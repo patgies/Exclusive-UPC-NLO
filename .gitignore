@@ -1,0 +1,17 @@
+*.aux
+*.log
+*synctex*
+*.pdf
+*settings.json
+*__pycache__*
+*.o
+*.so
+**/build/*
+*.json
+cpp/dipole_amplitude/*
+**/CMakeFiles/*
+CMakeCache.txt
+*.png
+*.out
+*old*
+*Makefile
