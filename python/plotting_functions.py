@@ -27,6 +27,76 @@ def read_file(file):
     
     return constant, variable, amplitudes_table
 
+def get_total_cross_section_Q(file_L, file_T, bool_decay_width):
+    cs_L = get_cross_section_values_Q(file_L, bool_decay_width, "L")
+    cs_T = get_cross_section_values_Q(file_T, bool_decay_width, "T")
+
+    if any(cs_L[0] != cs_T[0]):
+        raise Exception("Q vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
+
+    cs_tot = np.array(cs_L) + np.array(cs_T)
+    cs_tot[0] = cs_L[0] # Q^2 vector
+
+    return cs_tot
+
+
+def get_total_cross_section_W(file_L, file_T, bool_decay_width):
+    cs_L = get_cross_section_values_W(file_L, bool_decay_width, "L")
+    cs_T = get_cross_section_values_W(file_T, bool_decay_width, "T")
+
+    if cs_L[0] != cs_T[0]:
+        raise Exception("W vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
+
+    cs_tot = np.array(cs_L) + np.array(cs_T)
+    cs_tot[0] = cs_L[0] # W vecor
+
+    return cs_tot
+
+
+def get_total_cross_section_distribution_Q(file_L, file_T, bool_decay_width):
+    """
+    TODO:description
+    """
+    cs_L = get_distribution_Q(file_L, bool_decay_width, "L")
+    cs_T = get_distribution_Q(file_T, bool_decay_width, "T")
+
+    if any(cs_L[0] != cs_T[0]):
+        raise Exception("Q vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
+
+    cs_tot = np.zeros( ( 7, len(cs_L[0]) ) )
+    cs_tot[0] = cs_L[0] # Q^2 vector
+    cs_tot[1] = cs_L[1] + cs_T[1]
+    cs_tot[3] = cs_L[3] + cs_T[3]
+    cs_tot[5] = cs_L[5] + cs_T[5]
+    cs_tot[2] = np.sqrt(cs_L[2]**2 + cs_T[2]**2)
+    cs_tot[4] = np.sqrt(cs_L[4]**2 + cs_T[4]**2)
+
+    return cs_tot
+
+
+def get_total_cross_section_distribution_W(file_L, file_T, bool_decay_width):
+    """
+    TODO:description
+    """
+    cs_L = get_distribution_Q(file_L, bool_decay_width, "L")
+    cs_T = get_distribution_Q(file_T, bool_decay_width, "T")
+
+    if any(cs_L[0] != cs_T[0]):
+        raise Exception("Q vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
+
+    cs_tot = np.zeros( ( 7, len(cs_L[0]) ) )
+    cs_tot[0] = cs_L[0] # W vector
+    cs_tot[1] = cs_L[1] + cs_T[1]
+    cs_tot[3] = cs_L[3] + cs_T[3]
+    cs_tot[5] = cs_L[5] + cs_T[5]
+    cs_tot[2] = np.sqrt(cs_L[2]**2 + cs_T[2]**2)
+    cs_tot[4] = np.sqrt(cs_L[4]**2 + cs_T[4]**2)
+
+    return cs_tot
+
+
+
+
 def calculate_cross_section_T(Qv, amplitudes_table, bool_decay_width, O_LDME=0.440, q_LDME=0.441):
     """Calculates the cross sections from the production amplitudes. Qv can be a vector or scalar.
     Returns: a dictionary that contains relevant cross sections (in nb)"""
