@@ -1,0 +1,91 @@
+dependent_variables:
+- header: {name: SIG, units: NB}
+  qualifiers:
+  - {name: RE, value: GAMMA P --> J/PSI P}
+  - {name: SQRT(S), units: GeV, value: 20.0-260.0}
+  values:
+  - errors:
+    - {label: stat, symerror: 1.6}
+    - asymerror: {minus: -2.4, plus: 2.2}
+      label: sys
+    value: 33.6
+  - errors:
+    - {label: stat, symerror: 2.0}
+    - asymerror: {minus: -2.8, plus: 2.9}
+      label: sys
+    value: 43.8
+  - errors:
+    - {label: stat, symerror: 1.8}
+    - asymerror: {minus: -3.5, plus: 3.6}
+      label: sys
+    value: 57.2
+  - errors:
+    - {label: stat, symerror: 2.3}
+    - asymerror: {minus: -3.9, plus: 4.1}
+      label: sys
+    value: 62.5
+  - errors:
+    - {label: stat, symerror: 2.6}
+    - {label: sys, symerror: 4.5}
+    value: 68.9
+  - errors:
+    - {label: stat, symerror: 2.9}
+    - asymerror: {minus: -4.5, plus: 4.9}
+      label: sys
+    value: 72.1
+  - errors:
+    - {label: stat, symerror: 2.3}
+    - asymerror: {minus: -4.8, plus: 4.9}
+      label: sys
+    value: 81.9
+  - errors:
+    - {label: stat, symerror: 3.2}
+    - {label: sys, symerror: 5.4}
+    value: 95.7
+  - errors:
+    - {label: stat, symerror: 3.6}
+    - asymerror: {minus: -5.8, plus: 6.0}
+      label: sys
+    value: 103.9
+  - errors:
+    - {label: stat, symerror: 3.3}
+    - asymerror: {minus: -6.7, plus: 7.7}
+      label: sys
+    value: 115.0
+  - errors:
+    - {label: stat, symerror: 4.7}
+    - asymerror: {minus: -7.7, plus: 8.1}
+      label: sys
+    value: 129.1
+  - errors:
+    - {label: stat, symerror: 6.1}
+    - asymerror: {minus: -8.7, plus: 8.8}
+      label: sys
+    value: 141.7
+  - errors:
+    - {label: stat, symerror: 7.4}
+    - asymerror: {minus: -9.9, plus: 15.1}
+      label: sys
+    value: 140.3
+  - errors:
+    - {label: stat, symerror: 13.0}
+    - asymerror: {minus: -26.0, plus: 15.0}
+      label: sys
+    value: 189.0
+independent_variables:
+- header: {name: W, units: GEV}
+  values:
+  - {high: 35.0, low: 20.0}
+  - {high: 50.0, low: 35.0}
+  - {high: 60.0, low: 50.0}
+  - {high: 70.0, low: 60.0}
+  - {high: 80.0, low: 70.0}
+  - {high: 90.0, low: 80.0}
+  - {high: 110.0, low: 90.0}
+  - {high: 125.0, low: 110.0}
+  - {high: 140.0, low: 125.0}
+  - {high: 170.0, low: 140.0}
+  - {high: 200.0, low: 170.0}
+  - {high: 230.0, low: 200.0}
+  - {high: 260.0, low: 230.0}
+  - {high: 290.0, low: 260.0}

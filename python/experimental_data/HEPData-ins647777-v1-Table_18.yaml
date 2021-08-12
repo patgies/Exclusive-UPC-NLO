@@ -1,0 +1,70 @@
+dependent_variables:
+- header: {name: POL.RHO(ALPHA=04//MM=00)}
+  qualifiers:
+  - {name: ABS(T), units: GEV**2, value: < 1}
+  - {name: RE, value: GAMMA* P --> J/PSI P}
+  - {name: SQRT(S), units: GeV, value: '0.0'}
+  values:
+  - errors:
+    - {label: stat, symerror: 0.08}
+    - asymerror: {minus: -0.15, plus: 0.13}
+      label: sys
+    value: 0.12
+  - errors:
+    - {label: stat, symerror: 0.09}
+    - asymerror: {minus: -0.06, plus: 0.1}
+      label: sys
+    value: 0.25
+  - errors:
+    - {label: stat, symerror: 0.1}
+    - asymerror: {minus: -0.03, plus: 0.06}
+      label: sys
+    value: 0.54
+- header: {name: POL.RHO(ALPHA=1//MM=1-1)}
+  qualifiers:
+  - {name: ABS(T), units: GEV**2, value: < 1}
+  - {name: RE, value: GAMMA* P --> J/PSI P}
+  - {name: SQRT(S), units: GeV, value: '0.0'}
+  values:
+  - errors:
+    - {label: stat, symerror: 0.09}
+    - asymerror: {minus: -0.06, plus: 0.03}
+      label: sys
+    value: 0.34
+  - errors:
+    - {label: stat, symerror: 0.09}
+    - asymerror: {minus: -0.07, plus: 0.06}
+      label: sys
+    value: 0.44
+  - errors:
+    - {label: stat, symerror: 0.09}
+    - asymerror: {minus: -0.04, plus: 0.09}
+      label: sys
+    value: 0.26
+- header: {name: SIG(C=L)/SIG(C=T)}
+  qualifiers:
+  - {name: ABS(T), units: GEV**2, value: < 1}
+  - {name: RE, value: GAMMA* P --> J/PSI P}
+  - {name: SQRT(S), units: GeV, value: '0.0'}
+  values:
+  - errors:
+    - {label: stat, symerror: 0.11}
+    - asymerror: {minus: -0.16, plus: 0.09}
+      label: sys
+    value: 0.13
+  - errors:
+    - {label: stat, symerror: 0.16}
+    - asymerror: {minus: -0.11, plus: 0.19}
+      label: sys
+    value: 0.33
+  - errors:
+    - {label: stat, symerror: 0.51}
+    - asymerror: {minus: -0.14, plus: 0.28}
+      label: sys
+    value: 1.19
+independent_variables:
+- header: {name: Q**2, units: GEV**2}
+  values:
+  - {high: 5.0, low: 2.0, value: 3.1}
+  - {high: 10.0, low: 5.0, value: 6.8}
+  - {high: 100.0, low: 10.0, value: 16.0}

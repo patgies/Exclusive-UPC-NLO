@@ -1,0 +1,84 @@
+dependent_variables:
+- header: {name: POL.RHO(ALPHA=04//MM=00)}
+  qualifiers:
+  - {name: ABS(T), units: GEV**2, value: < 5}
+  - {name: RE, value: GAMMA P --> J/PSI P}
+  - {name: SQRT(S), units: GeV, value: 40.0-160.0}
+  - {name: W, units: GEV, value: 40 TO 160}
+  values:
+  - errors:
+    - {label: stat, symerror: 0.016}
+    - {label: sys, symerror: 0.027}
+    value: -0.03
+  - errors:
+    - {label: stat, symerror: 0.079}
+    - {label: sys, symerror: 0.05}
+    value: 0.049
+  - errors:
+    - {label: stat, symerror: 0.14}
+    - {label: sys, symerror: 0.06}
+    value: 0.19
+  - errors:
+    - {label: stat, symerror: 0.16}
+    - {label: sys, symerror: 0.06}
+    value: 0.38
+- header: {name: POL.RHO(ALPHA=04//MM=1-1)}
+  qualifiers:
+  - {name: ABS(T), units: GEV**2, value: < 5}
+  - {name: RE, value: GAMMA P --> J/PSI P}
+  - {name: SQRT(S), units: GeV, value: 40.0-160.0}
+  - {name: W, units: GEV, value: 40 TO 160}
+  values:
+  - errors:
+    - {label: stat, symerror: 0.016}
+    - {label: sys, symerror: 0.042}
+    value: 0.02
+  - errors:
+    - {label: stat, symerror: 0.07}
+    - {label: sys, symerror: 0.039}
+    value: -0.129
+  - errors:
+    - {label: stat, symerror: 0.1}
+    - {label: sys, symerror: 0.04}
+    value: -0.017
+  - errors:
+    - {label: stat, symerror: 0.12}
+    - {label: sys, symerror: 0.04}
+    value: -0.04
+- header: {name: SIG(C=L)/SIG(C=T)}
+  qualifiers:
+  - {name: ABS(T), units: GEV**2, value: < 5}
+  - {name: RE, value: GAMMA P --> J/PSI P}
+  - {name: SQRT(S), units: GeV, value: 40.0-160.0}
+  - {name: W, units: GEV, value: 40 TO 160}
+  values:
+  - errors:
+    - {label: stat, symerror: 0.015}
+    - asymerror: {minus: -0.025, plus: 0.026}
+      label: sys
+    value: -0.03
+  - errors:
+    - asymerror: {minus: -0.081, plus: 0.096}
+      label: stat
+    - asymerror: {minus: -0.053, plus: 0.059}
+      label: sys
+    value: 0.052
+  - errors:
+    - asymerror: {minus: -0.18, plus: 0.25}
+      label: stat
+    - asymerror: {minus: -0.08, plus: 0.09}
+      label: sys
+    value: 0.23
+  - errors:
+    - asymerror: {minus: -0.34, plus: 0.59}
+      label: stat
+    - asymerror: {minus: -0.14, plus: 0.17}
+      label: sys
+    value: 0.62
+independent_variables:
+- header: {name: Q**2, units: GEV**2}
+  values:
+  - {high: 1.0, low: 0.0, value: 0.05}
+  - {high: 5.0, low: 2.0, value: 3.2}
+  - {high: 10.0, low: 5.0, value: 7.0}
+  - {high: 50.0, low: 10.0, value: 22.4}

@@ -1,0 +1,101 @@
+dependent_variables:
+- header: {name: SIG, units: NB}
+  qualifiers:
+  - {name: ABS(T), units: GEV**2, value: < 1.2}
+  - {name: Q**2, units: GEV**2, value: 0.05 (BIN=0 TO 1)}
+  - {name: RE, value: GAMMA P --> J/PSI P}
+  - {name: SQRT(S), units: GeV, value: 44.8-292.3}
+  values:
+  - errors:
+    - {label: stat, symerror: 2.4}
+    - {label: sys, symerror: 4.0}
+    value: 46.0
+  - errors:
+    - {label: stat, symerror: 2.3}
+    - {label: sys, symerror: 4.3}
+    value: 48.5
+  - errors:
+    - {label: stat, symerror: 2.8}
+    - {label: sys, symerror: 5.3}
+    value: 59.7
+  - errors:
+    - {label: stat, symerror: 3.2}
+    - {label: sys, symerror: 5.5}
+    value: 62.7
+  - errors:
+    - {label: stat, symerror: 3.4}
+    - {label: sys, symerror: 6.4}
+    value: 72.6
+  - errors:
+    - {label: stat, symerror: 3.7}
+    - {label: sys, symerror: 6.9}
+    value: 78.6
+  - errors:
+    - {label: stat, symerror: 4.0}
+    - {label: sys, symerror: 7.3}
+    value: 82.6
+  - errors:
+    - {label: stat, symerror: 3.5}
+    - {label: sys, symerror: 8.1}
+    value: 91.5
+  - errors:
+    - {label: stat, symerror: 4.4}
+    - {label: sys, symerror: 8.7}
+    value: 98.3
+  - errors:
+    - {label: stat, symerror: 6.6}
+    - {label: sys, symerror: 9.6}
+    value: 98.6
+  - errors:
+    - {label: stat, symerror: 8.0}
+    - {label: sys, symerror: 11.0}
+    value: 114.0
+  - errors:
+    - {label: stat, symerror: 8.0}
+    - {label: sys, symerror: 12.0}
+    value: 126.0
+  - errors:
+    - {label: stat, symerror: 10.0}
+    - {label: sys, symerror: 15.0}
+    value: 143.0
+  - errors:
+    - {label: stat, symerror: 14.0}
+    - {label: sys, symerror: 25.0}
+    value: 187.0
+  - errors:
+    - {label: stat, symerror: 10.0}
+    - {label: sys, symerror: 18.0}
+    value: 133.0
+  - errors:
+    - {label: stat, symerror: 13.0}
+    - {label: sys, symerror: 17.0}
+    value: 171.0
+  - errors:
+    - {label: stat, symerror: 13.0}
+    - {label: sys, symerror: 18.0}
+    value: 173.0
+  - errors:
+    - {label: stat, symerror: 19.0}
+    - {label: sys, symerror: 23.0}
+    value: 194.0
+independent_variables:
+- header: {name: W, units: GEV}
+  values:
+  - {high: 50.0, low: 40.0, value: 44.8}
+  - {high: 60.0, low: 50.0, value: 54.8}
+  - {high: 70.0, low: 60.0, value: 64.8}
+  - {high: 80.0, low: 70.0, value: 74.8}
+  - {high: 90.0, low: 80.0, value: 84.9}
+  - {high: 100.0, low: 90.0, value: 94.9}
+  - {high: 110.0, low: 100.0, value: 104.9}
+  - {high: 130.0, low: 110.0, value: 119.5}
+  - {high: 160.0, low: 130.0, value: 144.1}
+  - {high: 155.0, low: 135.0, value: 144.9}
+  - {high: 170.0, low: 155.0}
+  - {high: 185.0, low: 170.0, value: 177.3}
+  - {high: 205.0, low: 185.0, value: 194.8}
+  - {high: 235.0, low: 205.0, value: 219.6}
+  - {high: 235.0, low: 205.0, value: 219.6}
+  - {high: 255.0, low: 235.0, value: 244.8}
+  - {high: 280.0, low: 255.0, value: 267.2}
+  - {high: 305.0, low: 280.0, value: 292.3}

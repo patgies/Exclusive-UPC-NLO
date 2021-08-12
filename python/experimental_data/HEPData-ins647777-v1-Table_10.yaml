@@ -1,0 +1,59 @@
+dependent_variables:
+- header: {name: SIG, units: NB}
+  qualifiers:
+  - {name: ABS(T), units: GEV**2, value: < 1}
+  - {name: RE, value: GAMMA* P --> J/PSI P}
+  - {name: SQRT(S), units: GeV, value: '90.0'}
+  - {name: W, units: GEV, value: 90 (C=MEAN)}
+  values:
+  - errors:
+    - {label: stat, symerror: 8.2}
+    - asymerror: {minus: -5.6, plus: 4.8}
+      label: sys
+    value: 72.6
+  - errors:
+    - {label: stat, symerror: 2.9}
+    - asymerror: {minus: -2.9, plus: 5.9}
+      label: sys
+    value: 39.7
+  - errors:
+    - {label: stat, symerror: 2.5}
+    - asymerror: {minus: -3.6, plus: 3.3}
+      label: sys
+    value: 38.7
+  - errors:
+    - {label: stat, symerror: 1.8}
+    - asymerror: {minus: -1.0, plus: 1.1}
+      label: sys
+    value: 24.3
+  - errors:
+    - {label: stat, symerror: 1.2}
+    - asymerror: {minus: -0.7, plus: 1.5}
+      label: sys
+    value: 15.8
+  - errors:
+    - {label: stat, symerror: 1.0}
+    - asymerror: {minus: -0.6, plus: 0.4}
+      label: sys
+    value: 11.6
+  - errors:
+    - {label: stat, symerror: 0.4}
+    - asymerror: {minus: -0.3, plus: 0.2}
+      label: sys
+    value: 4.0
+  - errors:
+    - {label: stat, symerror: 0.17}
+    - asymerror: {minus: -0.16, plus: 0.08}
+      label: sys
+    value: 0.65
+independent_variables:
+- header: {name: Q**2, units: GEV**2}
+  values:
+  - {high: 0.8, low: 0.15, value: 0.4}
+  - {high: 3.2, low: 2.0, value: 2.5}
+  - {high: 5.0, low: 3.2, value: 3.9}
+  - {high: 7.0, low: 5.0, value: 5.9}
+  - {high: 10.0, low: 7.0, value: 8.4}
+  - {high: 15.0, low: 10.0, value: 12.0}
+  - {high: 40.0, low: 15.0, value: 22.0}
+  - {high: 100.0, low: 40.0, value: 54.0}

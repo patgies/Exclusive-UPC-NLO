@@ -28,6 +28,12 @@ def read_file(file):
     return constant, variable, amplitudes_table
 
 def get_total_cross_section_Q(file_L, file_T, bool_decay_width):
+    """
+    Calculates the total (differential) cross section at t=0, using the files for longitudinal and transverse production.
+
+    Returns(the following are vectors with the same length):
+    Q^2, LO, NLO, LO_rel,NLO_rel, LO_pom, LO_rel_pom
+    """
     cs_L = get_cross_section_values_Q(file_L, bool_decay_width, "L")
     cs_T = get_cross_section_values_Q(file_T, bool_decay_width, "T")
 
@@ -41,6 +47,12 @@ def get_total_cross_section_Q(file_L, file_T, bool_decay_width):
 
 
 def get_total_cross_section_W(file_L, file_T, bool_decay_width):
+    """
+    Calculates the total (differential) cross section at t=0, using the files for longitudinal and transverse production.
+
+    Returns(the following are vectors with the same length):
+    W, LO, NLO, LO_rel,NLO_rel, LO_pom, LO_rel_pom
+    """
     cs_L = get_cross_section_values_W(file_L, bool_decay_width, "L")
     cs_T = get_cross_section_values_W(file_T, bool_decay_width, "T")
 
@@ -55,7 +67,12 @@ def get_total_cross_section_W(file_L, file_T, bool_decay_width):
 
 def get_total_cross_section_distribution_Q(file_L, file_T, bool_decay_width):
     """
-    TODO:description
+    Calculates the total (differential) cross section at t=0, using the files for longitudinal and transverse production.
+    Samples wave function values and gives the mean/std for various cross sections.
+    For consistency, this should be used with bool_decay_width=False.
+
+    Returns(the following are vectors with the same length):
+    Q^2, rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std
     """
     cs_L = get_distribution_Q(file_L, bool_decay_width, "L")
     cs_T = get_distribution_Q(file_T, bool_decay_width, "T")
@@ -70,13 +87,19 @@ def get_total_cross_section_distribution_Q(file_L, file_T, bool_decay_width):
     cs_tot[5] = cs_L[5] + cs_T[5]
     cs_tot[2] = np.sqrt(cs_L[2]**2 + cs_T[2]**2)
     cs_tot[4] = np.sqrt(cs_L[4]**2 + cs_T[4]**2)
+    cs_tot[6] = np.sqrt(cs_L[6]**2 + cs_T[6]**2)
 
     return cs_tot
 
 
 def get_total_cross_section_distribution_W(file_L, file_T, bool_decay_width):
     """
-    TODO:description
+    Calculates the total (differential) cross section at t=0, using the files for longitudinal and transverse production.
+    Samples wave function values and gives the mean/std for various cross sections.
+    For consistency, this should be used with bool_decay_width=False.
+
+    Returns(the following are vectors with the same length):
+    W, rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std
     """
     cs_L = get_distribution_Q(file_L, bool_decay_width, "L")
     cs_T = get_distribution_Q(file_T, bool_decay_width, "T")
@@ -91,6 +114,7 @@ def get_total_cross_section_distribution_W(file_L, file_T, bool_decay_width):
     cs_tot[5] = cs_L[5] + cs_T[5]
     cs_tot[2] = np.sqrt(cs_L[2]**2 + cs_T[2]**2)
     cs_tot[4] = np.sqrt(cs_L[4]**2 + cs_T[4]**2)
+    cs_tot[6] = np.sqrt(cs_L[6]**2 + cs_T[6]**2)
 
     return cs_tot
 
@@ -326,3 +350,9 @@ def nabla_phi():
 
     return np.mean(nabla_wf), np.std(nabla_wf)
     
+def t_integration_coefficient(Wv):
+    W_0 = 90
+    b_0 = 4.15
+    alpha_pom = 0.116
+
+    return 1 / ( b_0 + 4 * alpha_pom * np.log( Wv/W_0 ) )

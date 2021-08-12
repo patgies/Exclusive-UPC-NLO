@@ -1,0 +1,51 @@
+dependent_variables:
+- header: {name: SIG, units: NB}
+  qualifiers:
+  - {name: RE, value: E P --> E J/PSI P}
+  - {name: SQRT(S), units: GeV, value: '318.0'}
+  values:
+  - errors:
+    - {symerror: 4.9}
+    value: 50.7
+  - errors:
+    - {symerror: 5.8}
+    value: 59.5
+  - errors:
+    - {symerror: 6.2}
+    value: 61.8
+  - errors:
+    - {symerror: 6.2}
+    value: 67.6
+  - errors:
+    - {symerror: 6.5}
+    value: 72.4
+  - errors:
+    - {symerror: 7.0}
+    value: 79.9
+  - errors:
+    - {symerror: 7.0}
+    value: 84.4
+  - errors:
+    - {symerror: 7.4}
+    value: 86.7
+independent_variables:
+- header: {name: W, units: GEV}
+  values:
+  - {high: 46.5, low: 40.0, value: 43.2}
+  - {high: 53.5, low: 46.5}
+  - {high: 61.2, low: 53.5, value: 57.3}
+  - {high: 69.4, low: 61.2}
+  - {high: 78.4, low: 69.4}
+  - {high: 88.0, low: 78.4}
+  - {high: 98.5, low: 88.0, value: 93.3}
+  - {high: 110.0, low: 98.5, value: 104.3}
+- header: {name: PHI_T}
+  values:
+  - {value: 0.0158}
+  - {value: 0.0144}
+  - {value: 0.0131}
+  - {value: 0.012}
+  - {value: 0.0112}
+  - {value: 0.0103}
+  - {value: 0.0096}
+  - {value: 0.0089}
