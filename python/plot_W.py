@@ -13,7 +13,8 @@ plotting_functions.pheno_correction = True
 
 bool_decay_width = True
 bool_decay_width_rel = False
-id_string = "_Q2_0.05" # Q^2 = 0.05 GeV^2, thus there is no need for L
+# id_string = "_Q2_0.05" # Q^2 = 0.05 GeV^2, thus there is no need for L
+id_string = "_Q2_0.05-m_1.4" # Q^2 = 0.05 GeV^2, thus there is no need for L
 
 dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_L/'
 dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
@@ -99,7 +100,7 @@ if 1 in plots:
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, Q^2= 0.05$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
-    plt.xlim([50, 1e3])
+    plt.xlim([20, 1e3])
     plt.ylim([1e2, 1e4])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
@@ -121,7 +122,7 @@ if 2 in plots:
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, Q^2= 0.05$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
-    plt.xlim([50, 1e3])
+    plt.xlim([20, 1e3])
     plt.ylim([1e1, 1e4])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
@@ -149,7 +150,7 @@ if 3 in plots:
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
-    plt.xlim([5e1, 1e3])
+    plt.xlim([2e1, 1e3])
     plt.ylim([1e1, 1e3])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
@@ -177,7 +178,7 @@ if 4 in plots:
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
-    plt.xlim([50, 1e3])
+    plt.xlim([20, 1e3])
     plt.ylim([1e1, 1e3])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
@@ -208,7 +209,7 @@ if 5 in plots:
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
-    plt.xlim([50, 1e3])
+    plt.xlim([20, 1e3])
     plt.ylim([1e1, 1e3])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
@@ -238,7 +239,7 @@ if 6 in plots:
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
-    plt.xlim([50, 1e3])
+    plt.xlim([20, 1e3])
     plt.ylim([1e1, 1e3])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
