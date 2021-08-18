@@ -86,9 +86,15 @@ def sigma_tot_W_H1_v1():
 
     ind = yaml_list['independent_variables'][0]
     ind_values_list = ind['values']
-    W_values = np.array([x['value'] for x in ind_values_list])
     W_values_high = np.array([x['high'] for x in ind_values_list])
     W_values_low = np.array([x['low'] for x in ind_values_list])
+    W_values = np.zeros(  len(W_values_high) )
+    for idx, ind_value in enumerate(ind_values_list):
+        try:
+            W_values[idx] = ind_value['value']
+        except KeyError:
+            W_values[idx] = (W_values_high[idx] + W_values_low[idx])/2 # half-point if there is no value given
+
 
     dep = yaml_list['dependent_variables'][0]
     dep_values_list = dep['values']
@@ -167,7 +173,7 @@ def sigma_tot_W_H1_v2():
     ind_values_list = ind['values']
     W_values_high = np.array([x['high'] for x in ind_values_list])
     W_values_low = np.array([x['low'] for x in ind_values_list])
-    W_values = np.zeros( ( 1, len(W_values_high) ) )
+    W_values = np.zeros( len(W_values_high) )
     for idx, ind_value in enumerate(ind_values_list):
         try:
             W_values[idx] = ind_value['value']
@@ -292,7 +298,7 @@ def sigma_tot_W_ZEUS():
     ind_values_list = ind['values']
     W_values_high = np.array([x['high'] for x in ind_values_list])
     W_values_low = np.array([x['low'] for x in ind_values_list])
-    W_values = np.zeros( ( 1, len(W_values_high) ) )
+    W_values = np.zeros(  len(W_values_high) )
     for idx, ind_value in enumerate(ind_values_list):
         try:
             W_values[idx] = ind_value['value']
@@ -303,9 +309,16 @@ def sigma_tot_W_ZEUS():
     dep = yaml_list['dependent_variables'][0]
     dep_values_list = dep['values']
     y_values = np.array([x['value'] for x in dep_values_list])
-    y_errors = [x['errors'][0] for x in dep_values_list] 
-    y_errors_plus = np.abs(np.array([err_plus(x) for x in y_errors]))
-    y_errors_minus = np.abs(np.array([err_minus(x) for x in y_errors]))
+    # y_errors = [x['errors'][0] for x in dep_values_list] 
+    # y_errors_plus = np.abs(np.array([err_plus(x) for x in y_errors]))
+    # y_errors_minus = np.abs(np.array([err_minus(x) for x in y_errors]))
+    y_values_stat = [x['errors'][0] for x in dep_values_list] 
+    y_values_syst = [x['errors'][1] for x in dep_values_list] 
+    y_errors_stat_plus = np.abs(np.array([err_plus(x) for x in y_values_stat]))
+    y_errors_syst_plus = np.abs(np.array([err_plus(x) for x in y_values_syst]))
+    y_errors_stat_minus = np.abs(np.array([err_minus(x) for x in y_values_stat]))
+    y_errors_syst_minus = np.abs(np.array([err_minus(x) for x in y_values_syst]))
 
-    return [W_values, W_values_low, W_values_high], [y_values, y_errors_minus, y_errors_plus]
+    # return [W_values, W_values_low, W_values_high], [y_values, y_errors_minus, y_errors_plus]
+    return [W_values, W_values_low, W_values_high], [y_values, y_errors_stat_minus, y_errors_syst_minus, y_errors_stat_plus, y_errors_syst_plus]
 
