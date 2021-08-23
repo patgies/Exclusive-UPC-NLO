@@ -7,7 +7,7 @@ OUTPUT_FOLDER_T=output/transverse
 
 
 NTHREAD=20
-Q2=10
+Q2=0.05
 W=90
 Wmin=20
 Wmax=1000
@@ -55,8 +55,8 @@ echo Folder for the output, transverse = $OUTPUT_FOLDER_T
 
 
 
-${CODE_FOLDER}/NLO_amplitude -Q2 ${Q2} -Wmin ${Wmin} -Wmax ${Wmax} -Wpoints ${Wpoints} -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf-kcbk-hera-bal+sd-4.61.txt -ofileL ${OUTPUT_FOLDER_L}/results-kcbk-hera-bal+sd-4.61-L.dat -ofileT ${OUTPUT_FOLDER_T}/results-kcbk-hera-bal+sd-4.61-T.dat 
-echo KCBK 4.61
+# ${CODE_FOLDER}/NLO_amplitude -Q2 ${Q2} -Wmin ${Wmin} -Wmax ${Wmax} -Wpoints ${Wpoints} -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf-kcbk-hera-bal+sd-4.61.txt -ofileL ${OUTPUT_FOLDER_L}/results-kcbk-hera-bal+sd-4.61-L.dat -ofileT ${OUTPUT_FOLDER_T}/results-kcbk-hera-bal+sd-4.61-T.dat 
+# echo KCBK 4.61
 
 # ${CODE_FOLDER}/NLO_amplitude -Q2 ${Q2} -Wmin ${Wmin} -Wmax ${Wmax} -Wpoints ${Wpoints} -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf-kcbk-hera-bal+sd-0.00.txt -ofile ${OUTPUT_FOLDER}/results-kcbk-hera-bal+sd-0.00_Q2_0.05.dat 
 # echo KCBK 0.00
@@ -105,11 +105,11 @@ echo KCBK 4.61
 # ${CODE_FOLDER}/NLO_amplitude -W ${W} -Q2min ${Q2min} -Q2max ${Q2max} -Q2points ${Q2points} -thread ${NTHREAD} -fast -ifile ${INPUT_FOLDER}/conf-IP_SAT_m1.4.txt -ofile ${OUTPUT_FOLDER}/results-IP_SAT_m1.4-Q.dat
 # echo IPsat m1.4 Q
 
-# ${CODE_FOLDER}/NLO_amplitude -Q2 ${Q2} -Wmin ${Wmin} -Wmax ${Wmax} -Wpoints ${Wpoints} -thread ${NTHREAD} -fast -ifile ${INPUT_FOLDER}/conf_LOBK_MVe.txt -ofile ${OUTPUT_FOLDER}/results-LOBK-MVe_Q2_0.05.dat 
-# echo MVe
+${CODE_FOLDER}/NLO_amplitude -Q2 ${Q2} -Wmin ${Wmin} -Wmax ${Wmax} -Wpoints ${Wpoints} -thread ${NTHREAD} -fast -relxpom -ifile ${INPUT_FOLDER}/conf_LOBK_MVe.txt -ofileL ${OUTPUT_FOLDER_L}/results-LOBK-MVe_Q2_0.05.dat -ofileT ${OUTPUT_FOLDER_T}/results-LOBK-MVe_Q2_0.05.dat 
+echo MVe
 
-# ${CODE_FOLDER}/NLO_amplitude -W ${W} -Q2min ${Q2min} -Q2max ${Q2max} -Q2points ${Q2points} -thread ${NTHREAD} -fast -ifile ${INPUT_FOLDER}/conf_LOBK_MVe.txt -ofile ${OUTPUT_FOLDER}/results-LOBK-MVe-Q.dat
-# echo MVe Q
+${CODE_FOLDER}/NLO_amplitude -W ${W} -Q2min ${Q2min} -Q2max ${Q2max} -Q2points ${Q2points} -thread ${NTHREAD} -fast -relxpom -ifile ${INPUT_FOLDER}/conf_LOBK_MVe.txt -ofileL ${OUTPUT_FOLDER_L}/results-LOBK-MVe-W_90.dat -ofileT ${OUTPUT_FOLDER_T}/results-LOBK-MVe-W_90.dat
+echo MVe Q
 
 
 # ${CODE_FOLDER}/NLO_amplitude -Q2 ${Q2} -Wmin ${Wmin} -Wmax ${Wmax} -Wpoints ${Wpoints} -thread ${NTHREAD} -fast -ifile ${INPUT_FOLDER}/conf_LOBK_MVgamma.txt -ofile ${OUTPUT_FOLDER}/results-LOBK-MVgamma.dat 

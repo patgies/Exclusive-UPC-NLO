@@ -101,7 +101,11 @@ namespace Transverse {
         gsl_monte_function mf_qq_rel_002_pp = { &Transverse::qq_rel_002_pp, 1, &params_LO_sub };
         gsl_monte_function mf_qq_rel_200_pp = { &Transverse::qq_rel_200_pp, 1, &params_LO_sub };
         gsl_monte_function mf_qq_rel_100_pm = { &Transverse::qq_rel_100_pm, 1, &params_LO_sub };
-
+        if(rel_x_pom_bool) {
+            mf_qq_rel_002_pp = { &Transverse::qq_rel_002_pp, 1, &params_LO_pom };
+            mf_qq_rel_200_pp = { &Transverse::qq_rel_200_pp, 1, &params_LO_pom };
+            mf_qq_rel_100_pm = { &Transverse::qq_rel_100_pm, 1, &params_LO_pom };    
+        }
 
         double xl_qq_LO[] = {x10_min};
         double xl_qq_NLO_1_dim[] = {x10_min};

@@ -75,6 +75,7 @@ extern size_t calls_dim6;
 extern bool integ_points_small_bool;
 extern bool eta_bool;
 extern bool NLO_x_pom_bool ;
+extern bool rel_x_pom_bool ;
 extern bool dipole_file_bool;
 extern bool IPsat_bool ;
 extern bool rcBK_bool ;

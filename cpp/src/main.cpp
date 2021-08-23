@@ -60,6 +60,7 @@ int main(int argc, char* argv[])
         cout << "-thread:\tAmount of CPU threads used for calculations. Default is "<< n_thread << endl;
         cout << "-fast:\tForces a small amount of MC integration points (1e4). Overrides the amount of points in the config file. This option is useful for quickly getting results that are roughly correct." << endl;
         cout << "-NLOxpom:\tUse x_pom at NLO instead of x'"<<endl;
+        cout << "-relxpom:\tUse x_pom for relativistic corrections instead of x'. For LO calculations."<<endl;
         cout << "-rcBK:\tSubstitute rcBK to LO BK at NLO qqg expression."<<endl;
 
         cout << "\nConfig file help:" << endl;
@@ -146,6 +147,9 @@ int main(int argc, char* argv[])
         }
         else if (string(argv[i])=="-NLOxpom") {
             NLO_x_pom_bool = true;
+        }
+        else if (string(argv[i])=="-relxpom") {
+            rel_x_pom_bool = true;
         }
         else if (string(argv[i])=="-rcBK") {
             rcBK_bool = true;

@@ -102,7 +102,10 @@ namespace Longitudinal {
         // gsl_monte_function mf_lambda = { &Longitudinal::lambda_integrand, 1, &params_LO_pom };
         gsl_monte_function mf_qq_rel_002 = { &Longitudinal::qq_rel_002, 1, &params_LO_sub };
         gsl_monte_function mf_qq_rel_200 = { &Longitudinal::qq_rel_200, 1, &params_LO_sub };
-
+        if(rel_x_pom_bool) {
+            mf_qq_rel_002 = { &qq_rel_002, 1, &params_LO_pom };
+            mf_qq_rel_200 = { &qq_rel_200, 1, &params_LO_pom };
+        }
 
         double xl_qq_LO[] = {x10_min};
         double xl_qq_NLO_1_dim[] = {x10_min};

@@ -72,6 +72,7 @@ size_t calls_dim6;
 bool integ_points_small_bool = false;
 bool eta_bool = false;
 bool NLO_x_pom_bool = false;
+bool rel_x_pom_bool = false;
 bool dipole_file_bool = true;
 bool IPsat_bool = false;
 bool rcBK_bool = false;
