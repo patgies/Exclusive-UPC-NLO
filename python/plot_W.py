@@ -13,8 +13,8 @@ plotting_functions.pheno_correction = True
 
 bool_decay_width = True
 bool_decay_width_rel = False
-# id_string = "_Q2_0.05" # Q^2 = 0.05 GeV^2, thus there is no need for L
-id_string = "_Q2_0.05-m_1.4" # Q^2 = 0.05 GeV^2, thus there is no need for L
+id_string = "_Q2_0.05" # Q^2 = 0.05 GeV^2, thus there is no need for L
+# id_string = "_Q2_0.05-m_1.4" # Q^2 = 0.05 GeV^2, thus there is no need for L
 
 dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_L/'
 dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
@@ -86,7 +86,7 @@ C_int = plotting_functions.t_integration_coefficient(W)
 linewidth = 2.5
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
-plots = [3,4,5,6]
+plots = [1,2,3,4,5,6]
 
 if 1 in plots:
     plt.figure(1)
@@ -119,7 +119,7 @@ if 2 in plots:
     plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_rel_T[5], 'b-',label=r'NLO+rel resumBK 0.00', linewidth=linewidth)
     plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_rel_T[5], 'b--',label=r'NLO+rel resumBK 4.61', linewidth=linewidth)
     plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_rel_T[3], 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
-    plt.legend(prop={'size': 12}, frameon=False)
+    plt.legend(prop={'size': 10}, frameon=False)
     plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, Q^2= 0.05$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
     plt.xlim([20, 1e3])
@@ -147,7 +147,7 @@ if 3 in plots:
     plt.errorbar(sigma_tot_ALICE_v1_W[0], sigma_tot_ALICE_v1_data[0], xerr=[sigma_tot_ALICE_v1_W[0]-sigma_tot_ALICE_v1_W[1], sigma_tot_ALICE_v1_W[2]-sigma_tot_ALICE_v1_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v1_data[1]**2+sigma_tot_ALICE_v1_data[2]**2+sigma_tot_ALICE_v1_data[3]**2),np.sqrt(sigma_tot_ALICE_v1_data[4]**2+sigma_tot_ALICE_v1_data[5]**2+sigma_tot_ALICE_v1_data[6]**2)],label='ALICE', fmt='sg', capsize=3)
     plt.errorbar(sigma_tot_ALICE_v2_W[0], sigma_tot_ALICE_v2_data[0], xerr=[sigma_tot_ALICE_v2_W[0]-sigma_tot_ALICE_v2_W[1], sigma_tot_ALICE_v2_W[2]-sigma_tot_ALICE_v2_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v2_data[1]**2+sigma_tot_ALICE_v2_data[2]**2+sigma_tot_ALICE_v2_data[3]**2),np.sqrt(sigma_tot_ALICE_v2_data[4]**2+sigma_tot_ALICE_v2_data[5]**2+sigma_tot_ALICE_v2_data[6]**2)], fmt='sg', capsize=3) # ALICE
     plt.errorbar(sigma_tot_ALICE_v3_W[0], sigma_tot_ALICE_v3_data[0], xerr=[sigma_tot_ALICE_v3_W[0]-sigma_tot_ALICE_v3_W[1], sigma_tot_ALICE_v3_W[2]-sigma_tot_ALICE_v3_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v3_data[1]**2+sigma_tot_ALICE_v3_data[2]**2+sigma_tot_ALICE_v3_data[3]**2),np.sqrt(sigma_tot_ALICE_v3_data[4]**2+sigma_tot_ALICE_v3_data[5]**2+sigma_tot_ALICE_v3_data[6]**2)], fmt='sg', capsize=3) # ALICE
-    plt.legend(prop={'size': 12}, frameon=False)
+    plt.legend(prop={'size': 10}, frameon=False)
     plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
     plt.xlim([2e1, 1e3])
@@ -175,11 +175,11 @@ if 4 in plots:
     plt.errorbar(sigma_tot_ALICE_v1_W[0], sigma_tot_ALICE_v1_data[0], xerr=[sigma_tot_ALICE_v1_W[0]-sigma_tot_ALICE_v1_W[1], sigma_tot_ALICE_v1_W[2]-sigma_tot_ALICE_v1_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v1_data[1]**2+sigma_tot_ALICE_v1_data[2]**2+sigma_tot_ALICE_v1_data[3]**2),np.sqrt(sigma_tot_ALICE_v1_data[4]**2+sigma_tot_ALICE_v1_data[5]**2+sigma_tot_ALICE_v1_data[6]**2)],label='ALICE', fmt='sg', capsize=3)
     plt.errorbar(sigma_tot_ALICE_v2_W[0], sigma_tot_ALICE_v2_data[0], xerr=[sigma_tot_ALICE_v2_W[0]-sigma_tot_ALICE_v2_W[1], sigma_tot_ALICE_v2_W[2]-sigma_tot_ALICE_v2_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v2_data[1]**2+sigma_tot_ALICE_v2_data[2]**2+sigma_tot_ALICE_v2_data[3]**2),np.sqrt(sigma_tot_ALICE_v2_data[4]**2+sigma_tot_ALICE_v2_data[5]**2+sigma_tot_ALICE_v2_data[6]**2)], fmt='sg', capsize=3) # ALICE
     plt.errorbar(sigma_tot_ALICE_v3_W[0], sigma_tot_ALICE_v3_data[0], xerr=[sigma_tot_ALICE_v3_W[0]-sigma_tot_ALICE_v3_W[1], sigma_tot_ALICE_v3_W[2]-sigma_tot_ALICE_v3_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v3_data[1]**2+sigma_tot_ALICE_v3_data[2]**2+sigma_tot_ALICE_v3_data[3]**2),np.sqrt(sigma_tot_ALICE_v3_data[4]**2+sigma_tot_ALICE_v3_data[5]**2+sigma_tot_ALICE_v3_data[6]**2)], fmt='sg', capsize=3) # ALICE
-    plt.legend(prop={'size': 12}, frameon=False)
+    plt.legend(prop={'size': 10}, frameon=False)
     plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
     plt.xlim([20, 1e3])
-    plt.ylim([1e1, 1e3])
+    plt.ylim([1e1, 2e3])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
     plt.xscale('log')
@@ -206,11 +206,11 @@ if 5 in plots:
     plt.errorbar(sigma_tot_ALICE_v1_W[0], sigma_tot_ALICE_v1_data[0], xerr=[sigma_tot_ALICE_v1_W[0]-sigma_tot_ALICE_v1_W[1], sigma_tot_ALICE_v1_W[2]-sigma_tot_ALICE_v1_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v1_data[1]**2+sigma_tot_ALICE_v1_data[2]**2+sigma_tot_ALICE_v1_data[3]**2),np.sqrt(sigma_tot_ALICE_v1_data[4]**2+sigma_tot_ALICE_v1_data[5]**2+sigma_tot_ALICE_v1_data[6]**2)],label='ALICE', fmt='sg', capsize=3)
     plt.errorbar(sigma_tot_ALICE_v2_W[0], sigma_tot_ALICE_v2_data[0], xerr=[sigma_tot_ALICE_v2_W[0]-sigma_tot_ALICE_v2_W[1], sigma_tot_ALICE_v2_W[2]-sigma_tot_ALICE_v2_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v2_data[1]**2+sigma_tot_ALICE_v2_data[2]**2+sigma_tot_ALICE_v2_data[3]**2),np.sqrt(sigma_tot_ALICE_v2_data[4]**2+sigma_tot_ALICE_v2_data[5]**2+sigma_tot_ALICE_v2_data[6]**2)], fmt='sg', capsize=3) # ALICE
     plt.errorbar(sigma_tot_ALICE_v3_W[0], sigma_tot_ALICE_v3_data[0], xerr=[sigma_tot_ALICE_v3_W[0]-sigma_tot_ALICE_v3_W[1], sigma_tot_ALICE_v3_W[2]-sigma_tot_ALICE_v3_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v3_data[1]**2+sigma_tot_ALICE_v3_data[2]**2+sigma_tot_ALICE_v3_data[3]**2),np.sqrt(sigma_tot_ALICE_v3_data[4]**2+sigma_tot_ALICE_v3_data[5]**2+sigma_tot_ALICE_v3_data[6]**2)], fmt='sg', capsize=3) # ALICE
-    plt.legend(prop={'size': 12}, frameon=False)
+    plt.legend(prop={'size': 11}, frameon=False)
     plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
     plt.xlim([20, 1e3])
-    plt.ylim([1e1, 1e3])
+    plt.ylim([1e1, 2e3])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
     plt.xscale('log')
@@ -236,11 +236,11 @@ if 6 in plots:
     plt.errorbar(sigma_tot_ALICE_v1_W[0], sigma_tot_ALICE_v1_data[0], xerr=[sigma_tot_ALICE_v1_W[0]-sigma_tot_ALICE_v1_W[1], sigma_tot_ALICE_v1_W[2]-sigma_tot_ALICE_v1_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v1_data[1]**2+sigma_tot_ALICE_v1_data[2]**2+sigma_tot_ALICE_v1_data[3]**2),np.sqrt(sigma_tot_ALICE_v1_data[4]**2+sigma_tot_ALICE_v1_data[5]**2+sigma_tot_ALICE_v1_data[6]**2)],label='ALICE', fmt='sg', capsize=3)
     plt.errorbar(sigma_tot_ALICE_v2_W[0], sigma_tot_ALICE_v2_data[0], xerr=[sigma_tot_ALICE_v2_W[0]-sigma_tot_ALICE_v2_W[1], sigma_tot_ALICE_v2_W[2]-sigma_tot_ALICE_v2_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v2_data[1]**2+sigma_tot_ALICE_v2_data[2]**2+sigma_tot_ALICE_v2_data[3]**2),np.sqrt(sigma_tot_ALICE_v2_data[4]**2+sigma_tot_ALICE_v2_data[5]**2+sigma_tot_ALICE_v2_data[6]**2)], fmt='sg', capsize=3) # ALICE
     plt.errorbar(sigma_tot_ALICE_v3_W[0], sigma_tot_ALICE_v3_data[0], xerr=[sigma_tot_ALICE_v3_W[0]-sigma_tot_ALICE_v3_W[1], sigma_tot_ALICE_v3_W[2]-sigma_tot_ALICE_v3_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v3_data[1]**2+sigma_tot_ALICE_v3_data[2]**2+sigma_tot_ALICE_v3_data[3]**2),np.sqrt(sigma_tot_ALICE_v3_data[4]**2+sigma_tot_ALICE_v3_data[5]**2+sigma_tot_ALICE_v3_data[6]**2)], fmt='sg', capsize=3) # ALICE
-    plt.legend(prop={'size': 12}, frameon=False)
+    plt.legend(prop={'size': 11}, frameon=False)
     plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
     plt.xlim([20, 1e3])
-    plt.ylim([1e1, 1e3])
+    plt.ylim([1e1, 2e3])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
     plt.xscale('log')

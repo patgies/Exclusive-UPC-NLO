@@ -79,7 +79,7 @@ cs_tbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'result
 cs_tbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', bool_decay_width)
 cs_resumbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', bool_decay_width)
 cs_resumbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', bool_decay_width)
-cs_lobk_mve = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-LOBK-MVe-Q.dat', dir_path_T + r'results-LOBK-MVe-Q.dat', bool_decay_width)
+cs_lobk_mve = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-LOBK-MVe-W_90.dat', dir_path_T + r'results-LOBK-MVe-W_90.dat', bool_decay_width)
 
 
 cs_kcbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel)
@@ -88,7 +88,7 @@ cs_tbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_
 cs_tbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel)
 cs_resumbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel)
 cs_resumbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel)
-cs_lobk_mve_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-LOBK-MVe-Q.dat', dir_path_T + r'results-LOBK-MVe-Q.dat', bool_decay_width_rel)
+cs_lobk_mve_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-LOBK-MVe-W_90.dat', dir_path_T + r'results-LOBK-MVe-W_90.dat', bool_decay_width_rel)
 
 # cs_lobk_mve_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-LOBK-MVe-Q.dat', dir_path_T + r'results-LOBK-MVe-Q.dat', bool_decay_width_rel)
 # cs_kcbk_461_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel)
@@ -107,7 +107,7 @@ C_int = plotting_functions.t_integration_coefficient(W)
 linewidth = 2.5
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
-plots = [3,4,5,6]
+plots = [1,2,3,4,5,6]
 
 if 1 in plots:
     plt.figure(1)
@@ -164,7 +164,7 @@ if 3 in plots:
     plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve[5], 'k:',label=r'LOBK MV$^e$', linewidth=linewidth)
     plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3)
-    plt.legend(prop={'size': 12}, frameon=False)
+    plt.legend(prop={'size': 10}, frameon=False)
     plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$M_{J/\psi}^2+Q^2$ [GeV$^2$]', fontsize=15)
     plt.xlim([Mv2, 1e2])
@@ -188,7 +188,7 @@ if 4 in plots:
     plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve_rel[3], 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
     plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3)
-    plt.legend(prop={'size': 12}, frameon=False)
+    plt.legend(prop={'size': 10}, frameon=False)
     plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$M_{J/\psi}^2+Q^2$ [GeV$^2$]', fontsize=15)
     plt.xlim([Mv2, 1e2])

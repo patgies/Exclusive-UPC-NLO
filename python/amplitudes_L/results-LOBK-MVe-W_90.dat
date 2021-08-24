@@ -1,6 +1,6 @@
-# (longitudinal) Exclusive vector meson production in DIS at NLO by J. Penttala <jani.j.penttala@student.jyu.fi>, 2020-2021.  These are the values for the production amplitude at t=0, up to a prefactor -e*ef*Q/(2*pi)*sqrt(Nc/2)*2*(wavefunction factor).
-# Git version 62fdb5b695a6a7417140a380ecb1f2f51ce94a9a main build Aug 23 2021 15:02:06
-# Command: -W 90 -Q2min 0.01 -Q2max 100 -Q2points 20 -thread 20 -relxpom -fast -ifile config_files/conf_LOBK_MVe.txt -ofile output/results-LOBK-MVe-Q.dat 
+# Longitudinal exclusive vector meson production in DIS at NLO by J. Penttala <jani.j.penttala@student.jyu.fi>, 2021. These are the values for the production amplitude at t=0, up to a prefactor -e*ef*Q/(2*pi)*sqrt(Nc/2)*2*(wavefunction factor).
+# Git version f53016e2f3cfd10c965f356d4a7f66b8fe539f9a main build Aug 23 2021 16:10:09
+# Command: -W 90 -Q2min 0.01 -Q2max 100 -Q2points 20 -thread 20 -fast -relxpom -ifile config_files/conf_LOBK_MVe.txt -ofileL output/longitudinal/results-LOBK-MVe-W_90.dat -ofileT output/transverse/results-LOBK-MVe-W_90.dat 
 # Different parts of the longitudinal production amplitude. Rows: Q (GeV) 
 #W value:
 9.000000000e+01

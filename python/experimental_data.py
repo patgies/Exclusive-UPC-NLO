@@ -24,10 +24,10 @@ def err_minus(err_dict):
         return 0
 
 
-
-
-
 def R_Q2_ZEUS():
+    """
+    Data from Nucl.Phys.B 695 (2004) 3-37. 
+    """
     file_yaml = dir_path + r'HEPData-ins647777-v1-Table_18.yaml'
     with open(file_yaml) as file:
         yaml_list = yaml.load(file, Loader=yaml.FullLoader)
@@ -53,6 +53,9 @@ def R_Q2_ZEUS():
 
 
 def R_Q2_H1():
+    """
+    Data from Eur.Phys.J.C 46 (2006) 585-603, 2006. 
+    """
     file_yaml = dir_path + r'HEPData-ins694372-v1-Table_15.yaml'
     with open(file_yaml) as file:
         yaml_list = yaml.load(file, Loader=yaml.FullLoader)
