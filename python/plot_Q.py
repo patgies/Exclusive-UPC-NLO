@@ -7,7 +7,7 @@ import plotting_functions
 import experimental_data
 
     
-plotting_functions.pheno_correction = True
+plotting_functions.pheno_correction = False
 
 
 bool_decay_width = True
@@ -71,6 +71,9 @@ dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
 Mv = 3.0969
 Mv2 = Mv**2
 
+Cf = 4/3
+alpha_s0 = 0.25
+NRQCD_factor = (1-2*Cf*alpha_s0/np.pi)**2
 
 
 cs_kcbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', bool_decay_width)
@@ -139,7 +142,7 @@ if 2 in plots:
     plt.plot(Mv2 + cs_tbk_461[0], cs_tbk_461_rel[5], 'r--',label=r'NLO+rel tBK 4.61', linewidth=linewidth)
     plt.plot(Mv2 + cs_resumbk_000[0], cs_resumbk_000_rel[5], 'b-',label=r'NLO+rel resumBK 0.00', linewidth=linewidth)
     plt.plot(Mv2 + cs_resumbk_461[0], cs_resumbk_461_rel[5], 'b--',label=r'NLO+rel resumBK 4.61', linewidth=linewidth)
-    plt.plot(Mv2 + cs_lobk_mve[0], cs_lobk_mve_rel[3], 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
+    plt.plot(Mv2 + cs_lobk_mve[0], NRQCD_factor * cs_lobk_mve_rel[3], 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, W= 90$ GeV [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$M_{J/\psi}^2+Q^2$ [GeV$^2$]', fontsize=15)
@@ -165,7 +168,7 @@ if 3 in plots:
     plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3)
     plt.legend(prop={'size': 10}, frameon=False)
-    plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb/GeV$^2$]', fontsize=17)
+    plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb]', fontsize=17)
     plt.xlabel(r'$M_{J/\psi}^2+Q^2$ [GeV$^2$]', fontsize=15)
     plt.xlim([Mv2, 1e2])
     plt.ylim([0.1, 1e3])
@@ -185,11 +188,11 @@ if 4 in plots:
     plt.plot(Mv2 + cs_tbk_461[0],     C_int * cs_tbk_461_rel[5], 'r--',label=r'NLO+rel tBK 4.61', linewidth=linewidth)
     plt.plot(Mv2 + cs_resumbk_000[0], C_int * cs_resumbk_000_rel[5], 'b-',label=r'NLO+rel resumBK 0.00', linewidth=linewidth)
     plt.plot(Mv2 + cs_resumbk_461[0], C_int * cs_resumbk_461_rel[5], 'b--',label=r'NLO+rel resumBK 4.61', linewidth=linewidth)
-    plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve_rel[3], 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
+    plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve_rel[3] * NRQCD_factor, 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
     plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3)
     plt.legend(prop={'size': 10}, frameon=False)
-    plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb/GeV$^2$]', fontsize=17)
+    plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb]', fontsize=17)
     plt.xlabel(r'$M_{J/\psi}^2+Q^2$ [GeV$^2$]', fontsize=15)
     plt.xlim([Mv2, 1e2])
     plt.ylim([0.1, 1e3])
@@ -208,15 +211,15 @@ if 5 in plots:
     plt.plot(Mv2 + cs_kcbk_000[0],    C_int * cs_kcbk_000_rel[5], '-',color='tab:green',label=r'NLO+rel KCBK 0.00', linewidth=linewidth)
     plt.plot(Mv2 + cs_tbk_000[0],     C_int * cs_tbk_000_rel[5], 'c-',label=r'NLO+rel tBK 0.00', linewidth=linewidth)
     plt.plot(Mv2 + cs_resumbk_000[0], C_int * cs_resumbk_000_rel[5], 'm-',label=r'NLO+rel resumBK 0.00', linewidth=linewidth)
-    plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve_rel[3], 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
+    plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve_rel[3] * NRQCD_factor, 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
     plt.fill_between(Mv2 + cs_kcbk_000[0], C_int * (cs_kcbk_000_rel[5]-cs_kcbk_000_rel[6]), C_int * (cs_kcbk_000_rel[5]+cs_kcbk_000_rel[6]), facecolor='tab:green',alpha=0.3)
     plt.fill_between(Mv2 + cs_tbk_000[0], C_int * (cs_tbk_000_rel[5]-cs_tbk_000_rel[6]), C_int * (cs_tbk_000_rel[5]+cs_tbk_000_rel[6]), facecolor='c',alpha=0.3)
     plt.fill_between(Mv2 + cs_resumbk_000[0], C_int * (cs_resumbk_000_rel[5]-cs_resumbk_000_rel[6]), C_int * (cs_resumbk_000_rel[5]+cs_resumbk_000_rel[6]), facecolor='m',alpha=0.3)
-    plt.fill_between(Mv2 + cs_lobk_mve[0], C_int * (cs_lobk_mve_rel[3]-cs_lobk_mve_rel[4]), C_int * (cs_lobk_mve_rel[3]+cs_lobk_mve_rel[4]), facecolor='k',alpha=0.3)
+    plt.fill_between(Mv2 + cs_lobk_mve[0], C_int * NRQCD_factor * (cs_lobk_mve_rel[3]-cs_lobk_mve_rel[4]), C_int * NRQCD_factor * (cs_lobk_mve_rel[3]+cs_lobk_mve_rel[4]), facecolor='k',alpha=0.3)
     plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3, zorder=100)
     plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3, zorder=100)
     plt.legend(prop={'size': 12}, frameon=False)
-    plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb/GeV$^2$]', fontsize=17)
+    plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb]', fontsize=17)
     plt.xlabel(r'$M_{J/\psi}^2+Q^2$ [GeV$^2$]', fontsize=15)
     plt.xlim([Mv2, 1e2])
     plt.ylim([0.1, 1e3])
@@ -234,15 +237,15 @@ if 6 in plots:
     plt.plot(Mv2 + cs_kcbk_461[0],    C_int * cs_kcbk_461_rel[5], '-',color='tab:green',label=r'NLO+rel KCBK 4.61', linewidth=linewidth)
     plt.plot(Mv2 + cs_tbk_461[0],     C_int * cs_tbk_461_rel[5], 'c-',label=r'NLO+rel tBK 4.61', linewidth=linewidth)
     plt.plot(Mv2 + cs_resumbk_461[0], C_int * cs_resumbk_461_rel[5], 'm-',label=r'NLO+rel resumBK 4.61', linewidth=linewidth)
-    plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve_rel[3], 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
+    plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve_rel[3] * NRQCD_factor, 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
     plt.fill_between(Mv2 + cs_kcbk_461[0], C_int * (cs_kcbk_461_rel[5]-cs_kcbk_461_rel[6]), C_int * (cs_kcbk_461_rel[5]+cs_kcbk_461_rel[6]), facecolor='tab:green',alpha=0.3)
     plt.fill_between(Mv2 + cs_tbk_461[0], C_int * (cs_tbk_461_rel[5]-cs_tbk_461_rel[6]), C_int * (cs_tbk_461_rel[5]+cs_tbk_461_rel[6]), facecolor='c',alpha=0.3)
     plt.fill_between(Mv2 + cs_resumbk_461[0], C_int * (cs_resumbk_461_rel[5]-cs_resumbk_461_rel[6]), C_int * (cs_resumbk_461_rel[5]+cs_resumbk_461_rel[6]), facecolor='m',alpha=0.3)
-    plt.fill_between(Mv2 + cs_lobk_mve[0], C_int * (cs_lobk_mve_rel[3]-cs_lobk_mve_rel[4]), C_int * (cs_lobk_mve_rel[3]+cs_lobk_mve_rel[4]), facecolor='k',alpha=0.3)
+    plt.fill_between(Mv2 + cs_lobk_mve[0], C_int * NRQCD_factor * (cs_lobk_mve_rel[3]-cs_lobk_mve_rel[4]), C_int * NRQCD_factor * (cs_lobk_mve_rel[3]+cs_lobk_mve_rel[4]), facecolor='k',alpha=0.3)
     plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3, zorder=100)
     plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3, zorder=100)
     plt.legend(prop={'size': 12}, frameon=False)
-    plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb/GeV$^2$]', fontsize=17)
+    plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb]', fontsize=17)
     plt.xlabel(r'$M_{J/\psi}^2+Q^2$ [GeV$^2$]', fontsize=15)
     plt.xlim([Mv2, 1e2])
     plt.ylim([0.1, 1e3])
