@@ -81,7 +81,7 @@ double Transverse::K_0_integrand(double z, double x10, double m, double Q) {
     double tau = 2.0*m*x10*abs(0.5-z);
     return 1.0/gsl_pow_2(z-0.5) * ( 8.0*z*(1.0-z)*gsl_sf_bessel_K0(x10*sqrt(z*(1.0-z)*Q*Q+m*m)) * ( gsl_sf_bessel_K0(tau) - 1.0/(2.0*(1.0-z)) * ( gsl_sf_bessel_K0(tau)-tau/2.0*gsl_sf_bessel_K1(tau) ) )
     - 2.0*gsl_sf_bessel_K0(x10 * sqrt( 1.0/4.0*Q*Q+m*m )) * (0.5+(z-0.5)*(1.0+2.0*M_EULER + 2.0*log(tau/2.0) ) ) )
-            - 4.0*z*x10*sqrt(z*(1.0-z)*Q*Q+m*m) * gsl_sf_bessel_K1(x10*sqrt(z*(1.0-z)*Q*Q+m*m))*gsl_sf_bessel_K0(tau) * ( 1.0+ gsl_pow_2(1.0-2.0*z) );
+            + 4.0*z*x10*sqrt(z*(1.0-z)*Q*Q+m*m) * gsl_sf_bessel_K1(x10*sqrt(z*(1.0-z)*Q*Q+m*m))*gsl_sf_bessel_K0(tau) * ( 1.0+ gsl_pow_2(1.0-2.0*z) );
 }
 
 double Transverse::L(double m, double Q) {

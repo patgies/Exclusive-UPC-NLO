@@ -115,7 +115,7 @@ BOOST_AUTO_TEST_CASE( test_int_K_T )
 {
     struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef, zdef};
-    BOOST_TEST( Transverse::qq_NLO_K( x, 2,  &params) == -0.0364479, tt::tolerance(tol) );
+    BOOST_TEST( Transverse::qq_NLO_K( x, 2,  &params) == 0.0327568, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_lambda_T )
