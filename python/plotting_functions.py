@@ -46,6 +46,25 @@ def get_total_cross_section_Q(file_L, file_T, bool_decay_width):
     return cs_tot
 
 
+def get_cross_section_ratio_Q(file_L, file_T, bool_decay_width):
+    """
+    Calculates the ratio of the differential cross sections at t=0: (dsigma_L/dt)/(dsigma_T/dt), using the files for longitudinal and transverse production.
+
+    Returns(the following are vectors with the same length):
+    Q^2, LO, NLO, LO_rel,NLO_rel, LO_pom, LO_rel_pom
+    """
+    cs_L = get_cross_section_values_Q(file_L, bool_decay_width, "L")
+    cs_T = get_cross_section_values_Q(file_T, bool_decay_width, "T")
+
+    if any(cs_L[0] != cs_T[0]):
+        raise Exception("Q vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
+
+    cs_tot = np.array(cs_L) / np.array(cs_T)
+    cs_tot[0] = cs_L[0] # Q^2 vector
+
+    return cs_tot
+
+
 def get_total_cross_section_W(file_L, file_T, bool_decay_width):
     """
     Calculates the total (differential) cross section at t=0, using the files for longitudinal and transverse production.
@@ -60,7 +79,7 @@ def get_total_cross_section_W(file_L, file_T, bool_decay_width):
         raise Exception("W vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
 
     cs_tot = np.array(cs_L) + np.array(cs_T)
-    cs_tot[0] = cs_L[0] # W vecor
+    cs_tot[0] = cs_L[0] # W vector
 
     return cs_tot
 

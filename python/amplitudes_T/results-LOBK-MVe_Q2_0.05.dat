@@ -1,6 +1,6 @@
-# Transverse exclusive vector meson production in DIS at NLO by J. Penttala <jani.j.penttala@student.jyu.fi>, 2021. These are the values for the production amplitude at t=0, up to a prefactor e*ef*m/(pi)*sqrt(Nc/2)*2*(wavefunction factor).
-# Git version f53016e2f3cfd10c965f356d4a7f66b8fe539f9a main build Aug 23 2021 16:10:09
-# Command: -Q2 0.05 -Wmin 20 -Wmax 1000 -Wpoints 16 -thread 20 -fast -relxpom -ifile config_files/conf_LOBK_MVe.txt -ofileL output/longitudinal/results-LOBK-MVe_Q2_0.05.dat -ofileT output/transverse/results-LOBK-MVe_Q2_0.05.dat 
+# (transverse) Exclusive vector meson production in DIS at NLO by J. Penttala <jani.j.penttala@student.jyu.fi>, 2021. These are the values for the production amplitude at t=0, up to a prefactor -e*ef*m/(pi)*sqrt(Nc/2)*2*(wavefunction factor).
+# Git version 198ae89105bd3c009efa787204b7bb2a3c437d7b main build Aug 23 2021 15:13:25
+# Command: -Q2 0.05 -Wmin 20 -Wmax 1000 -Wpoints 16 -thread 20 -relxpom -fast -ifile config_files/conf_LOBK_MVe.txt -ofile output/results-LOBK-MVe_Q2_0.05.dat 
 # Different parts of the transverse production amplitude. A common prefactor e*ef/(pi)*sqrt(Nc/2)*2*(wavefunction factor) has been left out. Rows: W (GeV) 
 #Q^2 value:
 5.000000000e-02

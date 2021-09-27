@@ -8,7 +8,7 @@ OUTPUT_FOLDER_T=output/transverse
 
 NTHREAD=20
 Q2=0.05
-W=90
+W=1000
 Wmin=20
 Wmax=1000
 Q2min=0.01
@@ -20,6 +20,27 @@ echo Folder for the config = $INPUT_FOLDER
 echo Folder for the code = $CODE_FOLDER
 echo Folder for the output, longitudinal = $OUTPUT_FOLDER_L
 echo Folder for the output, transverse = $OUTPUT_FOLDER_T
+
+${CODE_FOLDER}/NLO_amplitude -W ${W} -Q2min ${Q2min} -Q2max ${Q2max} -Q2points ${Q2points} -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf-kcbk-hera-bal+sd-4.61.txt -ofileL ${OUTPUT_FOLDER_L}/results-kcbk-hera-bal+sd-4.61-L-W_${W}.dat -ofileT ${OUTPUT_FOLDER_T}/results-kcbk-hera-bal+sd-4.61-T-W_${W}.dat 
+echo KCBK 4.61, W ${W}
+
+${CODE_FOLDER}/NLO_amplitude -W ${W} -Q2min ${Q2min} -Q2max ${Q2max} -Q2points ${Q2points} -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf-kcbk-hera-bal+sd-0.00.txt -ofileL ${OUTPUT_FOLDER_L}/results-kcbk-hera-bal+sd-0.00-L-W_${W}.dat -ofileT ${OUTPUT_FOLDER_T}/results-kcbk-hera-bal+sd-0.00-T-W_${W}.dat 
+echo KCBK 0.00, W ${W}
+
+${CODE_FOLDER}/NLO_amplitude -W ${W} -Q2min ${Q2min} -Q2max ${Q2max} -Q2points ${Q2points} -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf-tbk-hera-bal+sd-4.61.txt -ofileL ${OUTPUT_FOLDER_L}/results-tbk-hera-bal+sd-4.61-L-W_${W}.dat -ofileT ${OUTPUT_FOLDER_T}/results-tbk-hera-bal+sd-4.61-T-W_${W}.dat 
+echo TBK 4.61, W ${W}
+
+${CODE_FOLDER}/NLO_amplitude -W ${W} -Q2min ${Q2min} -Q2max ${Q2max} -Q2points ${Q2points} -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf-tbk-hera-bal+sd-0.00.txt -ofileL ${OUTPUT_FOLDER_L}/results-tbk-hera-bal+sd-0.00-L-W_${W}.dat -ofileT ${OUTPUT_FOLDER_T}/results-tbk-hera-bal+sd-0.00-T-W_${W}.dat 
+echo TBK 0.00, W ${W}
+
+${CODE_FOLDER}/NLO_amplitude -W ${W} -Q2min ${Q2min} -Q2max ${Q2max} -Q2points ${Q2points} -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf-resumbk-hera-bal+sd-4.61.txt -ofileL ${OUTPUT_FOLDER_L}/results-resumbk-hera-bal+sd-4.61-L-W_${W}.dat -ofileT ${OUTPUT_FOLDER_T}/results-resumbk-hera-bal+sd-4.61-T-W_${W}.dat 
+echo ResumBK 4.61, W ${W}
+
+${CODE_FOLDER}/NLO_amplitude -W ${W} -Q2min ${Q2min} -Q2max ${Q2max} -Q2points ${Q2points} -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf-resumbk-hera-bal+sd-0.00.txt -ofileL ${OUTPUT_FOLDER_L}/results-resumbk-hera-bal+sd-0.00-L-W_${W}.dat -ofileT ${OUTPUT_FOLDER_T}/results-resumbk-hera-bal+sd-0.00-T-W_${W}.dat 
+echo ResumBK 0.00, W ${W}
+
+# ${CODE_FOLDER}/NLO_amplitude -fast -Q2 ${Q2} -Wmin ${Wmin} -Wmax ${Wmax} -Wpoints ${Wpoints} -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf-kcbk-hera-bal+sd-4.61.txt -ofileL ${OUTPUT_FOLDER_L}/results-kcbk-hera-bal+sd-4.61-L-fast.dat -ofileT ${OUTPUT_FOLDER_T}/results-kcbk-hera-bal+sd-4.61-T-fast.dat 
+# echo KCBK 4.61 fast
 
 # ${CODE_FOLDER}/NLO_amplitude -fast -Q2 ${Q2} -Wmin ${Wmin} -Wmax ${Wmax} -Wpoints ${Wpoints} -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf-kcbk-hera-bal+sd-4.61.txt -ofileL ${OUTPUT_FOLDER_L}/results-kcbk-hera-bal+sd-4.61-L-fast.dat -ofileT ${OUTPUT_FOLDER_T}/results-kcbk-hera-bal+sd-4.61-T-fast.dat 
 # echo KCBK 4.61 fast
