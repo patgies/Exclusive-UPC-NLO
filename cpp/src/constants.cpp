@@ -104,9 +104,15 @@ double eta_corr(double r) {
 }
 
 // Y
-double rapidity(double W, double Q, double z2, double r) {
-    return log(z2) + Y_0_fun(W, Q) + eta_corr(r);
+double rapidity(double W, double Q, double z2) {
+    return log(z2) + Y_0_fun(W, Q);
 } 
+
+// Target rapidity eta = Y + eta_corr
+double target_rapidity(double Y, double r) {
+    return Y + eta_corr(r);
+} 
+
 
 // Gives the minimum for the z_2 integral in the unsub scheme.
 double z2_min_fun(double W, double Q) {

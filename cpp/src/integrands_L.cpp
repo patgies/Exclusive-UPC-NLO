@@ -119,7 +119,7 @@ double Longitudinal::M_1(double x[], double delta, double m, double Q, double W)
     double u = x[5];
 
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2, x10);
+    double Y = rapidity(W, Q, z2);
 
     double omega_f = (1.0/2.0-z2) * z2 * 8.0;
     double lambda_f = 1.0/2.0*z2/(1.0/2.0-z2);
@@ -151,7 +151,7 @@ double Longitudinal::M_2(double x[], double delta, double m, double Q, double W)
     double u = x[5];
 
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2, x10);
+    double Y = rapidity(W, Q, z2);
 
     double omega_f = (1.0/2.0-z2) * z2 * 8.0;
     double lambda_f = 1.0/2.0*z2/(1.0/2.0-z2);
@@ -180,7 +180,7 @@ double Longitudinal::L_5(double x[], double delta, double m, double Q, double W)
     double z2 = x[3];
 
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2, x10);
+    double Y = rapidity(W, Q, z2);
 
     double omega_f = (1.0/2.0-z2) * z2 * 8.0;
     double Q_f = 0.5 * Q;
@@ -207,7 +207,7 @@ double Longitudinal::L_3(double x[], double delta, double m, double Q, double W)
     double z2 = x[3];
     
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2, x10);
+    double Y = rapidity(W, Q, z2);
 
     return 8.0*m/(M_PI*x20)* gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( gsl_pow_2(1.0-z2) + gsl_pow_2(z2) -1.0 ) * 
     ( gsl_sf_bessel_K1(2.0*m*z2*x20) * ( 1.0- x20/x21 * cos(ph) ) * N_xyz(x10, x20, x21, delta, Y) 
@@ -222,7 +222,7 @@ double Longitudinal::L_4(double x[], double delta, double m, double Q, double W)
     double z2 = x[3];
     
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2, x10);
+    double Y = rapidity(W, Q, z2);
 
     return 8.0*m/(M_PI*x20) * N_xyz(x10, x20, x21, delta, Y) * gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( 1.0- x20/x21 * cos(ph) ) * ( gsl_sf_bessel_K1(2.0*m*z2*x20) - 1.0/(2.0*m*z2*x20) )  * x20 *x21 * 2.0 *M_PI*alpha_s3(x10,x20,x21)*2.0/3.0/M_PI * delta_factor_qqg(z2, delta, x20, x21, ph);
 }
@@ -234,7 +234,7 @@ double Longitudinal::L_BK(double x[], double delta, double m, double Q, double W
     double z2 = x[3];
     
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2, x10);
+    double Y = rapidity(W, Q, z2);
 
     // double kernel0 = N_c / (2*Cf) * gsl_pow_2(x10) / gsl_pow_2( x20 * x21 ) ;
     // double kernel0 = N_c / (2*Cf) * (gsl_pow_2(x10) / gsl_pow_2( x20 * x21 )  + 1/(x20*x20) * (alpha_s(x20)/alpha_s(x21)-1) + 1/(x21*x21) * (alpha_s(x21)/alpha_s(x20)-1) );
@@ -251,7 +251,7 @@ double Longitudinal::L_rcBK(double x[], double delta, double m, double Q, double
     double z2 = x[3];
     
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2, x10);
+    double Y = rapidity(W, Q, z2);
 
     double kernel =  (gsl_pow_2(x10) / gsl_pow_2( x20 * x21 )  + 1/(x20*x20) * (alpha_s(x20)/alpha_s(x21)-1) + 1/(x21*x21) * (alpha_s(x21)/alpha_s(x20)-1) );
 
@@ -265,7 +265,7 @@ double Longitudinal::L_KCBK(double x[], double delta, double m, double Q, double
     double z2 = x[3];
     
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2, x10);
+    double Y = rapidity(W, Q, z2);
 
 
     double delta012 = fmax(0.0, log( fmin(x20*x20,x21*x21)/(x10*x10) ));
@@ -287,7 +287,7 @@ double Longitudinal::qq_LO(double x[], size_t dim, void *params) {
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * 2*M_PI * x10 * delta_factor_qq(0.5, delta, x10);
@@ -302,7 +302,7 @@ double Longitudinal::qq_NLO_1_dim_dw(double x[], size_t dim, void *params) {
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( 6.0-gsl_pow_2(M_PI)/3.0 + Gamma_Lm(m, Q) + L(m, Q) - 3.0*log(x10*m/2.0)-3.0*M_EULER )*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
 }
@@ -316,7 +316,7 @@ double Longitudinal::qq_NLO_1_dim_wf(double x[], size_t dim, void *params) {
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( 2.0-gsl_pow_2(M_PI)/3.0 + Gamma_Lm(m, Q) + L(m, Q) - 3.0*log(x10*m/2.0)-3.0*M_EULER )*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
 }
@@ -331,7 +331,7 @@ double Longitudinal::qq_NLO_K0(double x[], size_t dim, void *params) {
     double m = p->m;
     double x10 = x[0];
     double z = x[1];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
 
     return N_xy(x10, delta, Y)*K_0_integrand(z, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(z, delta, x10);
@@ -347,7 +347,7 @@ double Longitudinal::qq_NLO_J_1(double x[], size_t dim, void *params) {
     double m = p->m;
     double x10 = x[0];
     double xi = x[1];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
     return N_xy(x10, delta, Y)*J_1_integrand(xi, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
 }
@@ -363,7 +363,7 @@ double Longitudinal::qq_NLO_J_2(double x[], size_t dim, void *params) {
     double x10 = x[0];
     double xi = x[1];
     double x_var = x[2];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
     
     return N_xy(x10, delta, Y)*J_2_integrand(xi, x_var, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
 }
@@ -444,7 +444,7 @@ double Longitudinal::qq_rel_002(double x[], size_t dim, void *params) {
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
 
     return N_xy(x10, delta, Y)* ( gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*Q*Q + m*m )) - Q*Q*x10/(8.0 * sqrt( 1.0/4.0*Q*Q + m*m ) ) * gsl_sf_bessel_K1(x10 * sqrt( 1.0/4.0*Q*Q + m*m ) ) ) * 2*M_PI * x10 * delta_factor_qq(0.5, delta, x10);
@@ -460,7 +460,7 @@ double Longitudinal::qq_rel_200(double x[], size_t dim, void *params) {
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
 
     return N_xy(x10, delta, Y)* gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*Q*Q + m*m )) * m*m * x10*x10 / 4.0 * 2*M_PI * x10  * delta_factor_qq(0.5, delta, x10);
@@ -477,7 +477,7 @@ double Longitudinal::lambda_integrand(double x[], size_t dim, void *params) {
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
     return dNdY(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * 2*M_PI * x10 * delta_factor_qq(0.5, delta, x10);
 }

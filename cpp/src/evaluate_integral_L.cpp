@@ -197,7 +197,7 @@ namespace Longitudinal {
                 }
             }
 
-            cout << ((double)i_n+1)/((double)(W_points/n_thread+1))*100 <<"%"<<endl;
+            // cout << ((double)i_n+1)/((double)(W_points/n_thread+1))*100 <<"%"<<endl;
         }
         myfile.close();  
     }
@@ -244,7 +244,7 @@ namespace Longitudinal {
                 }
             }
 
-            cout << ((double)i_n+1)/((double)(Q_points/n_thread+1))*100 <<"%"<<endl;
+            // cout << ((double)i_n+1)/((double)(Q_points/n_thread+1))*100 <<"%"<<endl;
         }
         myfile.close();  
     }

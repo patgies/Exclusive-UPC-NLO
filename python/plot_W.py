@@ -89,7 +89,7 @@ C_int = plotting_functions.t_integration_coefficient(W)
 linewidth = 2.5
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
-plots = [1,2,3,4,5,6]
+plots = [1,10]
 
 if 1 in plots:
     plt.figure(1)
@@ -252,5 +252,27 @@ if 6 in plots:
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)
 
+
+if 10 in plots:
+    plt.figure(10)
+    plt.plot(cs_kcbk_000_T[0], cs_kcbk_000_T[1], '-',color='tab:green',label=r'LO KCBK 0.00', linewidth=linewidth)
+    plt.plot(cs_kcbk_461_T[0], cs_kcbk_461_T[1], '--',color='tab:green',label=r'LO KCBK 4.61', linewidth=linewidth)
+    plt.plot(cs_tbk_000_T[0], cs_tbk_000_T[1], 'r-',label=r'LO TBK 0.00', linewidth=linewidth)
+    plt.plot(cs_tbk_461_T[0], cs_tbk_461_T[1], 'r--',label=r'LO TBK 4.61', linewidth=linewidth)
+    plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_T[1], 'b-',label=r'LO ResumBK 0.00', linewidth=linewidth)
+    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_T[1], 'b--',label=r'LO ResumBK 4.61', linewidth=linewidth)
+    plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_T[5], 'k:',label=r'LOBK MV$^e$', linewidth=linewidth)
+    plt.legend(prop={'size': 12}, frameon=False)
+    plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, Q^2= 0.05$ GeV$^2$ [nb/GeV$^2$]', fontsize=17)
+    plt.xlabel(r'$W$ [GeV]', fontsize=15)
+    plt.xlim([20, 1e3])
+    plt.ylim([3e1, 4e3])
+    plt.xticks(fontsize=15)
+    plt.yticks(fontsize=15)
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.tight_layout()
+    plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
+    plt.tick_params(axis='x', pad=5)
 
 plt.show()

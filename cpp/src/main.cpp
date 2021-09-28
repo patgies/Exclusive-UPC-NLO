@@ -181,6 +181,8 @@ int main(int argc, char* argv[])
 
     if(ofileL_bool) {
 
+        cout << "Calculating longitudinal production..." << endl;
+
         ofstream ofile;
         ofile.open(output_file_L);
         ofile << "# Longitudinal exclusive vector meson production in DIS at NLO by J. Penttala <jani.j.penttala@student.jyu.fi>, 2021. These are the values for the production amplitude at t=0, up to a prefactor -e*ef*Q/(2*pi)*sqrt(Nc/2)*2*(wavefunction factor)." << endl;
@@ -213,9 +215,13 @@ int main(int argc, char* argv[])
             exit(1);
         }
 
+        cout << "Longitudinal done!" << endl;
+
     }    
 
     if(ofileT_bool) {
+
+        cout << "Calculating transverse production..." << endl;
 
         ofstream ofile;
         ofile.open(output_file_T);
@@ -248,6 +254,8 @@ int main(int argc, char* argv[])
             cerr << "Set a value for either W or Q2." << endl;
             exit(1);
         }
+
+        cout << "Transverse done!" << endl;
 
     }    
     return 0;

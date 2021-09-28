@@ -107,7 +107,7 @@ double Transverse::M(double x[], double delta, double m, double Q, double W) {
     double u = x[5];
 
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2, x10);
+    double Y = rapidity(W, Q, z2);
 
     double omega_j = (1.0/2.0-z2) * z2 * 8.0;
     double lambda_j = 1.0/2.0*z2/(1.0/2.0-z2);
@@ -142,7 +142,7 @@ double Transverse::L_1(double x[], double delta, double m, double Q, double W){
     double z2 = x[3];
 
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2, x10);
+    double Y = rapidity(W, Q, z2);
 
     double omega_j = (1.0/2.0-z2) * z2 * 8.0;
     double lambda_j = 1.0/2.0*z2/(1.0/2.0-z2);
@@ -188,7 +188,7 @@ double Transverse::L_BK(double x[], double delta, double m, double Q, double W){
     double z2 = x[3];
     
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2, x10);
+    double Y = rapidity(W, Q, z2);
 
     return 2.0 / (M_PI*z2) * ( N_xyz(x10, x20, x21, delta, Y) - N_xy(x10, delta, Y) ) * gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * gsl_pow_2(x10) / gsl_pow_2( x20 * x21 )  * x20 *x21 * 2.0 *M_PI*alpha_s3(x10,x20,x21)*2.0/3.0/M_PI * delta_factor_qqg(z2, delta, x20, x21, ph);
 }
@@ -201,7 +201,7 @@ double Transverse::L_rcBK(double x[], double delta, double m, double Q, double W
     double z2 = x[3];
     
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2, x10);
+    double Y = rapidity(W, Q, z2);
 
     double kernel =  (gsl_pow_2(x10) / gsl_pow_2( x20 * x21 )  + 1/(x20*x20) * (alpha_s(x20)/alpha_s(x21)-1) + 1/(x21*x21) * (alpha_s(x21)/alpha_s(x20)-1) );
 
@@ -215,7 +215,7 @@ double Transverse::L_KCBK(double x[], double delta, double m, double Q, double W
     double z2 = x[3];
     
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2, x10);
+    double Y = rapidity(W, Q, z2);
 
 
     double delta012 = fmax(0.0, log( fmin(x20*x20,x21*x21)/(x10*x10) ));
@@ -237,7 +237,7 @@ double Transverse::qq_LO(double x[], size_t dim, void *params) {
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * 2*M_PI * x10 * delta_factor_qq(0.5, delta, x10);
@@ -252,7 +252,7 @@ double Transverse::qq_NLO_1_dim_decay_width(double x[], size_t dim, void *params
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( -Omega_V(m,Q)+L(m,Q) -M_PI*M_PI/3.0+13.0/2.0-3.0*log( m*x10/2.0 ) -3.0*M_EULER )
             *2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
@@ -267,7 +267,7 @@ double Transverse::qq_NLO_1_dim_wave_function(double x[], size_t dim, void *para
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( -Omega_V(m,Q)+L(m,Q) -M_PI*M_PI/3.0+5.0/2.0-3.0*log( m*x10/2.0 ) -3.0*M_EULER )
             *2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
@@ -283,7 +283,7 @@ double Transverse::qq_NLO_K(double x[], size_t dim, void *params) {
     double m = p->m;
     double x10 = x[0];
     double z = x[1];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
 
     return N_xy(x10, delta, Y)*K_0_integrand(z, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(z, delta, x10);
@@ -299,7 +299,7 @@ double Transverse::qq_NLO_J_1(double x[], size_t dim, void *params) {
     double m = p->m;
     double x10 = x[0];
     double xi = x[1];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
     return N_xy(x10, delta, Y)*J_1_integrand(xi, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
 }
@@ -315,7 +315,7 @@ double Transverse::qq_NLO_J_2(double x[], size_t dim, void *params) {
     double x10 = x[0];
     double xi = x[1];
     double x_var = x[2];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
     
     return N_xy(x10, delta, Y)*J_2_integrand(xi, x_var, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
 }
@@ -395,7 +395,7 @@ double Transverse::qq_rel_002_pp(double x[], size_t dim, void *params) {
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
     double zeta = x10 * sqrt(0.25*Q*Q+m*m);
 
@@ -413,7 +413,7 @@ double Transverse::qq_rel_200_pp(double x[], size_t dim, void *params) {
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
     double zeta = x10 * sqrt(0.25*Q*Q+m*m);
 
@@ -430,7 +430,7 @@ double Transverse::qq_rel_100_pm(double x[], size_t dim, void *params) {
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
     double zeta = x10 * sqrt(0.25*Q*Q+m*m);
 
@@ -450,7 +450,7 @@ double Transverse::lambda_integrand(double x[], size_t dim, void *params) {
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap)+eta_corr(x10);
+    double Y = log(1.0/x_rap);
 
     return dNdY(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * 2*M_PI * x10 * delta_factor_qq(0.5, delta, x10);
 }

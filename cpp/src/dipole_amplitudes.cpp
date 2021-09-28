@@ -95,8 +95,8 @@ double S_IPsat(double r, double Y) {
 
 // S_matrix for the dipole-nucleus scattering.
 double S_xy(double r, double Y){
-    double Y_corr = Y;
-    if(Y<Y0_if) Y_corr = Y0_if;
+    double Y_corr = Y + eta_corr(r);
+    if(Y_corr<Y0_if) Y_corr = Y0_if;
     if (IPsat_bool) return S_IPsat(r, Y_corr);
     else if (dipole_file_bool) return S_file(r, Y_corr);
     else return S_GBW(r, Y_corr);
