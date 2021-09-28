@@ -89,7 +89,7 @@ C_int = plotting_functions.t_integration_coefficient(W)
 linewidth = 2.5
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
-plots = [1,10]
+plots = [1,2,3,4,5,6]
 
 if 1 in plots:
     plt.figure(1)
