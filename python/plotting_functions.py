@@ -27,15 +27,15 @@ def read_file(file):
     
     return constant, variable, amplitudes_table
 
-def get_total_cross_section_Q(file_L, file_T, bool_decay_width):
+def get_total_cross_section_Q(file_L, file_T, reg_scheme):
     """
     Calculates the total (differential) cross section at t=0, using the files for longitudinal and transverse production.
 
     Returns(the following are vectors with the same length):
     Q^2, LO, NLO, LO_rel,NLO_rel, LO_pom, LO_rel_pom
     """
-    cs_L = get_cross_section_values_Q(file_L, bool_decay_width, "L")
-    cs_T = get_cross_section_values_Q(file_T, bool_decay_width, "T")
+    cs_L = get_cross_section_values_Q(file_L, reg_scheme, "L")
+    cs_T = get_cross_section_values_Q(file_T, reg_scheme, "T")
 
     if any(cs_L[0] != cs_T[0]):
         raise Exception("Q vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
@@ -46,15 +46,15 @@ def get_total_cross_section_Q(file_L, file_T, bool_decay_width):
     return cs_tot
 
 
-def get_cross_section_ratio_Q(file_L, file_T, bool_decay_width):
+def get_cross_section_ratio_Q(file_L, file_T, reg_scheme):
     """
     Calculates the ratio of the differential cross sections at t=0: (dsigma_L/dt)/(dsigma_T/dt), using the files for longitudinal and transverse production.
 
     Returns(the following are vectors with the same length):
     Q^2, LO, NLO, LO_rel,NLO_rel, LO_pom, LO_rel_pom
     """
-    cs_L = get_cross_section_values_Q(file_L, bool_decay_width, "L")
-    cs_T = get_cross_section_values_Q(file_T, bool_decay_width, "T")
+    cs_L = get_cross_section_values_Q(file_L, reg_scheme, "L")
+    cs_T = get_cross_section_values_Q(file_T, reg_scheme, "T")
 
     if any(cs_L[0] != cs_T[0]):
         raise Exception("Q vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
@@ -65,15 +65,15 @@ def get_cross_section_ratio_Q(file_L, file_T, bool_decay_width):
     return cs_tot
 
 
-def get_total_cross_section_W(file_L, file_T, bool_decay_width):
+def get_total_cross_section_W(file_L, file_T, reg_scheme):
     """
     Calculates the total (differential) cross section at t=0, using the files for longitudinal and transverse production.
 
     Returns(the following are vectors with the same length):
     W, LO, NLO, LO_rel,NLO_rel, LO_pom, LO_rel_pom
     """
-    cs_L = get_cross_section_values_W(file_L, bool_decay_width, "L")
-    cs_T = get_cross_section_values_W(file_T, bool_decay_width, "T")
+    cs_L = get_cross_section_values_W(file_L, reg_scheme, "L")
+    cs_T = get_cross_section_values_W(file_T, reg_scheme, "T")
 
     if cs_L[0] != cs_T[0]:
         raise Exception("W vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
@@ -84,17 +84,17 @@ def get_total_cross_section_W(file_L, file_T, bool_decay_width):
     return cs_tot
 
 
-def get_total_cross_section_distribution_Q(file_L, file_T, bool_decay_width):
+def get_total_cross_section_distribution_Q(file_L, file_T, reg_scheme):
     """
     Calculates the total (differential) cross section at t=0, using the files for longitudinal and transverse production.
     Samples wave function values and gives the mean/std for various cross sections.
-    For consistency, this should be used with bool_decay_width=False.
+    For consistency, this should be used with reg_scheme = rel wave function.
 
     Returns(the following are vectors with the same length):
     Q^2, rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std
     """
-    cs_L = get_distribution_Q(file_L, bool_decay_width, "L")
-    cs_T = get_distribution_Q(file_T, bool_decay_width, "T")
+    cs_L = get_distribution_Q(file_L, reg_scheme, "L")
+    cs_T = get_distribution_Q(file_T, reg_scheme, "T")
 
     if any(cs_L[0] != cs_T[0]):
         raise Exception("Q vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
@@ -111,17 +111,17 @@ def get_total_cross_section_distribution_Q(file_L, file_T, bool_decay_width):
     return cs_tot
 
 
-def get_total_cross_section_distribution_W(file_L, file_T, bool_decay_width):
+def get_total_cross_section_distribution_W(file_L, file_T, reg_scheme):
     """
     Calculates the total (differential) cross section at t=0, using the files for longitudinal and transverse production.
     Samples wave function values and gives the mean/std for various cross sections.
-    For consistency, this should be used with bool_decay_width=False.
+    For consistency, this should be used with reg_scheme = rel wave function.
 
     Returns(the following are vectors with the same length):
     W, rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std
     """
-    cs_L = get_distribution_Q(file_L, bool_decay_width, "L")
-    cs_T = get_distribution_Q(file_T, bool_decay_width, "T")
+    cs_L = get_distribution_Q(file_L, reg_scheme, "L")
+    cs_T = get_distribution_Q(file_T, reg_scheme, "T")
 
     if any(cs_L[0] != cs_T[0]):
         raise Exception("Q vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
@@ -140,7 +140,7 @@ def get_total_cross_section_distribution_W(file_L, file_T, bool_decay_width):
 
 
 
-def calculate_cross_section_T(Qv, amplitudes_table, bool_decay_width, O_LDME=0.440, q_LDME=0.441):
+def calculate_cross_section_T(Qv, amplitudes_table, reg_scheme, O_LDME=0.440, q_LDME=0.441):
     """Calculates the cross sections from the production amplitudes. Qv can be a vector or scalar.
     Returns: a dictionary that contains relevant cross sections (in nb)"""
 
@@ -154,11 +154,18 @@ def calculate_cross_section_T(Qv, amplitudes_table, bool_decay_width, O_LDME=0.4
     wf_0 = np.sqrt( O_LDME / (2*Nc) ) # phi_RF(0)
     nabla_wf = -q_LDME * wf_0 # nabla phi_RF(0)
 
-    if bool_decay_width:
+    if reg_scheme == 'decay width':
         Gamma_ee = 5.53e-6
         wf_LO = np.sqrt(3*np.pi*Mv*Gamma_ee / (2*Nc*ef**2*e**4) )  # int dz/(4pi) phi(z,rt=0)
+    elif reg_scheme == 'NR wave function':
+        Gamma_ee = 5.53e-6
+        alpha_s = 0.25 # alpha_s(M_Jpsi)
+        Cf = 4/3
+        wf_LO = np.sqrt(3*np.pi*Mv*Gamma_ee / (2*Nc*ef**2*e**4) ) * ( 1 + 2*alpha_s*Cf/np.pi ) # int dz/(4pi) phi(z,rt=0)
+    elif reg_scheme == 'rel wave function':
+        wf_LO = 1/np.sqrt(4*m)*(wf_0 + 1/(6*m**2)*nabla_wf * 5/2)  # int dz/(4pi) phi(z,rt=0)
     else:
-        wf_LO = 1/np.sqrt(4*m)*(wf_0 + 1/(6*m**2)*nabla_wf * 7/2)  # int dz/(4pi) phi(z,rt=0)
+        raise Exception('Invalid scheme')
 
     nonrel_factor = m*e*ef/(np.pi)*2*np.sqrt(Nc/2)*wf_LO
 
@@ -179,7 +186,7 @@ def calculate_cross_section_T(Qv, amplitudes_table, bool_decay_width, O_LDME=0.4
     LO_pom = amplitudes[:,1]
     LO_0 = amplitudes[:,2]
     LO_BK = amplitudes[:,2] + amplitudes[:,10]
-    if bool_decay_width:
+    if reg_scheme == 'decay width':
         NLO_dip = amplitudes[:,3]+amplitudes[:,5]+amplitudes[:,6]+amplitudes[:,7]
     else:
         NLO_dip = amplitudes[:,4]+amplitudes[:,5]+amplitudes[:,6]+amplitudes[:,7]
@@ -204,7 +211,7 @@ def calculate_cross_section_T(Qv, amplitudes_table, bool_decay_width, O_LDME=0.4
     dict_cs = {"LO": cs_LO_prime, "LO_pom": cs_LO_pom, "NLO": cs_NLO, "LO_rel": cs_rel, "NLO_rel": cs_NLO_rel, "LO_rel_pom": cs_rel_pom   }
     return dict_cs
 
-def calculate_cross_section_L(Qv, amplitudes_table, bool_decay_width, O_LDME=0.440, q_LDME=0.441):
+def calculate_cross_section_L(Qv, amplitudes_table, reg_scheme, O_LDME=0.440, q_LDME=0.441):
     """Calculates the cross sections from the production amplitudes. Qv can be a vector or scalar.
     Returns: a dictionary that contains relevant cross sections (in nb)"""
 
@@ -218,11 +225,18 @@ def calculate_cross_section_L(Qv, amplitudes_table, bool_decay_width, O_LDME=0.4
     wf_0 = np.sqrt( O_LDME / (2*Nc) ) # phi_RF(0)
     nabla_wf = -q_LDME * wf_0 # nabla phi_RF(0)
 
-    if bool_decay_width:
+    if reg_scheme == 'decay width':
         Gamma_ee = 5.53e-6
         wf_LO = np.sqrt(3*np.pi*Mv*Gamma_ee / (2*Nc*ef**2*e**4) )  # int dz/(4pi) phi(z,rt=0)
-    else:
+    elif reg_scheme == 'NR wave function':
+        Gamma_ee = 5.53e-6
+        alpha_s = 0.25 # alpha_s(M_Jpsi)
+        Cf = 4/3
+        wf_LO = np.sqrt(3*np.pi*Mv*Gamma_ee / (2*Nc*ef**2*e**4) ) * ( 1 + 2*alpha_s*Cf/np.pi ) # int dz/(4pi) phi(z,rt=0)
+    elif reg_scheme == 'rel wave function':
         wf_LO = 1/np.sqrt(4*m)*(wf_0 + 1/(6*m**2)*nabla_wf * 5/2)  # int dz/(4pi) phi(z,rt=0)
+    else:
+        raise Exception('Invalid scheme')
 
     nonrel_factor = e*ef*Qv*Nc/(2*np.pi)*2*wf_LO / np.sqrt(2*Nc)
 
@@ -243,7 +257,7 @@ def calculate_cross_section_L(Qv, amplitudes_table, bool_decay_width, O_LDME=0.4
     LO_pom = amplitudes[:,1]
     LO_0 = amplitudes[:,2]
     LO_BK = amplitudes[:,2] + amplitudes[:,10]
-    if bool_decay_width:
+    if reg_scheme == 'decay width':
         NLO_dip = amplitudes[:,3]+amplitudes[:,5]+amplitudes[:,6]+amplitudes[:,7]
     else:
         NLO_dip = amplitudes[:,4]+amplitudes[:,5]+amplitudes[:,6]+amplitudes[:,7]
@@ -268,17 +282,17 @@ def calculate_cross_section_L(Qv, amplitudes_table, bool_decay_width, O_LDME=0.4
     dict_cs = {"LO": cs_LO_prime, "LO_pom": cs_LO_pom, "NLO": cs_NLO, "LO_rel": cs_rel, "NLO_rel": cs_NLO_rel, "LO_rel_pom": cs_rel_pom   }
     return dict_cs
 
-def calculate_cross_section(Qv, amplitudes_table, bool_decay_width, pol, O_LDME=0.440, q_LDME=0.441):
+def calculate_cross_section(Qv, amplitudes_table, reg_scheme, pol, O_LDME=0.440, q_LDME=0.441):
     if pol=='L':
-        dict_cs = calculate_cross_section_L(Qv, amplitudes_table, bool_decay_width, O_LDME=O_LDME, q_LDME=q_LDME)
+        dict_cs = calculate_cross_section_L(Qv, amplitudes_table, reg_scheme, O_LDME=O_LDME, q_LDME=q_LDME)
     elif pol=='T':
-        dict_cs = calculate_cross_section_T(Qv, amplitudes_table, bool_decay_width, O_LDME=O_LDME, q_LDME=q_LDME)
+        dict_cs = calculate_cross_section_T(Qv, amplitudes_table, reg_scheme, O_LDME=O_LDME, q_LDME=q_LDME)
     else:
         raise Exception("Invalid polarization: " + str(pol))
 
     return dict_cs
 
-def calculate_rel_error_bands(Qv, amplitudes_table, bool_decay_width, pol):
+def calculate_rel_error_bands(Qv, amplitudes_table, reg_scheme, pol):
     """Calculate the distribution of various differential cross sections, in terms of the NRQCD matrix elements."""
     size = 1000
     O_LDME, q_LDME = get_random_LDMEs(size)
@@ -287,7 +301,7 @@ def calculate_rel_error_bands(Qv, amplitudes_table, bool_decay_width, pol):
     cs_rel_pom_v = []
     cs_NLO_rel_v = []
     for i in range(size):
-        dict_cs = calculate_cross_section(Qv, amplitudes_table, bool_decay_width, pol, O_LDME=O_LDME[i], q_LDME=q_LDME[i])
+        dict_cs = calculate_cross_section(Qv, amplitudes_table, reg_scheme, pol, O_LDME=O_LDME[i], q_LDME=q_LDME[i])
 
         cs_rel_v += [dict_cs["LO_rel"]]
         cs_rel_pom_v += [dict_cs["LO_rel_pom"]]
@@ -310,36 +324,37 @@ def get_random_LDMEs(size):
     O_LDME, q_LDME = np.random.multivariate_normal(mean, cov, size).T
     return O_LDME, q_LDME
 
-def get_distribution_Q(file, bool_decay_width, pol):
+def get_distribution_Q(file, reg_scheme, pol):
     """Calculate the distribution of various differential cross sections, in terms of the NRQCD matrix elements.
     This is the correct implementation, though slower than the other one."""
     W, Qv, amplitudes_table = read_file(file)
         
     Q2v = Qv**2
 
-    rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std = calculate_rel_error_bands(Qv, amplitudes_table, bool_decay_width, pol)
+    rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std = calculate_rel_error_bands(Qv, amplitudes_table, reg_scheme, pol)
 
     return Q2v, rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std
 
-def get_distribution_W(file, bool_decay_width, pol):
+def get_distribution_W(file, reg_scheme, pol):
     """Calculate the distribution of various differential cross sections, in terms of the NRQCD matrix elements."""
     Q2, Wv, amplitudes_table = read_file(file)
 
     Q = np.sqrt(Q2)
 
-    rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std = calculate_rel_error_bands(Q, amplitudes_table, bool_decay_width, pol)
+    rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std = calculate_rel_error_bands(Q, amplitudes_table, reg_scheme, pol)
 
     return Wv, rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std
 
 
-def get_cross_section_values_Q(file, bool_decay_width, pol):
-    """Reads off the LO, NLO, rel and NLO+rel values for the section from the file. The bool_decay_width indicates whether one should use decay width or the wave function as the coefficient: True for decay width, False for wave function """
+def get_cross_section_values_Q(file, reg_scheme, pol):
+    """Reads off the LO, NLO, rel and NLO+rel values for the section from the file. 
+    The reg_scheme indicates which scheme to use for the wave function regularization."""
 
     W, Qv, amplitudes_table = read_file(file)
             
     Q2v = Qv**2
     
-    dict_cs = calculate_cross_section(Qv, amplitudes_table, bool_decay_width, pol)
+    dict_cs = calculate_cross_section(Qv, amplitudes_table, reg_scheme, pol)
 
     return Q2v, dict_cs["LO"], dict_cs["NLO"], dict_cs["LO_rel"], dict_cs["NLO_rel"], dict_cs["LO_pom"], dict_cs["LO_rel_pom"]
 
@@ -347,14 +362,15 @@ def get_cross_section_values_Q(file, bool_decay_width, pol):
 
 
 
-def get_cross_section_values_W(file, bool_decay_width, pol):
-    """Reads off the LO, NLO, rel and NLO+rel values for the section from the file. The bool_decay_width indicates whether one should use decay width or the wave function as the coefficient: True for decay width, False for wave function """
+def get_cross_section_values_W(file, reg_scheme, pol):
+    """Reads off the LO, NLO, rel and NLO+rel values for the section from the file. 
+    The reg_scheme indicates which scheme to use for the wave function regularization."""
     
     Q2, Wv, amplitudes_table = read_file(file)
 
     Q = np.sqrt(Q2)
 
-    dict_cs = calculate_cross_section(Q, amplitudes_table, bool_decay_width, pol)
+    dict_cs = calculate_cross_section(Q, amplitudes_table, reg_scheme, pol)
 
     return Wv, dict_cs["LO"], dict_cs["NLO"], dict_cs["LO_rel"], dict_cs["NLO_rel"], dict_cs["LO_pom"], dict_cs["LO_rel_pom"]
 

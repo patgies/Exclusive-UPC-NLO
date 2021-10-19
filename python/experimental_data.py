@@ -115,6 +115,9 @@ def sigma_tot_W_H1_v1():
 
 
 def sigma_tot_Q2_H1():
+    """
+    Data from Eur.Phys.J.C 46 (2006) 585-603, 2006. 
+    """
     file_yaml = dir_path + r'HEPData-ins694372-v1-Table_1.yaml'
     with open(file_yaml) as file:
         yaml_list = yaml.load(file, Loader=yaml.FullLoader)
@@ -138,6 +141,9 @@ def sigma_tot_Q2_H1():
     return [Q_values, Q_values_low, Q_values_high], [y_values, y_errors_stat_minus, y_errors_syst_minus, y_errors_stat_plus, y_errors_syst_plus]
 
 def sigma_tot_Q2_ZEUS():
+    """
+    Data from Nucl.Phys.B 695 (2004) 3-37. 
+    """
     file_yaml = dir_path + r'HEPData-ins647777-v1-Table_10.yaml'
     with open(file_yaml) as file:
         yaml_list = yaml.load(file, Loader=yaml.FullLoader)
