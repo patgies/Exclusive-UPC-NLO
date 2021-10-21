@@ -1,7 +1,7 @@
 ###M_V
-3.0969
+9.46030
 ###m
-1.54845
+4.73015
 ###Y0_if
 0.0
 ###Q_0
@@ -9,7 +9,15 @@
 ###m_N
 1.0
 ###sigma_0
-43.8109913
+53.5724434
+###C_big
+1.109054
+###lambda_QCD
+0.241
+###c_small
+0.2
+###mu_0
+0.6025
 ###z2_max
 0.499999999
 ###x20_min
@@ -48,18 +56,6 @@
 1.0e-5
 ###u_max
 1000.0
-###W_points
-12
-###Q_points
-24
-###Q^2_min
-0.01
-###Q^2_max
-100.0
-###W_min
-50.0
-###W_max
-1000.0
 ###integ calls low
 100000
 ###integ calls high
@@ -67,6 +63,5 @@
 ###integ calls dim 6
 10000000
 ###dipole file
-data/dipole-kcbk-hera-bal+sd-4.61.dip
-###alpha_s const
-0.3
+data/dipole-tbk-hera-bal+sd-4.61.dip
+###target rapidity

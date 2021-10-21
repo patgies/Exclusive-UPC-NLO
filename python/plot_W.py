@@ -10,11 +10,19 @@ import experimental_data
 
 plotting_functions.pheno_correction = False
 
+particle = 'upsilon'
+plotting_functions.particle = particle
+plotting_functions.initialize()
 
+# reg_scheme = 'decay width'
 reg_scheme = 'decay width'
 reg_scheme_rel = 'rel wave function'
-id_string = "_Q2_0.05" # Q^2 = 0.05 GeV^2, thus there is no need for L
-# id_string = "_Q2_0.05-m_1.4" # Q^2 = 0.05 GeV^2, thus there is no need for L
+
+if particle == 'jpsi':
+    id_string = "_Q2_0.05" # Q^2 = 0.05 GeV^2, thus there is no need for L
+    # id_string = "_Q2_0.05-m_1.4" # Q^2 = 0.05 GeV^2, thus there is no need for L
+elif particle == 'upsilon':
+    id_string = '-upsilon-T-Q2_0.05'
 
 dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_L/'
 dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
@@ -55,9 +63,14 @@ cs_tbk_000_rel_T = plotting_functions.get_distribution_W( dir_path_T + r'results
 cs_resumbk_461_rel_T = plotting_functions.get_distribution_W( dir_path_T + r'results-resumbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_rel, "T" )
 cs_resumbk_000_rel_T = plotting_functions.get_distribution_W( dir_path_T + r'results-resumbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_rel, "T" )
 
+if particle == 'jpsi':
+    alpha_s0 = 0.25
+elif particle == 'upsilon':
+    alpha_s0 = 0.18
+else:
+    raise Exception('Improper particle!')
 
 Cf = 4/3
-alpha_s0 = 0.25
 NRQCD_factor = (1-2*Cf*alpha_s0/np.pi)**2
 
 # cs_kcbk_000 = cs_kcbk_000_L + cs_kcbk_000_T
@@ -89,7 +102,11 @@ C_int = plotting_functions.t_integration_coefficient(W)
 linewidth = 2.5
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
-plots = [3,4]
+
+if particle == 'jpsi':
+    plots = [1,2,3,4,5,6]
+elif particle == 'upsilon':
+    plots = [11,12]
 
 linewidth1 = 0.8*linewidth
 linewidth2 = 1.2*linewidth
@@ -101,7 +118,7 @@ if 1 in plots:
     plt.plot(cs_tbk_000_T[0], cs_tbk_000_T[2], '--',color='tab:green',label=r'NLO TBK 0.00', linewidth=linewidth1)
     plt.plot(cs_tbk_461_T[0], cs_tbk_461_T[2], '--',color='tab:green',label=r'NLO TBK 4.61', linewidth=linewidth2)
     plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_T[2], 'b-.',label=r'NLO ResumBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_T[2], 'b-.',label=r'NLO ResumBK 4.61', linewidth=linewidth1)
+    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_T[2], 'b-.',label=r'NLO ResumBK 4.61', linewidth=linewidth2)
     plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_T[5], 'k:',label=r'LOBK MV$^e$', linewidth=linewidth2)
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, Q^2= 0.05$ GeV$^2$ [nb/GeV$^2$]', fontsize=17)
@@ -273,7 +290,7 @@ if 10 in plots:
     plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, Q^2= 0.05$ GeV$^2$ [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
     plt.xlim([20, 1e3])
-    plt.ylim([3e1, 4e3])
+    plt.ylim([3e0, 4e4])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
     plt.xscale('log')
@@ -281,5 +298,51 @@ if 10 in plots:
     plt.tight_layout()
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)
+
+
+if 11 in plots:
+    plt.figure(11)
+    plt.plot(cs_kcbk_000_T[0], cs_kcbk_000_T[2], 'r-',label=r'NLO KCBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_kcbk_461_T[0], cs_kcbk_461_T[2], 'r-',label=r'NLO KCBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_tbk_000_T[0], cs_tbk_000_T[2], '--',color='tab:green',label=r'NLO TBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_tbk_461_T[0], cs_tbk_461_T[2], '--',color='tab:green',label=r'NLO TBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_T[2], 'b-.',label=r'NLO ResumBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_T[2], 'b-.',label=r'NLO ResumBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_T[5], 'k:',label=r'LOBK MV$^e$', linewidth=linewidth2)
+    plt.legend(prop={'size': 12}, frameon=False)
+    plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, Q^2= 0.05$ GeV$^2$ [nb/GeV$^2$]', fontsize=17)
+    plt.xlabel(r'$W$ [GeV]', fontsize=15)
+    plt.xlim([50, 5e3])
+    plt.ylim([5e-2, 3e1])
+    plt.xticks(fontsize=15)
+    plt.yticks(fontsize=15)
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.tight_layout()
+    plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
+    plt.tick_params(axis='x', pad=5)
+
+if 12 in plots:
+    plt.figure(12)
+    plt.plot(cs_kcbk_000_T[0], cs_kcbk_000_rel_T[5], 'r-',label=r'NLO+rel KCBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_kcbk_461_T[0], cs_kcbk_461_rel_T[5], 'r-',label=r'NLO+rel KCBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_tbk_000_T[0], cs_tbk_000_rel_T[5], '--',color='tab:green',label=r'NLO+rel TBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_tbk_461_T[0], cs_tbk_461_rel_T[5], '--',color='tab:green',label=r'NLO+rel TBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_rel_T[5], 'b-.',label=r'NLO+rel ResumBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_rel_T[5], 'b-.',label=r'NLO+rel ResumBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_rel_T[3] * NRQCD_factor, 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth2)
+    plt.legend(prop={'size': 12}, frameon=False)
+    plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, Q^2= 0.05$ GeV$^2$ [nb/GeV$^2$]', fontsize=17)
+    plt.xlabel(r'$W$ [GeV]', fontsize=15)
+    plt.xlim([50, 5e3])
+    plt.ylim([5e-2, 3e1])
+    plt.xticks(fontsize=15)
+    plt.yticks(fontsize=15)
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.tight_layout()
+    plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
+    plt.tick_params(axis='x', pad=5)
+
 
 plt.show()

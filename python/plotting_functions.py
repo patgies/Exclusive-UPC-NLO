@@ -1,8 +1,51 @@
 import numpy as np
 from scipy import special
 
-
+particle = ''
 pheno_correction = False
+
+Nc = 3
+Cf = 4/3
+e = np.sqrt(4*np.pi/137)
+
+mean = [0, 0]
+cov = [[0, 0] ,[0, 0]]
+O_LDME0=0
+q_LDME0=0
+ef = 0
+Mv = 0
+m = 0
+alpha_s = 0
+Gamma_ee = 0
+
+
+def initialize():
+    global mean, cov, O_LDME0, q_LDME0, ef, Mv, m, alpha_s, Gamma_ee
+    if particle == 'jpsi':
+        mean = [0.440, 0.441]
+        cov = [[3.63e-3, 1.93e-4] ,[1.93e-4, 1.96e-2]]
+        O_LDME0=0.440
+        q_LDME0=0.441
+
+        ef = 2/3
+        Mv = 3.0969
+        m = Mv/2
+        alpha_s = 0.25 # alpha_s(M_Jpsi)
+        Gamma_ee = 5.53e-6
+    elif particle == 'upsilon':
+        mean = [3.069, -0.193]
+        cov = [[0.207**2, 0] ,[0, 0.072**2]]
+        O_LDME0=3.069
+        q_LDME0=-0.193
+
+        ef = 1/3
+        Mv = 9.46030
+        m = Mv/2
+        alpha_s = 0.18 # alpha_s(M_Upsilon)
+        Gamma_ee = 54.02e-6 * 0.0238
+    else:
+        raise Exception('Improper particle!')
+
 
 def phenomenological_correction(lambda_v):
     """Calculate the factor for phenomenological corrections. Equal to 1 if pheno_correction set to False."""
@@ -140,32 +183,24 @@ def get_total_cross_section_distribution_W(file_L, file_T, reg_scheme):
 
 
 
-def calculate_cross_section_T(Qv, amplitudes_table, reg_scheme, O_LDME=0.440, q_LDME=0.441):
+def calculate_cross_section_T(Qv, amplitudes_table, reg_scheme, O_LDME, q_LDME):
     """Calculates the cross sections from the production amplitudes. Qv can be a vector or scalar.
     Returns: a dictionary that contains relevant cross sections (in nb)"""
 
-    Nc = 3
-    ef = 2/3
-    e = np.sqrt(4*np.pi/137)
-    Mv = 3.0969
-    m = Mv/2
-    
 
     wf_0 = np.sqrt( O_LDME / (2*Nc) ) # phi_RF(0)
     nabla_wf = -q_LDME * wf_0 # nabla phi_RF(0)
 
+
     if reg_scheme == 'decay width':
-        Gamma_ee = 5.53e-6
         wf_LO = np.sqrt(3*np.pi*Mv*Gamma_ee / (2*Nc*ef**2*e**4) )  # int dz/(4pi) phi(z,rt=0)
     elif reg_scheme == 'NR wave function':
-        Gamma_ee = 5.53e-6
-        alpha_s = 0.25 # alpha_s(M_Jpsi)
-        Cf = 4/3
         wf_LO = np.sqrt(3*np.pi*Mv*Gamma_ee / (2*Nc*ef**2*e**4) ) * ( 1 + 2*alpha_s*Cf/np.pi ) # int dz/(4pi) phi(z,rt=0)
     elif reg_scheme == 'rel wave function':
-        wf_LO = 1/np.sqrt(4*m)*(wf_0 + 1/(6*m**2)*nabla_wf * 5/2)  # int dz/(4pi) phi(z,rt=0)
+        wf_LO = 1/np.sqrt(4*m)*(wf_0 + 1/(6*m**2)*nabla_wf * 7/2)  # int dz/(4pi) phi(z,rt=0)
     else:
         raise Exception('Invalid scheme')
+
 
     nonrel_factor = m*e*ef/(np.pi)*2*np.sqrt(Nc/2)*wf_LO
 
@@ -211,27 +246,18 @@ def calculate_cross_section_T(Qv, amplitudes_table, reg_scheme, O_LDME=0.440, q_
     dict_cs = {"LO": cs_LO_prime, "LO_pom": cs_LO_pom, "NLO": cs_NLO, "LO_rel": cs_rel, "NLO_rel": cs_NLO_rel, "LO_rel_pom": cs_rel_pom   }
     return dict_cs
 
-def calculate_cross_section_L(Qv, amplitudes_table, reg_scheme, O_LDME=0.440, q_LDME=0.441):
+def calculate_cross_section_L(Qv, amplitudes_table, reg_scheme, O_LDME, q_LDME):
     """Calculates the cross sections from the production amplitudes. Qv can be a vector or scalar.
     Returns: a dictionary that contains relevant cross sections (in nb)"""
 
-    Nc = 3
-    ef = 2/3
-    e = np.sqrt(4*np.pi/137)
-    Mv = 3.0969
-    m = Mv/2
     
 
     wf_0 = np.sqrt( O_LDME / (2*Nc) ) # phi_RF(0)
     nabla_wf = -q_LDME * wf_0 # nabla phi_RF(0)
 
     if reg_scheme == 'decay width':
-        Gamma_ee = 5.53e-6
         wf_LO = np.sqrt(3*np.pi*Mv*Gamma_ee / (2*Nc*ef**2*e**4) )  # int dz/(4pi) phi(z,rt=0)
     elif reg_scheme == 'NR wave function':
-        Gamma_ee = 5.53e-6
-        alpha_s = 0.25 # alpha_s(M_Jpsi)
-        Cf = 4/3
         wf_LO = np.sqrt(3*np.pi*Mv*Gamma_ee / (2*Nc*ef**2*e**4) ) * ( 1 + 2*alpha_s*Cf/np.pi ) # int dz/(4pi) phi(z,rt=0)
     elif reg_scheme == 'rel wave function':
         wf_LO = 1/np.sqrt(4*m)*(wf_0 + 1/(6*m**2)*nabla_wf * 5/2)  # int dz/(4pi) phi(z,rt=0)
@@ -282,7 +308,8 @@ def calculate_cross_section_L(Qv, amplitudes_table, reg_scheme, O_LDME=0.440, q_
     dict_cs = {"LO": cs_LO_prime, "LO_pom": cs_LO_pom, "NLO": cs_NLO, "LO_rel": cs_rel, "NLO_rel": cs_NLO_rel, "LO_rel_pom": cs_rel_pom   }
     return dict_cs
 
-def calculate_cross_section(Qv, amplitudes_table, reg_scheme, pol, O_LDME=0.440, q_LDME=0.441):
+def calculate_cross_section(Qv, amplitudes_table, reg_scheme, pol, O_LDME, q_LDME):
+
     if pol=='L':
         dict_cs = calculate_cross_section_L(Qv, amplitudes_table, reg_scheme, O_LDME=O_LDME, q_LDME=q_LDME)
     elif pol=='T':
@@ -319,8 +346,6 @@ def calculate_rel_error_bands(Qv, amplitudes_table, reg_scheme, pol):
 def get_random_LDMEs(size):
     """Get the LDME coefficients by sampling from the correlation matrix. Parameters from the J/psi decay width paper."""
 
-    mean = [0.440, 0.441]
-    cov = [[3.63e-3, 1.93e-4] ,[1.93e-4, 1.96e-2]]
     O_LDME, q_LDME = np.random.multivariate_normal(mean, cov, size).T
     return O_LDME, q_LDME
 
@@ -354,7 +379,7 @@ def get_cross_section_values_Q(file, reg_scheme, pol):
             
     Q2v = Qv**2
     
-    dict_cs = calculate_cross_section(Qv, amplitudes_table, reg_scheme, pol)
+    dict_cs = calculate_cross_section(Qv, amplitudes_table, reg_scheme, pol, O_LDME=O_LDME0, q_LDME=q_LDME0)
 
     return Q2v, dict_cs["LO"], dict_cs["NLO"], dict_cs["LO_rel"], dict_cs["NLO_rel"], dict_cs["LO_pom"], dict_cs["LO_rel_pom"]
 
@@ -370,7 +395,7 @@ def get_cross_section_values_W(file, reg_scheme, pol):
 
     Q = np.sqrt(Q2)
 
-    dict_cs = calculate_cross_section(Q, amplitudes_table, reg_scheme, pol)
+    dict_cs = calculate_cross_section(Q, amplitudes_table, reg_scheme, pol, O_LDME=O_LDME0, q_LDME=q_LDME0)
 
     return Wv, dict_cs["LO"], dict_cs["NLO"], dict_cs["LO_rel"], dict_cs["NLO_rel"], dict_cs["LO_pom"], dict_cs["LO_rel_pom"]
 

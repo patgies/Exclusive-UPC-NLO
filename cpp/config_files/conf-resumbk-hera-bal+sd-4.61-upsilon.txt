@@ -1,15 +1,23 @@
 ###M_V
-3.0969
+9.46030
 ###m
-1.54845
+4.73015
 ###Y0_if
 0.0
 ###Q_0
-10.0 
+1.0 
 ###m_N
 1.0
-###sigma_0/2(mb)
-16.36
+###sigma_0
+40.320583
+###C_big
+0.559464
+###lambda_QCD
+0.241
+###c_small
+0.2
+###mu_0
+0.6025
 ###z2_max
 0.499999999
 ###x20_min
@@ -54,7 +62,5 @@
 1000000
 ###integ calls dim 6
 10000000
-###alpha_s const
-0.3
 ###dipole file
-data/mve.dat
+data/dipole-resumbk-hera-bal+sd-4.61.dip

@@ -9,46 +9,51 @@ import experimental_data
     
 plotting_functions.pheno_correction = False
 
+particle = 'jpsi'
+plotting_functions.particle = particle
+plotting_functions.initialize()
 
-bool_decay_width = True
-bool_decay_width_rel = False
+# reg_scheme = True
+# reg_scheme_rel = False
+reg_scheme = 'decay width'
+reg_scheme_rel = 'rel wave function'
 
 dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_L/'
 dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
 
-# cs_kcbk_000_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', bool_decay_width, "L" )
-# cs_kcbk_461_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', bool_decay_width, "L" )
-# cs_tbk_000_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', bool_decay_width, "L"  )
-# cs_tbk_461_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', bool_decay_width, "L"  )
-# cs_resumbk_000_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', bool_decay_width, "L"  )
-# cs_resumbk_461_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', bool_decay_width, "L"  )
+# cs_kcbk_000_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', reg_scheme, "L" )
+# cs_kcbk_461_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', reg_scheme, "L" )
+# cs_tbk_000_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', reg_scheme, "L"  )
+# cs_tbk_461_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', reg_scheme, "L"  )
+# cs_resumbk_000_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', reg_scheme, "L"  )
+# cs_resumbk_461_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', reg_scheme, "L"  )
 
-# cs_lobk_mve_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-LOBK-MVe-Q.dat', bool_decay_width, "L"  )
+# cs_lobk_mve_L = plotting_functions.get_cross_section_values_Q( dir_path_L + r'results-LOBK-MVe-Q.dat', reg_scheme, "L"  )
 
-# cs_lobk_mve_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-LOBK-MVe-Q.dat', bool_decay_width_rel, "L"  )
-# cs_kcbk_461_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel, "L"  )
-# cs_tbk_461_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel, "L"  )
-# cs_resumbk_461_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel, "L"  )
-# cs_kcbk_000_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel, "L"  )
-# cs_tbk_000_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel, "L"  )
-# cs_resumbk_000_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel, "L"  )
+# cs_lobk_mve_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-LOBK-MVe-Q.dat', reg_scheme_rel, "L"  )
+# cs_kcbk_461_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel, "L"  )
+# cs_tbk_461_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel, "L"  )
+# cs_resumbk_461_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel, "L"  )
+# cs_kcbk_000_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel, "L"  )
+# cs_tbk_000_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel, "L"  )
+# cs_resumbk_000_rel_L = plotting_functions.get_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel, "L"  )
 
-# cs_kcbk_000_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', bool_decay_width, "T" )
-# cs_kcbk_461_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', bool_decay_width, "T" )
-# cs_tbk_000_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', bool_decay_width, "T" )
-# cs_tbk_461_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', bool_decay_width, "T" )
-# cs_resumbk_000_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', bool_decay_width, "T" )
-# cs_resumbk_461_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', bool_decay_width, "T" )
+# cs_kcbk_000_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', reg_scheme, "T" )
+# cs_kcbk_461_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', reg_scheme, "T" )
+# cs_tbk_000_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', reg_scheme, "T" )
+# cs_tbk_461_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', reg_scheme, "T" )
+# cs_resumbk_000_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', reg_scheme, "T" )
+# cs_resumbk_461_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', reg_scheme, "T" )
 
-# cs_lobk_mve_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-LOBK-MVe-Q.dat', bool_decay_width, "T" )
+# cs_lobk_mve_T = plotting_functions.get_cross_section_values_Q( dir_path_T + r'results-LOBK-MVe-Q.dat', reg_scheme, "T" )
 
-# cs_lobk_mve_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-LOBK-MVe-Q.dat', bool_decay_width_rel, "T" )
-# cs_kcbk_461_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel, "T" )
-# cs_tbk_461_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel, "T" )
-# cs_resumbk_461_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel, "T" )
-# cs_kcbk_000_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel, "T" )
-# cs_tbk_000_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel, "T" )
-# cs_resumbk_000_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel, "T" )
+# cs_lobk_mve_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-LOBK-MVe-Q.dat', reg_scheme_rel, "T" )
+# cs_kcbk_461_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel, "T" )
+# cs_tbk_461_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel, "T" )
+# cs_resumbk_461_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel, "T" )
+# cs_kcbk_000_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel, "T" )
+# cs_tbk_000_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel, "T" )
+# cs_resumbk_000_rel_T = plotting_functions.get_distribution_Q( dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel, "T" )
 
 # Q2v = cs_kcbk_000_L[0]
 
@@ -68,38 +73,45 @@ dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
 # cs_resumbk_461_rel = cs_resumbk_461_rel_L + cs_resumbk_461_rel_T
 # cs_lobk_mve_rel = cs_lobk_mve_rel_L + cs_lobk_mve_rel_T
 
-Mv = 3.0969
+if particle == 'jpsi':
+    alpha_s0 = 0.25
+    Mv = 3.0969
+elif particle == 'upsilon':
+    alpha_s0 = 0.18
+    Mv = 9.46030
+else:
+    raise Exception('Improper particle!')
+
 Mv2 = Mv**2
 
 Cf = 4/3
-alpha_s0 = 0.25
 NRQCD_factor = (1-2*Cf*alpha_s0/np.pi)**2
 
 
-cs_kcbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', bool_decay_width)
-cs_kcbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', bool_decay_width)
-cs_tbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', bool_decay_width)
-cs_tbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', bool_decay_width)
-cs_resumbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', bool_decay_width)
-cs_resumbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', bool_decay_width)
-cs_lobk_mve = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-LOBK-MVe-W_90.dat', dir_path_T + r'results-LOBK-MVe-W_90.dat', bool_decay_width)
+cs_kcbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', reg_scheme)
+cs_kcbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', reg_scheme)
+cs_tbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', reg_scheme)
+cs_tbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', reg_scheme)
+cs_resumbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', reg_scheme)
+cs_resumbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', reg_scheme)
+cs_lobk_mve = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-LOBK-MVe-W_90.dat', dir_path_T + r'results-LOBK-MVe-W_90.dat', reg_scheme)
 
 
-cs_kcbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel)
-cs_kcbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel)
-cs_tbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel)
-cs_tbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel)
-cs_resumbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel)
-cs_resumbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel)
-cs_lobk_mve_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-LOBK-MVe-W_90.dat', dir_path_T + r'results-LOBK-MVe-W_90.dat', bool_decay_width_rel)
+cs_kcbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel)
+cs_kcbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel)
+cs_tbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel)
+cs_tbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel)
+cs_resumbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel)
+cs_resumbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel)
+cs_lobk_mve_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-LOBK-MVe-W_90.dat', dir_path_T + r'results-LOBK-MVe-W_90.dat', reg_scheme_rel)
 
-# cs_lobk_mve_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-LOBK-MVe-Q.dat', dir_path_T + r'results-LOBK-MVe-Q.dat', bool_decay_width_rel)
-# cs_kcbk_461_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel)
-# cs_tbk_461_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel)
-# cs_resumbk_461_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', bool_decay_width_rel)
-# cs_kcbk_000_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel)
-# cs_tbk_000_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel)
-# cs_resumbk_000_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', bool_decay_width_rel)
+# cs_lobk_mve_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-LOBK-MVe-Q.dat', dir_path_T + r'results-LOBK-MVe-Q.dat', reg_scheme_rel)
+# cs_kcbk_461_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel)
+# cs_tbk_461_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel)
+# cs_resumbk_461_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel)
+# cs_kcbk_000_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel)
+# cs_tbk_000_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel)
+# cs_resumbk_000_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel)
 
 sigma_tot_ZEUS_Q2, sigma_tot_ZEUS_data = experimental_data.sigma_tot_Q2_ZEUS()
 sigma_tot_H1_Q2, sigma_tot_H1_data     = experimental_data.sigma_tot_Q2_H1()
