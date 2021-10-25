@@ -18,9 +18,13 @@ m = 0
 alpha_s = 0
 Gamma_ee = 0
 
+W_0 = 0
+b_0 = 0
+alpha_pom = 0
+
 
 def initialize():
-    global mean, cov, O_LDME0, q_LDME0, ef, Mv, m, alpha_s, Gamma_ee
+    global mean, cov, O_LDME0, q_LDME0, ef, Mv, m, alpha_s, Gamma_ee, W_0, b_0, alpha_pom
     if particle == 'jpsi':
         mean = [0.440, 0.441]
         cov = [[3.63e-3, 1.93e-4] ,[1.93e-4, 1.96e-2]]
@@ -32,6 +36,10 @@ def initialize():
         m = Mv/2
         alpha_s = 0.25 # alpha_s(M_Jpsi)
         Gamma_ee = 5.53e-6
+
+        W_0 = 90
+        b_0 = 4.15
+        alpha_pom = 0.116
     elif particle == 'upsilon':
         mean = [3.069, -0.193]
         cov = [[0.207**2, 0] ,[0, 0.072**2]]
@@ -43,6 +51,10 @@ def initialize():
         m = Mv/2
         alpha_s = 0.18 # alpha_s(M_Upsilon)
         Gamma_ee = 54.02e-6 * 0.0238
+
+        W_0 = 100 # Not measured yet!
+        b_0 = 4.5  # Phys.Lett.B 680, 4-12 (2009)
+        alpha_pom = 0 # Not measured yet!
     else:
         raise Exception('Improper particle!')
 
@@ -411,8 +423,4 @@ def nabla_phi():
     return np.mean(nabla_wf), np.std(nabla_wf)
     
 def t_integration_coefficient(Wv):
-    W_0 = 90
-    b_0 = 4.15
-    alpha_pom = 0.116
-
     return 1 / ( b_0 + 4 * alpha_pom * np.log( Wv/W_0 ) )

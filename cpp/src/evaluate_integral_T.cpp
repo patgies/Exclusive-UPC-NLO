@@ -149,7 +149,7 @@ namespace Transverse {
 
         stringstream s;
         for(int i = 0; i< n_values; i++) {
-            s <<  std::scientific << std::setprecision(9)<< values[i] << " ";
+            s <<  std::scientific << std::showpos << std::setprecision(9)<< values[i] << " ";
         }
         return s.str();
         
@@ -177,8 +177,7 @@ namespace Transverse {
         }
 
         myfile << "\n#Amplitude values:";
-        myfile << "\n#Order:LO(x_min) \t LO(x_pom) \t LO(x_max) \t qq NLO 1 dim decay width \t qq NLO 1 dim wave function \t qq NLO J_1 \t qq NLO J_2 \t qq NLO K \t qqg dim 4 no BK \t qqg dim 4 sub2 BK \t qqg dim 4 unsub BK \t qqg dim 6 \t lambda \t qq rel 002 pp \t qq rel 200 pp \t qq rel 100 pm";
-            
+        myfile << "\n#LO(Y_dip)[0]    LO(Y_pom)[1]     LO(Y_0)[2]       qq_NLO 1D dwS[3] qq_NLO 1D wfS[4] qq_NLO J_1[5]    qq_NLO J_2[6]    qq_NLO K[7]      qqg 4D no BK[8]  qqg pomsub BK[9] qqg unsub BK[10] qqg 6D[11]       lambda[12]       qq_rel 002pp[13] qq_rel 200pp[14] qq_rel 100pm[15]";
 
         for(int i_n = 0;i_n<W_points/n_thread+1; i_n++) {
             future<string> futures[n_thread];
@@ -224,7 +223,7 @@ namespace Transverse {
         }
 
         myfile << "\n#Amplitude values:";
-        myfile << "\n#Order:LO(x_min) \t LO(x_pom) \t LO(x_max) \t qq NLO 1 dim decay width \t qq NLO 1 dim wave function \t qq NLO J_1 \t qq NLO J_2 \t qq NLO K \t qqg dim 4 no BK \t qqg dim 4 sub2 BK \t qqg dim 4 unsub BK \t qqg dim 6 \t lambda \t qq rel 002 pp \t qq rel 200 pp \t qq rel 100 pm";
+        myfile << "\n#LO(Y_dip)[0]    LO(Y_pom)[1]     LO(Y_0)[2]       qq_NLO 1D dwS[3] qq_NLO 1D wfS[4] qq_NLO J_1[5]    qq_NLO J_2[6]    qq_NLO K[7]      qqg 4D no BK[8]  qqg pomsub BK[9] qqg unsub BK[10] qqg 6D[11]       lambda[12]       qq_rel 002pp[13] qq_rel 200pp[14] qq_rel 100pm[15]";
             
         for(int i_n = 0;i_n<Q_points/n_thread+1; i_n++) {
             future<string> futures[n_thread];

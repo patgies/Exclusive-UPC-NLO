@@ -5,17 +5,29 @@ INPUT_FOLDER=config_files
 OUTPUT_FOLDER_L=output/longitudinal
 OUTPUT_FOLDER_T=output/transverse
 
-
+PARTICLE=jpsi
 NTHREAD=20
 Q2=0.05
 W=90
-Wmin=50
-Wmax=5000
+# Wmin=50
+# Wmax=5000
+if [ ${PARTICLE} = jpsi ]
+then
+    Wmin=20
+    Wmax=1000
+elif [ ${PARTICLE} = upsilon ]
+then
+    Wmin=50
+    Wmax=5000
+else
+    echo "Invalid particle ${PARTICLE}"
+    exit 1
+fi
+
 Q2min=0.01
 Q2max=100
 Wpoints=20
 Q2points=20
-PARTICLE=upsilon
 
 echo Folder for the config = $INPUT_FOLDER
 echo Folder for the code = $CODE_FOLDER
@@ -134,11 +146,11 @@ date +"%d-%m-%y %T"
 # ${CODE_FOLDER}/NLO_amplitude -W ${W} -Q2min ${Q2min} -Q2max ${Q2max} -Q2points ${Q2points} -thread ${NTHREAD} -fast -ifile ${INPUT_FOLDER}/conf-IP_SAT_m1.4.txt -ofile ${OUTPUT_FOLDER}/results-IP_SAT_m1.4-Q.dat
 # echo IPsat m1.4 Q
 
-# ${CODE_FOLDER}/NLO_amplitude -Q2 ${Q2} -Wmin ${Wmin} -Wmax ${Wmax} -Wpoints ${Wpoints} -thread ${NTHREAD} -fast -relxpom -ifile ${INPUT_FOLDER}/conf_LOBK_MVe.txt -ofileL ${OUTPUT_FOLDER_L}/results-LOBK-MVe_Q2_0.05.dat -ofileT ${OUTPUT_FOLDER_T}/results-LOBK-MVe_Q2_0.05.dat 
-# echo MVe
+${CODE_FOLDER}/NLO_amplitude -Q2 ${Q2} -Wmin ${Wmin} -Wmax ${Wmax} -Wpoints ${Wpoints} -thread ${NTHREAD} -fast -relxpom -ifile ${INPUT_FOLDER}/conf_LOBK_MVe.txt -ofileL ${OUTPUT_FOLDER_L}/results-LOBK-MVe_Q2_0.05.dat -ofileT ${OUTPUT_FOLDER_T}/results-LOBK-MVe_Q2_0.05.dat 
+echo MVe
 
-# ${CODE_FOLDER}/NLO_amplitude -W ${W} -Q2min ${Q2min} -Q2max ${Q2max} -Q2points ${Q2points} -thread ${NTHREAD} -fast -relxpom -ifile ${INPUT_FOLDER}/conf_LOBK_MVe.txt -ofileL ${OUTPUT_FOLDER_L}/results-LOBK-MVe-W_90.dat -ofileT ${OUTPUT_FOLDER_T}/results-LOBK-MVe-W_90.dat
-# echo MVe Q
+${CODE_FOLDER}/NLO_amplitude -W ${W} -Q2min ${Q2min} -Q2max ${Q2max} -Q2points ${Q2points} -thread ${NTHREAD} -fast -relxpom -ifile ${INPUT_FOLDER}/conf_LOBK_MVe.txt -ofileL ${OUTPUT_FOLDER_L}/results-LOBK-MVe-W_90.dat -ofileT ${OUTPUT_FOLDER_T}/results-LOBK-MVe-W_90.dat
+echo MVe Q
 
 
 # ${CODE_FOLDER}/NLO_amplitude -Q2 ${Q2} -Wmin ${Wmin} -Wmax ${Wmax} -Wpoints ${Wpoints} -thread ${NTHREAD} -fast -ifile ${INPUT_FOLDER}/conf_LOBK_MVgamma.txt -ofile ${OUTPUT_FOLDER}/results-LOBK-MVgamma.dat 
@@ -231,6 +243,6 @@ date +"%d-%m-%y %T"
 # echo TBK 4.61, Q2 ${Q2}
 # date +"%d-%m-%y %T"
 
-${CODE_FOLDER}/NLO_amplitude -Q2 ${Q2} -Wmin ${Wmin} -Wmax ${Wmax} -Wpoints ${Wpoints} -relxpom -fast -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf_LOBK_MVe-${PARTICLE}.txt -ofileT ${OUTPUT_FOLDER_T}/results-LOBK-MVe-${PARTICLE}-T-Q2_${Q2}.dat 
-echo MVe, Q2 ${Q2}
-date +"%d-%m-%y %T"
+# ${CODE_FOLDER}/NLO_amplitude -Q2 ${Q2} -Wmin ${Wmin} -Wmax ${Wmax} -Wpoints ${Wpoints} -relxpom -fast -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf_LOBK_MVe-${PARTICLE}.txt -ofileT ${OUTPUT_FOLDER_T}/results-LOBK-MVe-${PARTICLE}-T-Q2_${Q2}.dat 
+# echo MVe, Q2 ${Q2}
+# date +"%d-%m-%y %T"

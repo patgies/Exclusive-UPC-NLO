@@ -57,10 +57,10 @@
 ###u_max
 1000.0
 ###integ calls low
-100000
+500000
 ###integ calls high
-1000000
+5000000
 ###integ calls dim 6
-10000000
+50000000
 ###dipole file
 data/dipole-kcbk-lightq-bal+sd-0.00.dip

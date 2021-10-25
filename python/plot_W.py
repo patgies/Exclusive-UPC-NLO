@@ -63,6 +63,7 @@ cs_tbk_000_rel_T = plotting_functions.get_distribution_W( dir_path_T + r'results
 cs_resumbk_461_rel_T = plotting_functions.get_distribution_W( dir_path_T + r'results-resumbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_rel, "T" )
 cs_resumbk_000_rel_T = plotting_functions.get_distribution_W( dir_path_T + r'results-resumbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_rel, "T" )
 
+
 if particle == 'jpsi':
     alpha_s0 = 0.25
 elif particle == 'upsilon':
@@ -95,6 +96,10 @@ sigma_tot_H1_v2_W, sigma_tot_H1_v2_data     = experimental_data.sigma_tot_W_H1_v
 sigma_tot_ALICE_v1_W, sigma_tot_ALICE_v1_data     = experimental_data.sigma_tot_W_ALICE_v1()
 sigma_tot_ALICE_v2_W, sigma_tot_ALICE_v2_data     = experimental_data.sigma_tot_W_ALICE_v2()
 sigma_tot_ALICE_v3_W, sigma_tot_ALICE_v3_data     = experimental_data.sigma_tot_W_ALICE_v3()
+sigma_tot_H1_upsilon, sigma_tot_H1_upsilon_data = experimental_data.sigma_tot_Upsilon_H1()
+sigma_tot_ZEUS_v1_upsilon, sigma_tot_ZEUS_v1_upsilon_data = experimental_data.sigma_tot_Upsilon_ZEUS_v1()
+sigma_tot_ZEUS_v2_upsilon, sigma_tot_ZEUS_v2_upsilon_data = experimental_data.sigma_tot_Upsilon_ZEUS_v2()
+sigma_tot_CMS_upsilon, sigma_tot_CMS_upsilon_data = experimental_data.sigma_tot_Upsilon_CMS()
 
 W = cs_kcbk_000_T[0]
 C_int = plotting_functions.t_integration_coefficient(W)
@@ -106,7 +111,7 @@ plt.rc('font', family='serif')
 if particle == 'jpsi':
     plots = [1,2,3,4,5,6]
 elif particle == 'upsilon':
-    plots = [11,12]
+    plots = [11,12, 14]
 
 linewidth1 = 0.8*linewidth
 linewidth2 = 1.2*linewidth
@@ -344,5 +349,29 @@ if 12 in plots:
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)
 
+if 14 in plots:
+    fig14=plt.figure(14)
+    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_T[2], 'r-',label=r'NLO KCBK 4.61', linewidth=linewidth1)
+    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_rel_T[5], 'r--',label=r'NLO+rel KCBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_T[5], 'k-',label=r'LO MV$^e$', linewidth=linewidth1)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[3] * NRQCD_factor, 'k--',label=r'LO+rel MV$^e$', linewidth=linewidth2)
+    plt.errorbar(sigma_tot_ZEUS_v1_upsilon[0], sigma_tot_ZEUS_v1_upsilon_data[0], xerr=[sigma_tot_ZEUS_v1_upsilon[0]-sigma_tot_ZEUS_v1_upsilon[1], sigma_tot_ZEUS_v1_upsilon[2]-sigma_tot_ZEUS_v1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[1]**2+sigma_tot_ZEUS_v1_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[3]**2+sigma_tot_ZEUS_v1_upsilon_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
+    plt.errorbar(sigma_tot_ZEUS_v2_upsilon[0], sigma_tot_ZEUS_v2_upsilon_data[0], xerr=[sigma_tot_ZEUS_v2_upsilon[0]-sigma_tot_ZEUS_v2_upsilon[1], sigma_tot_ZEUS_v2_upsilon[2]-sigma_tot_ZEUS_v2_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[1]**2+sigma_tot_ZEUS_v2_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[3]**2+sigma_tot_ZEUS_v2_upsilon_data[4]**2)],fmt='or', capsize=3)
+    plt.errorbar(sigma_tot_H1_upsilon[0], sigma_tot_H1_upsilon_data[0], xerr=[sigma_tot_H1_upsilon[0]-sigma_tot_H1_upsilon[1], sigma_tot_H1_upsilon[2]-sigma_tot_H1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_H1_upsilon_data[1]**2+sigma_tot_H1_upsilon_data[2]**2),np.sqrt(sigma_tot_H1_upsilon_data[3]**2+sigma_tot_H1_upsilon_data[4]**2)],label='H1', fmt='vb', capsize=3)
+    plt.errorbar(sigma_tot_CMS_upsilon[0], sigma_tot_CMS_upsilon_data[0], xerr=[sigma_tot_CMS_upsilon[0]-sigma_tot_CMS_upsilon[1], sigma_tot_CMS_upsilon[2]-sigma_tot_CMS_upsilon[0]] , yerr=[np.sqrt(sigma_tot_CMS_upsilon_data[1]**2+sigma_tot_CMS_upsilon_data[2]**2),np.sqrt(sigma_tot_CMS_upsilon_data[3]**2+sigma_tot_CMS_upsilon_data[4]**2)],label='CMS', fmt='sg', capsize=3)
+    plt.legend(prop={'size': 12}, frameon=False, loc='lower right')
+    # plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV$^2$ [nb]', fontsize=17)
+    plt.xlabel(r'$W$ [GeV]', fontsize=20)
+    plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
+    plt.text(0.25, 0.85, r'$Q^2 = 0.05\textrm{ GeV}^2$', transform=fig14.transFigure, fontsize=20)
+    plt.xlim([50, 5e3])
+    plt.ylim([5e-2, 1e1])
+    plt.xticks(fontsize=15)
+    plt.yticks(fontsize=15)
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.tight_layout()
+    plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
+    plt.tick_params(axis='x', pad=5)
 
 plt.show()
