@@ -384,10 +384,10 @@ def sigma_tot_Upsilon_CMS():
     W_values_high =np.array( [194, 275, 390, 826])
     W_values = np.array([133, 231, 328, 568])
     y_values = np.array([0.208, 0.343, 0.663, 0.956])
-    y_errors_stat_minus = np.array([0.96, 0.180, 0.260, 0.376])
-    y_errors_stat_plus =  np.array([0.96, 0.180, 0.260, 0.376])
-    y_errors_syst_plus =  np.array([0.37, 0.51, 0.93, 0.162])
-    y_errors_syst_minus = np.array([0.37, 0.51, 0.93, 0.162])
+    y_errors_stat_minus = np.array([0.096, 0.180, 0.260, 0.376])
+    y_errors_stat_plus =  np.array([0.096, 0.180, 0.260, 0.376])
+    y_errors_syst_plus =  np.array([0.037, 0.051, 0.093, 0.162])
+    y_errors_syst_minus = np.array([0.037, 0.051, 0.093, 0.162])
 
     return [W_values, W_values_low, W_values_high], [y_values, y_errors_stat_minus, y_errors_syst_minus, y_errors_stat_plus, y_errors_syst_plus]
 
