@@ -1,5 +1,6 @@
 
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 import numpy as np
 import os 
 
@@ -13,9 +14,8 @@ particle = 'jpsi'
 plotting_functions.particle = particle
 plotting_functions.initialize()
 
-# reg_scheme = True
-# reg_scheme_rel = False
-reg_scheme = 'decay width'
+reg_scheme_LO = 'decay width'
+reg_scheme_NLO = 'NR wave function'
 reg_scheme_rel = 'rel wave function'
 
 dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_L/'
@@ -88,13 +88,13 @@ Cf = 4/3
 NRQCD_factor = (1-2*Cf*alpha_s0/np.pi)**2
 
 
-cs_kcbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', reg_scheme)
-cs_kcbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', reg_scheme)
-cs_tbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', reg_scheme)
-cs_tbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', reg_scheme)
-cs_resumbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', reg_scheme)
-cs_resumbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', reg_scheme)
-cs_lobk_mve = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-LOBK-MVe-W_90.dat', dir_path_T + r'results-LOBK-MVe-W_90.dat', reg_scheme)
+cs_kcbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', reg_scheme_NLO)
+cs_kcbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', reg_scheme_NLO)
+cs_tbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', reg_scheme_NLO)
+cs_tbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', reg_scheme_NLO)
+cs_resumbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', reg_scheme_NLO)
+cs_resumbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', reg_scheme_NLO)
+cs_lobk_mve = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-LOBK-MVe-W_90.dat', dir_path_T + r'results-LOBK-MVe-W_90.dat', reg_scheme_LO)
 
 
 cs_kcbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel)
@@ -124,8 +124,35 @@ plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 plots = [3,4]
 
-linewidth1 = 0.8*linewidth
-linewidth2 = 1.2*linewidth
+linewidth1 = 1.3*linewidth
+linewidth2 = 1.0*linewidth
+linewidth3 = 0.7*linewidth
+
+
+
+legend_lines = [Line2D([0], [0], color='r', linestyle='-', linewidth=linewidth1),
+                Line2D([0], [0], color='g', linestyle='-', linewidth=linewidth2),
+                Line2D([0], [0], color='b', linestyle='-', linewidth=linewidth3),
+                Line2D([0], [0], color='k', linestyle='-', linewidth=linewidth1),
+                Line2D([0], [0], color='k', linestyle='--', linewidth=linewidth1),
+                Line2D([0], [0], color='k', linestyle=':', linewidth=linewidth2)
+                ]
+
+legend_text =  [r'NLO KCBK',
+                r'NLO TBK',
+                r'NLO ResumBK',
+                r'$Y_{0,\mathrm{BK}}=4.61$',
+                r'$Y_{0,\mathrm{BK}}=0.00$',
+                r'LO LOBK'
+                ]
+
+legend_text_rel =  [r'NLO+rel KCBK',
+                    r'NLO+rel TBK',
+                    r'NLO+rel ResumBK',
+                    r'$Y_{0,\mathrm{BK}}=4.61$',
+                    r'$Y_{0,\mathrm{BK}}=0.00$',
+                    r'LO+rel LOBK'
+                    ]
 
 if 1 in plots:
     plt.figure(1)
@@ -172,21 +199,21 @@ if 2 in plots:
     plt.tick_params(axis='x', pad=5)
 
 if 3 in plots:
-    fig3=plt.figure(3)
-    plt.plot(Mv2 + cs_kcbk_000[0],    C_int * cs_kcbk_000[2], 'r-',label=r'NLO KCBK 0.00', linewidth=linewidth1)
-    plt.plot(Mv2 + cs_kcbk_461[0],    C_int * cs_kcbk_461[2], 'r-',label=r'NLO KCBK 4.61', linewidth=linewidth2)
-    plt.plot(Mv2 + cs_tbk_000[0],     C_int * cs_tbk_000[2], 'g--',label=r'NLO TBK 0.00', linewidth=linewidth1)
-    plt.plot(Mv2 + cs_tbk_461[0],     C_int * cs_tbk_461[2], 'g--',label=r'NLO TBK 4.61', linewidth=linewidth2)
-    plt.plot(Mv2 + cs_resumbk_000[0], C_int * cs_resumbk_000[2], 'b-.',label=r'NLO ResumBK 0.00', linewidth=linewidth1)
-    plt.plot(Mv2 + cs_resumbk_461[0], C_int * cs_resumbk_461[2], 'b-.',label=r'NLO ResumBK 4.61', linewidth=linewidth2)
-    plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve[5], 'k:',label=r'LOBK MV$^e$', linewidth=linewidth2)
+    fig3=plt.figure(num=3)
+    plt.plot(Mv2 + cs_kcbk_000[0],    C_int * cs_kcbk_000[2], 'r--',label=r'NLO KCBK 0.00', linewidth=linewidth1)
+    plt.plot(Mv2 + cs_kcbk_461[0],    C_int * cs_kcbk_461[2], 'r-',label=r'NLO KCBK 4.61', linewidth=linewidth1)
+    plt.plot(Mv2 + cs_tbk_000[0],     C_int * cs_tbk_000[2], 'g--',label=r'NLO TBK 0.00', linewidth=linewidth2)
+    plt.plot(Mv2 + cs_tbk_461[0],     C_int * cs_tbk_461[2], 'g-',label=r'NLO TBK 4.61', linewidth=linewidth2)
+    plt.plot(Mv2 + cs_resumbk_000[0], C_int * cs_resumbk_000[2], 'b--',label=r'NLO ResumBK 0.00', linewidth=linewidth3)
+    plt.plot(Mv2 + cs_resumbk_461[0], C_int * cs_resumbk_461[2], 'b-',label=r'NLO ResumBK 4.61', linewidth=linewidth3)
+    plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve[5], 'k:',label=r'LO LOBK', linewidth=linewidth2)
     plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3)
-    plt.legend(prop={'size': 11}, frameon=False)
+    plt.legend(legend_lines, legend_text, prop={'size': 14.5}, frameon=False, loc='lower left')
     # plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb]', fontsize=17)
     plt.xlabel(r'$M_{J/\psi}^2+Q^2$ [GeV$^2$]', fontsize=20)
     plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
-    plt.text(0.70, 0.85, r'$W = 90\textrm{ GeV}$', transform=fig3.transFigure, fontsize=14)
+    plt.text(0.65, 0.85, r'$W = 90\textrm{ GeV}$', transform=fig3.transFigure, fontsize=20)
     plt.xlim([Mv2, 1e2])
     plt.ylim([0.05, 2e2])
     plt.xticks(fontsize=15)
@@ -197,22 +224,22 @@ if 3 in plots:
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)
 
-if 4 in plots:
-    fig4=plt.figure(4)
-    plt.plot(Mv2 + cs_kcbk_000[0],    C_int * cs_kcbk_000_rel[5], 'r-',label=r'NLO+rel KCBK 0.00', linewidth=linewidth1)
-    plt.plot(Mv2 + cs_kcbk_461[0],    C_int * cs_kcbk_461_rel[5], 'r-',label=r'NLO+rel KCBK 4.61', linewidth=linewidth2)
-    plt.plot(Mv2 + cs_tbk_000[0],     C_int * cs_tbk_000_rel[5], 'g--',label=r'NLO+rel TBK 0.00', linewidth=linewidth1)
-    plt.plot(Mv2 + cs_tbk_461[0],     C_int * cs_tbk_461_rel[5], 'g--',label=r'NLO+rel TBK 4.61', linewidth=linewidth2)
-    plt.plot(Mv2 + cs_resumbk_000[0], C_int * cs_resumbk_000_rel[5], 'b-.',label=r'NLO+rel ResumBK 0.00', linewidth=linewidth1)
-    plt.plot(Mv2 + cs_resumbk_461[0], C_int * cs_resumbk_461_rel[5], 'b-.',label=r'NLO+rel ResumBK 4.61', linewidth=linewidth2)
-    plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve_rel[3] * NRQCD_factor, 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth2)
+if 4 in plots:    
+    fig4=plt.figure(num=4)
+    plt.plot(Mv2 + cs_kcbk_000[0],    C_int * cs_kcbk_000_rel[5], 'r--',label=r'NLO+rel KCBK 0.00', linewidth=linewidth1)
+    plt.plot(Mv2 + cs_kcbk_461[0],    C_int * cs_kcbk_461_rel[5], 'r-',label=r'NLO+rel KCBK 4.61', linewidth=linewidth1)
+    plt.plot(Mv2 + cs_tbk_000[0],     C_int * cs_tbk_000_rel[5], 'g--',label=r'NLO+rel TBK 0.00', linewidth=linewidth2)
+    plt.plot(Mv2 + cs_tbk_461[0],     C_int * cs_tbk_461_rel[5], 'g-',label=r'NLO+rel TBK 4.61', linewidth=linewidth2)
+    plt.plot(Mv2 + cs_resumbk_000[0], C_int * cs_resumbk_000_rel[5], 'b--',label=r'NLO+rel ResumBK 0.00', linewidth=linewidth3)
+    plt.plot(Mv2 + cs_resumbk_461[0], C_int * cs_resumbk_461_rel[5], 'b-',label=r'NLO+rel ResumBK 4.61', linewidth=linewidth3)
+    plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve_rel[3] * NRQCD_factor, 'k:',label=r'LO+rel LOBK', linewidth=linewidth2)
     plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3)
-    plt.legend(prop={'size': 11}, frameon=False)
+    plt.legend(legend_lines, legend_text_rel, prop={'size': 14.5}, frameon=False)
     # plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb]', fontsize=17)
     plt.xlabel(r'$M_{J/\psi}^2+Q^2$ [GeV$^2$]', fontsize=20)
     plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
-    plt.text(0.70, 0.85, r'$W = 90\textrm{ GeV}$', transform=fig4.transFigure, fontsize=14)
+    plt.text(0.65, 0.85, r'$W = 90\textrm{ GeV}$', transform=fig4.transFigure, fontsize=20)
     plt.xlim([Mv2, 1e2])
     plt.ylim([0.05, 2e2])
     plt.xticks(fontsize=15)
