@@ -11,7 +11,7 @@ import experimental_data
 
 plotting_functions.pheno_correction = False
 
-particle = 'jpsi'
+particle = 'upsilon'
 plotting_functions.particle = particle
 plotting_functions.initialize()
 
@@ -112,7 +112,7 @@ plt.rc('font', family='serif')
 if particle == 'jpsi':
     plots = [3,4]
 elif particle == 'upsilon':
-    plots = [11,12, 14]
+    plots = [14]
 
 linewidth1 = 1.3*linewidth
 linewidth2 = 1.0*linewidth
@@ -379,19 +379,19 @@ if 12 in plots:
 
 if 14 in plots:
     fig14=plt.figure(14)
-    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_T[2], 'r-',label=r'NLO KCBK 4.61', linewidth=linewidth1)
-    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_rel_T[5], 'r--',label=r'NLO+rel KCBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_T[5], 'k-',label=r'LO MV$^e$', linewidth=linewidth1)
-    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[3] * NRQCD_factor, 'k--',label=r'LO+rel MV$^e$', linewidth=linewidth2)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_T[5], 'k-',label=r'LO LOBK', linewidth=linewidth2)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[3] * NRQCD_factor, 'k--',label=r'LO+rel LOBK', linewidth=linewidth2)
+    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_T[2], 'r-',label=r'NLO KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
+    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_rel_T[5], 'r--',label=r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
     plt.errorbar(sigma_tot_ZEUS_v1_upsilon[0], sigma_tot_ZEUS_v1_upsilon_data[0], xerr=[sigma_tot_ZEUS_v1_upsilon[0]-sigma_tot_ZEUS_v1_upsilon[1], sigma_tot_ZEUS_v1_upsilon[2]-sigma_tot_ZEUS_v1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[1]**2+sigma_tot_ZEUS_v1_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[3]**2+sigma_tot_ZEUS_v1_upsilon_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_ZEUS_v2_upsilon[0], sigma_tot_ZEUS_v2_upsilon_data[0], xerr=[sigma_tot_ZEUS_v2_upsilon[0]-sigma_tot_ZEUS_v2_upsilon[1], sigma_tot_ZEUS_v2_upsilon[2]-sigma_tot_ZEUS_v2_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[1]**2+sigma_tot_ZEUS_v2_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[3]**2+sigma_tot_ZEUS_v2_upsilon_data[4]**2)],fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_upsilon[0], sigma_tot_H1_upsilon_data[0], xerr=[sigma_tot_H1_upsilon[0]-sigma_tot_H1_upsilon[1], sigma_tot_H1_upsilon[2]-sigma_tot_H1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_H1_upsilon_data[1]**2+sigma_tot_H1_upsilon_data[2]**2),np.sqrt(sigma_tot_H1_upsilon_data[3]**2+sigma_tot_H1_upsilon_data[4]**2)],label='H1', fmt='vb', capsize=3)
     plt.errorbar(sigma_tot_CMS_upsilon[0], sigma_tot_CMS_upsilon_data[0], xerr=[sigma_tot_CMS_upsilon[0]-sigma_tot_CMS_upsilon[1], sigma_tot_CMS_upsilon[2]-sigma_tot_CMS_upsilon[0]] , yerr=[np.sqrt(sigma_tot_CMS_upsilon_data[1]**2+sigma_tot_CMS_upsilon_data[2]**2),np.sqrt(sigma_tot_CMS_upsilon_data[3]**2+sigma_tot_CMS_upsilon_data[4]**2)],label='CMS', fmt='sg', capsize=3)
-    plt.legend(prop={'size': 12}, frameon=False, loc='lower right')
+    plt.legend(prop={'size': 13}, frameon=False, loc='upper left')
     # plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV$^2$ [nb]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=20)
     plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
-    plt.text(0.25, 0.85, r'$Q^2 = 0.05\textrm{ GeV}^2$', transform=fig14.transFigure, fontsize=20)
+    plt.text(0.55, 0.3, r'$Q^2 = 0.05\textrm{ GeV}^2$', transform=fig14.transFigure, fontsize=20)
     plt.xlim([50, 5e3])
     plt.ylim([5e-2, 1e1])
     plt.xticks(fontsize=15)
