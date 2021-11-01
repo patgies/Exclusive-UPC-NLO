@@ -9,9 +9,9 @@
 ###m_N
 1.0
 ###sigma_0
-53.5724434
+62.0988342
 ###C_big
-1.109054
+1.6941074
 ###lambda_QCD
 0.241
 ###c_small
@@ -57,11 +57,10 @@
 ###u_max
 1000.0
 ###integ calls low
-100000
+500000
 ###integ calls high
-1000000
+5000000
 ###integ calls dim 6
-10000000
+50000000
 ###dipole file
-data/dipole-tbk-hera-bal+sd-4.61.dip
-###target rapidity
+data/dipole-kcbk-lightq-bal+sd-0.00.dip

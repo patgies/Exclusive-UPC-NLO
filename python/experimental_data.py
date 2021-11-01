@@ -391,3 +391,104 @@ def sigma_tot_Upsilon_CMS():
 
     return [W_values, W_values_low, W_values_high], [y_values, y_errors_stat_minus, y_errors_syst_minus, y_errors_stat_plus, y_errors_syst_plus]
 
+
+def sigma_tot_LHCb_7():
+    """
+    Data from J. Phys.G41(2014)055002,
+    """
+    W_values = np.array([
+        426,
+        483,
+        547,
+        620,
+        702,
+        796,
+        902,
+        1022,
+        1158,
+        1312
+    ])
+    y_values = np.array([
+        224,
+        257,
+        263,
+        265,
+        284,
+        301,
+        320,
+        356,
+        432,
+        481
+    ])
+    y_errors =  np.array([
+        32,
+        28,
+        29,
+        29,
+        30,
+        32,
+        34,
+        37,
+        47,
+        65
+    ])
+
+    return [W_values], [y_values, y_errors]
+
+
+def sigma_tot_LHCb_13():
+    """
+    Data from JHEP 10 (2018) 167
+    """
+
+    W_values = np.array([
+        580.968,
+        658.323,
+        745.977,
+        845.303,
+        957.854,
+        1085.391,
+        1229.909,
+        1393.669,
+        1579.234,
+        1789.507
+    ])
+    y_values = np.array([
+        255.496,
+        296.091,
+        282.791,
+        298.684,
+        315.613,
+        349.525,
+        356.168,
+        355.838,
+        402.682,
+        464.647
+    ])
+    y_errors =  np.array([
+        42.965,
+        30.314,
+        26.099,
+        24.309,
+        24.094,
+        25.939,
+        27.639,
+        30.302,
+        39.548,
+        66.028
+    ])
+
+    return [W_values], [y_values, y_errors]
+
+def sigma_tot_Upsilon_LHCb():
+    """
+    Data from JHEP, 09:084, 2015
+    """
+    W_values = np.array([
+    ])
+    y_values = np.array([
+    ])
+    y_errors =  np.array([
+    ])
+
+    return [W_values], [y_values, y_errors]

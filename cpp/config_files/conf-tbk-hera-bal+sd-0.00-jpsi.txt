@@ -1,7 +1,7 @@
 ###M_V
 3.0969
 ###m
-1.4
+1.54845
 ###Y0_if
 0.0
 ###Q_0
@@ -9,9 +9,9 @@
 ###m_N
 1.0
 ###sigma_0
-40.320583
+72.6284132
 ###C_big
-0.559464
+1.91572
 ###lambda_QCD
 0.241
 ###c_small
@@ -57,10 +57,11 @@
 ###u_max
 1000.0
 ###integ calls low
-100000
+500000
 ###integ calls high
-1000000
+5000000
 ###integ calls dim 6
-10000000
+50000000
 ###dipole file
-data/dipole-resumbk-hera-bal+sd-4.61.dip
+data/dipole-tbk-hera-bal+sd-0.00.dip
+###target rapidity
