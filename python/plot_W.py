@@ -1,4 +1,5 @@
 
+from matplotlib.markers import MarkerStyle
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 import numpy as np
@@ -16,12 +17,14 @@ plotting_functions.particle = particle
 plotting_functions.initialize()
 
 reg_scheme_LO = 'decay width'
+# reg_scheme_NLO = 'decay width'
 reg_scheme_NLO = 'NR wave function'
 reg_scheme_rel = 'rel wave function'
 
 if particle == 'jpsi':
-    id_string = "_Q2_0.05" # Q^2 = 0.05 GeV^2, thus there is no need for L
-    # id_string = "_Q2_0.05-m_1.4" # Q^2 = 0.05 GeV^2, thus there is no need for L
+    id_string = '-jpsi-T-Q2_0.05'
+    # id_string = "_Q2_0.05" 
+    # id_string = "_Q2_0.05-m_1.4" 
 elif particle == 'upsilon':
     id_string = '-upsilon-T-Q2_0.05'
 
@@ -97,10 +100,14 @@ sigma_tot_H1_v2_W, sigma_tot_H1_v2_data     = experimental_data.sigma_tot_W_H1_v
 sigma_tot_ALICE_v1_W, sigma_tot_ALICE_v1_data     = experimental_data.sigma_tot_W_ALICE_v1()
 sigma_tot_ALICE_v2_W, sigma_tot_ALICE_v2_data     = experimental_data.sigma_tot_W_ALICE_v2()
 sigma_tot_ALICE_v3_W, sigma_tot_ALICE_v3_data     = experimental_data.sigma_tot_W_ALICE_v3()
+sigma_tot_LHCb7_W, sigma_tot_LHCb7_data     = experimental_data.sigma_tot_LHCb_7()
+sigma_tot_LHCb13_W, sigma_tot_LHCb13_data     = experimental_data.sigma_tot_LHCb_13()
+
 sigma_tot_H1_upsilon, sigma_tot_H1_upsilon_data = experimental_data.sigma_tot_Upsilon_H1()
 sigma_tot_ZEUS_v1_upsilon, sigma_tot_ZEUS_v1_upsilon_data = experimental_data.sigma_tot_Upsilon_ZEUS_v1()
 sigma_tot_ZEUS_v2_upsilon, sigma_tot_ZEUS_v2_upsilon_data = experimental_data.sigma_tot_Upsilon_ZEUS_v2()
 sigma_tot_CMS_upsilon, sigma_tot_CMS_upsilon_data = experimental_data.sigma_tot_Upsilon_CMS()
+sigma_tot_LHCb_upsilon, sigma_tot_LHCb_upsilon_data     = experimental_data.sigma_tot_Upsilon_LHCb()
 
 W = cs_kcbk_000_T[0]
 C_int = plotting_functions.t_integration_coefficient(W)
@@ -112,7 +119,7 @@ plt.rc('font', family='serif')
 if particle == 'jpsi':
     plots = [3,4]
 elif particle == 'upsilon':
-    plots = [14]
+    plots = [14, 15]
 
 linewidth1 = 1.3*linewidth
 linewidth2 = 1.0*linewidth
@@ -123,26 +130,68 @@ linewidth3 = 0.7*linewidth
 legend_lines = [Line2D([0], [0], color='r', linestyle='-', linewidth=linewidth1),
                 Line2D([0], [0], color='g', linestyle='-', linewidth=linewidth2),
                 Line2D([0], [0], color='b', linestyle='-', linewidth=linewidth3),
+                Line2D([0], [0], color='k', linestyle=':', linewidth=linewidth2),
+                Line2D([0], [0], color='b', linestyle='None', marker='v'),
+                Line2D([0], [0], color='r', linestyle='None', marker='o'),
+                Line2D([0], [0], color='g', linestyle='None', marker='s'),
+                Line2D([0], [0], color='m', linestyle='None', marker='*', markersize=10),
+                ]
+
+legend_lines_Y = [
                 Line2D([0], [0], color='k', linestyle='-', linewidth=linewidth1),
-                Line2D([0], [0], color='k', linestyle='--', linewidth=linewidth1),
-                Line2D([0], [0], color='k', linestyle=':', linewidth=linewidth2)
+                Line2D([0], [0], color='k', linestyle='--', linewidth=linewidth1)
                 ]
 
 legend_text =  [r'NLO KCBK',
                 r'NLO TBK',
                 r'NLO ResumBK',
-                r'$Y_{0,\mathrm{BK}}=4.61$',
-                r'$Y_{0,\mathrm{BK}}=0.00$',
-                r'LO LOBK'
+                r'LO LOBK',
+                r'H1',
+                r'ZEUS',
+                r'ALICE',
+                r'LHCb'
                 ]
 
 legend_text_rel =  [r'NLO+rel KCBK',
                     r'NLO+rel TBK',
                     r'NLO+rel ResumBK',
-                    r'$Y_{0,\mathrm{BK}}=4.61$',
-                    r'$Y_{0,\mathrm{BK}}=0.00$',
-                    r'LO+rel LOBK'
+                    r'LO+rel LOBK',
+                    r'H1',
+                    r'ZEUS',
+                    r'ALICE',
+                    r'LHCb'
                     ]
+
+legend_text_Y = [ r'$Y_{0,\mathrm{BK}}=4.61$',
+                  r'$Y_{0,\mathrm{BK}}=0.00$']
+
+legend_lines_upsilon = [Line2D([0], [0], color='k', linestyle='-', linewidth=linewidth2),
+                Line2D([0], [0], color='k', linestyle='--', linewidth=linewidth2),
+                Line2D([0], [0], color='r', linestyle='-', linewidth=linewidth1),
+                Line2D([0], [0], color='r', linestyle='--', linewidth=linewidth1)
+                ]
+
+legend_lines_upsilon_exp = [
+                Line2D([0], [0], color='b', linestyle='None', marker='v'),
+                Line2D([0], [0], color='r', linestyle='None', marker='o'),
+                Line2D([0], [0], color='g', linestyle='None', marker='s'),
+                Line2D([0], [0], color='m', linestyle='None', marker='*', markersize=10)
+                ]
+
+legend_text_upsilon =  [r'LO LOBK',
+                r'LO+rel LOBK',
+                r'NLO KCBK $Y_{0,\mathrm{BK}}=4.61$',
+                r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=4.61$'
+                ]
+
+legend_text_upsilon_exp =  [
+                r'H1',
+                r'ZEUS',
+                r'CMS',
+                r'LHCb'
+                ]
+
+
 
 if 1 in plots:
     plt.figure(1)
@@ -203,13 +252,17 @@ if 3 in plots:
     plt.errorbar(sigma_tot_ALICE_v1_W[0], sigma_tot_ALICE_v1_data[0], xerr=[sigma_tot_ALICE_v1_W[0]-sigma_tot_ALICE_v1_W[1], sigma_tot_ALICE_v1_W[2]-sigma_tot_ALICE_v1_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v1_data[1]**2+sigma_tot_ALICE_v1_data[2]**2+sigma_tot_ALICE_v1_data[3]**2),np.sqrt(sigma_tot_ALICE_v1_data[4]**2+sigma_tot_ALICE_v1_data[5]**2+sigma_tot_ALICE_v1_data[6]**2)],label='ALICE', fmt='sg', capsize=3)
     plt.errorbar(sigma_tot_ALICE_v2_W[0], sigma_tot_ALICE_v2_data[0], xerr=[sigma_tot_ALICE_v2_W[0]-sigma_tot_ALICE_v2_W[1], sigma_tot_ALICE_v2_W[2]-sigma_tot_ALICE_v2_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v2_data[1]**2+sigma_tot_ALICE_v2_data[2]**2+sigma_tot_ALICE_v2_data[3]**2),np.sqrt(sigma_tot_ALICE_v2_data[4]**2+sigma_tot_ALICE_v2_data[5]**2+sigma_tot_ALICE_v2_data[6]**2)], fmt='sg', capsize=3) # ALICE
     plt.errorbar(sigma_tot_ALICE_v3_W[0], sigma_tot_ALICE_v3_data[0], xerr=[sigma_tot_ALICE_v3_W[0]-sigma_tot_ALICE_v3_W[1], sigma_tot_ALICE_v3_W[2]-sigma_tot_ALICE_v3_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v3_data[1]**2+sigma_tot_ALICE_v3_data[2]**2+sigma_tot_ALICE_v3_data[3]**2),np.sqrt(sigma_tot_ALICE_v3_data[4]**2+sigma_tot_ALICE_v3_data[5]**2+sigma_tot_ALICE_v3_data[6]**2)], fmt='sg', capsize=3) # ALICE
-    plt.legend(legend_lines, legend_text , prop={'size': 14}, frameon=False, loc='lower right')
+    plt.errorbar(sigma_tot_LHCb7_W[0], sigma_tot_LHCb7_data[0],  yerr=[sigma_tot_LHCb7_data[1], sigma_tot_LHCb7_data[1]], label=r'LHCb', fmt='*m', capsize=3, markersize=10) # LHCb 7
+    plt.errorbar(sigma_tot_LHCb13_W[0], sigma_tot_LHCb13_data[0],  yerr=[sigma_tot_LHCb13_data[1], sigma_tot_LHCb13_data[1]], fmt='*m', capsize=3, markersize=10) # LHCb 13
+    legend1 = plt.legend(legend_lines, legend_text , prop={'size': 13}, frameon=False, loc='lower right')
+    legend2 = plt.legend(legend_lines_Y, legend_text_Y, prop={'size': 14}, frameon=False, loc='upper left')
+    plt.gca().add_artist(legend1)
     # plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV$^2$ [nb]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=20)
     plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
-    plt.text(0.18, 0.85, r'$Q^2 = 0.05\textrm{ GeV}^2$', transform=fig3.transFigure, fontsize=18)
-    plt.xlim([2e1, 1e3])
-    plt.ylim([1e1, 6e2])
+    plt.text(0.16, 0.75, r'$Q^2 = 0.05\textrm{ GeV}^2$', transform=fig3.transFigure, fontsize=18)
+    plt.xlim([2e1, 3e3])
+    plt.ylim([1e1, 1e3])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
     plt.xscale('log')
@@ -232,14 +285,17 @@ if 4 in plots:
     plt.errorbar(sigma_tot_H1_v2_W[0], sigma_tot_H1_v2_data[0], xerr=[sigma_tot_H1_v2_W[0]-sigma_tot_H1_v2_W[1], sigma_tot_H1_v2_W[2]-sigma_tot_H1_v2_W[0]] , yerr=[sigma_tot_H1_v2_data[1], sigma_tot_H1_v2_data[2]], fmt='vb', capsize=3) # H1
     plt.errorbar(sigma_tot_ALICE_v1_W[0], sigma_tot_ALICE_v1_data[0], xerr=[sigma_tot_ALICE_v1_W[0]-sigma_tot_ALICE_v1_W[1], sigma_tot_ALICE_v1_W[2]-sigma_tot_ALICE_v1_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v1_data[1]**2+sigma_tot_ALICE_v1_data[2]**2+sigma_tot_ALICE_v1_data[3]**2),np.sqrt(sigma_tot_ALICE_v1_data[4]**2+sigma_tot_ALICE_v1_data[5]**2+sigma_tot_ALICE_v1_data[6]**2)],label='ALICE', fmt='sg', capsize=3)
     plt.errorbar(sigma_tot_ALICE_v2_W[0], sigma_tot_ALICE_v2_data[0], xerr=[sigma_tot_ALICE_v2_W[0]-sigma_tot_ALICE_v2_W[1], sigma_tot_ALICE_v2_W[2]-sigma_tot_ALICE_v2_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v2_data[1]**2+sigma_tot_ALICE_v2_data[2]**2+sigma_tot_ALICE_v2_data[3]**2),np.sqrt(sigma_tot_ALICE_v2_data[4]**2+sigma_tot_ALICE_v2_data[5]**2+sigma_tot_ALICE_v2_data[6]**2)], fmt='sg', capsize=3) # ALICE
-    plt.errorbar(sigma_tot_ALICE_v3_W[0], sigma_tot_ALICE_v3_data[0], xerr=[sigma_tot_ALICE_v3_W[0]-sigma_tot_ALICE_v3_W[1], sigma_tot_ALICE_v3_W[2]-sigma_tot_ALICE_v3_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v3_data[1]**2+sigma_tot_ALICE_v3_data[2]**2+sigma_tot_ALICE_v3_data[3]**2),np.sqrt(sigma_tot_ALICE_v3_data[4]**2+sigma_tot_ALICE_v3_data[5]**2+sigma_tot_ALICE_v3_data[6]**2)], fmt='sg', capsize=3) # ALICE
-    plt.legend(legend_lines, legend_text_rel, prop={'size': 14}, frameon=False)
-    # plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV$^2$ [nb]', fontsize=17)
+    plt.errorbar(sigma_tot_ALICE_v3_W[0], sigma_tot_ALICE_v3_data[0], xerr=[sigma_tot_ALICE_v3_W[0]-sigma_tot_ALICE_v3_W[1], sigma_tot_ALICE_v3_W[2]-sigma_tot_ALICE_v3_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v3_data[1]**2+sigma_tot_ALICE_v3_data[2]**2+sigma_tot_ALICE_v3_data[3]**2),np.sqrt(sigma_tot_ALICE_v3_data[4]**2+sigma_tot_ALICE_v3_data[5]**2+sigma_tot_ALICE_v3_data[6]**2)], fmt='sg', capsize=3) # ALICE   
+    plt.errorbar(sigma_tot_LHCb7_W[0], sigma_tot_LHCb7_data[0],  yerr=[sigma_tot_LHCb7_data[1], sigma_tot_LHCb7_data[1]], label=r'LHCb', fmt='*m', capsize=3, markersize=10) # LHCb 7
+    plt.errorbar(sigma_tot_LHCb13_W[0], sigma_tot_LHCb13_data[0],  yerr=[sigma_tot_LHCb13_data[1], sigma_tot_LHCb13_data[1]], fmt='*m', capsize=3, markersize=10) # LHCb 13
+    legend1 = plt.legend(legend_lines, legend_text_rel, prop={'size': 13}, frameon=False, loc='lower right', borderaxespad=0)
+    legend2 = plt.legend(legend_lines_Y, legend_text_Y, prop={'size': 14}, frameon=False, loc='upper left')
+    plt.gca().add_artist(legend1) # plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV$^2$ [nb]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=20)
     plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
-    plt.text(0.18, 0.85, r'$Q^2 = 0.05\textrm{ GeV}^2$', transform=fig4.transFigure, fontsize=18)
-    plt.xlim([20, 1e3])
-    plt.ylim([1e1, 6e2])
+    plt.text(0.16, 0.75, r'$Q^2 = 0.05\textrm{ GeV}^2$', transform=fig4.transFigure, fontsize=18)
+    plt.xlim([20, 3e3])
+    plt.ylim([1e1, 1e3])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
     plt.xscale('log')
@@ -387,13 +443,45 @@ if 14 in plots:
     plt.errorbar(sigma_tot_ZEUS_v2_upsilon[0], sigma_tot_ZEUS_v2_upsilon_data[0], xerr=[sigma_tot_ZEUS_v2_upsilon[0]-sigma_tot_ZEUS_v2_upsilon[1], sigma_tot_ZEUS_v2_upsilon[2]-sigma_tot_ZEUS_v2_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[1]**2+sigma_tot_ZEUS_v2_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[3]**2+sigma_tot_ZEUS_v2_upsilon_data[4]**2)],fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_upsilon[0], sigma_tot_H1_upsilon_data[0], xerr=[sigma_tot_H1_upsilon[0]-sigma_tot_H1_upsilon[1], sigma_tot_H1_upsilon[2]-sigma_tot_H1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_H1_upsilon_data[1]**2+sigma_tot_H1_upsilon_data[2]**2),np.sqrt(sigma_tot_H1_upsilon_data[3]**2+sigma_tot_H1_upsilon_data[4]**2)],label='H1', fmt='vb', capsize=3)
     plt.errorbar(sigma_tot_CMS_upsilon[0], sigma_tot_CMS_upsilon_data[0], xerr=[sigma_tot_CMS_upsilon[0]-sigma_tot_CMS_upsilon[1], sigma_tot_CMS_upsilon[2]-sigma_tot_CMS_upsilon[0]] , yerr=[np.sqrt(sigma_tot_CMS_upsilon_data[1]**2+sigma_tot_CMS_upsilon_data[2]**2),np.sqrt(sigma_tot_CMS_upsilon_data[3]**2+sigma_tot_CMS_upsilon_data[4]**2)],label='CMS', fmt='sg', capsize=3)
-    plt.legend(prop={'size': 13}, frameon=False, loc='upper left')
-    # plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV$^2$ [nb]', fontsize=17)
+    plt.errorbar(sigma_tot_LHCb_upsilon[0], sigma_tot_LHCb_upsilon_data[0], yerr=[sigma_tot_LHCb_upsilon_data[1],sigma_tot_LHCb_upsilon_data[2]],label='LHCb', fmt='*m', capsize=3, markersize=10)
+    legend1 = plt.legend(legend_lines_upsilon, legend_text_upsilon, prop={'size': 14}, frameon=False, loc='upper left')
+    legend2 = plt.legend(legend_lines_upsilon_exp, legend_text_upsilon_exp, prop={'size': 14}, frameon=False, loc='lower right')
+    plt.gca().add_artist(legend1) # plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV$^2$ [nb]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=20)
     plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
-    plt.text(0.55, 0.3, r'$Q^2 = 0.05\textrm{ GeV}^2$', transform=fig14.transFigure, fontsize=20)
+    plt.text(0.45, 0.25, r'$Q^2 = 0.05\textrm{ GeV}^2$', transform=fig14.transFigure, fontsize=20)
     plt.xlim([50, 5e3])
     plt.ylim([5e-2, 1e1])
+    plt.xticks(fontsize=15)
+    plt.yticks(fontsize=15)
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.tight_layout()
+    plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
+    plt.tick_params(axis='x', pad=5)
+
+if 15 in plots:
+    fig15=plt.figure(15)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_T[5], 'k-',label=r'LO LOBK', linewidth=linewidth2)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[3] * NRQCD_factor, 'k--',label=r'LO+rel LOBK', linewidth=linewidth2)
+    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_T[2], 'r-',label=r'NLO KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
+    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_rel_T[5], 'r--',label=r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
+    plt.plot(cs_kcbk_000_T[0],    C_int * cs_kcbk_000_T[2], 'b-',label=r'NLO KCBK $Y_{0,\mathrm{BK}}=0.00$', linewidth=linewidth1)
+    plt.plot(cs_kcbk_000_T[0],    C_int * cs_kcbk_000_rel_T[5], 'b--',label=r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=0.00$', linewidth=linewidth1)
+    plt.errorbar(sigma_tot_ZEUS_v1_upsilon[0], sigma_tot_ZEUS_v1_upsilon_data[0], xerr=[sigma_tot_ZEUS_v1_upsilon[0]-sigma_tot_ZEUS_v1_upsilon[1], sigma_tot_ZEUS_v1_upsilon[2]-sigma_tot_ZEUS_v1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[1]**2+sigma_tot_ZEUS_v1_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[3]**2+sigma_tot_ZEUS_v1_upsilon_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
+    plt.errorbar(sigma_tot_ZEUS_v2_upsilon[0], sigma_tot_ZEUS_v2_upsilon_data[0], xerr=[sigma_tot_ZEUS_v2_upsilon[0]-sigma_tot_ZEUS_v2_upsilon[1], sigma_tot_ZEUS_v2_upsilon[2]-sigma_tot_ZEUS_v2_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[1]**2+sigma_tot_ZEUS_v2_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[3]**2+sigma_tot_ZEUS_v2_upsilon_data[4]**2)],fmt='or', capsize=3)
+    plt.errorbar(sigma_tot_H1_upsilon[0], sigma_tot_H1_upsilon_data[0], xerr=[sigma_tot_H1_upsilon[0]-sigma_tot_H1_upsilon[1], sigma_tot_H1_upsilon[2]-sigma_tot_H1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_H1_upsilon_data[1]**2+sigma_tot_H1_upsilon_data[2]**2),np.sqrt(sigma_tot_H1_upsilon_data[3]**2+sigma_tot_H1_upsilon_data[4]**2)],label='H1', fmt='vb', capsize=3)
+    plt.errorbar(sigma_tot_CMS_upsilon[0], sigma_tot_CMS_upsilon_data[0], xerr=[sigma_tot_CMS_upsilon[0]-sigma_tot_CMS_upsilon[1], sigma_tot_CMS_upsilon[2]-sigma_tot_CMS_upsilon[0]] , yerr=[np.sqrt(sigma_tot_CMS_upsilon_data[1]**2+sigma_tot_CMS_upsilon_data[2]**2),np.sqrt(sigma_tot_CMS_upsilon_data[3]**2+sigma_tot_CMS_upsilon_data[4]**2)],label='CMS', fmt='sg', capsize=3)
+    plt.errorbar(sigma_tot_LHCb_upsilon[0], sigma_tot_LHCb_upsilon_data[0], yerr=[sigma_tot_LHCb_upsilon_data[1],sigma_tot_LHCb_upsilon_data[2]],label='LHCb', fmt='*m', capsize=3, markersize=10)
+    # legend1 = plt.legend(legend_lines_upsilon, legend_text_upsilon, prop={'size': 14}, frameon=False, loc='upper left')
+    # legend2 = plt.legend(legend_lines_upsilon_exp, legend_text_upsilon_exp, prop={'size': 14}, frameon=False, loc='lower right')
+    # plt.gca().add_artist(legend1) # plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV$^2$ [nb]', fontsize=17)
+    plt.legend(prop={'size': 10}, frameon=False)
+    plt.xlabel(r'$W$ [GeV]', fontsize=20)
+    plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
+    plt.text(0.25, 0.25, r'$Q^2 = 0.05\textrm{ GeV}^2$', transform=fig15.transFigure, fontsize=20)
+    plt.xlim([50, 5e3])
+    plt.ylim([1e-2, 1e1])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
     plt.xscale('log')

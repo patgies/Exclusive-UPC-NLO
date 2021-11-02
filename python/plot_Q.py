@@ -130,29 +130,38 @@ linewidth3 = 0.7*linewidth
 
 
 
+
 legend_lines = [Line2D([0], [0], color='r', linestyle='-', linewidth=linewidth1),
                 Line2D([0], [0], color='g', linestyle='-', linewidth=linewidth2),
                 Line2D([0], [0], color='b', linestyle='-', linewidth=linewidth3),
+                Line2D([0], [0], color='k', linestyle=':', linewidth=linewidth2),
+                Line2D([0], [0], color='b', linestyle='None', marker='v'),
+                Line2D([0], [0], color='r', linestyle='None', marker='o')
+                ]
+
+legend_lines_Y = [
                 Line2D([0], [0], color='k', linestyle='-', linewidth=linewidth1),
-                Line2D([0], [0], color='k', linestyle='--', linewidth=linewidth1),
-                Line2D([0], [0], color='k', linestyle=':', linewidth=linewidth2)
+                Line2D([0], [0], color='k', linestyle='--', linewidth=linewidth1)
                 ]
 
 legend_text =  [r'NLO KCBK',
                 r'NLO TBK',
                 r'NLO ResumBK',
-                r'$Y_{0,\mathrm{BK}}=4.61$',
-                r'$Y_{0,\mathrm{BK}}=0.00$',
-                r'LO LOBK'
+                r'LO LOBK',
+                r'H1',
+                r'ZEUS'
                 ]
 
 legend_text_rel =  [r'NLO+rel KCBK',
                     r'NLO+rel TBK',
                     r'NLO+rel ResumBK',
-                    r'$Y_{0,\mathrm{BK}}=4.61$',
-                    r'$Y_{0,\mathrm{BK}}=0.00$',
-                    r'LO+rel LOBK'
+                    r'LO+rel LOBK',
+                    r'H1',
+                    r'ZEUS'
                     ]
+
+legend_text_Y = [ r'$Y_{0,\mathrm{BK}}=4.61$',
+                  r'$Y_{0,\mathrm{BK}}=0.00$']
 
 if 1 in plots:
     plt.figure(1)
@@ -209,11 +218,13 @@ if 3 in plots:
     plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve[5], 'k:',label=r'LO LOBK', linewidth=linewidth2)
     plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3)
-    plt.legend(legend_lines, legend_text, prop={'size': 14.5}, frameon=False, loc='lower left')
+    legend1 = plt.legend(legend_lines,   legend_text, prop={'size': 14.5}, frameon=False, loc='lower left')
+    legend2 = plt.legend(legend_lines_Y, legend_text_Y, prop={'size': 15}, frameon=False, loc='upper right')
+    plt.gca().add_artist(legend1) 
     # plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb]', fontsize=17)
     plt.xlabel(r'$M_{J/\psi}^2+Q^2$ [GeV$^2$]', fontsize=20)
     plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
-    plt.text(0.65, 0.85, r'$W = 90\textrm{ GeV}$', transform=fig3.transFigure, fontsize=20)
+    plt.text(0.67, 0.75, r'$W = 90\textrm{ GeV}$', transform=fig3.transFigure, fontsize=20)
     plt.xlim([Mv2, 1e2])
     plt.ylim([0.05, 2e2])
     plt.xticks(fontsize=15)
@@ -235,11 +246,13 @@ if 4 in plots:
     plt.plot(Mv2 + cs_lobk_mve[0],    C_int * cs_lobk_mve_rel[3] * NRQCD_factor, 'k:',label=r'LO+rel LOBK', linewidth=linewidth2)
     plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3)
-    plt.legend(legend_lines, legend_text_rel, prop={'size': 14.5}, frameon=False)
+    legend1 = plt.legend(legend_lines, legend_text_rel, prop={'size': 14.5}, frameon=False, loc='lower left')
+    legend2 = plt.legend(legend_lines_Y, legend_text_Y, prop={'size': 15}, frameon=False, loc='upper right')
+    plt.gca().add_artist(legend1) 
     # plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb]', fontsize=17)
     plt.xlabel(r'$M_{J/\psi}^2+Q^2$ [GeV$^2$]', fontsize=20)
     plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
-    plt.text(0.65, 0.85, r'$W = 90\textrm{ GeV}$', transform=fig4.transFigure, fontsize=20)
+    plt.text(0.67, 0.75, r'$W = 90\textrm{ GeV}$', transform=fig4.transFigure, fontsize=20)
     plt.xlim([Mv2, 1e2])
     plt.ylim([0.05, 2e2])
     plt.xticks(fontsize=15)

@@ -368,11 +368,11 @@ def sigma_tot_Upsilon_ZEUS_v2():
     W_values_low = np.array([60, 130])
     W_values_high =np.array( [130, 220])
     W_values = (W_values_high + W_values_low)/2
-    y_values = np.array([160, 321])
-    y_errors_stat_minus = np.array([51, 88])
-    y_errors_stat_plus =  np.array([51, 88])
-    y_errors_syst_plus =  np.array([48,46])
-    y_errors_syst_minus = np.array( [21,114])
+    y_values = np.array([0.160, 0.321])
+    y_errors_stat_minus = np.array([0.051, 0.088])
+    y_errors_stat_plus =  np.array([0.051, 0.088])
+    y_errors_syst_plus =  np.array([0.048, 0.046])
+    y_errors_syst_minus = np.array( [0.021, 0.114])
 
     return [W_values, W_values_low, W_values_high], [y_values, y_errors_stat_minus, y_errors_syst_minus, y_errors_stat_plus, y_errors_syst_plus]
 
@@ -441,41 +441,50 @@ def sigma_tot_LHCb_13():
     Data from JHEP 10 (2018) 167
     """
 
+    # W_values = np.array([
+    #     580.968,
+    #     658.323,
+    #     745.977,
+    #     845.303,
+    #     957.854,
+    #     1085.391,
+    #     1229.909,
+    #     1393.669,
+    #     1579.234,
+    #     1789.507
+    # ])
+    # y_values = np.array([
+    #     255.496,
+    #     296.091,
+    #     282.791,
+    #     298.684,
+    #     315.613,
+    #     349.525,
+    #     356.168,
+    #     355.838,
+    #     402.682,
+    #     464.647
+    # ])
+    # y_errors =  np.array([
+    #     42.965,
+    #     30.314,
+    #     26.099,
+    #     24.309,
+    #     24.094,
+    #     25.939,
+    #     27.639,
+    #     30.302,
+    #     39.548,
+    #     66.028
+    # ])
     W_values = np.array([
-        580.968,
-        658.323,
-        745.977,
-        845.303,
-        957.854,
-        1085.391,
-        1229.909,
-        1393.669,
-        1579.234,
-        1789.507
+        581, 660, 757, 845, 961, 1087, 1233, 1394, 1577, 1793
     ])
     y_values = np.array([
-        255.496,
-        296.091,
-        282.791,
-        298.684,
-        315.613,
-        349.525,
-        356.168,
-        355.838,
-        402.682,
-        464.647
+        287, 334, 320, 337, 357, 398, 403, 403, 450, 521
     ])
     y_errors =  np.array([
-        42.965,
-        30.314,
-        26.099,
-        24.309,
-        24.094,
-        25.939,
-        27.639,
-        30.302,
-        39.548,
-        66.028
+        45, 34, 25, 23, 25, 30, 30, 30, 40, 70
     ])
 
     return [W_values], [y_values, y_errors]
@@ -484,11 +493,21 @@ def sigma_tot_Upsilon_LHCb():
     """
     Data from JHEP, 09:084, 2015
     """
-    W_values = np.array([
+    W_values = np.array([ 
+        942, 1369, 1990
     ])
     y_values = np.array([
+        0.988, 1.349, 2.105
     ])
-    y_errors =  np.array([
+    y_errors_minus =  np.array([
+        0.469,
+        0.584,
+        0.741
+    ])
+    y_errors_plus =  np.array([
+        0.486,
+        0.599,
+        0.802
     ])
 
-    return [W_values], [y_values, y_errors]
+    return [W_values], [y_values, y_errors_minus, y_errors_plus]

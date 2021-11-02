@@ -57,26 +57,41 @@ linewidth3 = 0.7*linewidth
 legend_lines = [Line2D([0], [0], color='r', linestyle='-', linewidth=linewidth1),
                 Line2D([0], [0], color='g', linestyle='-', linewidth=linewidth2),
                 Line2D([0], [0], color='b', linestyle='-', linewidth=linewidth3),
+                Line2D([0], [0], color='k', linestyle=':', linewidth=linewidth2),
                 Line2D([0], [0], color='k', linestyle='-', linewidth=linewidth1),
                 Line2D([0], [0], color='k', linestyle='--', linewidth=linewidth1),
-                Line2D([0], [0], color='k', linestyle=':', linewidth=linewidth2)
+                Line2D([0], [0], color='b', linestyle='None', marker='v'),
+                Line2D([0], [0], color='r', linestyle='None', marker='o')
+]
+                
+
+legend_lines_Y = [
+                Line2D([0], [0], color='k', linestyle='-', linewidth=linewidth1),
+                Line2D([0], [0], color='k', linestyle='--', linewidth=linewidth1)
                 ]
 
 legend_text =  [r'NLO KCBK',
                 r'NLO TBK',
                 r'NLO ResumBK',
+                r'LO LOBK',
                 r'$Y_{0,\mathrm{BK}}=4.61$',
                 r'$Y_{0,\mathrm{BK}}=0.00$',
-                r'LO LOBK'
+                r'H1',
+                r'ZEUS'
                 ]
 
 legend_text_rel =  [r'NLO+rel KCBK',
                     r'NLO+rel TBK',
                     r'NLO+rel ResumBK',
+                    r'LO+rel LOBK',
                     r'$Y_{0,\mathrm{BK}}=4.61$',
                     r'$Y_{0,\mathrm{BK}}=0.00$',
-                    r'LO+rel LOBK'
+                    r'H1',
+                    r'ZEUS'
                     ]
+
+legend_text_Y = [ r'$Y_{0,\mathrm{BK}}=4.61$',
+                  r'$Y_{0,\mathrm{BK}}=0.00$']
 
 if 1 in plots:
     fig1 = plt.figure(1)
@@ -89,7 +104,7 @@ if 1 in plots:
     plt.plot(R_lobk_mve[0],    R_lobk_mve[5], 'k:',label=r'LO LOBK', linewidth=linewidth2)
     plt.errorbar(R_ZEUS_Q2[0], R_ZEUS_data[0], xerr=[R_ZEUS_Q2[0]-R_ZEUS_Q2[1], R_ZEUS_Q2[2]-R_ZEUS_Q2[0]] , yerr=[np.sqrt(R_ZEUS_data[1]**2+R_ZEUS_data[2]**2),np.sqrt(R_ZEUS_data[3]**2+R_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3, zorder=100)
     plt.errorbar(R_H1_Q2[0], R_H1_data[0], xerr=[R_H1_Q2[0]-R_H1_Q2[1], R_H1_Q2[2]-R_H1_Q2[0]] , yerr=[np.sqrt(R_H1_data[1]**2+R_H1_data[2]**2),np.sqrt(R_H1_data[3]**2+R_H1_data[4]**2)],label='H1', fmt='vb', capsize=3, zorder=100)
-    plt.legend(legend_lines, legend_text, prop={'size': 16}, frameon=False)
+    plt.legend(legend_lines, legend_text, prop={'size': 14}, frameon=False)
     plt.xlabel(r'$Q^2$ [GeV]', fontsize=20)
     plt.ylabel(r'$\sigma_L/\sigma_T$', fontsize=20)
     plt.text(0.50, 0.85, r'$W = 90\textrm{ GeV}$', transform=fig1.transFigure, fontsize=18)
@@ -114,7 +129,7 @@ if 2 in plots:
     plt.plot(R_lobk_mve[0],    R_lobk_mve[6], 'k:',label=r'LO+rel LOBK', linewidth=linewidth2)
     plt.errorbar(R_ZEUS_Q2[0], R_ZEUS_data[0], xerr=[R_ZEUS_Q2[0]-R_ZEUS_Q2[1], R_ZEUS_Q2[2]-R_ZEUS_Q2[0]] , yerr=[np.sqrt(R_ZEUS_data[1]**2+R_ZEUS_data[2]**2),np.sqrt(R_ZEUS_data[3]**2+R_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3, zorder=100)
     plt.errorbar(R_H1_Q2[0], R_H1_data[0], xerr=[R_H1_Q2[0]-R_H1_Q2[1], R_H1_Q2[2]-R_H1_Q2[0]] , yerr=[np.sqrt(R_H1_data[1]**2+R_H1_data[2]**2),np.sqrt(R_H1_data[3]**2+R_H1_data[4]**2)],label='H1', fmt='vb', capsize=3, zorder=100)
-    plt.legend(legend_lines, legend_text_rel, prop={'size': 16}, frameon=False)
+    plt.legend(legend_lines, legend_text_rel, prop={'size': 14}, frameon=False)
     plt.xlabel(r'$Q^2$ [GeV]', fontsize=20)
     plt.ylabel(r'$\sigma_L/\sigma_T$', fontsize=20)
     plt.text(0.60, 0.85, r'$W = 90\textrm{ GeV}$', transform=fig2.transFigure, fontsize=18)
@@ -138,7 +153,7 @@ if 3 in plots:
     plt.plot(R_W1000_lobk_mve[0],    R_W1000_lobk_mve[5], 'k:',label=r'LO MV$^e$', linewidth=linewidth)
     # plt.errorbar(R_ZEUS_Q2[0], R_ZEUS_data[0], xerr=[R_ZEUS_Q2[0]-R_ZEUS_Q2[1], R_ZEUS_Q2[2]-R_ZEUS_Q2[0]] , yerr=[np.sqrt(R_ZEUS_data[1]**2+R_ZEUS_data[2]**2),np.sqrt(R_ZEUS_data[3]**2+R_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3, zorder=100)
     # plt.errorbar(R_H1_Q2[0], R_H1_data[0], xerr=[R_H1_Q2[0]-R_H1_Q2[1], R_H1_Q2[2]-R_H1_Q2[0]] , yerr=[np.sqrt(R_H1_data[1]**2+R_H1_data[2]**2),np.sqrt(R_H1_data[3]**2+R_H1_data[4]**2)],label='H1', fmt='vb', capsize=3, zorder=100)
-    plt.legend(prop={'size': 12}, frameon=False)
+    plt.legend(prop={'size': 11}, frameon=False)
     plt.title(r'$\sigma_L/\sigma_T$, $W= 1000$ GeV', fontsize=17)
     plt.xlabel(r'$Q^2$ [GeV$^2$]', fontsize=15)
     plt.xlim([0, 25])
@@ -162,7 +177,7 @@ if 4 in plots:
     plt.plot(R_W1000_lobk_mve[0],    R_W1000_lobk_mve[6], 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
     # plt.errorbar(R_ZEUS_Q2[0], R_ZEUS_data[0], xerr=[R_ZEUS_Q2[0]-R_ZEUS_Q2[1], R_ZEUS_Q2[2]-R_ZEUS_Q2[0]] , yerr=[np.sqrt(R_ZEUS_data[1]**2+R_ZEUS_data[2]**2),np.sqrt(R_ZEUS_data[3]**2+R_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3, zorder=100)
     # plt.errorbar(R_H1_Q2[0], R_H1_data[0], xerr=[R_H1_Q2[0]-R_H1_Q2[1], R_H1_Q2[2]-R_H1_Q2[0]] , yerr=[np.sqrt(R_H1_data[1]**2+R_H1_data[2]**2),np.sqrt(R_H1_data[3]**2+R_H1_data[4]**2)],label='H1', fmt='vb', capsize=3, zorder=100)
-    plt.legend(prop={'size': 12}, frameon=False)
+    plt.legend(prop={'size': 11}, frameon=False)
     plt.title(r'$\sigma_L/\sigma_T$, $W= 1000$ GeV', fontsize=17)
     plt.xlabel(r'$Q^2$ [GeV$^2$]', fontsize=15)
     plt.xlim([0, 25])
