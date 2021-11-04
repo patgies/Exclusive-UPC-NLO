@@ -1,0 +1,14 @@
+# Exclusive photoproduction p+gamma->p+jpsi. Data from JHEP 10 (2018) 167.
+# x=W [GeV]
+# y=sigma [nb]
+#x          y           y_err
+581         287         45
+660         334         34
+757         320         25
+845         337         23
+961         357         25
+1087        398         30 
+1233        403         30 
+1394        403         30 
+1577        450         40 
+1793        521         70

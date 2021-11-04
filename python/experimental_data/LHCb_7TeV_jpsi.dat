@@ -1,0 +1,14 @@
+# Exclusive photoproduction p+gamma->p+jpsi. Data from J. Phys.G41(2014)055002.
+# x=W [GeV]
+# y=sigma [nb]
+#x          y           y_err
+426         224         32
+483         257         28
+547         263         29
+620         265         29
+702         284         30
+796         301         32
+902         320         34
+1022        356         37
+1158        432         47
+1312        481         65
