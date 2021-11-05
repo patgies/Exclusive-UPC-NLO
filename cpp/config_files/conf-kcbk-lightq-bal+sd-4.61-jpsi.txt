@@ -61,6 +61,6 @@
 ###integ calls high
 5000000
 ###integ calls dim 6
-50000000
+20000000
 ###dipole file
 data/dipole-kcbk-lightq-bal+sd-4.61.dip

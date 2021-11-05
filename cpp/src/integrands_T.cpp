@@ -62,7 +62,7 @@ double Transverse::delta_factor_qqg(double z2, double Delta, double x20, double 
 //Integrand of J_1. Needs to be integrated over xi to get J_1.
 double Transverse::J_1_integrand(double xi, double x10, double m, double Q){
     return 2.0 * ( 1.0/xi * ( -2.0*log(xi)/(1.0-xi) + (1.0+xi)/2.0 ) * ( gsl_sf_bessel_K0( x10 * sqrt(1.0/4.0*Q*Q+m*m) ) - gsl_sf_bessel_K0(x10 * sqrt( 1.0/4.0*Q*Q+m*m + xi*0.5/(1.0-xi)*m*m ) ) ) 
-        + (-3.0/(2.0*(1.0-xi)) +1.0/2.0) * gsl_sf_bessel_K0(x10 * sqrt( 1.0/4.0*Q*Q+m*m + xi*0.5/(1.0-xi)*m*m ) ) );
+        +1.0/2.0 * (-3.0/(2.0*(1.0-xi)) +1.0/2.0) * gsl_sf_bessel_K0(x10 * sqrt( 1.0/4.0*Q*Q+m*m + xi*0.5/(1.0-xi)*m*m ) ) );
 }
 
 //Integrand of J_2. Needs to be integrated over xi and x to get J_2.

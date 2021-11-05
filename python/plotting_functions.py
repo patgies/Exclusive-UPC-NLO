@@ -53,7 +53,7 @@ def initialize():
         Gamma_ee = 54.02e-6 * 0.0238
 
         W_0 = 100 # Not measured yet!
-        b_0 = 4.5  # Phys.Lett.B 680, 4-12 (2009)
+        b_0 = 4.3  #     Phys.Lett.B 708 (2012) 14-20
         alpha_pom = 0 # Not measured yet!
     else:
         raise Exception('Improper particle!')

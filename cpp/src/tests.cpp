@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_CASE( test_int_J1_T )
 {
     struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef, xidef};
-    BOOST_TEST( Transverse::qq_NLO_J_1( x, 2,  &params) == -0.00704528, tt::tolerance(tol) );
+    BOOST_TEST( Transverse::qq_NLO_J_1( x, 2,  &params) == -0.00139493, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_J2_T )
