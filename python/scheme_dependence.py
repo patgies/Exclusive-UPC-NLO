@@ -20,14 +20,21 @@ reg_scheme_wf = 'NR wave function'
 id_string = ""
 # id_string = "_Q2_0.05"
 
-
+const = 'Q' 
 pol = 'L'
-
+if pol=='L' and const=='W':
+    id_string = '-Q'
+elif pol=='L' and const=='Q':
+    id_string = ''
+elif pol=='T' and const=='W':
+    id_string = '-jpsi-T-W_90'
+elif pol=='T' and const=='Q':
+    id_string = '-jpsi-T-Q2_0.05'
 
 
 dir_path = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_' + pol + r'/'
 
-if id_string == "_Q2_0.05" or id_string == "":
+if const=='Q':
     cs_kcbk_000_dw = plotting_functions.get_cross_section_values_W( dir_path + r'results-kcbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_dw, pol )
     cs_kcbk_461_dw = plotting_functions.get_cross_section_values_W( dir_path + r'results-kcbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_dw, pol )
     cs_tbk_000_dw = plotting_functions.get_cross_section_values_W( dir_path + r'results-tbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_dw, pol )
@@ -41,7 +48,7 @@ if id_string == "_Q2_0.05" or id_string == "":
     cs_tbk_461_wf = plotting_functions.get_cross_section_values_W( dir_path + r'results-tbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_wf, pol )
     cs_resumbk_000_wf = plotting_functions.get_cross_section_values_W( dir_path + r'results-resumbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_wf, pol )
     cs_resumbk_461_wf = plotting_functions.get_cross_section_values_W( dir_path + r'results-resumbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_wf, pol )
-elif id_string == '-Q':
+elif const=='W':
     cs_kcbk_000_dw = plotting_functions.get_cross_section_values_Q( dir_path + r'results-kcbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_dw, pol )
     cs_kcbk_461_dw = plotting_functions.get_cross_section_values_Q( dir_path + r'results-kcbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_dw, pol )
     cs_tbk_000_dw = plotting_functions.get_cross_section_values_Q( dir_path + r'results-tbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_dw, pol )
@@ -183,21 +190,21 @@ if 5 in plots:
         plt.ylabel(r'$(d\sigma_L/dt)_\Gamma /(d\sigma_L/dt)_\Psi$', fontsize=20)
     elif pol == 'T':
         plt.ylabel(r'$(d\sigma_T/dt)_\Gamma /(d\sigma_T/dt)_\Psi$', fontsize=20)
-    if id_string == '-Q':
+    if const=='W':
         plt.text(0.18, 0.87, r'$W = 90\textrm{ GeV}$', transform=fig5.transFigure, fontsize=18)
         plt.text(0.50, 0.87, r'$t=0$', transform=fig5.transFigure, fontsize=18)
         plt.text(0.18, 0.79, r'$\Gamma = $ decay width scheme', transform=fig5.transFigure, fontsize=18)
         plt.text(0.18, 0.71, r'$\Psi = $ wave function scheme', transform=fig5.transFigure, fontsize=18)
         plt.legend(legend_lines, legend_text, prop={'size': 16}, ncol=2, frameon=False, loc='lower left', columnspacing=1.0)
         plt.xlabel(r'$Q^2$ [GeV$^2$]', fontsize=20)
-    elif id_string == "_Q2_0.05":
+    elif const=='Q' and pol=='T':
         plt.text(0.50, 0.85, r'$Q^2 = 0.05\textrm{ GeV}^2$', transform=fig5.transFigure, fontsize=18)
         plt.text(0.80, 0.85, r'$t=0$', transform=fig5.transFigure, fontsize=18)
         plt.text(0.50, 0.77, r'$\Gamma = $ decay width scheme', transform=fig5.transFigure, fontsize=18)
         plt.text(0.50, 0.69, r'$\Psi = $ wave function scheme', transform=fig5.transFigure, fontsize=18)
         plt.legend(legend_lines, legend_text, prop={'size': 16}, ncol=2, frameon=False, loc='lower right', columnspacing=1.0)
         plt.xlabel(r'$W$ [GeV]', fontsize=20)
-    elif id_string == "":
+    elif const=='Q' and pol=='L':
         plt.text(0.50, 0.85, r'$Q^2 = 10\textrm{ GeV}^2$', transform=fig5.transFigure, fontsize=18)
         plt.text(0.80, 0.85, r'$t=0$', transform=fig5.transFigure, fontsize=18)
         plt.text(0.50, 0.77, r'$\Gamma = $ decay width scheme', transform=fig5.transFigure, fontsize=18)

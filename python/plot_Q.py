@@ -76,9 +76,13 @@ dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
 if particle == 'jpsi':
     alpha_s0 = 0.25
     Mv = 3.0969
+    id_string_L = '-jpsi-L-W_90'
+    id_string_T = '-jpsi-T-W_90'
 elif particle == 'upsilon':
     alpha_s0 = 0.18
     Mv = 9.46030
+    id_string_L = '-upsilon-L-W_90'
+    id_string_T = '-upsilon-T-W_90'
 else:
     raise Exception('Improper particle!')
 
@@ -88,22 +92,22 @@ Cf = 4/3
 NRQCD_factor = (1-2*Cf*alpha_s0/np.pi)**2
 
 
-cs_kcbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', reg_scheme_NLO)
-cs_kcbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', reg_scheme_NLO)
-cs_tbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', reg_scheme_NLO)
-cs_tbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', reg_scheme_NLO)
-cs_resumbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', reg_scheme_NLO)
-cs_resumbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', reg_scheme_NLO)
-cs_lobk_mve = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-LOBK-MVe-W_90.dat', dir_path_T + r'results-LOBK-MVe-W_90.dat', reg_scheme_LO)
+cs_kcbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00' + id_string_L + '.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00' + id_string_T + '.dat', reg_scheme_NLO)
+cs_kcbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61' + id_string_L + '.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61' + id_string_T + '.dat', reg_scheme_NLO)
+cs_tbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00' + id_string_L + '.dat', dir_path_T + r'results-tbk-hera-bal+sd-0.00' + id_string_T + '.dat', reg_scheme_NLO)
+cs_tbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61' + id_string_L + '.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61' + id_string_T + '.dat', reg_scheme_NLO)
+cs_resumbk_000 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00' + id_string_L + '.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00' + id_string_T + '.dat', reg_scheme_NLO)
+cs_resumbk_461 = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61' + id_string_L + '.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61' + id_string_T + '.dat', reg_scheme_NLO)
+cs_lobk_mve = plotting_functions.get_total_cross_section_Q( dir_path_L + r'results-LOBK-MVe' + id_string_L + '.dat', dir_path_T + r'results-LOBK-MVe' + id_string_T + '.dat', reg_scheme_LO)
 
 
-cs_kcbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel)
-cs_kcbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel)
-cs_tbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel)
-cs_tbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel)
-cs_resumbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00-Q.dat', reg_scheme_rel)
-cs_resumbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel)
-cs_lobk_mve_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-LOBK-MVe-W_90.dat', dir_path_T + r'results-LOBK-MVe-W_90.dat', reg_scheme_rel)
+cs_kcbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-0.00' + id_string_L + '.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00' + id_string_T + '.dat', reg_scheme_rel)
+cs_kcbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61' + id_string_L + '.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61' + id_string_T + '.dat', reg_scheme_rel)
+cs_tbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-0.00' + id_string_L + '.dat', dir_path_T + r'results-tbk-hera-bal+sd-0.00' + id_string_T + '.dat', reg_scheme_rel)
+cs_tbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-tbk-hera-bal+sd-4.61' + id_string_L + '.dat', dir_path_T + r'results-tbk-hera-bal+sd-4.61' + id_string_T + '.dat', reg_scheme_rel)
+cs_resumbk_000_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-0.00' + id_string_L + '.dat', dir_path_T + r'results-resumbk-hera-bal+sd-0.00' + id_string_T + '.dat', reg_scheme_rel)
+cs_resumbk_461_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-resumbk-hera-bal+sd-4.61' + id_string_L + '.dat', dir_path_T + r'results-resumbk-hera-bal+sd-4.61' + id_string_T + '.dat', reg_scheme_rel)
+cs_lobk_mve_rel = plotting_functions.get_total_cross_section_distribution_Q( dir_path_L + r'results-LOBK-MVe' + id_string_L + '.dat', dir_path_T + r'results-LOBK-MVe' + id_string_T + '.dat', reg_scheme_rel)
 
 # cs_lobk_mve_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-LOBK-MVe-Q.dat', dir_path_T + r'results-LOBK-MVe-Q.dat', reg_scheme_rel)
 # cs_kcbk_461_rel = plotting_functions.get_distribution_Q( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-Q.dat', dir_path_T + r'results-kcbk-hera-bal+sd-4.61-Q.dat', reg_scheme_rel)

@@ -114,10 +114,10 @@ def get_cross_section_ratio_Q(file_L, file_T, reg_scheme):
     if any(cs_L[0] != cs_T[0]):
         raise Exception("Q vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
 
-    cs_tot = np.array(cs_L) / np.array(cs_T)
-    cs_tot[0] = cs_L[0] # Q^2 vector
+    cs_ratio = np.array(cs_L) / np.array(cs_T)
+    cs_ratio[0] = cs_L[0] # Q^2 vector
 
-    return cs_tot
+    return cs_ratio
 
 
 def get_total_cross_section_W(file_L, file_T, reg_scheme):

@@ -166,7 +166,7 @@ namespace Transverse {
 
         ofstream myfile;
         myfile.open(file, ios_base::app);
-        myfile << "# Different parts of the transverse production amplitude. A common prefactor e*ef/(pi)*sqrt(Nc/2)*2*(wavefunction factor) has been left out. Rows: W (GeV) \n"; 
+        myfile << "# Different parts of the transverse production amplitude. Rows: W (GeV) \n"; 
         myfile << "#Q^2 value:\n" << std::scientific << std::setprecision(9) << Q2 << "\n"; 
         myfile << "#Delta value:\n" << std::scientific << std::setprecision(9) << Delta << "\n";
         myfile << "#W values:\n";
@@ -212,7 +212,7 @@ namespace Transverse {
 
         ofstream myfile;
         myfile.open(file, ios_base::app);
-        myfile << "# Different parts of the longitudinal production amplitude.  A common prefactor e*ef/(pi)*sqrt(Nc/2)*2*(wavefunction factor) has been left out. Rows: Q (GeV) \n"; 
+        myfile << "# Different parts of the transverse production amplitude. Rows: Q (GeV) \n"; 
         myfile << "#W value:\n" << std::scientific << std::setprecision(9) << W << "\n"; 
         myfile << "#Delta value:\n" << std::scientific << std::setprecision(9) << Delta << "\n";
         myfile << "#Q values:\n";

@@ -12,7 +12,7 @@ import experimental_data
 
 plotting_functions.pheno_correction = False
 
-particle = 'jpsi'
+particle = 'upsilon'
 plotting_functions.particle = particle
 plotting_functions.initialize()
 
