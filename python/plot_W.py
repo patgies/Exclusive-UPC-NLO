@@ -12,7 +12,7 @@ import experimental_data
 
 plotting_functions.pheno_correction = False
 
-particle = 'upsilon'
+particle = 'jpsi'
 plotting_functions.particle = particle
 plotting_functions.initialize()
 
@@ -254,8 +254,8 @@ if 3 in plots:
     plt.errorbar(sigma_tot_ALICE_v3_W[0], sigma_tot_ALICE_v3_data[0], xerr=[sigma_tot_ALICE_v3_W[0]-sigma_tot_ALICE_v3_W[1], sigma_tot_ALICE_v3_W[2]-sigma_tot_ALICE_v3_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v3_data[1]**2+sigma_tot_ALICE_v3_data[2]**2+sigma_tot_ALICE_v3_data[3]**2),np.sqrt(sigma_tot_ALICE_v3_data[4]**2+sigma_tot_ALICE_v3_data[5]**2+sigma_tot_ALICE_v3_data[6]**2)], fmt='sg', capsize=3) # ALICE
     plt.errorbar(sigma_tot_LHCb7_W[0], sigma_tot_LHCb7_data[0],  yerr=[sigma_tot_LHCb7_data[1], sigma_tot_LHCb7_data[1]], label=r'LHCb', fmt='*m', capsize=3, markersize=10) # LHCb 7
     plt.errorbar(sigma_tot_LHCb13_W[0], sigma_tot_LHCb13_data[0],  yerr=[sigma_tot_LHCb13_data[1], sigma_tot_LHCb13_data[1]], fmt='*m', capsize=3, markersize=10) # LHCb 13
-    legend1 = plt.legend(legend_lines, legend_text , prop={'size': 13}, frameon=False, loc='lower right')
-    legend2 = plt.legend(legend_lines_Y, legend_text_Y, prop={'size': 14}, frameon=False, loc='upper left')
+    legend1 = plt.legend(legend_lines, legend_text , prop={'size': 14.5}, frameon=False, loc='lower right', ncol=2)
+    legend2 = plt.legend(legend_lines_Y, legend_text_Y, prop={'size': 14.5}, frameon=False, loc='upper left')
     plt.gca().add_artist(legend1)
     # plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV$^2$ [nb]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=20)
@@ -288,8 +288,8 @@ if 4 in plots:
     plt.errorbar(sigma_tot_ALICE_v3_W[0], sigma_tot_ALICE_v3_data[0], xerr=[sigma_tot_ALICE_v3_W[0]-sigma_tot_ALICE_v3_W[1], sigma_tot_ALICE_v3_W[2]-sigma_tot_ALICE_v3_W[0]] , yerr=[np.sqrt(sigma_tot_ALICE_v3_data[1]**2+sigma_tot_ALICE_v3_data[2]**2+sigma_tot_ALICE_v3_data[3]**2),np.sqrt(sigma_tot_ALICE_v3_data[4]**2+sigma_tot_ALICE_v3_data[5]**2+sigma_tot_ALICE_v3_data[6]**2)], fmt='sg', capsize=3) # ALICE   
     plt.errorbar(sigma_tot_LHCb7_W[0], sigma_tot_LHCb7_data[0],  yerr=[sigma_tot_LHCb7_data[1], sigma_tot_LHCb7_data[1]], label=r'LHCb', fmt='*m', capsize=3, markersize=10) # LHCb 7
     plt.errorbar(sigma_tot_LHCb13_W[0], sigma_tot_LHCb13_data[0],  yerr=[sigma_tot_LHCb13_data[1], sigma_tot_LHCb13_data[1]], fmt='*m', capsize=3, markersize=10) # LHCb 13
-    legend1 = plt.legend(legend_lines, legend_text_rel, prop={'size': 13}, frameon=False, loc='lower right', borderaxespad=0)
-    legend2 = plt.legend(legend_lines_Y, legend_text_Y, prop={'size': 14}, frameon=False, loc='upper left')
+    legend1 = plt.legend(legend_lines, legend_text_rel, prop={'size': 14.5}, frameon=False, loc='lower right', ncol=2, columnspacing=0.5)
+    legend2 = plt.legend(legend_lines_Y, legend_text_Y, prop={'size': 14.5}, frameon=False, loc='upper left')
     plt.gca().add_artist(legend1) # plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV$^2$ [nb]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=20)
     plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
