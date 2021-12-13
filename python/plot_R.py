@@ -82,8 +82,8 @@ legend_text =  [r'NLO KCBK',
                 r'NLO TBK',
                 r'NLO ResumBK',
                 r'LO LOBK',
-                r'$Y_{0,\mathrm{BK}}=4.61$',
-                r'$Y_{0,\mathrm{BK}}=0.00$',
+                r'$Y_{0,\mathrm{BK}},\eta_{0,\mathrm{BK}}=4.61$',
+                r'$Y_{0,\mathrm{BK}},\eta_{0,\mathrm{BK}}=0.00$',
                 r'H1',
                 r'ZEUS'
                 ]
@@ -92,14 +92,12 @@ legend_text_rel =  [r'NLO+rel KCBK',
                     r'NLO+rel TBK',
                     r'NLO+rel ResumBK',
                     r'LO+rel LOBK',
-                    r'$Y_{0,\mathrm{BK}}=4.61$',
-                    r'$Y_{0,\mathrm{BK}}=0.00$',
+                    r'$Y_{0,\mathrm{BK}},\eta_{0,\mathrm{BK}}=4.61$',
+                    r'$Y_{0,\mathrm{BK}},\eta_{0,\mathrm{BK}}=0.00$',
                     r'H1',
                     r'ZEUS'
                     ]
 
-legend_text_Y = [ r'$Y_{0,\mathrm{BK}}=4.61$',
-                  r'$Y_{0,\mathrm{BK}}=0.00$']
 
 if 1 in plots:
     fig1 = plt.figure(1)

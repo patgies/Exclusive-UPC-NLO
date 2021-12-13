@@ -164,8 +164,8 @@ legend_text_rel =  [r'NLO+rel KCBK',
                     r'ZEUS'
                     ]
 
-legend_text_Y = [ r'$Y_{0,\mathrm{BK}}=4.61$',
-                  r'$Y_{0,\mathrm{BK}}=0.00$']
+legend_text_Y = [ r'$Y_{0,\mathrm{BK}},\eta_{0,\mathrm{BK}}=4.61$',
+                  r'$Y_{0,\mathrm{BK}},\eta_{0,\mathrm{BK}}=0.00$']
 
 if 1 in plots:
     plt.figure(1)

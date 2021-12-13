@@ -162,8 +162,8 @@ legend_text_rel =  [r'NLO+rel KCBK',
                     r'LHCb'
                     ]
 
-legend_text_Y = [ r'$Y_{0,\mathrm{BK}}=4.61$',
-                  r'$Y_{0,\mathrm{BK}}=0.00$']
+legend_text_Y = [ r'$Y_{0,\mathrm{BK}},\eta_{0,\mathrm{BK}}=4.61$',
+                  r'$Y_{0,\mathrm{BK}},\eta_{0,\mathrm{BK}}=0.00$']
 
 legend_lines_upsilon = [Line2D([0], [0], color='k', linestyle='-', linewidth=linewidth2),
                 Line2D([0], [0], color='k', linestyle='--', linewidth=linewidth2),
