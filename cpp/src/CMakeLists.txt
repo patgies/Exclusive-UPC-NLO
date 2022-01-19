@@ -15,18 +15,6 @@ add_library(
 )
 
 
-
-
-add_library(
-	dipole_amplitude
-	STATIC
-    gitsha1.h
-	amplitudelib.cpp
-	datafile.cpp
-	tools.cpp
-	interpolation.cpp
-)
-
 add_executable(
 	NLO_amplitude
     ${CMAKE_CURRENT_BINARY_DIR}/gitsha1.cpp
@@ -40,7 +28,7 @@ target_link_libraries(
 	NLO_amplitude
 	PRIVATE
 	integrands
-    dipole_amplitude
+	amplitude
 	GSL::gsl
 	GSL::gslcblas
     pthread
@@ -68,7 +56,8 @@ target_link_libraries(
 	tests
 	PRIVATE
 	integrands
-	dipole_amplitude
+	#dipole_amplitude
+	amplitude
 	${Boost_LIBRARIES}
 	GSL::gsl
 	GSL::gslcblas

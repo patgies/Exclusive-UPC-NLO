@@ -17,15 +17,18 @@ set(CMAKE_BUILD_TYPE Release)
 find_package(GSL REQUIRED)
 include_directories(${GSL_INCLUDE_DIRS})
 
+
+# Add nlodisfit
+link_directories("../../nlodisfit/build/lib/")
+include_directories("../../nlodisfit/src/")
+
+
 add_subdirectory(src)
 
 set_target_properties(integrands PROPERTIES
 	 LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib
 	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib )
 
-set_target_properties(dipole_amplitude PROPERTIES
-	 LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib
-	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib )
 
 
 set_target_properties(NLO_amplitude PROPERTIES

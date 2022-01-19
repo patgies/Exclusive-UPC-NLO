@@ -1,11 +1,13 @@
 // Methods for using dipole amplitude.
 
-#include "dipole_amplitudes.hpp"
-#include "amplitudelib.hpp"
-#include "constants.hpp"
-#include "b_integral.hpp"
 #include <gsl/gsl_math.h>
 #include <iostream>
+
+#include <amplitudelib.hpp>
+
+#include "dipole_amplitudes.hpp"
+#include "constants.hpp"
+#include "b_integral.hpp"
 using namespace std;
 
 AmplitudeLib *N;

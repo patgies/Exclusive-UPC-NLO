@@ -6,8 +6,8 @@
 #include <boost/test/unit_test.hpp>
 #include <iostream>
 
+#include <dipole_amplitudes.hpp>
 
-#include "dipole_amplitudes.hpp"
 #include "read_constants.cpp"
 #include "integrands_T.hpp"
 #include "integrands_L.hpp"

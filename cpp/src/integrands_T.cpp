@@ -3,14 +3,15 @@
 * See the article for the definitions of the functions.
 */
 
-#include "integrands_T.hpp"
-#include "constants.hpp"
-#include "dipole_amplitudes.hpp"
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_sf_bessel.h>
 #include <gsl/gsl_sf_dilog.h>
 #include <gsl/gsl_errno.h>
 #include <iostream>
+
+#include "integrands_T.hpp"
+#include "constants.hpp"
+#include "dipole_amplitudes.hpp"
 using namespace std;
 
 // Heaviside theta

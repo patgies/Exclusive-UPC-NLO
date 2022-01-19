@@ -1,8 +1,6 @@
 // For actually evaluating the integrals needed to calculate the longitudinal production amplitude.
 
 
-#include "integrands_L.hpp"
-#include "constants.hpp"
 #include <gsl/gsl_monte_vegas.h>
 #include <gsl/gsl_monte.h>
 #include <gsl/gsl_math.h>
@@ -12,6 +10,9 @@
 #include <fstream>
 #include <iomanip>
 #include <future>
+
+#include "integrands_L.hpp"
+#include "constants.hpp"
 using namespace std;
 
 namespace Longitudinal {

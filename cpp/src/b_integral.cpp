@@ -1,10 +1,11 @@
 // Methods for computing the b integral of the dipole amplitude.
 
+#include <cstring>
+#include <gsl/gsl_integration.h>
+
 #include "b_integral.hpp"
 #include "dipole_amplitudes.hpp"
 #include "constants.hpp"
-#include <cstring>
-#include <gsl/gsl_integration.h>
 
 
 AmplitudeLib *amplitudes [16];

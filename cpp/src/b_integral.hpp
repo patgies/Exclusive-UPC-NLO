@@ -3,7 +3,7 @@
 #define _B_INTEGRAL_H
 
 
-#include "amplitudelib.hpp"
+#include <amplitudelib.hpp>
 #include <string>
 using namespace std;
 

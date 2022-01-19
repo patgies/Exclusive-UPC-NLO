@@ -1,9 +1,12 @@
+
+#include <fstream>
+#include <iostream>
+
+#include <tools.hpp>
+
 #include "constants.hpp"
 #include "dipole_amplitudes.hpp"
 #include "b_integral.hpp"
-#include "tools.hpp"
-#include <fstream>
-#include <iostream>
 using namespace std;
 
 void read_constants_from_file(string path) {

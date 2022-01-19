@@ -1,18 +1,17 @@
 
-#include "read_constants.cpp"
-#include "tools.hpp"
-
-#include "evaluate_integral_L.cpp"
-#include "evaluate_integral_T.cpp"
 #include <iostream>
 #include <vector>
 #include <string>
 #include <sstream> 
 #include <iomanip>
-
 #include <gsl/gsl_errno.h>
 #include "gitsha1.h"
 
+#include <tools.hpp>
+
+#include "read_constants.cpp"
+#include "evaluate_integral_L.cpp"
+#include "evaluate_integral_T.cpp"
 using namespace std;
 
 int main(int argc, char* argv[])
