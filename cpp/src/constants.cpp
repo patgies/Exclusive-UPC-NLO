@@ -5,6 +5,7 @@
 #include <gsl/gsl_math.h>
 #include <cmath>
 #include <string>
+
 using namespace std;
 
 // Global variables.
@@ -30,7 +31,7 @@ double c_small;
 double mu_0;
 
 
-// Integration limits. May be reset in the config files.
+// Integration limits. May be reset from the terminal.
 double z2_max = 0.4999999;
 double x20_min = 1.0e-5;
 double x20_max = 100.0;
@@ -52,21 +53,17 @@ double u_min = 1.0e-5;
 double u_max = 1000.0;
 
 
-//Evaluation points:
-int W_points;
-int Q_points;
-double Q2_min;
-double Q2_max;
-double W_min;
-double W_max;
+//Number of evaluation points:
+int W_length=0;
+int Q2_length=0;
 
 // Integration points used in the integration method.
 // Low = 1-3 dimensional integrals
-// High = 4-dimensional integrals
-// dim6 = 6-dimensional integral
-size_t calls_low;
-size_t calls_high;
-size_t calls_dim6;
+// 4 = 4-dimensional integrals
+// 6 = 6-dimensional integral
+size_t calls_dim_low;
+size_t calls_dim_4;
+size_t calls_dim_6;
 
 // Boolean switches for several options.
 bool integ_points_small_bool = false;
@@ -140,3 +137,65 @@ double R_A() {
     return (R_A_plus*std::pow(A,1.0/3.0)-R_A_minus*std::pow(A,-1.0/3.0));
 }
 
+
+// A default set of parameters. Meant for debugging only, not to be used in actual calculations.
+int read_constants_default() {
+    Mv = 3.0969;
+    m = Mv / 2.0;
+    Y0_if = 0.0;
+    Q0 = 1.0; 
+    x_max = exp(-Y0_if);
+    m_N = 1.0;
+    sigma0 = 23.0 / 0.3894;
+
+    C_big = sqrt(exp(-2.0*M_EULER));
+    lambda_QCD = 0.241;
+    c_small = 0.2;
+    mu_0 = 2.5*lambda_QCD;
+
+    z2_max = 0.5-1.0e-8;
+    x20_min = 1.0e-5;
+    x20_max = 100.0;
+    x21_min = 1.0e-5;
+    x21_max = 100.0;
+    ph_min = 0.0;
+    ph_max = 2.0*M_PI-ph_min;
+    x10_min = 1.0e-5;
+    x10_max = 100.0;
+    z_K0_min = 1.0e-5;
+    z_K0_max = 0.5-z_K0_min;
+    xi_min = 1.0e-5;
+    xi_max = 1.0-xi_min;
+    x_J_min = 1.0e-5;
+    x_J_max = 1.0-x_J_min;
+    t_min = 1.0e-5;
+    t_max = 1000.0;
+    u_min = 1.0e-5;
+    u_max = 1000.0;
+
+
+    // calls_low = 1e5;
+    // calls_high = 1e6;
+    // calls_dim6 = 1e7;
+
+    calls_dim_low = 1e5;
+    calls_dim_4 = 1e5;
+    calls_dim_6 = 1e5;
+
+
+    // dipole_data_file="data/fixed_as_mv_qs0_0.1114_gamma_1.94";
+    // string dipole_data_file="data/dipole-kcbk-hera-bal+sd-0.00.dip";
+    // initialize_amplitude(dipole_data_file);
+    dipole_file_bool = false;
+    eta_bool = false;
+
+    return 0;
+}
+
+
+// For checking the code fast or only calculating the LO.
+void set_integ_points_small() {
+    calls_dim_low = 1e4;
+    calls_dim_4 = 1e4;
+    calls_dim_6 = 1e4;
+}

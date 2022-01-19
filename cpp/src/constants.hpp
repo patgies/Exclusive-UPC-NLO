@@ -5,10 +5,10 @@
 #define _CONSTANTS_H
 
 
-#include <gsl/gsl_math.h>
-#include <cmath>
-#include <string>
-using namespace std;
+// #include <gsl/gsl_math.h>
+// #include <cmath>
+// #include <string>
+// using namespace std;
 
 // Global variables.
 extern double Mv;
@@ -55,21 +55,17 @@ extern double u_min ;
 extern double u_max ;
 
 
-//Evaluation points:
-extern int W_points;
-extern int Q_points;
-extern double Q2_min;
-extern double Q2_max;
-extern double W_min;
-extern double W_max;
+//Number of evaluation points:
+extern int W_length;
+extern int Q2_length;
 
 // Integration points used in the integration method.
 // Low = 1-3 dimensional integrals
-// High = 4-dimensional integrals
-// dim6 = 6-dimensional integral
-extern size_t calls_low;
-extern size_t calls_high;
-extern size_t calls_dim6;
+// 4 = 4-dimensional integrals
+// 6 = 6-dimensional integral
+extern size_t calls_dim_low;
+extern size_t calls_dim_4;
+extern size_t calls_dim_6;
 
 // Boolean switches for several options.
 extern bool integ_points_small_bool;
@@ -104,7 +100,8 @@ extern double fm_to_inv_gev;
 
 double R_A();
 
-
+int read_constants_default();
+void set_integ_points_small();
 
 
 #endif

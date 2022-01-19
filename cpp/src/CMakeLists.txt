@@ -4,7 +4,6 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/gitsha1.cpp.in" "${CMAKE_CURRENT_BIN
 add_library(
 	integrands
 	STATIC
-    read_constants.cpp
     dipole_amplitudes.cpp
 	integrands_T.cpp
 	integrands_L.cpp
@@ -56,7 +55,6 @@ target_link_libraries(
 	tests
 	PRIVATE
 	integrands
-	#dipole_amplitude
 	amplitude
 	${Boost_LIBRARIES}
 	GSL::gsl

@@ -8,7 +8,7 @@
 
 #include <dipole_amplitudes.hpp>
 
-#include "read_constants.cpp"
+#include "constants.hpp"
 #include "integrands_T.hpp"
 #include "integrands_L.hpp"
 
