@@ -6,68 +6,39 @@ OUTPUT_FOLDER_L=output/longitudinal     # Where to output the longitudinal produ
 OUTPUT_FOLDER_T=output/transverse       # Where to output the transverse productin files?
 
 calculate_amplitude () {
-    CONF=$1                 # configuration used (e.g. kcbk-hera-bal+sd-0.00)
-    CONST_W_OR_Q2=$2        # Which is constant, W or Q^2? 'W' or 'Q2'
+    CONF=$1                 # configuration file used (e.g. -conf-kcbk-hera-bal+sd-0.00.sh)
+    FIXED_PARAMETER=$2      # Which is constant, W or Q^2? 'W' or 'Q2'
     BOOL_L=$3               # Calculate longitudinal production? true or false
     BOOL_T=$4               # Calculate transverse produciton? true or false
     PARTICLE=${5:-"jpsi"}   # Which particle? Default: jpsi. Also works for "upsilon"
-    INFO_STRING=$6          # Additional information, added to the names of the output files
-    PARAMETERS=$7           # Additional parameters in the call
+    ACCURACY_LEVEL=$6       # Level of accuracy for integration
+    INFO_STRING=$7          # Additional information, added to the names of the output files
+    PARAMETERS=$8           # Additional parameters in the call
 
 
     NTHREAD=20              # Number of threads used in the calculation
-    Q2=0.05                 # If Q^2 is constant, which value to use? [GeV^2]
-    W=90                    # If W is constant, which value to use? [GeV]
-
-    W_POINTS=20             # Number of points where to evaluate in W
-    Q2_POINTS=20            # Number of points where to evaluate in Q^2
-
-    Q2_MIN=0.01             # Min value of evaluation for Q^2
-    Q2_MAX=100              # Max value of evaluation for Q^2
-
-    if [ ${PARTICLE} = "jpsi" ]
-    then
-        W_MIN=20            # Min value of evaluation for W
-        W_MAX=3000          # Max value of evaluation for W
-    elif [ ${PARTICLE} = "upsilon" ]
-    then
-        W_MIN=50            # Min value of evaluation for W
-        W_MAX=5000          # Max value of evaluation for W
-    else
-        echo "Invalid particle: ${PARTICLE}"
-        exit 1
-    fi
-
-
-    if [ $CONST_W_OR_Q2 = "W" ]
-    then
-        POINTS="-W ${W} -Q2min ${Q2_MIN} -Q2max ${Q2_MAX} -Q2points ${Q2_POINTS}"
-        CONST_STRING="W_${W}"
-    elif [ $CONST_W_OR_Q2 = "Q2" ]
-    then
-        POINTS="-Q2 ${Q2} -Wmin ${W_MIN} -Wmax ${W_MAX} -Wpoints ${W_POINTS}"
-        CONST_STRING="Q2_${Q2}"
-    else
-        echo "Invalid choice (should be W or Q2): ${CONST_W_OR_Q2}"
-        exit 1
-    fi
+    
+    evaluation_points $FIXED_PARAMETER $PARTICLE
+    source ${INPUT_FOLDER}/conf-${CONF}.sh
+    masses $PARTICLE
+    integration_points $ACCURACY_LEVEL
 
     if [ $BOOL_L = true ]
     then
-        ${CODE_FOLDER}/NLO_amplitude ${POINTS} ${PARAMETERS} -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf-${CONF}-${PARTICLE}.txt -ofileL ${OUTPUT_FOLDER_L}/results-${CONF}-${PARTICLE}-L-${CONST_STRING}${INFO_STRING}.dat
+        ${CODE_FOLDER}/NLO_amplitude $ACCURACY_STRING $CONF_STRING $POINTS_STRING $MASS_STRING $PARAMETERS -thread ${NTHREAD} -ofileL ${OUTPUT_FOLDER_L}/results-${CONF}-${PARTICLE}-L-${FIXED_PARAMETER}${INFO_STRING}.dat
     fi
 
     if [ $BOOL_T = true ]
     then
-        ${CODE_FOLDER}/NLO_amplitude ${POINTS} ${PARAMETERS} -thread ${NTHREAD} -ifile ${INPUT_FOLDER}/conf-${CONF}-${PARTICLE}.txt -ofileT ${OUTPUT_FOLDER_T}/results-${CONF}-${PARTICLE}-T-${CONST_STRING}${INFO_STRING}.dat
+        ${CODE_FOLDER}/NLO_amplitude $ACCURACY_STRING $CONF_STRING $POINTS_STRING $MASS_STRING $PARAMETERS -thread ${NTHREAD} -ofileT ${OUTPUT_FOLDER_T}/results-${CONF}-${PARTICLE}-T-${FIXED_PARAMETER}${INFO_STRING}.dat
     fi
 
-    echo ${CONF}, ${CONST_W_OR_Q2}
+    echo ${CONF}, ${FIXED_PARAMETER}
     date +"%d-%m-%y %T"
 }
 
 repeat () {
-	for (( i=0; i<= $1; i++ )); do echo -n "$2"; done
+	for (( i=0; i< $1; i++ )); do echo -n "$2"; done
 }
 
 evaluation_points () {
@@ -89,7 +60,7 @@ evaluation_points () {
 
     elif [ ${FIXED_PARAMETER} = "Q2" ]
     then
-        Q2=0.05                 # If Q^2 is constant, which value to use? [GeV^2]
+        Q2_CONST=0.05                 # If Q^2 is constant, which value to use? [GeV^2]
         W_POINTS=20             # Number of points where to evaluate in W
 
         if [ ${PARTICLE} = "jpsi" ]
@@ -108,14 +79,66 @@ evaluation_points () {
         fi
 
         Q2=`repeat $W_POINTS "$Q2_CONST "`
-
     else
-        echo "Invalid parameter: ${PARTICLE}"
+        echo "Invalid parameter: ${FIXED_PARAMETER}"
         exit 1
     fi
 
-    return -W $W -Q2 $Q2
+    POINTS_STRING="-W $W -Q2 $Q2"
 
+}
+
+integration_points () {
+
+    ACCURACY_LEVEL=$1       # Describes the level of accuracy, i.e. the amount of integration points used. 0,1,2,3 - higher valuer means more poitns (slower execution)
+
+    if [ $ACCURACY_LEVEL = 0 ]
+    then 
+        DIM_LOW=10000
+        DIM_4=10000
+        DIM_6=10000
+    elif [ $ACCURACY_LEVEL = 1 ]
+    then 
+        DIM_LOW=500000
+        DIM_4=500000
+        DIM_6=500000
+    elif [ $ACCURACY_LEVEL = 2 ]
+    then 
+        DIM_LOW=500000
+        DIM_4=5000000
+        DIM_6=20000000
+    elif [ $ACCURACY_LEVEL = 3 ]
+    then 
+        DIM_LOW=500000
+        DIM_4=5000000
+        DIM_6=50000000
+    else
+        echo "Invalid accuracy: ${ACCURACY_LEVEL}. Should be 0,1,2,3"
+        exit 1
+    fi
+
+    ACCURACY_STRING="-int_points_dim_low $DIM_LOW -int_points_dim_4 $DIM_4 -int_points_dim_6 $DIM_6"
+
+}
+
+
+masses () {
+    PARTICLE=$1                 # The particle we are interested in. jpsi or upsilon.
+
+    if [ ${PARTICLE} = "jpsi" ]
+    then
+        M_V=3.0969
+        M_Q=1.54845
+    elif [ ${PARTICLE} = "upsilon" ]
+    then
+        M_V=9.46030
+        M_Q=4.73015
+    else
+        echo "Invalid particle: ${PARTICLE}"
+        exit 1
+    fi
+
+    MASS_STRING="-m_q $M_Q -M_V $M_V"
 }
 
 
@@ -126,28 +149,26 @@ echo Folder for the output, transverse = $OUTPUT_FOLDER_T
 
 date +"%d-%m-%y %T"
 
-calculate_amplitude conf points files(L or T)
+# calculate_amplitude "kcbk-hera-bal+sd-4.61" "Q2" true true "jpsi" 2
+# calculate_amplitude "kcbk-hera-bal+sd-0.00" "Q2" true true "jpsi" 2
+# calculate_amplitude "resumbk-hera-bal+sd-4.61" "Q2" true true "jpsi" 2
+# calculate_amplitude "resumbk-hera-bal+sd-0.00" "Q2" true true "jpsi" 2
+# calculate_amplitude "tbk-hera-bal+sd-4.61" "Q2" true true "jpsi" 2
+# calculate_amplitude "tbk-hera-bal+sd-0.00" "Q2" true true "jpsi" 2
+calculate_amplitude "LOBK-MVe" "Q2" true true "jpsi" 0 "" "-relxpom"
 
-calculate_amplitude "kcbk-hera-bal+sd-4.61" "Q2" true true "jpsi"
-calculate_amplitude "kcbk-hera-bal+sd-0.00" "Q2" true true "jpsi"
-calculate_amplitude "resumbk-hera-bal+sd-4.61" "Q2" true true "jpsi"
-calculate_amplitude "resumbk-hera-bal+sd-0.00" "Q2" true true "jpsi"
-calculate_amplitude "tbk-hera-bal+sd-4.61" "Q2" true true "jpsi"
-calculate_amplitude "tbk-hera-bal+sd-0.00" "Q2" true true "jpsi"
-calculate_amplitude "LOBK-MVe" "Q2" true true "jpsi" "" "-relxpom -fast"
+# calculate_amplitude "kcbk-hera-bal+sd-4.61" "W" true true "jpsi" 2
+# calculate_amplitude "kcbk-hera-bal+sd-0.00" "W" true true "jpsi" 2
+# calculate_amplitude "resumbk-hera-bal+sd-4.61" "W" true true "jpsi" 2
+# calculate_amplitude "resumbk-hera-bal+sd-0.00" "W" true true "jpsi" 2
+# calculate_amplitude "tbk-hera-bal+sd-4.61" "W" true true "jpsi" 2
+# calculate_amplitude "tbk-hera-bal+sd-0.00" "W" true true "jpsi" 2
+# calculate_amplitude "LOBK-MVe" "W" true true "jpsi" 0 "" "-relxpom -fast"
 
-calculate_amplitude "kcbk-hera-bal+sd-4.61" "W" true true "jpsi"
-calculate_amplitude "kcbk-hera-bal+sd-0.00" "W" true true "jpsi"
-calculate_amplitude "resumbk-hera-bal+sd-4.61" "W" true true "jpsi"
-calculate_amplitude "resumbk-hera-bal+sd-0.00" "W" true true "jpsi"
-calculate_amplitude "tbk-hera-bal+sd-4.61" "W" true true "jpsi"
-calculate_amplitude "tbk-hera-bal+sd-0.00" "W" true true "jpsi"
-calculate_amplitude "LOBK-MVe" "W" true true "jpsi" "" "-relxpom -fast"
-
-calculate_amplitude "kcbk-hera-bal+sd-4.61" "Q2" false true "upsilon"
-calculate_amplitude "kcbk-hera-bal+sd-0.00" "Q2" false true "upsilon"
-calculate_amplitude "resumbk-hera-bal+sd-4.61" "Q2" false true "upsilon"
-calculate_amplitude "resumbk-hera-bal+sd-0.00" "Q2" false true "upsilon"
-calculate_amplitude "tbk-hera-bal+sd-4.61" "Q2" false true "upsilon"
-calculate_amplitude "tbk-hera-bal+sd-0.00" "Q2" false true "upsilon"
-calculate_amplitude "LOBK-MVe" "Q2" false true "upsilon" "" "-relxpom -fast"
+# calculate_amplitude "kcbk-hera-bal+sd-4.61" "Q2" false true "upsilon" 3
+# calculate_amplitude "kcbk-hera-bal+sd-0.00" "Q2" false true "upsilon" 3
+# calculate_amplitude "resumbk-hera-bal+sd-4.61" "Q2" false true "upsilon" 3
+# calculate_amplitude "resumbk-hera-bal+sd-0.00" "Q2" false true "upsilon" 3
+# calculate_amplitude "tbk-hera-bal+sd-4.61" "Q2" false true "upsilon" 3
+# calculate_amplitude "tbk-hera-bal+sd-0.00" "Q2" false true "upsilon" 3
+# calculate_amplitude "LOBK-MVe" "Q2" false true "upsilon" 0 "" "-relxpom -fast"

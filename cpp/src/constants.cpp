@@ -192,10 +192,3 @@ int read_constants_default() {
     return 0;
 }
 
-
-// For checking the code fast or only calculating the LO.
-void set_integ_points_small() {
-    calls_dim_low = 1e4;
-    calls_dim_4 = 1e4;
-    calls_dim_6 = 1e4;
-}

@@ -113,19 +113,17 @@ int main(int argc, char* argv[])
         else if (string(argv[i])=="-Delta")
             Delta = StrToReal(argv[i+1]);
         else if (string(argv[i])=="-W") {
-            i++;
-            while( !(string(argv[i]).substr(0,1)=="-") )
+            while( !(string(argv[i+1]).substr(0,1)=="-") )
             {
-                double W = StrToReal(argv[i]);
+                double W = StrToReal(argv[i+1]);
                 W_list[W_length] = W;
                 i++; W_length++;
             }
         }
         else if (string(argv[i])=="-Q2") {
-            i++;
-            while( !(string(argv[i]).substr(0,1)=="-") )
+            while( !(string(argv[i+1]).substr(0,1)=="-") )
             {
-                double Q2 = StrToReal(argv[i]);
+                double Q2 = StrToReal(argv[i+1]);
                 Q2_list[Q2_length] = Q2;
                 i++; Q2_length++;
             }
@@ -142,6 +140,9 @@ int main(int argc, char* argv[])
         else if (string(argv[i])=="-rcBK") {
             rcBK_bool = true;
         }
+        else if (string(argv[i])=="-thread") {
+            n_thread = StrToInt(argv[i+1]);
+        }
         else if(string(argv[i])== "-M_V") {
             Mv = StrToReal(argv[i+1]);
         }
@@ -157,10 +158,10 @@ int main(int argc, char* argv[])
         else if(string(argv[i])== "-m_N") {
             m_N = StrToReal(argv[i+1]);
         }
-        else if(string(argv[i])== "-sigma_0/2(mb)") {
+        else if(string(argv[i])== "-sigma_0_half_mb") {
             sigma0 = 2.56819*2.0*StrToReal(argv[i+1]);
         }
-        else if(string(argv[i])=="-C^2") {
+        else if(string(argv[i])=="-C2") {
             C_big = sqrt(StrToReal(argv[i+1]));
         }
         else if(string(argv[i])=="-c_small") {
@@ -257,13 +258,13 @@ int main(int argc, char* argv[])
         else if(string(argv[i])== "-b_dependent") {
             b_dependence_bool = true;
         }
-        else if(string(argv[i])== "-d(fm)") {
+        else if(string(argv[i])== "-d_fm") {
             d_thickness = StrToReal(argv[i+1]) * fm_to_inv_gev;
         }
-        else if(string(argv[i])=="-R_A_plus(fm)") {
+        else if(string(argv[i])=="-R_A_plus_fm") {
             R_A_plus = StrToReal(argv[i+1]) * fm_to_inv_gev;
         }
-        else if(string(argv[i])=="-R_A_minus(fm)") {
+        else if(string(argv[i])=="-R_A_minus_fm") {
             R_A_minus = StrToReal(argv[i+1]) * fm_to_inv_gev;
         }
         else if(string(argv[i])=="-A") {
@@ -352,12 +353,6 @@ int main(int argc, char* argv[])
     else initialize_amplitude(dipole_data_file);
 
 
-    if(integ_points_small_bool) set_integ_points_small();
-
-    if (!ifile_bool) {
-        cerr << "No file for input parameters!" << endl;
-        exit(1);
-    }
     if (!ofileL_bool && !ofileT_bool) {
         cerr << "No file for output! Need to give at least longitudinal or transverse file for output." << endl;
         exit(1);

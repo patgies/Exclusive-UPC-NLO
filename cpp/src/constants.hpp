@@ -101,7 +101,6 @@ extern double fm_to_inv_gev;
 double R_A();
 
 int read_constants_default();
-void set_integ_points_small();
 
 
 #endif
