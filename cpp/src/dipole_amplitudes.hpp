@@ -13,7 +13,6 @@ double dNdY(double r, double delta, double Y);
 
 double S_file(double r, double Y);
 double S_GBW(double r, double Y);
-double S_IP_SAT(double r, double Y);
 
 
 double Qs2_GBW(double x);

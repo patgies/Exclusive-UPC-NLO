@@ -43,17 +43,6 @@ double N_xy(double r, double delta, double Y) {
         }
         return qq_dipole_integrated( r, Y );
     }
-    else if( IPsat_bool ) {
-        if( r < 1.0001 * N->MinR() ) {
-            return 0.0;
-        }
-        else if( r > 0.9999 * N->MaxR() ) {
-            return N->DipoleAmplitude(0.9999 * N->MaxR(), Y);
-        }
-        else {
-            return N->DipoleAmplitude(r, Y);
-        }
-    }
     else return (1-S_xy(r, Y)) * sigma0/2.0; // The case where the dipole amplitude depends only weakly on b. Integrate over b -> sigma0/2.
 }
 
@@ -79,28 +68,12 @@ double S_file(double r, double Y) {
     }
 }
 
-// S matrix for the IPsat model
-double S_IPsat(double r, double Y) {
-    if (!amp_init_bool) {
-        cerr << "Dipole amplitude not initialized! Cannot evaluate it." << endl;
-    }
-    if( r < 1.0001 * N->MinR() ) {
-        return 1.0;
-    }
-    else if( r > 0.9999 * N->MaxR() ) {
-        return 1.0-N->DipoleAmplitude(0.9999 * N->MaxR(), Y) * 2.0/sigma0;
-    }
-    else {
-        return 1.0-N->DipoleAmplitude(r, Y) * 2.0/sigma0;
-    }
-}
 
 // S_matrix for the dipole-nucleus scattering.
 double S_xy(double r, double Y){
     double Y_corr = Y + eta_corr(r);
     if(Y_corr<Y0_if) Y_corr = Y0_if;
-    if (IPsat_bool) return S_IPsat(r, Y_corr);
-    else if (dipole_file_bool) return S_file(r, Y_corr);
+    if (dipole_file_bool) return S_file(r, Y_corr);
     else return S_GBW(r, Y_corr);
 }
 

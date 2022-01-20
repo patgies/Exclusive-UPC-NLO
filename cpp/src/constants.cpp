@@ -66,13 +66,9 @@ size_t calls_dim_4;
 size_t calls_dim_6;
 
 // Boolean switches for several options.
-bool integ_points_small_bool = false;
 bool eta_bool = false;
-bool NLO_x_pom_bool = false;
-bool rel_x_pom_bool = false;
+bool x_pom_bool = false;
 bool dipole_file_bool = true;
-bool IPsat_bool = false;
-bool rcBK_bool = false;
 
 double x_pom_fun(double W, double Q, double Delta) {
     return (Q*Q+Mv*Mv+Delta*Delta)/(W*W+Q*Q-m_N*m_N);
@@ -117,7 +113,7 @@ double z2_min_fun(double W, double Q) {
 }
 
 // Gives the minimum for the z_2 integral for the variant of the sub scheme, where LO is evaluated at x_pom.
-double z2_min_sub2_fun(double W, double Q, double Delta) {
+double z2_min_pom_fun(double W, double Q, double Delta) {
     return z2_min_fun(W, Q) * x_max/x_pom_fun(W, Q, Delta);
 }
 
@@ -174,18 +170,12 @@ int read_constants_default() {
     u_max = 1000.0;
 
 
-    // calls_low = 1e5;
-    // calls_high = 1e6;
-    // calls_dim6 = 1e7;
 
     calls_dim_low = 1e5;
     calls_dim_4 = 1e5;
     calls_dim_6 = 1e5;
 
 
-    // dipole_data_file="data/fixed_as_mv_qs0_0.1114_gamma_1.94";
-    // string dipole_data_file="data/dipole-kcbk-hera-bal+sd-0.00.dip";
-    // initialize_amplitude(dipole_data_file);
     dipole_file_bool = false;
     eta_bool = false;
 

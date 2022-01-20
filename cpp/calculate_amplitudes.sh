@@ -155,7 +155,7 @@ date +"%d-%m-%y %T"
 # calculate_amplitude "resumbk-hera-bal+sd-0.00" "Q2" true true "jpsi" 2
 # calculate_amplitude "tbk-hera-bal+sd-4.61" "Q2" true true "jpsi" 2
 # calculate_amplitude "tbk-hera-bal+sd-0.00" "Q2" true true "jpsi" 2
-calculate_amplitude "LOBK-MVe" "Q2" true true "jpsi" 0 "" "-relxpom"
+calculate_amplitude "LOBK-MVe" "Q2" true true "jpsi" 0 "" "-xpom"
 
 # calculate_amplitude "kcbk-hera-bal+sd-4.61" "W" true true "jpsi" 2
 # calculate_amplitude "kcbk-hera-bal+sd-0.00" "W" true true "jpsi" 2

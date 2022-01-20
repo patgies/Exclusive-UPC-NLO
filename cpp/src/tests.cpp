@@ -15,7 +15,7 @@
 namespace tt = boost::test_tools;
 
 
-// Just to get the code to initialize the constants... this is actually pretty stupid
+// Initialize the constants. Not the most beautiful way to do this -- feel free to improve :)
 int initiliaze = read_constants_default();
 
 double rdef = 0.8;
@@ -224,14 +224,14 @@ BOOST_AUTO_TEST_CASE( test_int_1dim_dw_L )
 {
     struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
-    BOOST_TEST( Longitudinal::qq_NLO_1_dim_dw( x, 1,  &params) == 0.0143608, tt::tolerance(tol) );
+    BOOST_TEST( Longitudinal::qq_NLO_1_dim_decay_width( x, 1,  &params) == 0.0143608, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_1dim_wf_L )
 {
     struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
-    BOOST_TEST( Longitudinal::qq_NLO_1_dim_wf( x, 1,  &params) == -0.00002082, tt::tolerance(tol) );
+    BOOST_TEST( Longitudinal::qq_NLO_1_dim_wave_function( x, 1,  &params) == -0.00002082, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_J1_L )
@@ -307,12 +307,4 @@ BOOST_AUTO_TEST_CASE( test_int_dim6_L )
     double x[] = {x20def, x21def, phidef, z2def, tdef, udef};
     BOOST_TEST( Longitudinal::qqg_dim6( x, 6,  &params) == -0.0235301, tt::tolerance(tol) );
 }
-
-
-
-// double qqg_rcBK(double x[], size_t dim, void *params);
-// double qqg_KCBK(double x[], size_t dim, void *params);
-
-// double delta_factor_qq(double z, double Delta, double x10);
-// double delta_factor_qqg(double z2, double Delta, double x20, double x21, double ph);
 

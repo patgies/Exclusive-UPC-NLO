@@ -1,4 +1,14 @@
 
+/**
+ * 
+ * 
+ * Program for calculating exclusive vector meson production in DIS at NLO accuracy. 
+ * Made by J. Penttala <jani.j.penttala@student.jyu.fi>, 2021-2022.
+ * 
+ * 
+**/
+
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -18,7 +28,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    // Do not let code to crash if an error occurs, we should have error handling everywhere!
+    // Do not let code to crash if an error occurs.
     gsl_set_error_handler_off();
     
     
@@ -27,74 +37,54 @@ int main(int argc, char* argv[])
     double Delta = 0.0;
     double W_list[argc] ; 
     double Q2_list[argc];
-    bool W_bool= false;
-    bool Q_bool = false;
     bool ofileL_bool = false;
     bool ofileT_bool = false;
-    bool ifile_bool = false;
     int n_thread = 1;
 
     string dipole_data_file;
     string b_folder;
     
     if (argc < 2) {
-        cerr << "No arguments given. See -help for more details." << endl;
+        cerr << "No arguments given. See --help for more details." << endl;
         exit(1);
     }
 
-    if (string(argv[1])=="-help" || string(argv[1])=="-h")
+    if (string(argv[1])=="--help" || string(argv[1])=="-h")
     {
         cout << "Program for calculating exclusive vector meson production in DIS at NLO accuracy. Made by J. Penttala <jani.j.penttala@student.jyu.fi>, 2021.\n" << endl;
         cout << "Required parameters:" << endl;
-        cout << "-ifile:\tFile for reading the parameters" << endl;
         cout << "-ofileL:\tOutput file for longitudinal production amplitude" << endl;
         cout << "-ofileT:\tOutput file for transverse production amplitude" << endl;
-        cout << "\nDifferent options:" << endl;
-        cout << "Plot as a function of W or Q^2, keeping the other constant. One of the following (in each case) must be given as a parameter:" << endl;
-        cout << "-Q2 or -W:\tSets the value of the parameter kept as constant" << endl;
-        cout << "-Wmin or -Q2min:\tMinimum for the evaluation points" <<endl;
-        cout << "-Wmax or -Q2max:\tMaximum for the evaluation points" <<endl;
-        cout << "-Wpoints or -Q2points:\tNumber of evaluation points. The points are spread in evenly in the logarithmic scale." <<endl;
-        cout << "As an example, the following options could be used:\t-W 100 -Q2min 1 -Q2max 30 -Q2points 100" <<endl;
-        cout << "Both can also be used simultaneously, to evaluate as a function of W (with constant Q^2) and vice versa." << endl;
+        cout << "-Q2 and -W:\tValues of Q^2 and W for which we calculate the amplitude. Can be given as a list, separated by space." << endl;
+        cout << "-M_V:\tMass of the vector meson" << endl;
+        cout << "-m_q:\tMass of the heavy quark" << endl;
+        cout << "-Y0_if:\tInitial value for the rapidity" << endl;
+        cout << "-Q0:\tMass scale of the nucleon" << endl;
+        cout << "-sigma_0_half_mb:\tCross section/2 for the quark dipole scattering in units of mb" << endl;
         cout << "\nOptional parameters:" << endl;
-        cout << "-Delta:\tThe value of Delta = sqrt(-t). Default Delta=0" << endl;
-        cout << "-W:\tThe value of W" << endl;
-        cout << "-Q2:\tThe value of Q^2" << endl;
+        cout << "-Delta:\tThe value of Delta = sqrt(-t). Default Delta=0. WARNING: At the moment Delta!=0 is not guaranteed to work!" << endl;
         cout << "-thread:\tAmount of CPU threads used for calculations. Default is "<< n_thread << endl;
-        cout << "-fast:\tForces a small amount of MC integration points (1e4). Overrides the amount of points in the config file. This option is useful for quickly getting results that are roughly correct." << endl;
-        cout << "-NLOxpom:\tUse x_pom at NLO instead of x'"<<endl;
-        cout << "-relxpom:\tUse x_pom for relativistic corrections instead of x'. For LO calculations."<<endl;
-        cout << "-rcBK:\tSubstitute rcBK to LO BK at NLO qqg expression."<<endl;
-
-        cout << "\nConfig file help:" << endl;
-        cout << "Start row with \'###\' to indicate the name of a variable. Then, put the value of the variable on the next row." << endl;
-        cout << "See example files in the folder \'config_files\'." << endl;
-        cout << "Possible variables:" << endl;
-        cout << "M_V:\tMass of the vector meson" << endl;
-        cout << "m:\tMass of the heavy quark" << endl;
-        cout << "Y0_if:\tInitial value for the rapidity" << endl;
-        cout << "Q0:\tMass scale of the nucleon" << endl;
-        cout << "m_N:\tMass of the nucleon (~1GeV, doesn't affect the results too much)" << endl;
-        cout << "sigma0/2(mb):\tCross section/2 for the quark dipole scattering in units of mb" << endl;
-        cout << "sigma0:\tCross section for the quark dipole scattering in units of GeV^2" << endl;
-        cout << "alpha_s const:\tUse constant alpha_s and set its value." << endl;
-        cout << "dipole file:\tPath to the dipole file" << endl;
-        cout << "integ calls low:\tNumber of integration points for the low-dimensional (<4) parts of the calculate" << endl;
-        cout << "integ calls high:\tNumber of integration points for the 4-dimensional part of the calculate" << endl;
-        cout << "integ calls dim 6:\tNumber of integration points for the 6-dimensional part of the calculate" << endl;
+        cout << "-xpom:\tCalculations are done at rapidity Y=ln(1/x_pom) instead of Y_dip. Meant for LO calculations."<<endl;
+        cout << "-use_target_rapidity:\tUse target rapidity instead of projectile rapidity. For TBK dipole amplitude."<<endl;
+        cout << "-m_N:\tMass of the nucleon (~1GeV, doesn't affect the results too much)" << endl;
+        cout << "-alphas_const:\tUse constant alpha_s and set its value." << endl;
+        cout << "-dipole_file:\tPath to the dipole file" << endl;
+        cout << "-int_points_dim_low:\tNumber of integration points for the low-dimensional (<4) parts of the calculate" << endl;
+        cout << "-int_points_dim_4:\tNumber of integration points for the 4-dimensional part of the calculate" << endl;
+        cout << "-int_points_dim_low:\tNumber of integration points for the 6-dimensional part of the calculate" << endl;
         cout << "One can also set the integration limits if needed. However, this isn't necessary and default values may be used instead." << endl;
         cout << "If running alpha_s is used (as is by default), the following variables must be set:" << endl;
-        cout << "C^2 or C_big:\tSet C^2 or C" << endl;
-        cout << "lambda_QCD:\tSet lambda_QCD" << endl;
-        cout << "c_small:\tSet c (lower-case alphabet)" << endl;
-        cout << "mu_0:\tSet mu_0" << endl;
-        cout << "b-dependent:\tThe dipole amplitude has explicit b-dependence" << endl;
-        cout << "b-folder:\tFolder that contains unintegrated dipole amplitudes for different values of b" << endl;
-        cout << "A:\tAtomic mass number for the nucleus" << endl;
-        cout << "R_A_plus:\tParameter for Wood-Saxon distribution (R_A ~ A^1/3*R_A_plus - A^(-1/3)*R_A_minus)" << endl;
-        cout << "R_A_minus:\tParameter for Wood-Saxon distribution (R_A ~ A^1/3*R_A_plus - A^(-1/3)*R_A_minus)" << endl;
-        cout << "d:\tParameter for Wood-Saxon distribution (thickness)" << endl;
+        cout << "-C^2:\tSet C^2" << endl;
+        cout << "-lambda_QCD:\tSet lambda_QCD" << endl;
+        cout << "-c_small:\tSet c (lower-case alphabet)" << endl;
+        cout << "-mu_0:\tSet mu_0" << endl;
+        cout << "-b_dependent:\tThe dipole amplitude has explicit b-dependence" << endl;
+        cout << "Required parameters when b-dependent dipole amplitude is used(-b_dependent option is used):" << endl;
+        cout << "-b_folder:\tFolder that contains unintegrated dipole amplitudes for different values of b" << endl;
+        cout << "-A:\tAtomic mass number for the nucleus" << endl;
+        cout << "-R_A_plus_fm:\tParameter for Wood-Saxon distribution (R_A ~ A^1/3*R_A_plus - A^(-1/3)*R_A_minus) in fm" << endl;
+        cout << "-R_A_minus_fm:\tParameter for Wood-Saxon distribution (R_A ~ A^1/3*R_A_plus - A^(-1/3)*R_A_minus) in fm" << endl;
+        cout << "-d_fm:\tParameter for Wood-Saxon distribution (thickness) in fm." << endl;
         return 0;
     }
     
@@ -128,17 +118,8 @@ int main(int argc, char* argv[])
                 i++; Q2_length++;
             }
         }
-        else if (string(argv[i])=="-fast") {
-            integ_points_small_bool = true;
-        }
-        else if (string(argv[i])=="-NLOxpom") {
-            NLO_x_pom_bool = true;
-        }
-        else if (string(argv[i])=="-relxpom") {
-            rel_x_pom_bool = true;
-        }
-        else if (string(argv[i])=="-rcBK") {
-            rcBK_bool = true;
+        else if (string(argv[i])=="-xpom") {
+            x_pom_bool = true;
         }
         else if (string(argv[i])=="-thread") {
             n_thread = StrToInt(argv[i+1]);
@@ -251,9 +232,6 @@ int main(int argc, char* argv[])
         else if(string(argv[i])=="-alphas_const") {
             alpha_s_const = StrToReal(argv[i+1]);
             alpha_s_run_bool = false;
-        }
-        else if(string(argv[i])== "-IP_SAT") {
-            IPsat_bool = true;
         }
         else if(string(argv[i])== "-b_dependent") {
             b_dependence_bool = true;
@@ -376,27 +354,6 @@ int main(int argc, char* argv[])
 
         Longitudinal::write_amplitudes_thread(output_file_L, n_thread, W_list, Q2_list, Delta);
 
-        // if (Q_bool)
-        // {
-        //     if(W_points == 0) {
-        //         cerr<<"Error! No points to evaluate in W given" << endl;
-        //         exit(1);
-        //     }
-        //     Longitudinal::write_amplitudes_W_thread(output_file_L, n_thread, Q2, Delta);
-        // }
-        // else if (W_bool)
-        // {
-        //     if(Q_points == 0) {
-        //         cerr<<"Error! No points to evaluate in Q^2 given" << endl;
-        //         exit(1);
-        //     }
-        //     Longitudinal::write_amplitudes_Q_thread(output_file_L, n_thread, W, Delta);
-        // }
-        // else {
-        //     cerr << "Set a value for either W or Q2." << endl;
-        //     exit(1);
-        // }
-
         cout << "Longitudinal done!" << endl;
 
     }    
@@ -416,27 +373,6 @@ int main(int argc, char* argv[])
         ofile.close();
         
         Transverse::write_amplitudes_thread(output_file_T, n_thread, W_list, Q2_list, Delta);
-
-        // if (Q_bool)
-        // {
-        //     if(W_points == 0) {
-        //         cerr<<"Error! No points to evaluate in W given" << endl;
-        //         exit(1);
-        //     }
-        //     Transverse::write_amplitudes_W_thread(output_file_T, n_thread, Q2, Delta);
-        // }
-        // else if (W_bool)
-        // {
-        //     if(Q_points == 0) {
-        //         cerr<<"Error! No points to evaluate in Q^2 given" << endl;
-        //         exit(1);
-        //     }
-        //     Transverse::write_amplitudes_Q_thread(output_file_T, n_thread, W, Delta);
-        // }
-        // else {
-        //     cerr << "Set a value for either W or Q2." << endl;
-        //     exit(1);
-        // }
 
         cout << "Transverse done!" << endl;
 

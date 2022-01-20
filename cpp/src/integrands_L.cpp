@@ -237,47 +237,9 @@ double Longitudinal::L_BK(double x[], double delta, double m, double Q, double W
     double x10 = x10_value(x20, x21, ph);
     double Y = rapidity(W, Q, z2);
 
-    // double kernel0 = N_c / (2*Cf) * gsl_pow_2(x10) / gsl_pow_2( x20 * x21 ) ;
-    // double kernel0 = N_c / (2*Cf) * (gsl_pow_2(x10) / gsl_pow_2( x20 * x21 )  + 1/(x20*x20) * (alpha_s(x20)/alpha_s(x21)-1) + 1/(x21*x21) * (alpha_s(x21)/alpha_s(x20)-1) );
-    // return 2.0 / (M_PI*z2) * kernel0 * sigma0 * ( -S_xy(x20, Y)*S_xy(x21, Y) + S_xy(x10, Y) ) * gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * x20 *x21 * 2.0 *M_PI*gsl_sf_bessel_J0( bessel_J_argument )*alpha_s3(x10,x20,x21)*2.0/3.0/M_PI;
-
     return 2.0 / (M_PI*z2) * ( N_xyz(x10, x20, x21, delta, Y) - N_xy(x10, delta, Y) ) * gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * gsl_pow_2(x10) / gsl_pow_2( x20 * x21 )  * x20 *x21 * 2.0 *M_PI*alpha_s3(x10,x20,x21)*2.0/3.0/M_PI * delta_factor_qqg(z2, delta, x20, x21, ph);
 }
 
-
-double Longitudinal::L_rcBK(double x[], double delta, double m, double Q, double W){
-    double x20 = x[0];
-    double x21 = x[1];
-    double ph = x[2];
-    double z2 = x[3];
-    
-    double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2);
-
-    double kernel =  (gsl_pow_2(x10) / gsl_pow_2( x20 * x21 )  + 1/(x20*x20) * (alpha_s(x20)/alpha_s(x21)-1) + 1/(x21*x21) * (alpha_s(x21)/alpha_s(x20)-1) );
-
-    return 2.0 / (M_PI*z2) * ( N_xyz(x10, x20, x21, delta, Y) - N_xy(x10, delta, Y) ) * gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * kernel  * x20 *x21 * 2.0 *M_PI*alpha_s3(x10,x20,x21)*2.0/3.0/M_PI * delta_factor_qqg(z2, delta, x20, x21, ph);
-}
-
-double Longitudinal::L_KCBK(double x[], double delta, double m, double Q, double W){
-    double x20 = x[0];
-    double x21 = x[1];
-    double ph = x[2];
-    double z2 = x[3];
-    
-    double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2);
-
-
-    double delta012 = fmax(0.0, log( fmin(x20*x20,x21*x21)/(x10*x10) ));
-    double kernel0 =  (gsl_pow_2(x10) / gsl_pow_2( x20 * x21 )  + 1/(x20*x20) * (alpha_s(x20)/alpha_s(x21)-1) + 1/(x21*x21) * (alpha_s(x21)/alpha_s(x20)-1) );
-
-    if( Y - delta012 - Y0_if > 0 ) {
-        return 2.0 / (M_PI*z2) * kernel0 * sigma0 * ( - S_xy(x20, Y-delta012)*S_xy(x21, Y-delta012) + S_xy(x10, Y) ) * gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * x20 *x21 * 2.0 *M_PI*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qqg(z2, delta, x20, x21, ph);
-    } else {
-        return 0.0;
-    }
-}
 
 // Integrand for the LO part of the calculation.
 double Longitudinal::qq_LO(double x[], size_t dim, void *params) {
@@ -295,7 +257,7 @@ double Longitudinal::qq_LO(double x[], size_t dim, void *params) {
 }
 
 // Integrand for the dipole NLO part of the calculation, where only a 1-dimensional integral has to be done. Uses decay width as the coefficient!
-double Longitudinal::qq_NLO_1_dim_dw(double x[], size_t dim, void *params) {
+double Longitudinal::qq_NLO_1_dim_decay_width(double x[], size_t dim, void *params) {
     dimension_error(dim, 1);
     struct integ_params *p = (struct integ_params *)params;
     double x_rap = p->x;
@@ -309,7 +271,7 @@ double Longitudinal::qq_NLO_1_dim_dw(double x[], size_t dim, void *params) {
 }
 
 // Integrand for the dipole NLO part of the calculation, where only a 1-dimensional integral has to be done. Uses renormalized wave function as the coefficient!
-double Longitudinal::qq_NLO_1_dim_wf(double x[], size_t dim, void *params) {
+double Longitudinal::qq_NLO_1_dim_wave_function(double x[], size_t dim, void *params) {
     dimension_error(dim, 1);
     struct integ_params *p = (struct integ_params *)params;
     double x_rap = p->x;
@@ -403,27 +365,6 @@ double Longitudinal::qqg_BK(double x[], size_t dim, void *params) {
     return L_BK(x, delta, m, Q, W);
 }
 
-// Integrand for the BK part of the qqg integral. Instead of using LO BK, here we use rcBK.
-double Longitudinal::qqg_rcBK(double x[], size_t dim, void *params) {
-    dimension_error(dim, 4);
-    struct integ_params *p = (struct integ_params *)params;
-    double delta = p->delta;
-    double Q = p->Q;
-    double m = p->m;
-    double W = p->W;
-    return L_rcBK(x, delta, m, Q, W);
-}
-
-// KCBK instead of BK for the qqg part.
-double Longitudinal::qqg_KCBK(double x[], size_t dim, void *params) {
-    dimension_error(dim, 4);
-    struct integ_params *p = (struct integ_params *)params;
-    double delta = p->delta;
-    double Q = p->Q;
-    double m = p->m;
-    double W = p->W;
-    return L_KCBK(x, delta, m, Q, W);
-}
 
 // Integrand for the 6-dimensional integral of the qqg part.
 double Longitudinal::qqg_dim6(double x[], size_t dim, void *params) {

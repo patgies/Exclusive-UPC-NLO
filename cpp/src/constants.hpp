@@ -5,10 +5,6 @@
 #define _CONSTANTS_H
 
 
-// #include <gsl/gsl_math.h>
-// #include <cmath>
-// #include <string>
-// using namespace std;
 
 // Global variables.
 extern double Mv;
@@ -68,13 +64,9 @@ extern size_t calls_dim_4;
 extern size_t calls_dim_6;
 
 // Boolean switches for several options.
-extern bool integ_points_small_bool;
 extern bool eta_bool;
-extern bool NLO_x_pom_bool ;
-extern bool rel_x_pom_bool ;
+extern bool x_pom_bool ;
 extern bool dipole_file_bool;
-extern bool IPsat_bool ;
-extern bool rcBK_bool ;
 
 double x_pom_fun(double W, double Q, double Delta);
 double x_min_fun(double W, double Q, double Delta);
@@ -84,7 +76,7 @@ double eta_corr(double r);
 double rapidity(double W, double Q, double z2);
 double target_rapidity(double W, double Q, double z2, double r);
 double z2_min_fun(double W, double Q);
-double z2_min_sub2_fun(double W, double Q, double Delta);
+double z2_min_pom_fun(double W, double Q, double Delta);
 
 
 // Constants needed for the nuclear dipole amplitude

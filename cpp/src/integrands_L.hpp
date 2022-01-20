@@ -21,13 +21,11 @@ namespace Longitudinal {
     double M_1(double x[], double delta, double m, double Q, double W);
     double M_2(double x[], double delta, double m, double Q, double W);
     double L_BK(double x[], double delta, double m, double Q, double W);
-    double L_rcBK(double x[], double delta, double m, double Q, double W);
-    double L_KCBK(double x[], double delta, double m, double Q, double W);
 
 
     double qq_LO(double x[], size_t dim, void *params);
-    double qq_NLO_1_dim_dw(double x[], size_t dim, void *params);
-    double qq_NLO_1_dim_wf(double x[], size_t dim, void *params);
+    double qq_NLO_1_dim_decay_width(double x[], size_t dim, void *params);
+    double qq_NLO_1_dim_wave_function(double x[], size_t dim, void *params);
     double qq_NLO_J_1(double x[], size_t dim, void *params);
     double qq_NLO_J_2(double x[], size_t dim, void *params);
     double qq_NLO_K0(double x[], size_t dim, void *params);
@@ -35,8 +33,6 @@ namespace Longitudinal {
     double qqg_dim4_unsub(double x[], size_t dim, void *params);
     double qqg_dim6(double x[], size_t dim, void *params);
     double qqg_BK(double x[], size_t dim, void *params);
-    double qqg_rcBK(double x[], size_t dim, void *params);
-    double qqg_KCBK(double x[], size_t dim, void *params);
     double lambda_integrand(double x[], size_t dim, void *params);
     double qq_rel_002(double x[], size_t dim, void *params);
     double qq_rel_200(double x[], size_t dim, void *params);
