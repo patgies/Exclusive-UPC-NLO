@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
         cout << "-dipole_file:\tPath to the dipole file" << endl;
         cout << "-int_points_dim_low:\tNumber of integration points for the low-dimensional (<4) parts of the calculate" << endl;
         cout << "-int_points_dim_4:\tNumber of integration points for the 4-dimensional part of the calculate" << endl;
-        cout << "-int_points_dim_low:\tNumber of integration points for the 6-dimensional part of the calculate" << endl;
+        cout << "-int_points_dim_6:\tNumber of integration points for the 6-dimensional part of the calculate" << endl;
         cout << "One can also set the integration limits if needed. However, this isn't necessary and default values may be used instead." << endl;
         cout << "If running alpha_s is used (as is by default), the following variables must be set:" << endl;
         cout << "-C^2:\tSet C^2" << endl;
@@ -253,7 +253,7 @@ int main(int argc, char* argv[])
         }
         else if (string(argv[i]).substr(0,1)=="-")
         {
-            cerr << "Unknown parameter " << argv[i] <<  ". See -help for more details." << endl;
+            cerr << "Unknown parameter " << argv[i] <<  ". See --help for more details." << endl;
             exit(1);
         }
         
