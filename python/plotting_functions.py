@@ -75,14 +75,14 @@ def read_file(file):
         W = []
         Q2 = []
         amplitudes_table = []
-        for l in lines[1:]:
+        for l in lines[2:]: #TODO: fix when updated amplitude files
             values = l.split(' ')
             values_float = [float(x) for x in values[:-1]]
             W += [values_float[0]]
             Q2+= [values_float[1]]
             amplitudes_table += [values_float[2:]]
 
-    return W, Q2, amplitudes_table
+    return np.array(W), np.array(Q2), np.array(amplitudes_table)
 
 # def get_total_cross_section_Q(file_L, file_T, reg_scheme):
 #     """
@@ -138,8 +138,8 @@ def get_cross_section_ratio(file_L, file_T, reg_scheme):
         raise Exception("Q^2 vectors different: " + str(cs_L[1]) + "\nand\n" + str(cs_T[1]))
 
     cs_ratio = np.array(cs_L) / np.array(cs_T)
-    cs_ratio[0] = cs_L[0] # Q^2 vector
-    cs_ratio[1] = cs_L[1] # W vector
+    cs_ratio[0] = cs_L[0] # W vector
+    cs_ratio[1] = cs_L[1] # Q^2 vector
 
     return cs_ratio
 
@@ -154,10 +154,10 @@ def get_total_cross_section(file_L, file_T, reg_scheme):
     cs_L = get_cross_section_values(file_L, reg_scheme, "L")
     cs_T = get_cross_section_values(file_T, reg_scheme, "T")
 
-    if cs_L[0] != cs_T[0]:
+    if any(cs_L[0] != cs_T[0]):
         raise Exception("W vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
 
-    if cs_L[1] != cs_T[1]:
+    if any(cs_L[1] != cs_T[1]):
         raise Exception("Q^2 vectors different: " + str(cs_L[1]) + "\nand\n" + str(cs_T[1]))
 
     cs_tot = np.array(cs_L) + np.array(cs_T)
@@ -185,7 +185,7 @@ def get_total_cross_section(file_L, file_T, reg_scheme):
 #     return cs_tot
 
 
-def get_total_cross_section_distribution_Q(file_L, file_T, reg_scheme):
+def get_total_cross_section_distribution(file_L, file_T, reg_scheme):
     """
     Calculates the total (differential) cross section at t=0, using the files for longitudinal and transverse production.
     Samples wave function values and gives the mean/std for various cross sections.
@@ -197,10 +197,10 @@ def get_total_cross_section_distribution_Q(file_L, file_T, reg_scheme):
     cs_L = get_distribution(file_L, reg_scheme, "L")
     cs_T = get_distribution(file_T, reg_scheme, "T")
 
-    if cs_L[0] != cs_T[0]:
+    if any(cs_L[0] != cs_T[0]):
         raise Exception("W vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
 
-    if cs_L[1] != cs_T[1]:
+    if any(cs_L[1] != cs_T[1]):
         raise Exception("Q^2 vectors different: " + str(cs_L[1]) + "\nand\n" + str(cs_T[1]))
 
 

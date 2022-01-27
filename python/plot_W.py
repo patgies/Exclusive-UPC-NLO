@@ -12,7 +12,7 @@ import experimental_data
 
 plotting_functions.pheno_correction = False
 
-particle = 'jpsi'
+particle = 'upsilon'
 plotting_functions.particle = particle
 plotting_functions.initialize()
 
@@ -22,11 +22,11 @@ reg_scheme_NLO = 'NR wave function'
 reg_scheme_rel = 'rel wave function'
 
 if particle == 'jpsi':
-    id_string = '-jpsi-T-Q2_0.05'
+    id_string = '-jpsi-T-Q2'
     # id_string = "_Q2_0.05" 
     # id_string = "_Q2_0.05-m_1.4" 
 elif particle == 'upsilon':
-    id_string = '-upsilon-T-Q2_0.05'
+    id_string = '-upsilon-T-Q2'
 
 dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_L/'
 dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
@@ -49,23 +49,22 @@ dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
 # cs_tbk_000_rel_L = plotting_functions.get_distribution_W( dir_path_L + r'results-tbk-hera-bal+sd-0.00.dat', reg_scheme_rel, "L"  )
 # cs_resumbk_000_rel_L = plotting_functions.get_distribution_W( dir_path_L + r'results-resumbk-hera-bal+sd-0.00.dat', reg_scheme_rel, "L"  )
 
-cs_kcbk_000_T = plotting_functions.get_cross_section_values_W( dir_path_T + r'results-kcbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T" )
-cs_kcbk_461_T = plotting_functions.get_cross_section_values_W( dir_path_T + r'results-kcbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T" )
-cs_tbk_000_T = plotting_functions.get_cross_section_values_W( dir_path_T + r'results-tbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T" )
-cs_tbk_461_T = plotting_functions.get_cross_section_values_W( dir_path_T + r'results-tbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T" )
-cs_resumbk_000_T = plotting_functions.get_cross_section_values_W( dir_path_T + r'results-resumbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T" )
-cs_resumbk_461_T = plotting_functions.get_cross_section_values_W( dir_path_T + r'results-resumbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T" )
+cs_kcbk_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T" )
+cs_kcbk_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T" )
+cs_tbk_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T" )
+cs_tbk_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T" )
+cs_resumbk_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T" )
+cs_resumbk_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T" )
 
-# cs_ipsat_T = plotting_functions.get_cross_section_values_W( dir_path_T + r'results-IP_SAT_m1.4.dat', reg_scheme )
-cs_lobk_mve_T = plotting_functions.get_cross_section_values_W( dir_path_T + r'results-LOBK-MVe' + id_string + '.dat', reg_scheme_LO, "T" )
+cs_lobk_mve_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-LOBK-MVe' + id_string + '.dat', reg_scheme_LO, "T" )
 
-cs_lobk_mve_rel_T = plotting_functions.get_distribution_W( dir_path_T + r'results-LOBK-MVe' + id_string + '.dat', reg_scheme_rel, "T" )
-cs_kcbk_461_rel_T = plotting_functions.get_distribution_W( dir_path_T + r'results-kcbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_rel, "T" )
-cs_kcbk_000_rel_T = plotting_functions.get_distribution_W( dir_path_T + r'results-kcbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_rel, "T" )
-cs_tbk_461_rel_T = plotting_functions.get_distribution_W( dir_path_T + r'results-tbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_rel, "T" )
-cs_tbk_000_rel_T = plotting_functions.get_distribution_W( dir_path_T + r'results-tbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_rel, "T" )
-cs_resumbk_461_rel_T = plotting_functions.get_distribution_W( dir_path_T + r'results-resumbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_rel, "T" )
-cs_resumbk_000_rel_T = plotting_functions.get_distribution_W( dir_path_T + r'results-resumbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_rel, "T" )
+cs_lobk_mve_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-LOBK-MVe' + id_string + '.dat', reg_scheme_rel, "T" )
+cs_kcbk_461_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-kcbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_rel, "T" )
+cs_kcbk_000_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-kcbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_rel, "T" )
+cs_tbk_461_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-tbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_rel, "T" )
+cs_tbk_000_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-tbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_rel, "T" )
+cs_resumbk_461_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-resumbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_rel, "T" )
+cs_resumbk_000_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-resumbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_rel, "T" )
 
 
 if particle == 'jpsi':
@@ -195,13 +194,13 @@ legend_text_upsilon_exp =  [
 
 if 1 in plots:
     plt.figure(1)
-    plt.plot(cs_kcbk_000_T[0], cs_kcbk_000_T[2], 'r-',label=r'NLO KCBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_kcbk_461_T[0], cs_kcbk_461_T[2], 'r-',label=r'NLO KCBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_tbk_000_T[0], cs_tbk_000_T[2], '--',color='tab:green',label=r'NLO TBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_tbk_461_T[0], cs_tbk_461_T[2], '--',color='tab:green',label=r'NLO TBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_T[2], 'b-.',label=r'NLO ResumBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_T[2], 'b-.',label=r'NLO ResumBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_T[5], 'k:',label=r'LO LOBK', linewidth=linewidth2)
+    plt.plot(cs_kcbk_000_T[0], cs_kcbk_000_T[3], 'r-',label=r'NLO KCBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_kcbk_461_T[0], cs_kcbk_461_T[3], 'r-',label=r'NLO KCBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_tbk_000_T[0], cs_tbk_000_T[3], '--',color='tab:green',label=r'NLO TBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_tbk_461_T[0], cs_tbk_461_T[3], '--',color='tab:green',label=r'NLO TBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_T[3], 'b-.',label=r'NLO ResumBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_T[3], 'b-.',label=r'NLO ResumBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_T[6], 'k:',label=r'LO LOBK', linewidth=linewidth2)
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, Q^2= 0.05$ GeV$^2$ [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
@@ -217,13 +216,13 @@ if 1 in plots:
 
 if 2 in plots:
     plt.figure(2)
-    plt.plot(cs_kcbk_000_T[0], cs_kcbk_000_rel_T[5], 'r-',label=r'NLO+rel KCBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_kcbk_461_T[0], cs_kcbk_461_rel_T[5], 'r-',label=r'NLO+rel KCBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_tbk_000_T[0], cs_tbk_000_rel_T[5], '--',color='tab:green',label=r'NLO+rel TBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_tbk_461_T[0], cs_tbk_461_rel_T[5], '--',color='tab:green',label=r'NLO+rel TBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_rel_T[5], 'b-.',label=r'NLO+rel ResumBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_rel_T[5], 'b-.',label=r'NLO+rel ResumBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_rel_T[3] * NRQCD_factor, 'k:',label=r'LO+rel LOBK', linewidth=linewidth2)
+    plt.plot(cs_kcbk_000_T[0], cs_kcbk_000_rel_T[6], 'r-',label=r'NLO+rel KCBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_kcbk_461_T[0], cs_kcbk_461_rel_T[6], 'r-',label=r'NLO+rel KCBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_tbk_000_T[0], cs_tbk_000_rel_T[6], '--',color='tab:green',label=r'NLO+rel TBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_tbk_461_T[0], cs_tbk_461_rel_T[6], '--',color='tab:green',label=r'NLO+rel TBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_rel_T[6], 'b-.',label=r'NLO+rel ResumBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_rel_T[6], 'b-.',label=r'NLO+rel ResumBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_rel_T[4] * NRQCD_factor, 'k:',label=r'LO+rel LOBK', linewidth=linewidth2)
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, Q^2= 0.05$ GeV$^2$ [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
@@ -239,13 +238,13 @@ if 2 in plots:
 
 if 3 in plots:
     fig3=plt.figure(num=3)
-    plt.plot(cs_kcbk_000_T[0],    C_int * cs_kcbk_000_T[2], 'r--',label=r'NLO KCBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_T[2], 'r-',label=r'NLO KCBK 4.61', linewidth=linewidth1)
-    plt.plot(cs_tbk_000_T[0],     C_int * cs_tbk_000_T[2], 'g--',label=r'NLO TBK 0.00', linewidth=linewidth2)
-    plt.plot(cs_tbk_461_T[0],     C_int * cs_tbk_461_T[2], 'g-',label=r'NLO TBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_resumbk_000_T[0], C_int * cs_resumbk_000_T[2], 'b--',label=r'NLO ResumBK 0.00', linewidth=linewidth3)
-    plt.plot(cs_resumbk_461_T[0], C_int * cs_resumbk_461_T[2], 'b-',label=r'NLO ResumBK 4.61', linewidth=linewidth3)
-    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_T[5], 'k:',label=r'LO LOBK', linewidth=linewidth2)
+    plt.plot(cs_kcbk_000_T[0],    C_int * cs_kcbk_000_T[3], 'r--',label=r'NLO KCBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_T[3], 'r-',label=r'NLO KCBK 4.61', linewidth=linewidth1)
+    plt.plot(cs_tbk_000_T[0],     C_int * cs_tbk_000_T[3], 'g--',label=r'NLO TBK 0.00', linewidth=linewidth2)
+    plt.plot(cs_tbk_461_T[0],     C_int * cs_tbk_461_T[3], 'g-',label=r'NLO TBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_resumbk_000_T[0], C_int * cs_resumbk_000_T[3], 'b--',label=r'NLO ResumBK 0.00', linewidth=linewidth3)
+    plt.plot(cs_resumbk_461_T[0], C_int * cs_resumbk_461_T[3], 'b-',label=r'NLO ResumBK 4.61', linewidth=linewidth3)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_T[6], 'k:',label=r'LO LOBK', linewidth=linewidth2)
     plt.errorbar(sigma_tot_ZEUS_W[0], sigma_tot_ZEUS_data[0],         yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_v1_W[0], sigma_tot_H1_v1_data[0],       yerr=[np.sqrt(sigma_tot_H1_v1_data[1]**2+sigma_tot_H1_v1_data[2]**2),np.sqrt(sigma_tot_H1_v1_data[3]**2+sigma_tot_H1_v1_data[4]**2)],label='H1', fmt='vb', capsize=3)
     plt.errorbar(sigma_tot_H1_v2_W[0], sigma_tot_H1_v2_data[0],       yerr=[sigma_tot_H1_v2_data[1], sigma_tot_H1_v2_data[2]], fmt='vb', capsize=3) # H1
@@ -281,13 +280,13 @@ if 3 in plots:
 
 if 4 in plots:
     fig4=plt.figure(num=4)
-    plt.plot(cs_kcbk_000_T[0],    C_int * cs_kcbk_000_rel_T[5], 'r--',label=r'NLO+rel KCBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_rel_T[5], 'r-',label=r'NLO+rel KCBK 4.61', linewidth=linewidth1)
-    plt.plot(cs_tbk_000_T[0],     C_int * cs_tbk_000_rel_T[5], 'g--',label=r'NLO+rel TBK 0.00', linewidth=linewidth2)
-    plt.plot(cs_tbk_461_T[0],     C_int * cs_tbk_461_rel_T[5], 'g-',label=r'NLO+rel TBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_resumbk_000_T[0], C_int * cs_resumbk_000_rel_T[5], 'b--',label=r'NLO+rel ResumBK 0.00', linewidth=linewidth3)
-    plt.plot(cs_resumbk_461_T[0], C_int * cs_resumbk_461_rel_T[5], 'b-',label=r'NLO+rel ResumBK 4.61', linewidth=linewidth3)
-    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[3] * NRQCD_factor, 'k:',label=r'LO+rel LOBK', linewidth=linewidth2)
+    plt.plot(cs_kcbk_000_T[0],    C_int * cs_kcbk_000_rel_T[6], 'r--',label=r'NLO+rel KCBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_rel_T[6], 'r-',label=r'NLO+rel KCBK 4.61', linewidth=linewidth1)
+    plt.plot(cs_tbk_000_T[0],     C_int * cs_tbk_000_rel_T[6], 'g--',label=r'NLO+rel TBK 0.00', linewidth=linewidth2)
+    plt.plot(cs_tbk_461_T[0],     C_int * cs_tbk_461_rel_T[6], 'g-',label=r'NLO+rel TBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_resumbk_000_T[0], C_int * cs_resumbk_000_rel_T[6], 'b--',label=r'NLO+rel ResumBK 0.00', linewidth=linewidth3)
+    plt.plot(cs_resumbk_461_T[0], C_int * cs_resumbk_461_rel_T[6], 'b-',label=r'NLO+rel ResumBK 4.61', linewidth=linewidth3)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[4] * NRQCD_factor, 'k:',label=r'LO+rel LOBK', linewidth=linewidth2)
     plt.errorbar(sigma_tot_ZEUS_W[0], sigma_tot_ZEUS_data[0],         yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_v1_W[0], sigma_tot_H1_v1_data[0],       yerr=[np.sqrt(sigma_tot_H1_v1_data[1]**2+sigma_tot_H1_v1_data[2]**2),np.sqrt(sigma_tot_H1_v1_data[3]**2+sigma_tot_H1_v1_data[4]**2)],label='H1', fmt='vb', capsize=3)
     plt.errorbar(sigma_tot_H1_v2_W[0], sigma_tot_H1_v2_data[0],       yerr=[sigma_tot_H1_v2_data[1], sigma_tot_H1_v2_data[2]], fmt='vb', capsize=3) # H1
@@ -324,14 +323,14 @@ if 4 in plots:
 
 if 5 in plots:
     plt.figure(5)
-    plt.plot(cs_kcbk_000_T[0],    C_int * cs_kcbk_000_rel_T[5], '-',color='tab:green',label=r'NLO+rel KCBK 0.00', linewidth=linewidth)
-    plt.plot(cs_tbk_000_T[0],     C_int * cs_tbk_000_rel_T[5], 'c-',label=r'NLO+rel TBK 0.00', linewidth=linewidth)
-    plt.plot(cs_resumbk_000_T[0], C_int * cs_resumbk_000_rel_T[5], 'm-',label=r'NLO+rel ResumBK 0.00', linewidth=linewidth)
-    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[3] * NRQCD_factor, 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
-    plt.fill_between(cs_kcbk_000_T[0], C_int * (cs_kcbk_000_rel_T[5]-cs_kcbk_000_rel_T[6]), C_int * (cs_kcbk_000_rel_T[5]+cs_kcbk_000_rel_T[6]), facecolor='tab:green',alpha=0.3)
-    plt.fill_between(cs_tbk_000_T[0], C_int * (cs_tbk_000_rel_T[5]-cs_tbk_000_rel_T[6]), C_int * (cs_tbk_000_rel_T[5]+cs_tbk_000_rel_T[6]), facecolor='c',alpha=0.3)
-    plt.fill_between(cs_resumbk_000_T[0], C_int * (cs_resumbk_000_rel_T[5]-cs_resumbk_000_rel_T[6]), C_int * (cs_resumbk_000_rel_T[5]+cs_resumbk_000_rel_T[6]), facecolor='m',alpha=0.3)
-    plt.fill_between(cs_lobk_mve_T[0], C_int * NRQCD_factor * (cs_lobk_mve_rel_T[3]-cs_lobk_mve_rel_T[4]), C_int * NRQCD_factor * (cs_lobk_mve_rel_T[3]+cs_lobk_mve_rel_T[4]), facecolor='k',alpha=0.3)
+    plt.plot(cs_kcbk_000_T[0],    C_int * cs_kcbk_000_rel_T[6], '-',color='tab:green',label=r'NLO+rel KCBK 0.00', linewidth=linewidth)
+    plt.plot(cs_tbk_000_T[0],     C_int * cs_tbk_000_rel_T[6], 'c-',label=r'NLO+rel TBK 0.00', linewidth=linewidth)
+    plt.plot(cs_resumbk_000_T[0], C_int * cs_resumbk_000_rel_T[6], 'm-',label=r'NLO+rel ResumBK 0.00', linewidth=linewidth)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[4] * NRQCD_factor, 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
+    plt.fill_between(cs_kcbk_000_T[0], C_int * (cs_kcbk_000_rel_T[6]-cs_kcbk_000_rel_T[7]), C_int * (cs_kcbk_000_rel_T[6]+cs_kcbk_000_rel_T[7]), facecolor='tab:green',alpha=0.3)
+    plt.fill_between(cs_tbk_000_T[0], C_int * (cs_tbk_000_rel_T[6]-cs_tbk_000_rel_T[7]), C_int * (cs_tbk_000_rel_T[6]+cs_tbk_000_rel_T[7]), facecolor='c',alpha=0.3)
+    plt.fill_between(cs_resumbk_000_T[0], C_int * (cs_resumbk_000_rel_T[6]-cs_resumbk_000_rel_T[7]), C_int * (cs_resumbk_000_rel_T[6]+cs_resumbk_000_rel_T[7]), facecolor='m',alpha=0.3)
+    plt.fill_between(cs_lobk_mve_T[0], C_int * NRQCD_factor * (cs_lobk_mve_rel_T[4]-cs_lobk_mve_rel_T[5]), C_int * NRQCD_factor * (cs_lobk_mve_rel_T[4]+cs_lobk_mve_rel_T[5]), facecolor='k',alpha=0.3)
     plt.errorbar(sigma_tot_ZEUS_W[0], sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_W[0]-sigma_tot_ZEUS_W[1], sigma_tot_ZEUS_W[2]-sigma_tot_ZEUS_W[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_v1_W[0], sigma_tot_H1_v1_data[0], xerr=[sigma_tot_H1_v1_W[0]-sigma_tot_H1_v1_W[1], sigma_tot_H1_v1_W[2]-sigma_tot_H1_v1_W[0]] , yerr=[np.sqrt(sigma_tot_H1_v1_data[1]**2+sigma_tot_H1_v1_data[2]**2),np.sqrt(sigma_tot_H1_v1_data[3]**2+sigma_tot_H1_v1_data[4]**2)],label='H1', fmt='vb', capsize=3)
     plt.errorbar(sigma_tot_H1_v2_W[0], sigma_tot_H1_v2_data[0], xerr=[sigma_tot_H1_v2_W[0]-sigma_tot_H1_v2_W[1], sigma_tot_H1_v2_W[2]-sigma_tot_H1_v2_W[0]] , yerr=[sigma_tot_H1_v2_data[1], sigma_tot_H1_v2_data[2]], fmt='vb', capsize=3) # H1
@@ -354,13 +353,13 @@ if 5 in plots:
 
 if 6 in plots:
     plt.figure(6)
-    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_rel_T[5], '-',color='tab:green',label=r'NLO+rel KCBK 4.61', linewidth=linewidth)
-    plt.plot(cs_tbk_461_T[0],     C_int * cs_tbk_461_rel_T[5], 'c-',label=r'NLO+rel TBK 4.61', linewidth=linewidth)
-    plt.plot(cs_resumbk_461_T[0], C_int * cs_resumbk_461_rel_T[5], 'm-',label=r'NLO+rel ResumBK 4.61', linewidth=linewidth)
-    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[3] * NRQCD_factor, 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
-    plt.fill_between(cs_kcbk_461_T[0], C_int * (cs_kcbk_461_rel_T[5]-cs_kcbk_461_rel_T[6]), C_int * (cs_kcbk_461_rel_T[5]+cs_kcbk_461_rel_T[6]), facecolor='tab:green',alpha=0.3)
-    plt.fill_between(cs_tbk_461_T[0], C_int * (cs_tbk_461_rel_T[5]-cs_tbk_461_rel_T[6]), C_int * (cs_tbk_461_rel_T[5]+cs_tbk_461_rel_T[6]), facecolor='c',alpha=0.3)
-    plt.fill_between(cs_resumbk_461_T[0], C_int * (cs_resumbk_461_rel_T[5]-cs_resumbk_461_rel_T[6]), C_int * (cs_resumbk_461_rel_T[5]+cs_resumbk_461_rel_T[6]), facecolor='m',alpha=0.3)
+    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_rel_T[7], '-',color='tab:green',label=r'NLO+rel KCBK 4.61', linewidth=linewidth)
+    plt.plot(cs_tbk_461_T[0],     C_int * cs_tbk_461_rel_T[7], 'c-',label=r'NLO+rel TBK 4.61', linewidth=linewidth)
+    plt.plot(cs_resumbk_461_T[0], C_int * cs_resumbk_461_rel_T[7], 'm-',label=r'NLO+rel ResumBK 4.61', linewidth=linewidth)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[5] * NRQCD_factor, 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth)
+    plt.fill_between(cs_kcbk_461_T[0], C_int * (cs_kcbk_461_rel_T[6]-cs_kcbk_461_rel_T[7]), C_int * (cs_kcbk_461_rel_T[6]+cs_kcbk_461_rel_T[7]), facecolor='tab:green',alpha=0.3)
+    plt.fill_between(cs_tbk_461_T[0], C_int * (cs_tbk_461_rel_T[6]-cs_tbk_461_rel_T[7]), C_int * (cs_tbk_461_rel_T[6]+cs_tbk_461_rel_T[7]), facecolor='c',alpha=0.3)
+    plt.fill_between(cs_resumbk_461_T[0], C_int * (cs_resumbk_461_rel_T[6]-cs_resumbk_461_rel_T[7]), C_int * (cs_resumbk_461_rel_T[6]+cs_resumbk_461_rel_T[7]), facecolor='m',alpha=0.3)
     plt.fill_between(cs_lobk_mve_T[0], C_int * NRQCD_factor * (cs_lobk_mve_rel_T[3]-cs_lobk_mve_rel_T[4]), C_int * NRQCD_factor * (cs_lobk_mve_rel_T[3]+cs_lobk_mve_rel_T[4]), facecolor='k',alpha=0.3)
     plt.errorbar(sigma_tot_ZEUS_W[0], sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_W[0]-sigma_tot_ZEUS_W[1], sigma_tot_ZEUS_W[2]-sigma_tot_ZEUS_W[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_v1_W[0], sigma_tot_H1_v1_data[0], xerr=[sigma_tot_H1_v1_W[0]-sigma_tot_H1_v1_W[1], sigma_tot_H1_v1_W[2]-sigma_tot_H1_v1_W[0]] , yerr=[np.sqrt(sigma_tot_H1_v1_data[1]**2+sigma_tot_H1_v1_data[2]**2),np.sqrt(sigma_tot_H1_v1_data[3]**2+sigma_tot_H1_v1_data[4]**2)],label='H1', fmt='vb', capsize=3)
@@ -384,13 +383,13 @@ if 6 in plots:
 
 if 10 in plots:
     plt.figure(10)
-    plt.plot(cs_kcbk_000_T[0], cs_kcbk_000_T[1], '-',color='tab:green',label=r'LO KCBK 0.00', linewidth=linewidth)
-    plt.plot(cs_kcbk_461_T[0], cs_kcbk_461_T[1], '--',color='tab:green',label=r'LO KCBK 4.61', linewidth=linewidth)
-    plt.plot(cs_tbk_000_T[0], cs_tbk_000_T[1], 'r-',label=r'LO TBK 0.00', linewidth=linewidth)
-    plt.plot(cs_tbk_461_T[0], cs_tbk_461_T[1], 'r--',label=r'LO TBK 4.61', linewidth=linewidth)
-    plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_T[1], 'b-',label=r'LO ResumBK 0.00', linewidth=linewidth)
-    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_T[1], 'b--',label=r'LO ResumBK 4.61', linewidth=linewidth)
-    plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_T[5], 'k:',label=r'LOBK MV$^e$', linewidth=linewidth)
+    plt.plot(cs_kcbk_000_T[0], cs_kcbk_000_T[2], '-',color='tab:green',label=r'LO KCBK 0.00', linewidth=linewidth)
+    plt.plot(cs_kcbk_461_T[0], cs_kcbk_461_T[2], '--',color='tab:green',label=r'LO KCBK 4.61', linewidth=linewidth)
+    plt.plot(cs_tbk_000_T[0], cs_tbk_000_T[2], 'r-',label=r'LO TBK 0.00', linewidth=linewidth)
+    plt.plot(cs_tbk_461_T[0], cs_tbk_461_T[2], 'r--',label=r'LO TBK 4.61', linewidth=linewidth)
+    plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_T[2], 'b-',label=r'LO ResumBK 0.00', linewidth=linewidth)
+    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_T[2], 'b--',label=r'LO ResumBK 4.61', linewidth=linewidth)
+    plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_T[6], 'k:',label=r'LOBK MV$^e$', linewidth=linewidth)
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, Q^2= 0.05$ GeV$^2$ [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
@@ -407,13 +406,13 @@ if 10 in plots:
 
 if 11 in plots:
     plt.figure(11)
-    plt.plot(cs_kcbk_000_T[0], cs_kcbk_000_T[2], 'r-',label=r'NLO KCBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_kcbk_461_T[0], cs_kcbk_461_T[2], 'r-',label=r'NLO KCBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_tbk_000_T[0], cs_tbk_000_T[2], '--',color='tab:green',label=r'NLO TBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_tbk_461_T[0], cs_tbk_461_T[2], '--',color='tab:green',label=r'NLO TBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_T[2], 'b-.',label=r'NLO ResumBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_T[2], 'b-.',label=r'NLO ResumBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_T[5], 'k:',label=r'LOBK MV$^e$', linewidth=linewidth2)
+    plt.plot(cs_kcbk_000_T[0], cs_kcbk_000_T[3], 'r-',label=r'NLO KCBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_kcbk_461_T[0], cs_kcbk_461_T[3], 'r-',label=r'NLO KCBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_tbk_000_T[0], cs_tbk_000_T[3], '--',color='tab:green',label=r'NLO TBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_tbk_461_T[0], cs_tbk_461_T[3], '--',color='tab:green',label=r'NLO TBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_T[3], 'b-.',label=r'NLO ResumBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_T[3], 'b-.',label=r'NLO ResumBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_T[6], 'k:',label=r'LOBK MV$^e$', linewidth=linewidth2)
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, Q^2= 0.05$ GeV$^2$ [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
@@ -429,13 +428,13 @@ if 11 in plots:
 
 if 12 in plots:
     plt.figure(12)
-    plt.plot(cs_kcbk_000_T[0], cs_kcbk_000_rel_T[5], 'r-',label=r'NLO+rel KCBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_kcbk_461_T[0], cs_kcbk_461_rel_T[5], 'r-',label=r'NLO+rel KCBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_tbk_000_T[0], cs_tbk_000_rel_T[5], '--',color='tab:green',label=r'NLO+rel TBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_tbk_461_T[0], cs_tbk_461_rel_T[5], '--',color='tab:green',label=r'NLO+rel TBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_rel_T[5], 'b-.',label=r'NLO+rel ResumBK 0.00', linewidth=linewidth1)
-    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_rel_T[5], 'b-.',label=r'NLO+rel ResumBK 4.61', linewidth=linewidth2)
-    plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_rel_T[3] * NRQCD_factor, 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth2)
+    plt.plot(cs_kcbk_000_T[0], cs_kcbk_000_rel_T[6], 'r-',label=r'NLO+rel KCBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_kcbk_461_T[0], cs_kcbk_461_rel_T[6], 'r-',label=r'NLO+rel KCBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_tbk_000_T[0], cs_tbk_000_rel_T[6], '--',color='tab:green',label=r'NLO+rel TBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_tbk_461_T[0], cs_tbk_461_rel_T[6], '--',color='tab:green',label=r'NLO+rel TBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_resumbk_000_T[0], cs_resumbk_000_rel_T[6], 'b-.',label=r'NLO+rel ResumBK 0.00', linewidth=linewidth1)
+    plt.plot(cs_resumbk_461_T[0], cs_resumbk_461_rel_T[6], 'b-.',label=r'NLO+rel ResumBK 4.61', linewidth=linewidth2)
+    plt.plot(cs_lobk_mve_T[0], cs_lobk_mve_rel_T[4] * NRQCD_factor, 'k:',label=r'LO+rel MV$^e$', linewidth=linewidth2)
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'$(d\sigma_{\textrm{tot}}/dt)$ at $t = 0, Q^2= 0.05$ GeV$^2$ [nb/GeV$^2$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
@@ -451,10 +450,10 @@ if 12 in plots:
 
 if 14 in plots:
     fig14=plt.figure(14)
-    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_T[5], 'k-',label=r'LO LOBK', linewidth=linewidth2)
-    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[3] * NRQCD_factor, 'k--',label=r'LO+rel LOBK', linewidth=linewidth2)
-    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_T[2], 'r-',label=r'NLO KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
-    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_rel_T[5], 'r--',label=r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_T[6], 'k-',label=r'LO LOBK', linewidth=linewidth2)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[4] * NRQCD_factor, 'k--',label=r'LO+rel LOBK', linewidth=linewidth2)
+    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_T[3], 'r-',label=r'NLO KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
+    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_rel_T[6], 'r--',label=r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
     plt.errorbar(sigma_tot_ZEUS_v1_upsilon[0], sigma_tot_ZEUS_v1_upsilon_data[0], xerr=[sigma_tot_ZEUS_v1_upsilon[0]-sigma_tot_ZEUS_v1_upsilon[1], sigma_tot_ZEUS_v1_upsilon[2]-sigma_tot_ZEUS_v1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[1]**2+sigma_tot_ZEUS_v1_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[3]**2+sigma_tot_ZEUS_v1_upsilon_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_ZEUS_v2_upsilon[0], sigma_tot_ZEUS_v2_upsilon_data[0], xerr=[sigma_tot_ZEUS_v2_upsilon[0]-sigma_tot_ZEUS_v2_upsilon[1], sigma_tot_ZEUS_v2_upsilon[2]-sigma_tot_ZEUS_v2_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[1]**2+sigma_tot_ZEUS_v2_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[3]**2+sigma_tot_ZEUS_v2_upsilon_data[4]**2)],fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_upsilon[0], sigma_tot_H1_upsilon_data[0], xerr=[sigma_tot_H1_upsilon[0]-sigma_tot_H1_upsilon[1], sigma_tot_H1_upsilon[2]-sigma_tot_H1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_H1_upsilon_data[1]**2+sigma_tot_H1_upsilon_data[2]**2),np.sqrt(sigma_tot_H1_upsilon_data[3]**2+sigma_tot_H1_upsilon_data[4]**2)],label='H1', fmt='vb', capsize=3)
@@ -478,12 +477,12 @@ if 14 in plots:
 
 if 15 in plots:
     fig15=plt.figure(15)
-    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_T[5], 'k-',label=r'LO LOBK', linewidth=linewidth2)
-    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[3] * NRQCD_factor, 'k--',label=r'LO+rel LOBK', linewidth=linewidth2)
-    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_T[2], 'r-',label=r'NLO KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
-    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_rel_T[5], 'r--',label=r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
-    plt.plot(cs_kcbk_000_T[0],    C_int * cs_kcbk_000_T[2], 'b-',label=r'NLO KCBK $Y_{0,\mathrm{BK}}=0.00$', linewidth=linewidth1)
-    plt.plot(cs_kcbk_000_T[0],    C_int * cs_kcbk_000_rel_T[5], 'b--',label=r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=0.00$', linewidth=linewidth1)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_T[6], 'k-',label=r'LO LOBK', linewidth=linewidth2)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[4] * NRQCD_factor, 'k--',label=r'LO+rel LOBK', linewidth=linewidth2)
+    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_T[3], 'r-',label=r'NLO KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
+    plt.plot(cs_kcbk_461_T[0],    C_int * cs_kcbk_461_rel_T[6], 'r--',label=r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
+    plt.plot(cs_kcbk_000_T[0],    C_int * cs_kcbk_000_T[3], 'b-',label=r'NLO KCBK $Y_{0,\mathrm{BK}}=0.00$', linewidth=linewidth1)
+    plt.plot(cs_kcbk_000_T[0],    C_int * cs_kcbk_000_rel_T[6], 'b--',label=r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=0.00$', linewidth=linewidth1)
     plt.errorbar(sigma_tot_ZEUS_v1_upsilon[0], sigma_tot_ZEUS_v1_upsilon_data[0], xerr=[sigma_tot_ZEUS_v1_upsilon[0]-sigma_tot_ZEUS_v1_upsilon[1], sigma_tot_ZEUS_v1_upsilon[2]-sigma_tot_ZEUS_v1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[1]**2+sigma_tot_ZEUS_v1_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[3]**2+sigma_tot_ZEUS_v1_upsilon_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_ZEUS_v2_upsilon[0], sigma_tot_ZEUS_v2_upsilon_data[0], xerr=[sigma_tot_ZEUS_v2_upsilon[0]-sigma_tot_ZEUS_v2_upsilon[1], sigma_tot_ZEUS_v2_upsilon[2]-sigma_tot_ZEUS_v2_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[1]**2+sigma_tot_ZEUS_v2_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[3]**2+sigma_tot_ZEUS_v2_upsilon_data[4]**2)],fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_upsilon[0], sigma_tot_H1_upsilon_data[0], xerr=[sigma_tot_H1_upsilon[0]-sigma_tot_H1_upsilon[1], sigma_tot_H1_upsilon[2]-sigma_tot_H1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_H1_upsilon_data[1]**2+sigma_tot_H1_upsilon_data[2]**2),np.sqrt(sigma_tot_H1_upsilon_data[3]**2+sigma_tot_H1_upsilon_data[4]**2)],label='H1', fmt='vb', capsize=3)
