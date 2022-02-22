@@ -74,7 +74,7 @@ double x_min_fun(double W, double Q, double Delta);
 double Y_0_fun(double W, double Q);
 double eta_corr(double r);
 double rapidity(double W, double Q, double z2);
-double target_rapidity(double W, double Q, double z2, double r);
+double target_rapidity(double Y, double r);
 double z2_min_fun(double W, double Q);
 double z2_min_pom_fun(double W, double Q, double Delta);
 

@@ -1,5 +1,5 @@
 // File for defining several constants and integration variables.
-
+// TODO: the rapidities defined here are really complicated. In the future, it might be better to define them more clearly.
 
 
 #include <gsl/gsl_math.h>

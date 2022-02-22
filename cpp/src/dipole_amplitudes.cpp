@@ -71,7 +71,8 @@ double S_file(double r, double Y) {
 
 // S_matrix for the dipole-nucleus scattering.
 double S_xy(double r, double Y){
-    double Y_corr = Y + eta_corr(r);
+    // double Y_corr = Y + eta_corr(r);
+    double Y_corr = target_rapidity(Y,r);
     if(Y_corr<Y0_if) Y_corr = Y0_if;
     if (dipole_file_bool) return S_file(r, Y_corr);
     else return S_GBW(r, Y_corr);
