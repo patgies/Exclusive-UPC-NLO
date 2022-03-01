@@ -68,7 +68,7 @@ C_int = plotting_functions.t_integration_coefficient(W)
 linewidth = 2.5
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
-plots = [3,4]
+plots = [3,4,9]
 
 linewidth1 = 1.3*linewidth
 linewidth2 = 1.0*linewidth
@@ -77,12 +77,13 @@ linewidth3 = 0.7*linewidth
 
 
 
-legend_lines = [Line2D([0], [0], color='r', linestyle='-', linewidth=linewidth1),
+legend_lines = [
+                Line2D([0], [0], color='b', linestyle='None', marker='v'),
+                Line2D([0], [0], color='r', linestyle='None', marker='o'),
+                Line2D([0], [0], color='r', linestyle='-', linewidth=linewidth1),
                 Line2D([0], [0], color='g', linestyle='-', linewidth=linewidth2),
                 Line2D([0], [0], color='b', linestyle='-', linewidth=linewidth3),
-                Line2D([0], [0], color='k', linestyle=':', linewidth=linewidth2),
-                Line2D([0], [0], color='b', linestyle='None', marker='v'),
-                Line2D([0], [0], color='r', linestyle='None', marker='o')
+                Line2D([0], [0], color='k', linestyle=':', linewidth=linewidth2)
                 ]
 
 legend_lines_Y = [
@@ -90,20 +91,22 @@ legend_lines_Y = [
                 Line2D([0], [0], color='k', linestyle='--', linewidth=linewidth1)
                 ]
 
-legend_text =  [r'NLO KCBK',
+legend_text =  [
+                r'H1',
+                r'ZEUS',
+                r'NLO KCBK',
                 r'NLO TBK',
                 r'NLO ResumBK',
-                r'LO LOBK',
-                r'H1',
-                r'ZEUS'
+                r'LO LOBK'
                 ]
 
-legend_text_rel =  [r'NLO+rel KCBK',
+legend_text_rel =  [
+                    r'H1',
+                    r'ZEUS',
+                    r'NLO+rel KCBK',
                     r'NLO+rel TBK',
                     r'NLO+rel ResumBK',
-                    r'LO+rel LOBK',
-                    r'H1',
-                    r'ZEUS'
+                    r'LO+rel LOBK'
                     ]
 
 legend_text_Y = [ r'$Y_{0,\mathrm{BK}},\eta_{0,\mathrm{BK}}=4.61$',
@@ -164,17 +167,17 @@ if 3 in plots:
     plt.plot(Mv2 + cs_lobk_mve[1],    C_int * cs_lobk_mve[6], 'k:',label=r'LO LOBK', linewidth=linewidth2)
     plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3)
-    legend1 = plt.legend(legend_lines,   legend_text,   prop={'size': 17}, frameon=False, loc='lower left', handlelength=1.0, labelspacing=0.4, borderaxespad=0.1 )
+    legend1 = plt.legend(legend_lines,   legend_text,   prop={'size': 17}, frameon=False, loc='lower left')
     legend2 = plt.legend(legend_lines_Y, legend_text_Y, prop={'size': 17}, frameon=False, loc='upper right')
     plt.gca().add_artist(legend1) 
-    # plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb]', fontsize=17)
-    plt.xlabel(r'$M_{J/\psi}^2+Q^2$ [GeV$^2$]', fontsize=20)
+    plt.title(r'$p+\gamma^* \rightarrow p + \mathrm{J}/\psi$', fontsize=20)
+    plt.xlabel(r'$M_{\mathrm{J}/\psi}^2+Q^2$ [GeV$^2$]', fontsize=20)
     plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
-    plt.text(0.69, 0.72, r'$W = 90\textrm{ GeV}$', transform=fig3.transFigure, fontsize=20)
+    plt.text(0.69, 0.65, r'$W = 90\textrm{ GeV}$', transform=fig3.transFigure, fontsize=20)
     plt.xlim([Mv2, 1e2])
     plt.ylim([0.05, 2e2])
-    plt.xticks(fontsize=15)
-    plt.yticks(fontsize=15)
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
     plt.xscale('log')
     plt.yscale('log')
     plt.tight_layout()
@@ -192,17 +195,17 @@ if 4 in plots:
     plt.plot(Mv2 + cs_lobk_mve[1],    C_int * cs_lobk_mve_rel[4] * NRQCD_factor, 'k:',label=r'LO+rel LOBK', linewidth=linewidth2)
     plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3)
-    legend1 = plt.legend(legend_lines, legend_text_rel, prop={'size': 17}, frameon=False, loc='lower left', handlelength=1.0, labelspacing=0.4, borderaxespad=0.1 )
+    legend1 = plt.legend(legend_lines, legend_text_rel, prop={'size': 17}, frameon=False, loc='lower left')
     legend2 = plt.legend(legend_lines_Y, legend_text_Y, prop={'size': 17}, frameon=False, loc='upper right')
     plt.gca().add_artist(legend1) 
-    # plt.title(r'$\sigma_{\textrm{tot}}$, $W= 90$ GeV [nb]', fontsize=17)
-    plt.xlabel(r'$M_{J/\psi}^2+Q^2$ [GeV$^2$]', fontsize=20)
+    plt.title(r'$p+\gamma^* \rightarrow p + \mathrm{J}/\psi$', fontsize=20)
+    plt.xlabel(r'$M_{\mathrm{J}/\psi}^2+Q^2$ [GeV$^2$]', fontsize=20)
     plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
-    plt.text(0.69, 0.72, r'$W = 90\textrm{ GeV}$', transform=fig4.transFigure, fontsize=20)
+    plt.text(0.69, 0.65, r'$W = 90\textrm{ GeV}$', transform=fig4.transFigure, fontsize=20)
     plt.xlim([Mv2, 1e2])
     plt.ylim([0.05, 2e2])
-    plt.xticks(fontsize=15)
-    plt.yticks(fontsize=15)
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
     plt.xscale('log')
     plt.yscale('log')
     plt.tight_layout()
@@ -261,6 +264,64 @@ if 6 in plots:
     plt.tight_layout()
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)
+
+
+
+if 9 in plots:
+    alpha=0.3
+    # plt.figure(num=8, figsize=(6,8))
+    fig9, (ax91, ax92) = plt.subplots(2,1, sharex=True, num=9, figsize=(6,8))
+    # plt.suptitle(r'$\mathrm{d}\sigma_L/\mathrm{d}t (t = 0, Q^2= 10\mathrm{ GeV}^2)$ [nb/GeV$^2$]', fontsize=17)
+    ax91.plot(cs_lobk_mve[1], cs_lobk_mve[6], 'k-',label=r'LO LOBK', linewidth=linewidth2)
+    ax91.plot(cs_lobk_mve_rel[1], NRQCD_factor * cs_lobk_mve_rel[4], 'k--',label=r'LO+rel LOBK', linewidth=linewidth2)
+    # ax91.plot(cs_lobk_mve[0], cs_lobk_mve[6], 'k--',label=r'LO+rel LOBK', linewidth=linewidth)
+    ax91.plot(cs_kcbk_461[1], cs_kcbk_461[3], 'r-',label=r'NLO KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
+    ax91.plot(cs_kcbk_461_rel[1], cs_kcbk_461_rel[6], 'r--',label=r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
+    # ax91.plot(cs_kcbk_461[0], cs_kcbk_461[4], 'r--',label=r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth)
+    # ax91.plot(cs_kcbk_000[0], cs_kcbk_000[2], 'g-',label=r'NLO KCBK $Y_{0,\mathrm{BK}}=0.00$', linewidth=linewidth)
+    # ax91.plot(cs_resumbk_461[0], cs_resumbk_461[2], 'b-',label=r'NLO ResumBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth)
+    # ax91.plot(cs_tbk_000[0], cs_tbk_461[2], 'c-',label=r'NLO TBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth)
+    # ax91.plot(cs_resumbk_461[0], cs_resumbk_000[2], 'y-',label=r'NLO ResumBK $Y_{0,\mathrm{BK}}=0.00$', linewidth=linewidth)
+    # ax91.plot(cs_tbk_000[0], cs_tbk_000[2], 'm-',label=r'NLO TBK $Y_{0,\mathrm{BK}}=0.00$', linewidth=linewidth)
+    ax91.fill_between(cs_lobk_mve_rel[1], NRQCD_factor * (cs_lobk_mve_rel[4]-cs_lobk_mve_rel[5]), NRQCD_factor * (cs_lobk_mve_rel[4]+cs_lobk_mve_rel[5]), facecolor='k',alpha=alpha)
+    ax91.fill_between(cs_kcbk_461_rel[1], cs_kcbk_461_rel[6]-cs_kcbk_461_rel[7], cs_kcbk_461_rel[6]+cs_kcbk_461_rel[7], facecolor='r',alpha=alpha)
+    ax91.set_ylim([1e-2, 1e3])
+    ax91.set_yscale('log')
+    ax91.set_ylabel(r'$\mathrm{d}\sigma_T/\mathrm{d}t$ [nb/GeV$^2$]', fontsize=20)
+    ax91.legend(prop={'size': 17}, frameon=False, loc='lower center' )
+    fig9.suptitle(r'$p+\gamma^* \rightarrow p + \mathrm{J}/\psi$', fontsize=20)
+
+
+    ax92.plot(cs_lobk_mve[1], np.ones( len(cs_lobk_mve[1]) ), 'k-',label=r'LO LOBK', linewidth=linewidth2)
+    ax92.plot(cs_lobk_mve_rel[1], NRQCD_factor * cs_lobk_mve_rel[4]/cs_lobk_mve[6], 'k--',label=r'LO+rel LOBK', linewidth=linewidth2)
+    # ax92.plot(cs_lobk_mve[0], cs_lobk_mve[2]/cs_lobk_mve[5], 'k--',label=r'LO+rel LOBK', linewidth=linewidth)
+    ax92.plot(cs_kcbk_461[1], cs_kcbk_461[3]/cs_lobk_mve[6], 'r-',label=r'NLO KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
+    # ax92.plot(cs_kcbk_000[0], cs_kcbk_000[2]/cs_lobk_mve[5], 'g-',label=r'NLO KCBK $Y_{0,\mathrm{BK}}=0.00$', linewidth=linewidth)
+    # ax92.plot(cs_resumbk_461[0], cs_resumbk_461[2]/cs_lobk_mve[5], 'b-',label=r'NLO ResumBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth)
+    # ax92.plot(cs_tbk_000[0], cs_tbk_461[2]/cs_lobk_mve[5], 'c-',label=r'NLO TBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth)
+    # ax92.plot(cs_resumbk_461[0], cs_resumbk_000[2]/cs_lobk_mve[5], 'y-',label=r'NLO ResumBK $Y_{0,\mathrm{BK}}=0.00$', linewidth=linewidth)
+    # ax92.plot(cs_tbk_000[0], cs_tbk_000[2]/cs_lobk_mve[5], 'm-',label=r'NLO TBK $Y_{0,\mathrm{BK}}=0.00$', linewidth=linewidth)
+    ax92.plot(cs_kcbk_461_rel[1], cs_kcbk_461_rel[6]/cs_lobk_mve[6], 'r--',label=r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth1)
+    # ax92.plot(cs_kcbk_461[0], cs_kcbk_461[4]/cs_lobk_mve[5], 'r--',label=r'NLO+rel KCBK $Y_{0,\mathrm{BK}}=4.61$', linewidth=linewidth)
+    ax92.fill_between(cs_lobk_mve_rel[1], NRQCD_factor * (cs_lobk_mve_rel[4]-cs_lobk_mve_rel[5])/cs_lobk_mve[6], NRQCD_factor * (cs_lobk_mve_rel[4]+cs_lobk_mve_rel[5])/cs_lobk_mve[6], facecolor='k',alpha=alpha)
+    ax92.fill_between(cs_kcbk_461_rel[1], (cs_kcbk_461_rel[6]-cs_kcbk_461_rel[7])/cs_lobk_mve[6], (cs_kcbk_461_rel[6]+cs_kcbk_461_rel[7])/cs_lobk_mve[6], facecolor='r',alpha=alpha)
+    ax92.set_xlim([1e-1, 1e2])
+    ax92.set_ylim([0, 3])
+    ax92.set_xscale('log')
+    ax92.set_yticks([ 0.5, 1.0, 1.5, 2.0, 2.5])
+    ax92.set_ylabel(r'$(\mathrm{d}\sigma_T/\mathrm{d}t)/(\mathrm{d}\sigma_T/\mathrm{d}t)_\mathrm{LOBK}$', fontsize=20)
+    ax92.set_xlabel(r'$Q^2$ [GeV$^2$]', fontsize=20)
+    ax91.tick_params(direction='in', which='both', left=True, right=True, axis='y', labelsize=18)
+    ax92.tick_params(direction='in', which='both', left=True, right=True, axis='y', labelsize=18)
+    ax91.tick_params(direction='in', which='both', bottom=True, top=True, axis='x', labelsize=18)
+    ax92.tick_params(direction='in', which='both', bottom=True, top=True, axis='x', labelsize=18)
+    plt.text(0.1, 0.8, r'$W = 90\textrm{ GeV}$', transform=ax92.transAxes, fontsize=20)
+    plt.text(0.1, 0.6, r'$t=0$', transform=ax92.transAxes, fontsize=20)
+    # plt.tick_params(axis='x', pad=5)
+    plt.tight_layout(pad=1.0)
+    plt.subplots_adjust(hspace=0)
+
+
 
 
 plt.show()

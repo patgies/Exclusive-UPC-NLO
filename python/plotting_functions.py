@@ -333,9 +333,12 @@ def calculate_cross_section_T(Qv, amplitudes_table, reg_scheme, O_LDME, q_LDME):
     # cs_LO_0 = 1/(16*np.pi)*LO_0**2                                                          * gev_to_nb * pheno_factor
     # cs_NLO_2 = 1/(16*np.pi)*NLO**2                                                          * gev_to_nb * pheno_factor
     cs_NLO = 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime))                           * gev_to_nb * pheno_factor 
-    cs_rel = 1/(16*np.pi)*(LO_prime + rel )**2                                              * gev_to_nb * pheno_factor 
-    cs_rel_pom = 1/(16*np.pi)*(LO_pom + rel )**2                                            * gev_to_nb * pheno_factor
-    cs_NLO_rel = 1/(16*np.pi)*((LO_prime+rel)**2+2*(LO_prime+rel)*(NLO+rel-(LO_prime+rel))) * gev_to_nb * pheno_factor 
+    # cs_rel = 1/(16*np.pi)*(LO_prime + rel )**2                                              * gev_to_nb * pheno_factor 
+    # cs_rel_pom = 1/(16*np.pi)*(LO_pom + rel )**2                                            * gev_to_nb * pheno_factor
+    # cs_NLO_rel = 1/(16*np.pi)*((LO_prime+rel)**2+2*(LO_prime+rel)*(NLO+rel-(LO_prime+rel))) * gev_to_nb * pheno_factor
+    cs_rel = 1/(16*np.pi)*(LO_prime**2 + 2*LO_prime*rel )                                              * gev_to_nb * pheno_factor 
+    cs_rel_pom = 1/(16*np.pi)*(LO_pom**2 + 2*LO_pom*rel)                                            * gev_to_nb * pheno_factor
+    cs_NLO_rel = 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime+rel)) * gev_to_nb * pheno_factor  
 
     dict_cs = {"LO": cs_LO_prime, "LO_pom": cs_LO_pom, "NLO": cs_NLO, "LO_rel": cs_rel, "NLO_rel": cs_NLO_rel, "LO_rel_pom": cs_rel_pom   }
     return dict_cs
@@ -395,9 +398,12 @@ def calculate_cross_section_L(Qv, amplitudes_table, reg_scheme, O_LDME, q_LDME):
     # cs_LO_0 = 1/(16*np.pi)*LO_0**2                                                          * gev_to_nb * pheno_factor
     # cs_NLO_2 = 1/(16*np.pi)*NLO**2                                                          * gev_to_nb * pheno_factor
     cs_NLO = 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime))                           * gev_to_nb * pheno_factor 
-    cs_rel = 1/(16*np.pi)*(LO_prime + rel )**2                                              * gev_to_nb * pheno_factor 
-    cs_rel_pom = 1/(16*np.pi)*(LO_pom + rel )**2                                            * gev_to_nb * pheno_factor
-    cs_NLO_rel = 1/(16*np.pi)*((LO_prime+rel)**2+2*(LO_prime+rel)*(NLO+rel-(LO_prime+rel))) * gev_to_nb * pheno_factor 
+    # cs_rel = 1/(16*np.pi)*(LO_prime + rel )**2                                              * gev_to_nb * pheno_factor 
+    # cs_rel_pom = 1/(16*np.pi)*(LO_pom + rel )**2                                            * gev_to_nb * pheno_factor
+    # cs_NLO_rel = 1/(16*np.pi)*((LO_prime+rel)**2+2*(LO_prime+rel)*(NLO+rel-(LO_prime+rel))) * gev_to_nb * pheno_factor 
+    cs_rel = 1/(16*np.pi)*(LO_prime**2 + 2*LO_prime*rel )                                              * gev_to_nb * pheno_factor 
+    cs_rel_pom = 1/(16*np.pi)*(LO_pom**2 + 2*LO_pom*rel)                                            * gev_to_nb * pheno_factor
+    cs_NLO_rel = 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime+rel)) * gev_to_nb * pheno_factor 
 
     dict_cs = {"LO": cs_LO_prime, "LO_pom": cs_LO_pom, "NLO": cs_NLO, "LO_rel": cs_rel, "NLO_rel": cs_NLO_rel, "LO_rel_pom": cs_rel_pom   }
     return dict_cs
