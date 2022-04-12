@@ -166,7 +166,7 @@ def get_total_cross_section_distribution(file_L, file_T, reg_scheme):
 
 
 
-def calculate_cross_section_T(Qv, amplitudes_table, reg_scheme, O_LDME, q_LDME):
+def calculate_cross_section_T(Qv, amplitudes_table, reg_scheme, O_LDME, q_LDME, NLO_scheme='LO(Ydip)'):
     """Calculates the cross sections from the production amplitudes. Qv can be a vector or scalar.
     Returns: a dictionary that contains relevant cross sections (in nb)"""
 
@@ -221,18 +221,34 @@ def calculate_cross_section_T(Qv, amplitudes_table, reg_scheme, O_LDME, q_LDME):
     cs_LO_pom = 1/(16*np.pi)*LO_pom**2                                                      * gev_to_nb * pheno_factor
     # cs_LO_0 = 1/(16*np.pi)*LO_0**2                                                          * gev_to_nb * pheno_factor
     # cs_NLO_2 = 1/(16*np.pi)*NLO**2                                                          * gev_to_nb * pheno_factor
-    cs_NLO = 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime))                           * gev_to_nb * pheno_factor 
+    # cs_NLO = 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime))                           * gev_to_nb * pheno_factor 
     # cs_rel = 1/(16*np.pi)*(LO_prime + rel )**2                                              * gev_to_nb * pheno_factor 
     # cs_rel_pom = 1/(16*np.pi)*(LO_pom + rel )**2                                            * gev_to_nb * pheno_factor
     # cs_NLO_rel = 1/(16*np.pi)*((LO_prime+rel)**2+2*(LO_prime+rel)*(NLO+rel-(LO_prime+rel))) * gev_to_nb * pheno_factor
-    cs_rel = 1/(16*np.pi)*(LO_prime**2 + 2*LO_prime*rel )                                              * gev_to_nb * pheno_factor 
-    cs_rel_pom = 1/(16*np.pi)*(LO_pom**2 + 2*LO_pom*rel)                                            * gev_to_nb * pheno_factor
-    cs_NLO_rel = 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime+rel)) * gev_to_nb * pheno_factor  
+    # cs_rel             = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_prime**2 + 2*LO_prime*rel ) 
+    # cs_rel_pom         = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_pom**2 + 2*LO_pom*rel) 
+    if(NLO_scheme=='LO(Ydip)'):
+        cs_NLO         = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime))
+        cs_NLO_rel     = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime+rel))
+        cs_rel         = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_prime**2 + 2*LO_prime*rel )
+        cs_rel_pom     = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_pom**2 + 2*LO_pom*rel) 
+    elif(NLO_scheme=='squared'):
+        cs_NLO         = gev_to_nb * pheno_factor * 1/(16*np.pi)*NLO**2
+        cs_NLO_rel     = gev_to_nb * pheno_factor * 1/(16*np.pi)*(NLO+rel)**2
+        cs_rel         = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_prime+rel)**2
+        cs_rel_pom     = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_pom+rel)**2
+    elif(NLO_scheme=='LO(Y0)+BK'):
+        cs_NLO         = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_BK**2+2*LO_BK*(NLO-LO_BK))
+        cs_NLO_rel     = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_BK**2+2*LO_BK*(NLO-LO_BK+rel))
+        cs_rel         = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_prime**2 + 2*LO_prime*rel )
+        cs_rel_pom     = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_pom**2 + 2*LO_pom*rel) 
+    else:
+        raise Exception('Invalid NLO scheme: ' + NLO_scheme)
 
     dict_cs = {"LO": cs_LO_prime, "LO_pom": cs_LO_pom, "NLO": cs_NLO, "LO_rel": cs_rel, "NLO_rel": cs_NLO_rel, "LO_rel_pom": cs_rel_pom   }
     return dict_cs
 
-def calculate_cross_section_L(Qv, amplitudes_table, reg_scheme, O_LDME, q_LDME):
+def calculate_cross_section_L(Qv, amplitudes_table, reg_scheme, O_LDME, q_LDME, NLO_scheme='LO(Ydip)'):
     """Calculates the cross sections from the production amplitudes. Qv can be a vector or scalar.
     Returns: a dictionary that contains relevant cross sections (in nb)"""
 
@@ -287,24 +303,42 @@ def calculate_cross_section_L(Qv, amplitudes_table, reg_scheme, O_LDME, q_LDME):
     cs_LO_pom = 1/(16*np.pi)*LO_pom**2                                                      * gev_to_nb * pheno_factor
     # cs_LO_0 = 1/(16*np.pi)*LO_0**2                                                          * gev_to_nb * pheno_factor
     # cs_NLO_2 = 1/(16*np.pi)*NLO**2                                                          * gev_to_nb * pheno_factor
-    cs_NLO = 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime))                           * gev_to_nb * pheno_factor 
+    # cs_NLO = 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime))                           * gev_to_nb * pheno_factor 
 
     # cs_rel = 1/(16*np.pi)*(LO_prime + rel )**2                                              * gev_to_nb * pheno_factor 
     # cs_rel_pom = 1/(16*np.pi)*(LO_pom + rel )**2                                            * gev_to_nb * pheno_factor
     # cs_NLO_rel = 1/(16*np.pi)*((LO_prime+rel)**2+2*(LO_prime+rel)*(NLO+rel-(LO_prime+rel))) * gev_to_nb * pheno_factor
-    cs_rel = 1/(16*np.pi)*(LO_prime**2 + 2*LO_prime*rel )                                              * gev_to_nb * pheno_factor 
-    cs_rel_pom = 1/(16*np.pi)*(LO_pom**2 + 2*LO_pom*rel)                                            * gev_to_nb * pheno_factor
-    cs_NLO_rel = 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime+rel)) * gev_to_nb * pheno_factor 
+    # cs_rel = 1/(16*np.pi)*(LO_prime**2 + 2*LO_prime*rel )                                              * gev_to_nb * pheno_factor 
+    # cs_rel_pom = 1/(16*np.pi)*(LO_pom**2 + 2*LO_pom*rel)                                            * gev_to_nb * pheno_factor
+    # cs_NLO_rel = 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime+rel)) * gev_to_nb * pheno_factor 
+
+    if(NLO_scheme=='LO(Ydip)'):
+        cs_NLO         = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime))
+        cs_NLO_rel     = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_prime**2+2*LO_prime*(NLO-LO_prime+rel))
+        cs_rel         = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_prime**2 + 2*LO_prime*rel )
+        cs_rel_pom     = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_pom**2 + 2*LO_pom*rel) 
+    elif(NLO_scheme=='squared'):
+        cs_NLO         = gev_to_nb * pheno_factor * 1/(16*np.pi)*NLO**2
+        cs_NLO_rel     = gev_to_nb * pheno_factor * 1/(16*np.pi)*(NLO+rel)**2
+        cs_rel         = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_prime+rel)**2
+        cs_rel_pom     = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_pom+rel)**2
+    elif(NLO_scheme=='LO(Y0)+BK'):
+        cs_NLO         = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_BK**2+2*LO_BK*(NLO-LO_BK))
+        cs_NLO_rel     = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_BK**2+2*LO_BK*(NLO-LO_BK+rel))
+        cs_rel         = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_prime**2 + 2*LO_prime*rel )
+        cs_rel_pom     = gev_to_nb * pheno_factor * 1/(16*np.pi)*(LO_pom**2 + 2*LO_pom*rel) 
+    else:
+        raise Exception('Invalid NLO scheme: ' + NLO_scheme)
 
     dict_cs = {"LO": cs_LO_prime, "LO_pom": cs_LO_pom, "NLO": cs_NLO, "LO_rel": cs_rel, "NLO_rel": cs_NLO_rel, "LO_rel_pom": cs_rel_pom   }
     return dict_cs
 
-def calculate_cross_section(Qv, amplitudes_table, reg_scheme, pol, O_LDME, q_LDME):
+def calculate_cross_section(Qv, amplitudes_table, reg_scheme, pol, O_LDME, q_LDME, NLO_scheme='LO(Ydip)'):
 
     if pol=='L':
-        dict_cs = calculate_cross_section_L(Qv, amplitudes_table, reg_scheme, O_LDME=O_LDME, q_LDME=q_LDME)
+        dict_cs = calculate_cross_section_L(Qv, amplitudes_table, reg_scheme, O_LDME=O_LDME, q_LDME=q_LDME, NLO_scheme=NLO_scheme)
     elif pol=='T':
-        dict_cs = calculate_cross_section_T(Qv, amplitudes_table, reg_scheme, O_LDME=O_LDME, q_LDME=q_LDME)
+        dict_cs = calculate_cross_section_T(Qv, amplitudes_table, reg_scheme, O_LDME=O_LDME, q_LDME=q_LDME, NLO_scheme=NLO_scheme)
     else:
         raise Exception("Invalid polarization: " + str(pol))
 
@@ -355,7 +389,7 @@ def get_distribution(file, reg_scheme, pol):
 
 
 
-def get_cross_section_values(file, reg_scheme, pol):
+def get_cross_section_values(file, reg_scheme, pol, NLO_scheme='LO(Ydip)'):
     """Reads off the LO, NLO, rel and NLO+rel values for the section from the file. 
     The reg_scheme indicates which scheme to use for the wave function regularization."""
     
@@ -363,7 +397,7 @@ def get_cross_section_values(file, reg_scheme, pol):
 
     Q = np.sqrt(Q2)
 
-    dict_cs = calculate_cross_section(Q, amplitudes_table, reg_scheme, pol, O_LDME=O_LDME0, q_LDME=q_LDME0)
+    dict_cs = calculate_cross_section(Q, amplitudes_table, reg_scheme, pol, O_LDME=O_LDME0, q_LDME=q_LDME0, NLO_scheme=NLO_scheme)
 
     return Wv, Q2, dict_cs["LO"], dict_cs["NLO"], dict_cs["LO_rel"], dict_cs["NLO_rel"], dict_cs["LO_pom"], dict_cs["LO_rel_pom"]
 
