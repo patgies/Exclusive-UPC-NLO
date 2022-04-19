@@ -16,8 +16,8 @@ particle = 'jpsi'
 plotting_functions.particle = particle
 plotting_functions.initialize()
 
-BKeq = 'resumbk'
-Y0 = '0.00'
+BKeq = 'kcbk'
+Y0 = '4.61'
 
 dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
 
@@ -71,12 +71,13 @@ if 3 in plots:
 
 
 if 4 in plots:
-    plt.figure(4)
+    fig4=plt.figure(4)
     plt.plot(cs_nlo_LOYdip[1], cs_nlo_LOYdip[3]/cs_nlo_LOYdip[3], 'b-', label=r'NLO result, LO=LO(Ydip)', linewidth=linewidth1)
     plt.plot(cs_nlo_LO0_BK[1], cs_nlo_LO0_BK[3]/cs_nlo_LOYdip[3], 'r-.', label=r'NLO result, LO=LO(Y0)+BK', linewidth=linewidth1)
     plt.plot(cs_nlo_sq[1], cs_nlo_sq[3]/cs_nlo_LOYdip[3], 'g:', label=r'NLO result, keep $\alpha_s^2$ term', linewidth=linewidth1)
     plt.legend( loc='upper left', frameon=False, prop={'size': 17} )
     plt.title(r'$\sigma_T/\sigma_T(\textrm{LO}=\textrm{LO}(Y_\textrm{dip}))$', fontsize=20)
+    plt.text(0.2, 0.25, r'$W = 90\textrm{ GeV}$', transform=fig4.transFigure, fontsize=20)
     plt.xlabel(r'$Q^2$ [GeV$^2$]', fontsize=20)
     plt.ylim([0, 2])
 
@@ -116,12 +117,13 @@ if 5 in plots:
 
 
 if 6 in plots:
-    plt.figure(6)
+    fig6=plt.figure(6)
     plt.plot(cs_nlo_LOYdip_W[0], cs_nlo_LOYdip_W[3]/cs_nlo_LOYdip_W[3], 'b-', label=r'NLO result, LO=LO(Ydip)', linewidth=linewidth1)
     plt.plot(cs_nlo_LO0_BK_W[0], cs_nlo_LO0_BK_W[3]/cs_nlo_LOYdip_W[3], 'r-.', label=r'NLO result, LO=LO(Y0)+BK', linewidth=linewidth1)
     plt.plot(cs_nlo_sq_W[0], cs_nlo_sq_W[3]/cs_nlo_LOYdip_W[3], 'g:', label=r'NLO result, keep $\alpha_s^2$ term', linewidth=linewidth1)
     plt.legend( loc='upper left', frameon=False, prop={'size': 17} )
     plt.title(r'$\sigma_T/\sigma_T(\textrm{LO}=\textrm{LO}(Y_\textrm{dip}))$', fontsize=20)
+    plt.text(0.59, 0.25, r'$Q^2 = 0.05\textrm{ GeV}^2$', transform=fig6.transFigure, fontsize=20)
     plt.xlabel(r'$W$ [GeV]', fontsize=20)
     plt.ylim([0, 2])
 
