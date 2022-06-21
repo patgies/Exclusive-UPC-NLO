@@ -149,13 +149,28 @@ echo Folder for the output, transverse = $OUTPUT_FOLDER_T
 
 date +"%d-%m-%y %T"
 
+# CONF FIXED_PARAM CALC_LONG CALC_TRANS PARTICLE ACCURACY INFO ADDITIONAL_OPTIONS
+
+
+calculate_amplitude "kcbk-lightq-parent-0.00" "Q2" false true "jpsi" 0 "test"
+
+
+
+# calculate_amplitude "kcbk-lightq-parent-4.61" "Q2" true true "jpsi" 2
+# calculate_amplitude "kcbk-lightq-parent-0.00" "Q2" true true "jpsi" 2
+# calculate_amplitude "resumbk-lightq-parent-4.61" "Q2" true true "jpsi" 2
+# calculate_amplitude "resumbk-lightq-parent-0.00" "Q2" true true "jpsi" 2
+# calculate_amplitude "tbk-lightq-parent-4.61" "Q2" true true "jpsi" 2
+# calculate_amplitude "tbk-lightq-parent-0.00" "Q2" true true "jpsi" 2
+
+
 # calculate_amplitude "kcbk-hera-bal+sd-4.61" "Q2" true true "jpsi" 2
 # calculate_amplitude "kcbk-hera-bal+sd-0.00" "Q2" true true "jpsi" 2
 # calculate_amplitude "resumbk-hera-bal+sd-4.61" "Q2" true true "jpsi" 2
 # calculate_amplitude "resumbk-hera-bal+sd-0.00" "Q2" true true "jpsi" 2
 # calculate_amplitude "tbk-hera-bal+sd-4.61" "Q2" true true "jpsi" 2
 # calculate_amplitude "tbk-hera-bal+sd-0.00" "Q2" true true "jpsi" 2
-calculate_amplitude "LOBK-MVe" "Q2" true true "jpsi" 0 "" "-xpom"
+# calculate_amplitude "LOBK-MVe" "Q2" true true "jpsi" 0 "" "-xpom"
 
 # calculate_amplitude "kcbk-hera-bal+sd-4.61" "W" true true "jpsi" 2
 # calculate_amplitude "kcbk-hera-bal+sd-0.00" "W" true true "jpsi" 2

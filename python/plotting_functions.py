@@ -71,11 +71,11 @@ def phenomenological_correction(lambda_v):
 def read_file(file):
     """Reads the file and gives the corresponding amplitudes. Returns the value of the constant variable, value for the varying variable the amplitude table. """
     with open(file, "r") as f:
-        lines = [line for line in f.readlines() if not line.startswith('#')]
+        lines = [line for line in f.readlines() if not line.startswith('#') and not line=='\n']
         W = []
         Q2 = []
         amplitudes_table = []
-        for l in lines[2:]: #TODO: fix when updated amplitude files
+        for l in lines[1:]:
             values = l.split(' ')
             values_float = [float(x) for x in values[:-1]]
             W += [values_float[0]]
@@ -108,15 +108,15 @@ def get_cross_section_ratio(file_L, file_T, reg_scheme):
     return cs_ratio
 
 
-def get_total_cross_section(file_L, file_T, reg_scheme):
+def get_total_cross_section(file_L, file_T, reg_scheme, NLO_scheme='LO(Ydip)'):
     """
     Calculates the total (differential) cross section at t=0, using the files for longitudinal and transverse production.
 
     Returns(the following are vectors with the same length):
     W, Q2, LO, NLO, LO_rel,NLO_rel, LO_pom, LO_rel_pom
     """
-    cs_L = get_cross_section_values(file_L, reg_scheme, "L")
-    cs_T = get_cross_section_values(file_T, reg_scheme, "T")
+    cs_L = get_cross_section_values(file_L, reg_scheme, "L", NLO_scheme=NLO_scheme)
+    cs_T = get_cross_section_values(file_T, reg_scheme, "T", NLO_scheme=NLO_scheme)
 
     if any(cs_L[0] != cs_T[0]):
         raise Exception("W vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
@@ -132,7 +132,7 @@ def get_total_cross_section(file_L, file_T, reg_scheme):
 
 
 
-def get_total_cross_section_distribution(file_L, file_T, reg_scheme):
+def get_total_cross_section_distribution(file_L, file_T, reg_scheme, NLO_scheme='LO(Ydip)'):
     """
     Calculates the total (differential) cross section at t=0, using the files for longitudinal and transverse production.
     Samples wave function values and gives the mean/std for various cross sections.
@@ -141,8 +141,8 @@ def get_total_cross_section_distribution(file_L, file_T, reg_scheme):
     Returns(the following are vectors with the same length):
     W, Q^2, rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std
     """
-    cs_L = get_distribution(file_L, reg_scheme, "L")
-    cs_T = get_distribution(file_T, reg_scheme, "T")
+    cs_L = get_distribution(file_L, reg_scheme, "L", NLO_scheme=NLO_scheme)
+    cs_T = get_distribution(file_T, reg_scheme, "T", NLO_scheme=NLO_scheme)
 
     if any(cs_L[0] != cs_T[0]):
         raise Exception("W vectors different: " + str(cs_L[0]) + "\nand\n" + str(cs_T[0]))
@@ -344,7 +344,7 @@ def calculate_cross_section(Qv, amplitudes_table, reg_scheme, pol, O_LDME, q_LDM
 
     return dict_cs
 
-def calculate_rel_error_bands(Qv, amplitudes_table, reg_scheme, pol):
+def calculate_rel_error_bands(Qv, amplitudes_table, reg_scheme, pol, NLO_scheme='LO(Ydip)'):
     """Calculate the distribution of various differential cross sections, in terms of the NRQCD matrix elements."""
     size = 1000
     O_LDME, q_LDME = get_random_LDMEs(size)
@@ -353,7 +353,7 @@ def calculate_rel_error_bands(Qv, amplitudes_table, reg_scheme, pol):
     cs_rel_pom_v = []
     cs_NLO_rel_v = []
     for i in range(size):
-        dict_cs = calculate_cross_section(Qv, amplitudes_table, reg_scheme, pol, O_LDME=O_LDME[i], q_LDME=q_LDME[i])
+        dict_cs = calculate_cross_section(Qv, amplitudes_table, reg_scheme, pol, O_LDME=O_LDME[i], q_LDME=q_LDME[i], NLO_scheme=NLO_scheme)
 
         cs_rel_v += [dict_cs["LO_rel"]]
         cs_rel_pom_v += [dict_cs["LO_rel_pom"]]
@@ -375,14 +375,14 @@ def get_random_LDMEs(size):
     O_LDME, q_LDME = np.random.multivariate_normal(mean, cov, size).T
     return O_LDME, q_LDME
 
-def get_distribution(file, reg_scheme, pol):
+def get_distribution(file, reg_scheme, pol, NLO_scheme='LO(Ydip)'):
     """Calculate the distribution of various differential cross sections, in terms of the NRQCD matrix elements.
     This is the correct implementation, though slower than the other one."""
     W, Q2, amplitudes_table = read_file(file)
         
     Q = np.sqrt(Q2)
 
-    rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std = calculate_rel_error_bands(Q, amplitudes_table, reg_scheme, pol)
+    rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std = calculate_rel_error_bands(Q, amplitudes_table, reg_scheme, pol, NLO_scheme=NLO_scheme)
 
     return W, Q2, rel_mean, rel_std, rel_pom_mean, rel_pom_std, NLO_rel_mean, NLO_rel_std
 

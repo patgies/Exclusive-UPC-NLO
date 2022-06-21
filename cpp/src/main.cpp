@@ -40,9 +40,9 @@ int main(int argc, char* argv[])
     bool ofileL_bool = false;
     bool ofileT_bool = false;
     int n_thread = 1;
-
     string dipole_data_file;
     string b_folder;
+
     
     if (argc < 2) {
         cerr << "No arguments given. See --help for more details." << endl;
@@ -89,9 +89,9 @@ int main(int argc, char* argv[])
     }
     
 
+
     for (int i=1; i<argc; i++)
     {
-       
         if (string(argv[i])=="-ofileL") {
             output_file_L = string(argv[i+1]);
             ofileL_bool = true;
@@ -251,6 +251,9 @@ int main(int argc, char* argv[])
         else if(string(argv[i])=="-b_folder") {
             b_folder = argv[i+1];
         }
+        else if(string(argv[i])=="-alpha_s_scheme") {
+            alpha_s_scheme = new string(argv[i+1]);
+        }
         else if (string(argv[i]).substr(0,1)=="-")
         {
             cerr << "Unknown parameter " << argv[i] <<  ". See --help for more details." << endl;
@@ -258,6 +261,7 @@ int main(int argc, char* argv[])
         }
         
     }
+
 
 
     //Check that the required variables are read
@@ -314,6 +318,11 @@ int main(int argc, char* argv[])
             exit(1);
         }
 
+    }
+
+    if( !alpha_s_scheme ) {
+        cerr << "Set alpha_s_scheme: bal+sd or parent dipole" << endl;
+        exit(1);
     }
 
     if(dipole_file_bool && dipole_data_file == "") {

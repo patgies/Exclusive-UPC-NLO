@@ -4,6 +4,8 @@
 #ifndef _CONSTANTS_H
 #define _CONSTANTS_H
 
+#include <string>
+using namespace std;
 
 
 // Global variables.
@@ -22,6 +24,7 @@ extern double C_F;
 
 //Constants for the (running) coupling constant.
 extern bool alpha_s_run_bool;
+extern string *alpha_s_scheme; // Bal+SD or parent dipole
 extern double alpha_s_const;
 extern double C_big;
 extern double lambda_QCD;

@@ -24,6 +24,7 @@ double C_F = (gsl_pow_2(N_c)-1.0)/(2.0*N_c); // 4/3
 
 //Constants for the (running) coupling constant.
 bool alpha_s_run_bool = true;
+string* alpha_s_scheme;
 double alpha_s_const;
 double C_big;
 double lambda_QCD;
@@ -109,7 +110,7 @@ double target_rapidity(double Y, double r) {
 
 // Gives the minimum for the z_2 integral in the unsub scheme.
 double z2_min_fun(double W, double Q) {
-    return fmin(exp(Y0_if- Y_0_fun(W, Q) ),0.5);
+    return fmin(exp(Y0_if- Y_0_fun(W, Q) ), z2_max);
 }
 
 // Gives the minimum for the z_2 integral for the variant of the sub scheme, where LO is evaluated at x_pom.
@@ -169,6 +170,7 @@ int read_constants_default() {
     u_min = 1.0e-5;
     u_max = 1000.0;
 
+    alpha_s_scheme = new string("bal+sd");
 
 
     calls_dim_low = 1e5;

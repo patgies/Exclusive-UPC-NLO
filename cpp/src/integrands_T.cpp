@@ -45,7 +45,16 @@ double Transverse::alpha_s( double r) {
 
 // alpha_s for the qqg-part, where the running alpha_s depends on the sizes of the dipoles.
 double Transverse::alpha_s3( double x10, double x20, double x21) {
-    double r = fmin(x10,  fmin(x20,x21) );
+    double r;
+    if( *alpha_s_scheme == "bal+sd" ) {
+        r = fmin(x10,  fmin(x20,x21) );        
+    }
+    else if( *alpha_s_scheme == "parent_dipole" ) {
+        r = x10;        
+    } else {
+        cerr << "Wrong alpha_s scheme: " << *alpha_s_scheme << endl;
+        exit(1);
+    }
     return alpha_s( r );
 }
 

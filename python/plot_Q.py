@@ -17,6 +17,7 @@ plotting_functions.initialize()
 reg_scheme_LO = 'decay width'
 reg_scheme_NLO = 'NR wave function'
 reg_scheme_rel = 'rel wave function'
+NLO_scheme = 'LO(Ydip)'
 
 dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_L/'
 dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
@@ -64,6 +65,20 @@ cs_kcbk_461_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-
 cs_lobk_mve_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-LOBK-MVe' + id_string_T + '.dat', reg_scheme_rel, 'T')
 
 
+cs_kcbk_parent_lightq_000 = plotting_functions.get_total_cross_section( dir_path_L + r'results-kcbk-lightq-parent-0.00' + id_string_L + '.dat', dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string_T + '.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+# cs_kcbk_parent_lightq_461 = plotting_functions.get_total_cross_section( dir_path_L + r'results-kcbk-lightq-parent-4.61' + id_string_L + '.dat', dir_path_T + r'results-kcbk-lightq-parent-4.61' + id_string_T + '.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+cs_tbk_parent_lightq_000 = plotting_functions.get_total_cross_section( dir_path_L + r'results-tbk-lightq-parent-0.00' + id_string_L + '.dat', dir_path_T + r'results-tbk-lightq-parent-0.00' + id_string_T + '.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+cs_tbk_parent_lightq_461 = plotting_functions.get_total_cross_section( dir_path_L + r'results-tbk-lightq-parent-4.61' + id_string_L + '.dat', dir_path_T + r'results-tbk-lightq-parent-4.61' + id_string_T + '.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+cs_resumbk_parent_lightq_000 = plotting_functions.get_total_cross_section( dir_path_L + r'results-resumbk-lightq-parent-0.00' + id_string_L + '.dat', dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string_T + '.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+cs_resumbk_parent_lightq_461 = plotting_functions.get_total_cross_section( dir_path_L + r'results-resumbk-lightq-parent-4.61' + id_string_L + '.dat', dir_path_T + r'results-resumbk-lightq-parent-4.61' + id_string_T + '.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+
+cs_kcbk_parent_lightq_000_rel = plotting_functions.get_total_cross_section_distribution( dir_path_L + r'results-kcbk-lightq-parent-0.00' + id_string_L + '.dat', dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string_T + '.dat', reg_scheme_rel, NLO_scheme=NLO_scheme)
+# cs_kcbk_parent_lightq_461_rel = plotting_functions.get_total_cross_section_distribution( dir_path_L + r'results-kcbk-lightq-parent-4.61' + id_string_L + '.dat', dir_path_T + r'results-kcbk-lightq-parent-4.61' + id_string_T + '.dat', reg_scheme_rel, NLO_scheme=NLO_scheme)
+cs_tbk_parent_lightq_000_rel = plotting_functions.get_total_cross_section_distribution( dir_path_L + r'results-tbk-lightq-parent-0.00' + id_string_L + '.dat', dir_path_T + r'results-tbk-lightq-parent-0.00' + id_string_T + '.dat', reg_scheme_rel, NLO_scheme=NLO_scheme)
+cs_tbk_parent_lightq_461_rel = plotting_functions.get_total_cross_section_distribution( dir_path_L + r'results-tbk-lightq-parent-4.61' + id_string_L + '.dat', dir_path_T + r'results-tbk-lightq-parent-4.61' + id_string_T + '.dat', reg_scheme_rel, NLO_scheme=NLO_scheme)
+cs_resumbk_parent_lightq_000_rel = plotting_functions.get_total_cross_section_distribution( dir_path_L + r'results-resumbk-lightq-parent-0.00' + id_string_L + '.dat', dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string_T + '.dat', reg_scheme_rel, NLO_scheme=NLO_scheme)
+cs_resumbk_parent_lightq_461_rel = plotting_functions.get_total_cross_section_distribution( dir_path_L + r'results-resumbk-lightq-parent-4.61' + id_string_L + '.dat', dir_path_T + r'results-resumbk-lightq-parent-4.61' + id_string_T + '.dat', reg_scheme_rel, NLO_scheme=NLO_scheme)
+
 
 sigma_tot_ZEUS_Q2, sigma_tot_ZEUS_data = experimental_data.sigma_tot_Q2_ZEUS()
 sigma_tot_H1_Q2, sigma_tot_H1_data     = experimental_data.sigma_tot_Q2_H1()
@@ -74,7 +89,7 @@ C_int = plotting_functions.t_integration_coefficient(W)
 linewidth = 2.5
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
-plots = [3,4,9]
+plots = [3,4,9, 301, 401]
 
 linewidth1 = 1.3*linewidth
 linewidth2 = 1.0*linewidth
@@ -217,6 +232,65 @@ if 4 in plots:
     plt.tight_layout()
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)
+
+
+
+if 301 in plots:
+    fig301=plt.figure(num=301)
+    plt.plot(Mv2 + cs_kcbk_parent_lightq_000[1],    C_int * cs_kcbk_parent_lightq_000[3], 'r--',label=r'NLO KCBK 0.00', linewidth=linewidth1)
+    # plt.plot(Mv2 + cs_kcbk_parent_lightq_461[1],    C_int * cs_kcbk_parent_lightq_461[3], 'r-',label=r'NLO KCBK 4.61', linewidth=linewidth1)
+    plt.plot(Mv2 + cs_tbk_parent_lightq_000[1],     C_int * cs_tbk_parent_lightq_000[3], 'g--',label=r'NLO TBK 0.00', linewidth=linewidth2)
+    plt.plot(Mv2 + cs_tbk_parent_lightq_461[1],     C_int * cs_tbk_parent_lightq_461[3], 'g-',label=r'NLO TBK 4.61', linewidth=linewidth2)
+    plt.plot(Mv2 + cs_resumbk_parent_lightq_000[1], C_int * cs_resumbk_parent_lightq_000[3], 'b--',label=r'NLO ResumBK 0.00', linewidth=linewidth3)
+    plt.plot(Mv2 + cs_resumbk_parent_lightq_461[1], C_int * cs_resumbk_parent_lightq_461[3], 'b-',label=r'NLO ResumBK 4.61', linewidth=linewidth3)
+    plt.plot(Mv2 + cs_lobk_mve[1],    C_int * cs_lobk_mve[6], 'k:',label=r'LO LOBK', linewidth=linewidth2)
+    plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
+    plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3)
+    legend1 = plt.legend(legend_lines,   legend_text,   prop={'size': 17}, frameon=False, loc='lower left')
+    legend2 = plt.legend(legend_lines_Y, legend_text_Y, prop={'size': 17}, frameon=False, loc='upper right')
+    plt.gca().add_artist(legend1) 
+    plt.title(r'$p+\gamma^* \rightarrow p + \mathrm{J}/\psi$, parent lightq', fontsize=20)
+    plt.xlabel(r'$M_{\mathrm{J}/\psi}^2+Q^2$ [GeV$^2$]', fontsize=20)
+    plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
+    plt.text(0.69, 0.65, r'$W = 90\textrm{ GeV}$', transform=fig301.transFigure, fontsize=20)
+    plt.xlim([Mv2, 1e2])
+    plt.ylim([0.05, 2e2])
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.tight_layout()
+    plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
+    plt.tick_params(axis='x', pad=5)
+
+if 401 in plots:    
+    fig401=plt.figure(num=401)
+    plt.plot(Mv2 + cs_kcbk_parent_lightq_000[1],    C_int * cs_kcbk_parent_lightq_000_rel[6], 'r--',label=r'NLO+rel KCBK 0.00', linewidth=linewidth1)
+    # plt.plot(Mv2 + cs_kcbk_parent_lightq_461[1],    C_int * cs_kcbk_parent_lightq_461_rel[6], 'r-',label=r'NLO+rel KCBK 4.61', linewidth=linewidth1)
+    plt.plot(Mv2 + cs_tbk_parent_lightq_000[1],     C_int * cs_tbk_parent_lightq_000_rel[6], 'g--',label=r'NLO+rel TBK 0.00', linewidth=linewidth2)
+    plt.plot(Mv2 + cs_tbk_parent_lightq_461[1],     C_int * cs_tbk_parent_lightq_461_rel[6], 'g-',label=r'NLO+rel TBK 4.61', linewidth=linewidth2)
+    plt.plot(Mv2 + cs_resumbk_parent_lightq_000[1], C_int * cs_resumbk_parent_lightq_000_rel[6], 'b--',label=r'NLO+rel ResumBK 0.00', linewidth=linewidth3)
+    plt.plot(Mv2 + cs_resumbk_parent_lightq_461[1], C_int * cs_resumbk_parent_lightq_461_rel[6], 'b-',label=r'NLO+rel ResumBK 4.61', linewidth=linewidth3)
+    plt.plot(Mv2 + cs_lobk_mve[1],    C_int * cs_lobk_mve_rel[4] * NRQCD_factor, 'k:',label=r'LO+rel LOBK', linewidth=linewidth2)
+    plt.errorbar(sigma_tot_ZEUS_Q2[0]+Mv**2, sigma_tot_ZEUS_data[0], xerr=[sigma_tot_ZEUS_Q2[0]-sigma_tot_ZEUS_Q2[1], sigma_tot_ZEUS_Q2[2]-sigma_tot_ZEUS_Q2[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
+    plt.errorbar(sigma_tot_H1_Q2[0]+Mv**2, sigma_tot_H1_data[0], xerr=[sigma_tot_H1_Q2[0]-sigma_tot_H1_Q2[1], sigma_tot_H1_Q2[2]-sigma_tot_H1_Q2[0]] , yerr=[np.sqrt(sigma_tot_H1_data[1]**2+sigma_tot_H1_data[2]**2),np.sqrt(sigma_tot_H1_data[3]**2+sigma_tot_H1_data[4]**2)],label='H1', fmt='vb', capsize=3)
+    legend1 = plt.legend(legend_lines, legend_text_rel, prop={'size': 17}, frameon=False, loc='lower left')
+    legend2 = plt.legend(legend_lines_Y, legend_text_Y, prop={'size': 17}, frameon=False, loc='upper right')
+    plt.gca().add_artist(legend1) 
+    plt.title(r'$p+\gamma^* \rightarrow p + \mathrm{J}/\psi$, parent lightq', fontsize=20)
+    plt.xlabel(r'$M_{\mathrm{J}/\psi}^2+Q^2$ [GeV$^2$]', fontsize=20)
+    plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
+    plt.text(0.69, 0.65, r'$W = 90\textrm{ GeV}$', transform=fig401.transFigure, fontsize=20)
+    plt.xlim([Mv2, 1e2])
+    plt.ylim([0.05, 2e2])
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.tight_layout()
+    plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
+    plt.tick_params(axis='x', pad=5)
+
 
 
 
