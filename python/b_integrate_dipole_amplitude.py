@@ -44,15 +44,14 @@ def b_integrate(dipole_amplitude_list, b_list):
     Here dipole amplitude contains arrays of dipole amplitudes. Just sum these together. b_list has values in fm, we convert them to GeV^-1
     """
 
-    fm_to_gev = 5.068
     b_step_size = 2
 
     # Trapezoid method
-    dipole_amplitude_integrated = 1/2 * dipole_amplitude_list[0] * b_list[0] * 2*np.pi * b_step_size * fm_to_gev**2
+    dipole_amplitude_integrated = 1/2 * dipole_amplitude_list[0] * b_list[0] * 2*np.pi * b_step_size 
     for i in range((len(dipole_amplitude_list)))[1:-1]:
-        dipole_amplitude_integrated += dipole_amplitude_list[i] * b_list[i] * 2*np.pi * b_step_size * fm_to_gev**2
+        dipole_amplitude_integrated += dipole_amplitude_list[i] * b_list[i] * 2*np.pi * b_step_size 
     
-    dipole_amplitude_integrated += 1/2 *  dipole_amplitude_list[-1] * b_list[-1] * 2*np.pi * b_step_size * fm_to_gev**2
+    dipole_amplitude_integrated += 1/2 *  dipole_amplitude_list[-1] * b_list[-1] * 2*np.pi * b_step_size 
 
 
     return dipole_amplitude_integrated
