@@ -13,6 +13,9 @@ namespace Longitudinal {
     double alpha_s_run(double r);
     double x10_value(double x20, double x21, double ph);
 
+    double g_int(int a, int b, double Qbar, double mf, double x2, double x3, double omega, double lambda, double y);
+
+
     double Ii_0_integrand(double t, double u, double b, double r, double m, double Qbar, double omega, double lambda);
     double I_integrand(double t, double u, double b, double r, double m, double Qbar, double omega, double lambda);
     double L_5(double x[], double delta, double m, double Q, double W);
@@ -21,6 +24,9 @@ namespace Longitudinal {
     double M_1(double x[], double delta, double m, double Q, double W);
     double M_2(double x[], double delta, double m, double Q, double W);
     double L_BK(double x[], double delta, double m, double Q, double W);
+    double M_1_fast(double x[], double delta, double m, double Q, double W);
+    double M_2_fast(double x[], double delta, double m, double Q, double W);
+
 
 
     double qq_LO(double x[], size_t dim, void *params);
@@ -31,6 +37,7 @@ namespace Longitudinal {
     double qq_NLO_K0(double x[], size_t dim, void *params);
     double qqg_dim4_sub(double x[], size_t dim, void *params);
     double qqg_dim4_unsub(double x[], size_t dim, void *params);
+    double qqg_dim5(double x[], size_t dim, void *params);
     double qqg_dim6(double x[], size_t dim, void *params);
     double qqg_BK(double x[], size_t dim, void *params);
     double lambda_integrand(double x[], size_t dim, void *params);

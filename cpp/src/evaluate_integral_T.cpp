@@ -37,7 +37,7 @@ namespace Transverse {
 
             gsl_monte_vegas_integrate (&f, xl, xu, dimension, calls_warm_up, r, s,
                                         &res, &err);
-            if( calls_dim_6 < 200000 || calls_dim_4 < 100000 ){
+            if( calls_dim_high < 200000 || calls_dim_4 < 100000 ){
                 gsl_monte_vegas_integrate (&f, xl, xu, dimension, calls, r, s, &res, &err);
 
             }
@@ -84,6 +84,7 @@ namespace Transverse {
         gsl_monte_function mf_qq_NLO_K = { &Transverse::qq_NLO_K, 2, &params_sub };
         gsl_monte_function mf_qqg_dim_4_sub = { &Transverse::qqg_dim4_sub, 4, &params_sub };
         gsl_monte_function mf_qqg_BK = { &Transverse::qqg_BK, 4, &params_sub };
+        gsl_monte_function mf_qqg_dim_5 = { &Transverse::qqg_dim5, 5, &params_sub };
         gsl_monte_function mf_qqg_dim_6 = { &Transverse::qqg_dim6, 6, &params_sub };
         gsl_monte_function mf_lambda = { &Transverse::lambda_integrand, 1, &params_sub };
         gsl_monte_function mf_qq_rel_002_pp = { &Transverse::qq_rel_002_pp, 1, &params_sub };
@@ -107,6 +108,7 @@ namespace Transverse {
         double xl_qq_NLO_J_2[] = {x10_min, xi_min, x_J_min };
         double xl_qq_NLO_K[] = {x10_min, z_K0_min};
         double xl_qqg_dim_4[] = {x20_min, x21_min, ph_min, z2_min};
+        double xl_qqg_dim_5[] = {x20_min, x21_min, ph_min, z2_min, y_min}; 
         double xl_qqg_dim_6[] = {x20_min, x21_min, ph_min, z2_min, t_min, u_min};
 
         double xu_qq_LO [] = {x10_max};
@@ -115,6 +117,7 @@ namespace Transverse {
         double xu_qq_NLO_J_2 [] = {x10_max, xi_max, x_J_max };
         double xu_qq_NLO_K [] = {x10_max, z_K0_max};
         double xu_qqg_dim_4 [] = {x20_max, x21_max, ph_max, z2_max};
+        double xu_qqg_dim_5 [] = {x20_max, x21_max, ph_max, z2_max, y_max};
         double xu_qqg_dim_6 [] = {x20_max, x21_max, ph_max, z2_max, t_max, u_max};
 
         int n_values = 15;
@@ -129,7 +132,12 @@ namespace Transverse {
         values[7] =  integral(mf_qq_NLO_K, xl_qq_NLO_K, xu_qq_NLO_K, 2, calls_dim_low);
         values[8] =  integral(mf_qqg_dim_4_sub, xl_qqg_dim_4, xu_qqg_dim_4, 4, calls_dim_4);
         values[9] =  integral(mf_qqg_BK, xl_qqg_dim_4, xu_qqg_dim_4, 4, calls_dim_4);
-        values[10] =  integral(mf_qqg_dim_6, xl_qqg_dim_6, xu_qqg_dim_6, 6, calls_dim_6);
+        if( dim6_bool){
+            values[10] =  integral(mf_qqg_dim_6, xl_qqg_dim_6, xu_qqg_dim_6, 6, calls_dim_high);
+        }
+        else {
+            values[10] =  integral(mf_qqg_dim_5, xl_qqg_dim_5, xu_qqg_dim_5, 5, calls_dim_high);
+        }
         if( !x_pom_bool ) {
             values[11] =  integral(mf_lambda, xl_qq_LO, xu_qq_LO, 1, calls_dim_low)/values[0];
         }

@@ -52,6 +52,8 @@ double t_min = 1.0e-5;
 double t_max = 1000.0;
 double u_min = 1.0e-5;
 double u_max = 1000.0;
+double y_min = 1.0e-5;
+double y_max = 1.0-1.0e-5;
 
 
 //Number of evaluation points:
@@ -64,12 +66,13 @@ int Q2_length=0;
 // 6 = 6-dimensional integral
 size_t calls_dim_low;
 size_t calls_dim_4;
-size_t calls_dim_6;
+size_t calls_dim_high;
 
 // Boolean switches for several options.
 bool eta_bool = false;
 bool x_pom_bool = false;
 bool dipole_file_bool = true;
+bool dim6_bool = false;
 
 double x_pom_fun(double W, double Q, double Delta) {
     return (Q*Q+Mv*Mv+Delta*Delta)/(W*W+Q*Q-m_N*m_N);
@@ -175,7 +178,7 @@ int read_constants_default() {
 
     calls_dim_low = 1e5;
     calls_dim_4 = 1e5;
-    calls_dim_6 = 1e5;
+    calls_dim_high = 1e5;
 
 
     dipole_file_bool = false;

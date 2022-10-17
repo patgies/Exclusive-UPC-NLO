@@ -13,8 +13,11 @@ namespace Transverse {
     double alpha_s_run(double r);
     double x10_value(double x20, double x21, double ph);
 
+    double g_int(int a, int b, double Qbar, double mf, double x2, double x3, double omega, double lambda, double y);
+
     double L_1(double x[], double delta, double m, double Q, double W);
     double M(double x[], double delta, double m, double Q, double W);
+    double M_fast(double x[], double delta, double m, double Q, double W);
     double L_BK(double x[], double delta, double m, double Q, double W);
 
 
@@ -26,6 +29,7 @@ namespace Transverse {
     double qq_NLO_K(double x[], size_t dim, void *params);
     double qqg_dim4_sub(double x[], size_t dim, void *params);
     double qqg_dim4_unsub(double x[], size_t dim, void *params);
+    double qqg_dim5(double x[], size_t dim, void *params);
     double qqg_dim6(double x[], size_t dim, void *params);
     double qqg_BK(double x[], size_t dim, void *params);
     double lambda_integrand(double x[], size_t dim, void *params);

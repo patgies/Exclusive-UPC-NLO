@@ -52,6 +52,8 @@ extern double t_min ;
 extern double t_max ;
 extern double u_min ;
 extern double u_max ;
+extern double y_min ;
+extern double y_max ;
 
 
 //Number of evaluation points:
@@ -64,12 +66,13 @@ extern int Q2_length;
 // 6 = 6-dimensional integral
 extern size_t calls_dim_low;
 extern size_t calls_dim_4;
-extern size_t calls_dim_6;
+extern size_t calls_dim_high;
 
 // Boolean switches for several options.
 extern bool eta_bool;
 extern bool x_pom_bool ;
 extern bool dipole_file_bool;
+extern bool dim6_bool;
 
 double x_pom_fun(double W, double Q, double Delta);
 double x_min_fun(double W, double Q, double Delta);

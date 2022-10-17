@@ -218,7 +218,10 @@ int main(int argc, char* argv[])
             calls_dim_4 = StrToInt(argv[i+1]);
         }
         else if(string(argv[i])=="-int_points_dim_6") {
-            calls_dim_6 = StrToInt(argv[i+1]);
+            calls_dim_high = StrToInt(argv[i+1]);
+        }
+        else if(string(argv[i])=="-int_points_dim_5") {
+            calls_dim_high = StrToInt(argv[i+1]);
         }
         else if(string(argv[i])=="-dipole_file") {
             dipole_data_file = argv[i+1];
@@ -253,6 +256,9 @@ int main(int argc, char* argv[])
         }
         else if(string(argv[i])=="-alpha_s_scheme") {
             alpha_s_scheme = new string(argv[i+1]);
+        }
+        else if(string(argv[i])=="-dim6") {
+            dim6_bool = true;
         }
         else if (string(argv[i]).substr(0,1)=="-")
         {

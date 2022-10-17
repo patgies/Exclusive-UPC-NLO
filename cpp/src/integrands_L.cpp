@@ -183,6 +183,89 @@ double Longitudinal::M_2(double x[], double delta, double m, double Q, double W)
     ) *2.0*M_PI*x20*x21*alpha_s3(x10,x20,x21)*2.0/3.0/M_PI * delta_factor_qqg(z2, delta, x20, x21, ph);
 }
 
+
+
+
+double Longitudinal::g_int(int a, int b, double Qbar, double mf, double x2, double x3, double omega, double lambda, double y) {
+    // Integrands of the functions G^(a;b)_(x) that appear in the qqg-part. Here the u-integral has been done, and only one integral remains.
+    // The integration varialbe is y = omega * t
+
+    double value = 1.0/pow( y, 0.5*(2.0-a+b) ) * pow( 2.0, a+b-1.0 ) * pow(omega, b-1.0) 
+                    * pow(( y*lambda * mf*mf + Qbar*Qbar + mf*mf ) / ( y*x3*x3 + omega*x2*x2 ), 0.5*(a+b-2.0) )
+                    * gsl_sf_bessel_Kn( a+b-2, sqrt(1.0/y * ( y*lambda * mf*mf + Qbar*Qbar + mf*mf ) * ( y*x3*x3 + omega*x2*x2 )) ) ;
+
+    return value;
+}
+
+double Longitudinal::M_1_fast(double x[], double delta, double m, double Q, double W) {
+    double x20 = x[0];
+    double x21 = x[1];
+    double ph = x[2];
+    double z2 = x[3];
+    double y = x[4];
+
+    double x10 = x10_value(x20, x21, ph);
+    double Y = rapidity(W, Q, z2);
+
+    double omega_f = (1.0/2.0-z2) * z2 * 8.0;
+    double lambda_f = 1.0/2.0*z2/(1.0/2.0-z2);
+    double Q_f = 0.5 * Q;
+    double b_f = sqrt( gsl_pow_2( (1.0 - 2.0*z2) * x20 ) + x21 * x21 - 2.0 * (1.0-2.0*z2) * x20 *x21 * cos( ph ) );
+    double r_f = x20;
+
+    double omega_g = 1.0/2.0*z2/(1.0/2.0-z2)/gsl_pow_2(1.0/2.0+z2);
+    double lambda_g = 2.0*z2*(1.0/2.0-z2);
+    double Q_g = sqrt( (1.0/2.0-z2) * (1.0/2.0+z2)) * Q;
+    double b_g = sqrt( gsl_pow_2( 1.0 / (1.0 + 2.0*z2) * x21 ) + x20 * x20 - 2.0 / (1.0 + 2.0*z2) * x20 *x21 * cos( ph ) );
+    double r_g = x21;
+
+
+    double g_12_bar_f = g_int(1, 2, Q_f, m, r_f, b_f, omega_f, lambda_f, y)-g_int(1, 2, Q_f, m, r_f, b_f, omega_f, 0.0, y);
+    double g_12_bar_g = g_int(1, 2, Q_g, m, r_g, b_g, omega_g, lambda_g, y)-g_int(1, 2, Q_g, m, r_g, b_g, omega_g, 0.0, y);
+
+
+    return  m/M_PI * N_xyz( x10, x20, x21, delta, Y ) * gsl_sf_bessel_K1( 2*m*z2*x20 ) * 
+    ( 
+        x20 * ((1.0-z2)*(1.0-z2)+z2*z2) * g_12_bar_f
+        +x21 * cos(ph) *(2.0*z2*z2-1.0) * (1.0-2.0*z2) * g_12_bar_g
+    ) * x20 *x21 * 2.0 *M_PI*alpha_s3(x10,x20,x21)*2.0/3.0/M_PI * delta_factor_qqg(z2, delta, x20, x21, ph);
+
+}
+
+double Longitudinal::M_2_fast(double x[], double delta, double m, double Q, double W) {
+    double x20 = x[0];
+    double x21 = x[1];
+    double ph = x[2];
+    double z2 = x[3];
+    double y = x[4];
+
+    double x10 = x10_value(x20, x21, ph);
+    double Y = rapidity(W, Q, z2);
+
+    double omega_f = (1.0/2.0-z2) * z2 * 8.0;
+    double lambda_f = 1.0/2.0*z2/(1.0/2.0-z2);
+    double Q_f = 0.5 * Q;
+    double b_f = sqrt( gsl_pow_2( (1.0 - 2.0*z2) * x20 ) + x21 * x21 - 2.0 * (1.0-2.0*z2) * x20 *x21 * cos( ph ) );
+    double r_f = x20;
+
+    double omega_g = 1.0/2.0*z2/(1.0/2.0-z2)/gsl_pow_2(1.0/2.0+z2);
+    double lambda_g = 2.0*z2*(1.0/2.0-z2);
+    double Q_g = sqrt( (1.0/2.0-z2) * (1.0/2.0+z2)) * Q;
+    double b_g = sqrt( gsl_pow_2( 1.0 / (1.0 + 2.0*z2) * x21 ) + x20 * x20 - 2.0 / (1.0 + 2.0*z2) * x20 *x21 * cos( ph ) );
+    double r_g = x21;
+
+
+    double g_11_f = g_int(1, 1, Q_f, m, r_f, b_f, omega_f, lambda_f, y);
+    double g_11_g = g_int(1, 1, Q_g, m, r_g, b_g, omega_g, lambda_g, y);
+
+    return  - 8.0/M_PI * m * m * gsl_pow_3(z2) * N_xyz( x10, x20, x21, delta, Y ) * gsl_sf_bessel_K0( 2*m*z2*x20 ) * 
+    ( 
+        g_11_f
+        - (0.5-z2)/(0.5+z2) * g_11_g 
+    ) *2.0*M_PI*x20*x21*alpha_s3(x10,x20,x21)*2.0/3.0/M_PI * delta_factor_qqg(z2, delta, x20, x21, ph);
+}
+
+
 double Longitudinal::L_5(double x[], double delta, double m, double Q, double W){
     double x20 = x[0];
     double x21 = x[1];
@@ -373,6 +456,20 @@ double Longitudinal::qqg_BK(double x[], size_t dim, void *params) {
     double W = p->W;
     return L_BK(x, delta, m, Q, W);
 }
+
+
+// Integrand for the 5-dimensional integral of the qqg part.
+// REPLACES dim6 part!
+double Longitudinal::qqg_dim5(double x[], size_t dim, void *params) {
+    dimension_error(dim, 5);
+    struct integ_params *p = (struct integ_params *)params;
+    double delta = p->delta;
+    double Q = p->Q;
+    double m = p->m;
+    double W = p->W;
+    return M_1_fast(x, delta, m, Q, W)+M_2_fast(x, delta, m, Q, W);
+}
+
 
 
 // Integrand for the 6-dimensional integral of the qqg part.

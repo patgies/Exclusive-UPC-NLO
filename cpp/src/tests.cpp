@@ -31,8 +31,12 @@ double phidef = 0.17;
 double Wdef = 90.0;
 double tdef = 0.12;
 double udef = 0.15;
+double ytdef = 0.12;
 
 double tol = 0.0001;
+
+// Transverse
+
 
 BOOST_AUTO_TEST_CASE( test_alphas_T )
 {
@@ -178,7 +182,16 @@ BOOST_AUTO_TEST_CASE( test_int_dim6_T )
 }
 
 
+BOOST_AUTO_TEST_CASE( test_int_dim5_T )
+{
+    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    double x[] = {x20def, x21def, phidef, z2def, ytdef};
+    BOOST_TEST( Transverse::qqg_dim5( x, 5,  &params) == -0.0000773066, tt::tolerance(tol) );
+}
 
+
+
+// Longitudinal
 
 
 
@@ -308,3 +321,27 @@ BOOST_AUTO_TEST_CASE( test_int_dim6_L )
     BOOST_TEST( Longitudinal::qqg_dim6( x, 6,  &params) == -0.0235301, tt::tolerance(tol) );
 }
 
+
+
+BOOST_AUTO_TEST_CASE( test_int_dim5_L )
+{
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    double x[] = {x20def, x21def, phidef, z2def, ytdef};
+    BOOST_TEST( Longitudinal::qqg_dim5( x, 5,  &params) == -0.0000543107, tt::tolerance(tol) );
+}
+
+// BOOST_AUTO_TEST_CASE( test_M_1_fast_L )
+// {
+//     struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+//     double x[] = {x20def, x21def, phidef, z2def, ytdef};
+//     BOOST_TEST( Longitudinal::M_1_fast(x, 0.0, m, Qdef, Wdef) == -0.0000395293, tt::tolerance(tol) );
+// }
+
+
+
+// BOOST_AUTO_TEST_CASE( test_M_2_fast_L )
+// {
+//     struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+//     double x[] = {x20def, x21def, phidef, z2def, ytdef};
+//     BOOST_TEST( Longitudinal::M_2_fast(x, 0.0, m, Qdef, Wdef) == -8.40579e-6, tt::tolerance(tol) );
+// }

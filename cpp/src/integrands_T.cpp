@@ -108,6 +108,17 @@ double Transverse::Omega_V(double m, double Q) {
 }
 
 
+double Transverse::g_int(int a, int b, double Qbar, double mf, double x2, double x3, double omega, double lambda, double y) {
+    // Integrands of the functions G^(a;b)_(x) that appear in the qqg-part. Here the u-integral has been done, and only one integral remains.
+    // The integration varialbe is y = omega * t
+
+    double value = 1.0/pow( y, 0.5*(2.0-a+b) ) * pow( 2.0, a+b-1.0 ) * pow(omega, b-1.0) 
+                    * pow(( y*lambda * mf*mf + Qbar*Qbar + mf*mf ) / ( y*x3*x3 + omega*x2*x2 ), 0.5*(a+b-2.0) )
+                    * gsl_sf_bessel_Kn( a+b-2, sqrt(1.0/y * ( y*lambda * mf*mf + Qbar*Qbar + mf*mf ) * ( y*x3*x3 + omega*x2*x2 )) ) ;
+
+    return value;
+}
+
 double Transverse::M(double x[], double delta, double m, double Q, double W) {
     double x20 = x[0];
     double x21 = x[1];
@@ -144,6 +155,55 @@ double Transverse::M(double x[], double delta, double m, double Q, double W) {
         *  x20 *x21 * 2.0 *M_PI*alpha_s3(x10,x20,x21)*2.0/3.0/M_PI * delta_factor_qqg(z2, delta, x20, x21, ph);
 
 }
+
+
+double Transverse::M_fast(double x[], double delta, double m, double Q, double W) {
+    // Another implementation of M, requires only 5 integrals instead of 6.
+    double x20 = x[0];
+    double x21 = x[1];
+    double ph = x[2];
+    double z2 = x[3];
+    double y = x[4];
+
+    double x10 = x10_value(x20, x21, ph);
+    double Y = rapidity(W, Q, z2);
+
+    double omega_j = (1.0/2.0-z2) * z2 * 8.0;
+    double lambda_j = 1.0/2.0*z2/(1.0/2.0-z2);
+    double Q_j = 0.5 * Q;
+    double b_j = sqrt( gsl_pow_2( (1.0 - 2.0*z2) * x20 ) + x21 * x21 - 2.0 * (1.0-2.0*z2) * x20 *x21 * cos( ph ) );
+    double r_j = x20;
+
+    double omega_k = 1.0/2.0*z2/(1.0/2.0-z2)/gsl_pow_2(1.0/2.0+z2);
+    double lambda_k = 2.0*z2*(1.0/2.0-z2);
+    double Q_k = sqrt( (1.0/2.0-z2) * (1.0/2.0+z2)) * Q;
+    double b_k = sqrt( gsl_pow_2( 1.0 / (1.0 + 2.0*z2) * x21 ) + x20 * x20 - 2.0 / (1.0 + 2.0*z2) * x20 *x21 * cos( ph ) );
+    double r_k = x21;
+
+    double rj_dot_bj = x20*x21*cos(ph)-(1.0-2.0*z2)*x20*x20;
+    double rk_dot_bk = -x20*x21*cos(ph) + 1.0/(1.0+2.0*z2)*x21*x21 ;
+
+    double g_12_bar_j = g_int(1, 2, Q_j, m, r_j, b_j, omega_j, lambda_j, y)-g_int(1, 2, Q_j, m, r_j, b_j, omega_j, 0.0, y);
+    double g_12_bar_k = g_int(1, 2, Q_k, m, r_k, b_k, omega_k, lambda_k, y)-g_int(1, 2, Q_k, m, r_k, b_k, omega_k, 0.0, y);
+    double g_22_bar_j = g_int(2, 2, Q_j, m, r_j, b_j, omega_j, lambda_j, y)-g_int(2, 2, Q_j, m, r_j, b_j, omega_j, 0.0, y);
+    double g_22_bar_k = g_int(2, 2, Q_k, m, r_k, b_k, omega_k, lambda_k, y)-g_int(2, 2, Q_k, m, r_k, b_k, omega_k, 0.0, y);
+
+    double g_21_j = g_int(2, 1, Q_j, m, r_j, b_j, omega_j, lambda_j, y);
+    double g_21_k = g_int(2, 1, Q_k, m, r_k, b_k, omega_k, lambda_k, y);
+
+    double g_11_j = g_int(1, 1, Q_j, m, r_j, b_j, omega_j, lambda_j, y);
+
+
+    double part_j = m/r_j * gsl_sf_bessel_K1(2.0*m*z2*r_j) * ( r_j*r_j*( gsl_pow_2(1-z2)+z2*z2 ) * (g_12_bar_j)+z2*z2*(2.0*z2-1.0)*rj_dot_bj*g_21_j )
+        - z2*gsl_sf_bessel_K0(2*m*z2*r_j)* ( rj_dot_bj * (2.0*z2-1)/4.0 * (g_22_bar_j)+8.0*m*m*z2*z2*g_11_j );
+    double part_k = m/r_j * gsl_sf_bessel_K1(2.0*m*z2*r_j) * ( r_j*r_k*cos(ph)/((2.0*z2+1.0))* (g_12_bar_k)+z2*z2*gsl_pow_2(2.0*z2-1.0)/gsl_pow_2(1.0+2.0*z2)*rk_dot_bk*g_21_k )
+        + z2*gsl_sf_bessel_K0(2*m*z2*r_j)* rk_dot_bk * (2.0*z2+1)/4.0 * (g_22_bar_k);
+
+    return N_xyz(x10,x20,x21,delta,Y)/(M_PI) * (  part_j -  part_k  )
+        *  x20 *x21 * 2.0 *M_PI*alpha_s3(x10,x20,x21)*2.0/3.0/M_PI * delta_factor_qqg(z2, delta, x20, x21, ph);
+
+}
+
 
 double Transverse::L_1(double x[], double delta, double m, double Q, double W){
     double x20 = x[0];
@@ -328,6 +388,20 @@ double Transverse::qqg_BK(double x[], size_t dim, void *params) {
     double W = p->W;
     return L_BK(x, delta, m, Q, W);
 }
+
+
+// Integrand for the 5-dimensional integral of the qqg part. 
+// REPLACES qqg_dim6.
+double Transverse::qqg_dim5(double x[], size_t dim, void *params) {
+    dimension_error(dim, 5);
+    struct integ_params *p = (struct integ_params *)params;
+    double delta = p->delta;
+    double Q = p->Q;
+    double m = p->m;
+    double W = p->W;
+    return M_fast(x, delta, m, Q, W);
+}
+
 
 
 // Integrand for the 6-dimensional integral of the qqg part.
