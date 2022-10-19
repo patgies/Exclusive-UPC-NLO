@@ -170,7 +170,7 @@ namespace Transverse {
         myfile << "#Delta value:\n" << std::scientific << std::setprecision(9) << Delta;
 
         myfile << "\n#Amplitude values:";
-        myfile << "\n#W (GeV)[0]      Q^2 (GeV^2)[1]   LO(Y_dip)[2]     LO(Y_pom)[3]     LO(Y_0)[4]       qq_NLO 1D dwS[5] qq_NLO 1D wfS[6] qq_NLO J_1[7]    qq_NLO J_2[8]    qq_NLO K[9]      qqg 4D no BK[10] qqg BK[11]       qqg 6D[12]       lambda[13]       qq_rel 002pp[14] qq_rel 200pp[15] qq_rel 100pm[16]";
+        myfile << "\n#W (GeV)[0]      Q^2 (GeV^2)[1]   LO(Y_dip)[2]     LO(Y_pom)[3]     LO(Y_0)[4]       qq_NLO 1D dwS[5] qq_NLO 1D wfS[6] qq_NLO J_1[7]    qq_NLO J_2[8]    qq_NLO K[9]      qqg 4D no BK[10] qqg BK[11]       qqg 5D[12]       lambda[13]       qq_rel 002pp[14] qq_rel 200pp[15] qq_rel 100pm[16]";
     
 
         for(int i_n = 0;i_n<W_length/n_thread+1; i_n++) {

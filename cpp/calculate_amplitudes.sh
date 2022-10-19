@@ -154,12 +154,12 @@ integration_points () {
     then 
         DIM_LOW=500000
         DIM_4=5000000
-        DIM_6=20000000
+        DIM_6=5000000
     elif [ $ACCURACY_LEVEL = 3 ]
     then 
         DIM_LOW=500000
         DIM_4=5000000
-        DIM_6=50000000
+        DIM_6=20000000
     else
         echo "Invalid accuracy: ${ACCURACY_LEVEL}. Should be 0,1,2,3"
         exit 1
