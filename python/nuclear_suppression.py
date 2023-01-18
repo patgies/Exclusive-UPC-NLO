@@ -10,15 +10,15 @@ import experimental_data
     
 plotting_functions.pheno_correction = False
 
-particle = 'jpsi'
+particle = 'upsilon'
 plotting_functions.particle = particle
 plotting_functions.initialize()
 
 reg_scheme_LO = 'decay width'
 reg_scheme_NLO = 'NR wave function'
 reg_scheme_rel = 'rel wave function'
-# NLO_scheme = 'LO(Ydip)'
-NLO_scheme = 'squared'
+NLO_scheme = 'LO(Ydip)'
+# NLO_scheme = 'squared'
 
 dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_L/'
 dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'

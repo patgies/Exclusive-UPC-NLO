@@ -18,6 +18,7 @@ reg_scheme_LO = 'decay width'
 reg_scheme_NLO = 'NR wave function'
 reg_scheme_rel = 'rel wave function'
 NLO_scheme = 'LO(Ydip)'
+# NLO_scheme = 'squared'
 
 dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_L/'
 dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'

@@ -10,9 +10,11 @@ import plotting_functions
 import experimental_data
 
 
+# plotting_functions.pheno_correction = True
 plotting_functions.pheno_correction = False
 
-particle = 'jpsi'
+# particle = 'jpsi'
+particle = 'upsilon'
 plotting_functions.particle = particle
 plotting_functions.initialize()
 
@@ -23,12 +25,24 @@ reg_scheme_rel = 'rel wave function'
 # NLO_scheme='squared'
 NLO_scheme='LO(Ydip)'
 
+
+
+if particle == 'jpsi':
+    # plots = [3,4,16, 301, 401]
+    plots = [302, 402]
+elif particle == 'upsilon':
+    # plots = [14]
+    plots = [303]
+
+
+
 if particle == 'jpsi':
     id_string = '-jpsi-T-Q2'
     # id_string = "_Q2_0.05" 
     # id_string = "_Q2_0.05-m_1.4" 
 elif particle == 'upsilon':
     id_string = '-upsilon-T-Q2'
+    # id_string = '-upsilon-T-Q2_0.01_high-W'
 
 dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_L/'
 dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
@@ -51,6 +65,7 @@ dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
 # cs_tbk_000_rel_L = plotting_functions.get_distribution_W( dir_path_L + r'results-tbk-hera-bal+sd-0.00.dat', reg_scheme_rel, "L"  )
 # cs_resumbk_000_rel_L = plotting_functions.get_distribution_W( dir_path_L + r'results-resumbk-hera-bal+sd-0.00.dat', reg_scheme_rel, "L"  )
 
+
 cs_kcbk_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T" )
 cs_kcbk_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T" )
 cs_tbk_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T" )
@@ -68,37 +83,51 @@ cs_tbk_000_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-t
 cs_resumbk_461_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-resumbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_rel, "T" )
 cs_resumbk_000_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-resumbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_rel, "T" )
 
-cs_kcbk_parent_lightq_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-lightq-parent-4.61' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
-cs_kcbk_parent_lightq_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
-cs_tbk_parent_lightq_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-lightq-parent-4.61' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
-cs_tbk_parent_lightq_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-lightq-parent-0.00' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
-cs_resumbk_parent_lightq_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-lightq-parent-4.61' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
-cs_resumbk_parent_lightq_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
-
-cs_kcbk_parent_lightq_461_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-kcbk-lightq-parent-4.61' + id_string + '.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
-cs_kcbk_parent_lightq_000_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string + '.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
-cs_tbk_parent_lightq_461_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-tbk-lightq-parent-4.61' + id_string + '.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
-cs_tbk_parent_lightq_000_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-tbk-lightq-parent-0.00' + id_string + '.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
-cs_resumbk_parent_lightq_461_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-resumbk-lightq-parent-4.61' + id_string + '.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
-cs_resumbk_parent_lightq_000_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string + '.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
 
 
-cs_ampsq_kcbk_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme='squared' )
-cs_ampsq_kcbk_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme='squared' )
-cs_ampsq_tbk_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme='squared' )
-cs_ampsq_tbk_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme='squared' )
-cs_ampsq_resumbk_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme='squared' )
-cs_ampsq_resumbk_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme='squared' )
+if particle == 'jpsi':
+    cs_kcbk_parent_lightq_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-lightq-parent-4.61' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
+    cs_kcbk_parent_lightq_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
+    cs_tbk_parent_lightq_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-lightq-parent-4.61' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
+    cs_tbk_parent_lightq_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-lightq-parent-0.00' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
+    cs_resumbk_parent_lightq_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-lightq-parent-4.61' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
+    cs_resumbk_parent_lightq_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
 
-cs_kcbk_parent_lightq_000_T_Q0 = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string + '_0.dat', reg_scheme_NLO, "T",       NLO_scheme=NLO_scheme )
-cs_tbk_balsd_lightq_000_T_Q0 = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-lightq-bal+sd-0.00' + id_string + '_0.dat', reg_scheme_NLO, "T",          NLO_scheme=NLO_scheme )
-cs_resumbk_parent_lightq_000_T_Q0 = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string + '_0.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
+    cs_kcbk_parent_lightq_461_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-kcbk-lightq-parent-4.61' + id_string + '.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
+    cs_kcbk_parent_lightq_000_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string + '.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
+    cs_tbk_parent_lightq_461_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-tbk-lightq-parent-4.61' + id_string + '.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
+    cs_tbk_parent_lightq_000_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-tbk-lightq-parent-0.00' + id_string + '.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
+    cs_resumbk_parent_lightq_461_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-resumbk-lightq-parent-4.61' + id_string + '.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
+    cs_resumbk_parent_lightq_000_rel_T = plotting_functions.get_distribution( dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string + '.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
+
+
+    cs_ampsq_kcbk_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme='squared' )
+    cs_ampsq_kcbk_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme='squared' )
+    cs_ampsq_tbk_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme='squared' )
+    cs_ampsq_tbk_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme='squared' )
+    cs_ampsq_resumbk_000_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme='squared' )
+    cs_ampsq_resumbk_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme='squared' )
+
+    cs_kcbk_parent_lightq_000_T_Q0 = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string + '_0.dat', reg_scheme_NLO, "T",       NLO_scheme=NLO_scheme )
+    cs_tbk_balsd_lightq_000_T_Q0 = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-lightq-bal+sd-0.00' + id_string + '_0.dat', reg_scheme_NLO, "T",          NLO_scheme=NLO_scheme )
+    cs_resumbk_parent_lightq_000_T_Q0 = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string + '_0.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
 
 
 
-cs_kcbk_parent_lightq_000_T_Q0_rel = plotting_functions.get_distribution( dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string + '_0.dat', reg_scheme_rel, "T",       NLO_scheme=NLO_scheme )
-cs_tbk_balsd_lightq_000_T_Q0_rel = plotting_functions.get_distribution( dir_path_T + r'results-tbk-lightq-bal+sd-0.00' + id_string + '_0.dat', reg_scheme_rel, "T",          NLO_scheme=NLO_scheme )
-cs_resumbk_parent_lightq_000_T_Q0_rel = plotting_functions.get_distribution( dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string + '_0.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
+    cs_kcbk_parent_lightq_000_T_Q0_rel = plotting_functions.get_distribution( dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string + '_0.dat', reg_scheme_rel, "T",       NLO_scheme=NLO_scheme )
+    cs_tbk_balsd_lightq_000_T_Q0_rel = plotting_functions.get_distribution( dir_path_T + r'results-tbk-lightq-bal+sd-0.00' + id_string + '_0.dat', reg_scheme_rel, "T",          NLO_scheme=NLO_scheme )
+    cs_resumbk_parent_lightq_000_T_Q0_rel = plotting_functions.get_distribution( dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string + '_0.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
+
+if particle == 'upsilon':
+    cs_kcbk_parent_lightq_000_T_Q0 = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string + '_0.01_high-W.dat', reg_scheme_NLO, "T",       NLO_scheme=NLO_scheme )
+    cs_tbk_balsd_lightq_000_T_Q0 = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-lightq-bal+sd-0.00' + id_string + '_0.01_high-W.dat', reg_scheme_NLO, "T",          NLO_scheme=NLO_scheme )
+    cs_resumbk_parent_lightq_000_T_Q0 = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string + '_0.01_high-W.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
+
+
+
+    cs_kcbk_parent_lightq_000_T_Q0_rel = plotting_functions.get_distribution( dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string + '_0.01_high-W.dat', reg_scheme_rel, "T",       NLO_scheme=NLO_scheme )
+    cs_tbk_balsd_lightq_000_T_Q0_rel = plotting_functions.get_distribution( dir_path_T + r'results-tbk-lightq-bal+sd-0.00' + id_string + '_0.01_high-W.dat', reg_scheme_rel, "T",          NLO_scheme=NLO_scheme )
+    cs_resumbk_parent_lightq_000_T_Q0_rel = plotting_functions.get_distribution( dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string + '_0.01_high-W.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
 
 
 
@@ -144,18 +173,15 @@ sigma_tot_ZEUS_v2_upsilon, sigma_tot_ZEUS_v2_upsilon_data = experimental_data.si
 sigma_tot_CMS_upsilon, sigma_tot_CMS_upsilon_data = experimental_data.sigma_tot_Upsilon_CMS()
 sigma_tot_LHCb_upsilon, sigma_tot_LHCb_upsilon_data     = experimental_data.sigma_tot_Upsilon_LHCb()
 
-W = cs_kcbk_000_T[0]
+if particle == 'jpsi':
+    W = cs_kcbk_000_T[0]
+if particle == 'upsilon':
+    W = cs_kcbk_parent_lightq_000_T_Q0[0]
 C_int = plotting_functions.t_integration_coefficient(W)
 
 linewidth = 2.5
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
-
-if particle == 'jpsi':
-    # plots = [3,4,16, 301, 401]
-    plots = [302, 402]
-elif particle == 'upsilon':
-    plots = [14]
 
 linewidth1 = 1.3*linewidth
 linewidth2 = 1.0*linewidth
@@ -432,6 +458,38 @@ if 302 in plots:
     plt.tick_params(axis='x', pad=5)
 
 
+if 303 in plots:
+    fig303=plt.figure(num=303)
+    plt.plot(cs_kcbk_parent_lightq_000_T_Q0[0],    C_int * cs_kcbk_parent_lightq_000_T_Q0[3], 'r--',label=r'NLO KCBK parent 0.00', linewidth=linewidth1)
+    plt.plot(cs_tbk_balsd_lightq_000_T_Q0[0],     C_int *  cs_tbk_balsd_lightq_000_T_Q0[3], 'g--',label=r'NLO TBK bal+sd 0.00', linewidth=linewidth2)
+    plt.plot(cs_resumbk_parent_lightq_000_T_Q0[0], C_int * cs_resumbk_parent_lightq_000_T_Q0[3], 'b--',label=r'NLO ResumBK parent 0.00', linewidth=linewidth3)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_T[6], 'k:',label=r'LO LOBK', linewidth=linewidth2)
+    plt.errorbar(sigma_tot_ZEUS_v1_upsilon[0], sigma_tot_ZEUS_v1_upsilon_data[0], xerr=[sigma_tot_ZEUS_v1_upsilon[0]-sigma_tot_ZEUS_v1_upsilon[1], sigma_tot_ZEUS_v1_upsilon[2]-sigma_tot_ZEUS_v1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[1]**2+sigma_tot_ZEUS_v1_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[3]**2+sigma_tot_ZEUS_v1_upsilon_data[4]**2)],label='ZEUS', fmt='or', capsize=3, zorder=10)
+    plt.errorbar(sigma_tot_ZEUS_v2_upsilon[0], sigma_tot_ZEUS_v2_upsilon_data[0], xerr=[sigma_tot_ZEUS_v2_upsilon[0]-sigma_tot_ZEUS_v2_upsilon[1], sigma_tot_ZEUS_v2_upsilon[2]-sigma_tot_ZEUS_v2_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[1]**2+sigma_tot_ZEUS_v2_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[3]**2+sigma_tot_ZEUS_v2_upsilon_data[4]**2)],fmt='or', capsize=3, zorder=10)
+    plt.errorbar(sigma_tot_H1_upsilon[0], sigma_tot_H1_upsilon_data[0], xerr=[sigma_tot_H1_upsilon[0]-sigma_tot_H1_upsilon[1], sigma_tot_H1_upsilon[2]-sigma_tot_H1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_H1_upsilon_data[1]**2+sigma_tot_H1_upsilon_data[2]**2),np.sqrt(sigma_tot_H1_upsilon_data[3]**2+sigma_tot_H1_upsilon_data[4]**2)],label='H1', fmt='vb', capsize=3, zorder=10)
+    plt.errorbar(sigma_tot_CMS_upsilon[0], sigma_tot_CMS_upsilon_data[0], xerr=[sigma_tot_CMS_upsilon[0]-sigma_tot_CMS_upsilon[1], sigma_tot_CMS_upsilon[2]-sigma_tot_CMS_upsilon[0]] , yerr=[np.sqrt(sigma_tot_CMS_upsilon_data[1]**2+sigma_tot_CMS_upsilon_data[2]**2),np.sqrt(sigma_tot_CMS_upsilon_data[3]**2+sigma_tot_CMS_upsilon_data[4]**2)],label='CMS', fmt='sg', capsize=3, zorder=10)
+    plt.errorbar(sigma_tot_LHCb_upsilon[0], sigma_tot_LHCb_upsilon_data[0], yerr=[sigma_tot_LHCb_upsilon_data[1],sigma_tot_LHCb_upsilon_data[2]],label='LHCb', fmt='*m', capsize=3, markersize=10, zorder=10)
+    # legend1 = plt.legend(legend_lines_upsilon, legend_text_upsilon, prop={'size': 14}, frameon=False, loc='upper left')
+    # legend2 = plt.legend(legend_lines_upsilon_exp, legend_text_upsilon_exp, prop={'size': 14}, frameon=False, loc='lower right')
+    # plt.gca().add_artist(legend1)
+    plt.legend(prop={'size': 11}, frameon=False, ncol=2, loc='upper left')
+    plt.title(r'$p+\gamma^* \rightarrow p + \Upsilon$', fontsize=20)
+    plt.xlabel(r'$W$ [GeV]', fontsize=20)
+    plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
+    plt.text(0.71, 0.2, r'$Q^2 = 0.01\textrm{ GeV}^2$', transform=fig303.transFigure, fontsize=15)
+    plt.xlim([1e2, 3e3])
+    plt.ylim([1e-2, 1e1])
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.tight_layout()
+    plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
+    plt.tick_params(axis='x', pad=5)
+
+
+
+
 if 4 in plots:
     fig4=plt.figure(num=4)
     plt.plot(cs_kcbk_000_T[0],    C_int * cs_kcbk_000_rel_T[6], 'r--',label=r'NLO+rel KCBK 0.00', linewidth=linewidth1)
@@ -542,6 +600,38 @@ if 402 in plots:
     plt.tight_layout()
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)
+
+
+if 403 in plots:
+    fig403=plt.figure(num=403)
+    plt.plot(cs_kcbk_parent_lightq_000_T_Q0[0],    C_int * cs_kcbk_parent_lightq_000_T_Q0_rel[6], 'r--',label=r'NLO+rel KCBK parent 0.00', linewidth=linewidth1)
+    plt.plot(cs_tbk_balsd_lightq_000_T_Q0[0],     C_int *  cs_tbk_balsd_lightq_000_T_Q0_rel[6], 'g--',label=r'NLO+rel TBK bal+sd 0.00', linewidth=linewidth2)
+    plt.plot(cs_resumbk_parent_lightq_000_T_Q0[0], C_int * cs_resumbk_parent_lightq_000_T_Q0_rel[6], 'b--',label=r'NLO+rel ResumBK parent 0.00', linewidth=linewidth3)
+    plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_rel_T[4] * NRQCD_factor, 'k:',label=r'LO+rel LOBK', linewidth=linewidth2)
+    plt.errorbar(sigma_tot_ZEUS_v1_upsilon[0], sigma_tot_ZEUS_v1_upsilon_data[0], xerr=[sigma_tot_ZEUS_v1_upsilon[0]-sigma_tot_ZEUS_v1_upsilon[1], sigma_tot_ZEUS_v1_upsilon[2]-sigma_tot_ZEUS_v1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[1]**2+sigma_tot_ZEUS_v1_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v1_upsilon_data[3]**2+sigma_tot_ZEUS_v1_upsilon_data[4]**2)],label='ZEUS', fmt='or', capsize=3, zorder=10)
+    plt.errorbar(sigma_tot_ZEUS_v2_upsilon[0], sigma_tot_ZEUS_v2_upsilon_data[0], xerr=[sigma_tot_ZEUS_v2_upsilon[0]-sigma_tot_ZEUS_v2_upsilon[1], sigma_tot_ZEUS_v2_upsilon[2]-sigma_tot_ZEUS_v2_upsilon[0]] , yerr=[np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[1]**2+sigma_tot_ZEUS_v2_upsilon_data[2]**2),np.sqrt(sigma_tot_ZEUS_v2_upsilon_data[3]**2+sigma_tot_ZEUS_v2_upsilon_data[4]**2)],fmt='or', capsize=3, zorder=10)
+    plt.errorbar(sigma_tot_H1_upsilon[0], sigma_tot_H1_upsilon_data[0], xerr=[sigma_tot_H1_upsilon[0]-sigma_tot_H1_upsilon[1], sigma_tot_H1_upsilon[2]-sigma_tot_H1_upsilon[0]] , yerr=[np.sqrt(sigma_tot_H1_upsilon_data[1]**2+sigma_tot_H1_upsilon_data[2]**2),np.sqrt(sigma_tot_H1_upsilon_data[3]**2+sigma_tot_H1_upsilon_data[4]**2)],label='H1', fmt='vb', capsize=3, zorder=10)
+    plt.errorbar(sigma_tot_CMS_upsilon[0], sigma_tot_CMS_upsilon_data[0], xerr=[sigma_tot_CMS_upsilon[0]-sigma_tot_CMS_upsilon[1], sigma_tot_CMS_upsilon[2]-sigma_tot_CMS_upsilon[0]] , yerr=[np.sqrt(sigma_tot_CMS_upsilon_data[1]**2+sigma_tot_CMS_upsilon_data[2]**2),np.sqrt(sigma_tot_CMS_upsilon_data[3]**2+sigma_tot_CMS_upsilon_data[4]**2)],label='CMS', fmt='sg', capsize=3, zorder=10)
+    plt.errorbar(sigma_tot_LHCb_upsilon[0], sigma_tot_LHCb_upsilon_data[0], yerr=[sigma_tot_LHCb_upsilon_data[1],sigma_tot_LHCb_upsilon_data[2]],label='LHCb', fmt='*m', capsize=3, markersize=10, zorder=10)
+    # legend1 = plt.legend(legend_lines_upsilon, legend_text_upsilon, prop={'size': 14}, frameon=False, loc='upper left')
+    # legend2 = plt.legend(legend_lines_upsilon_exp, legend_text_upsilon_exp, prop={'size': 14}, frameon=False, loc='lower right')
+    # plt.gca().add_artist(legend1) # plt.title(r'$\sigma_{\textrm{tot}}$, $Q^2= 0.05$ GeV$^2$ [nb]', fontsize=17)
+    plt.legend(prop={'size': 12}, frameon=False, ncol=1)
+    plt.title(r'$p+\gamma^* \rightarrow p + \Upsilon$', fontsize=20)
+    plt.xlabel(r'$W$ [GeV]', fontsize=20)
+    plt.ylabel(r'$\sigma_{\textrm{tot}}$ [nb]', fontsize=20)
+    plt.text(0.57, 0.8, r'$Q^2 = 0.01\textrm{ GeV}^2$', transform=fig403.transFigure, fontsize=20)
+    plt.xlim([1e2, 3e3])
+    plt.ylim([1e-2, 1e1])
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.tight_layout()
+    plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
+    plt.tick_params(axis='x', pad=5)
+
+
 
 
 if 5 in plots:
