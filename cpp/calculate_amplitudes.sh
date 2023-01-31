@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CODE_FOLDER=build/bin                   # Where is the actual program?
 INPUT_FOLDER=config_files               # Where are the config files located?
@@ -199,14 +199,16 @@ date +"%d-%m-%y %T"
 
 # CONF FIXED_PARAM FIXED_VALUE PARAM_MIN PARAM_MAX CALC_LONG CALC_TRANS PARTICLE ACCURACY INFO ADDITIONAL_OPTIONS
 
+calculate_amplitude "LOBK-as-const" "Q2" 0.01 100 3000 false true "jpsi" 2 "_high-W"
 
-calculate_amplitude "kcbk-lightq-parent-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_high-W"
-calculate_amplitude "resumbk-lightq-parent-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_high-W"
-calculate_amplitude "tbk-lightq-bal+sd-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_high-W"
 
-calculate_amplitude "A197-kcbk-lightq-parent-0.00" "Q2" 90 0.01 100 true true "jpsi" 2 "_high-W"
-calculate_amplitude "A197-resumbk-lightq-parent-0.00" "Q2" 90 0.01 100 true true "jpsi" 2 "_high-W"
-calculate_amplitude "A197-tbk-lightq-bal+sd-0.00" "Q2" 90 0.01 100 true true "jpsi" 2 "_high-W"
+# calculate_amplitude "kcbk-lightq-parent-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_high-W"
+# calculate_amplitude "resumbk-lightq-parent-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_high-W"
+# calculate_amplitude "tbk-lightq-bal+sd-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_high-W"
+
+# calculate_amplitude "A197-kcbk-lightq-parent-0.00" "Q2" 90 0.01 100 true true "jpsi" 2 "_high-W"
+# calculate_amplitude "A197-resumbk-lightq-parent-0.00" "Q2" 90 0.01 100 true true "jpsi" 2 "_high-W"
+# calculate_amplitude "A197-tbk-lightq-bal+sd-0.00" "Q2" 90 0.01 100 true true "jpsi" 2 "_high-W"
 
 
 # calculate_amplitude "A197-kcbk-lightq-parent-0.00" "Q2" 0.01 100 3000 false true "jpsi" 2 "_high-W"

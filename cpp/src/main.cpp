@@ -74,6 +74,7 @@ int main(int argc, char* argv[])
         cout << "-int_points_dim_6:\tNumber of integration points for the 6-dimensional part of the calculate" << endl;
         cout << "One can also set the integration limits if needed. However, this isn't necessary and default values may be used instead." << endl;
         cout << "If running alpha_s is used (as is by default), the following variables must be set:" << endl;
+        cout << "-alpha_s_scheme:\tSet the scheme for running alpha_s: bal+sd or parent_dipole." << endl;
         cout << "-C^2:\tSet C^2" << endl;
         cout << "-lambda_QCD:\tSet lambda_QCD" << endl;
         cout << "-c_small:\tSet c (lower-case alphabet)" << endl;
@@ -326,7 +327,7 @@ int main(int argc, char* argv[])
 
     }
 
-    if( !alpha_s_scheme ) {
+    if( !alpha_s_scheme && alpha_s_run_bool ) {
         cerr << "Set alpha_s_scheme: bal+sd or parent dipole" << endl;
         exit(1);
     }

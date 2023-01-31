@@ -6,6 +6,8 @@ import numpy as np
 import os 
 import plotting_functions
 
+plots = [51]
+# plots = [1,2,5]
 
 # def phenomenological_correction(lambda_v):
 #     real_part_correction = lambda x: 1+np.tan( np.pi/2 * x )**2
@@ -18,10 +20,11 @@ import plotting_functions
 dir_path = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
 
 
-alphas_const = False
+alphas_const = True
 if alphas_const:
     # amplitude_file = dir_path + r'production_amplitude_W_as_02_fixed_ver_2.0.dat'
-    amplitude_file = dir_path + r'KCBK_Ybk_4.6_as_0.3_W.dat'
+    # amplitude_file = dir_path + r'KCBK_Ybk_4.6_as_0.3_W.dat'
+    amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_high-W.dat'
 else:
     # amplitude_file = dir_path + r'results-kcbk-lightq-bal+sd-4.61.dat'
     # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-4.61-jpsi-T-Q2.dat'
@@ -91,7 +94,6 @@ linewidth = 2.5
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
-plots = [1,2,5]
 
 if 1 in plots:
     plt.figure(1)
@@ -266,6 +268,48 @@ if 5 in plots:
     plt.xlim([20, 1e3])
     # plt.ylim([-0.2, 0.4])
     plt.ylim([-0.6, 1.4])
+    plt.xticks(fontsize=18)
+    # plt.yticks(fontsize=18,ticks=[0,0.05,0.1,0.15,0.2])
+    plt.yticks(fontsize=18)
+    plt.xscale('log')
+    # plt.yscale('log')
+    plt.tight_layout()
+    plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
+    plt.tick_params(axis='x', pad=5)
+
+
+if 51 in plots:
+    fig5=plt.figure(51)
+    plt.plot(Wv, NLO, 'k-',label=r'NLO', linewidth=1.3*linewidth)
+    # plt.plot(Wv, NLO, 'r-',label=r'$\textrm{NLO} (=\textrm{LO}(x^\prime)+ \textrm{NLO}_\textrm{dip} + \textrm{NLO}_{qqg})$', linewidth=linewidth)
+    # plt.plot(Wv, NLO, 'b-',label=r'$\textrm{NLO} (=\textrm{LO}(x_\textrm{P})+ \textrm{NLO}_\textrm{BK,2} + \textrm{NLO}_\textrm{dip} + \textrm{NLO}_{qqg})$', linewidth=linewidth)
+    plt.plot(Wv, LO_prime, 'k--',label=r'LO$(Y_\textrm{dip})$', linewidth=1.3*linewidth)
+    # plt.plot(Wv, LO_pom, 'g--',label=r'$\textrm{LO}(x_\textrm{P})$', linewidth=linewidth)
+    plt.plot(Wv, LO_0, 'g--',label=r'LO$(Y_0)$', linewidth=linewidth)
+    # plt.plot(Wv, LO_BK, 'r--',label=r'$\textrm{LO}(x_0)+ L_\textrm{BK}$', linewidth=linewidth)
+    plt.plot(Wv, NLO_dip, 'b:',label=r'NLO$_\textrm{dip}$', linewidth=linewidth)
+    # plt.plot(Wv, NLO_qqg+NLO_BK, 'r:',label=r'NLO$_{q \bar q g}$', linewidth=linewidth)
+    plt.plot(Wv, NLO_qqg, 'r:',label=r'NLO$_{\textrm{q} \overline \textrm{q}\textrm{g}}$(no BK)', linewidth=linewidth)
+    plt.plot(Wv, NLO_BK, 'r-.',label=r'NLO$_{\textrm{q} \overline \textrm{q}\textrm{g}}$(BK)', linewidth=linewidth)
+    # plt.plot(Wv, NLO_qqg+NLO_BK+LO_0-LO_prime, 'g:',label=r'NLO$_{q \bar q g}$+LO$(x_0)$-LO$(x^\prime)$', linewidth=linewidth)
+    plt.legend(prop={'size': 15}, frameon=False, ncol=2, loc='upper left', columnspacing=0.5)
+    # if alphas_const:
+    #     plt.title(r'Amplitude at $Q^2 =10 \textrm{GeV}^2$ [GeV$^{-2}$] $(\alpha_s = 0.3)$', fontsize=14)
+    # else:
+    #     plt.title(r'Amplitude at $Q^2 =10 \textrm{GeV}^2$ [GeV$^{-2}$] (KCBK 4.61)', fontsize=14)
+    # plt.title(r'Amplitude at $Q^2 =10 \textrm{GeV}^2$ [GeV$^{-2}$] $(m_c = 1.2\textrm{GeV})$', fontsize=17)
+    plt.xlabel(r'$W \textrm{ [GeV]}$', fontsize=20)
+    # plt.ylabel(r'$i \mathcal{A}_L(t=0,Q^2=10 \textrm{ GeV}^2)$ ', fontsize=20)
+    plt.ylabel(r'$-i \mathcal{A}_T$ [GeV$^{-2}$]', fontsize=20)
+    # plt.text(0.5, 0.85, r'$t=0, Q^2 = 10\textrm{ GeV}^2$', transform=fig5.transFigure, fontsize=16)
+    plt.text(0.22, 0.59, r'$t=0$', transform=fig5.transFigure, fontsize=18)
+    plt.text(0.22, 0.665, r'$Q^2 = 0.05\textrm{ GeV}^2$', transform=fig5.transFigure, fontsize=18)
+    # plt.ylabel(r'$\sigma_L+\sigma_T$ [nb]', fontsize=15)
+    # plt.xlim([50, 2e2])
+    # plt.xlim([50, 1e3])
+    plt.xlim([30, 1e3])
+    # plt.ylim([-0.2, 0.4])
+    plt.ylim([-2, 4])
     plt.xticks(fontsize=18)
     # plt.yticks(fontsize=18,ticks=[0,0.05,0.1,0.15,0.2])
     plt.yticks(fontsize=18)

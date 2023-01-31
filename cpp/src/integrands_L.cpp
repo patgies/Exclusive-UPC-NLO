@@ -47,6 +47,9 @@ double Longitudinal::alpha_s( double r) {
 
 // alpha_s for the qqg-part, where the running alpha_s depends on the sizes of the dipoles.
 double Longitudinal::alpha_s3( double x10, double x20, double x21) {
+    if (!alpha_s_run_bool) {
+        return alpha_s_const;
+    }
     double r;
     if( *alpha_s_scheme == "bal+sd" ) {
         r = fmin(x10,  fmin(x20,x21) );        
