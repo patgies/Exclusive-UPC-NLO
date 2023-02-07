@@ -109,13 +109,13 @@ if particle == 'jpsi':
     cs_ampsq_resumbk_461_T = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_NLO, "T", NLO_scheme='squared' )
 
     cs_kcbk_parent_lightq_000_T_Q0 = plotting_functions.get_cross_section_values( dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string + '_0.dat', reg_scheme_NLO, "T",       NLO_scheme=NLO_scheme )
-    cs_tbk_balsd_lightq_000_T_Q0 = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-lightq-bal+sd-0.00' + id_string + '_0.dat', reg_scheme_NLO, "T",          NLO_scheme=NLO_scheme )
+    cs_tbk_balsd_lightq_000_T_Q0 = plotting_functions.get_cross_section_values( dir_path_T + r'results-tbk-lightq-bal+sd-0.00' + id_string + '_0.01_high-W.dat', reg_scheme_NLO, "T",          NLO_scheme=NLO_scheme )
     cs_resumbk_parent_lightq_000_T_Q0 = plotting_functions.get_cross_section_values( dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string + '_0.dat', reg_scheme_NLO, "T", NLO_scheme=NLO_scheme )
 
 
 
     cs_kcbk_parent_lightq_000_T_Q0_rel = plotting_functions.get_distribution( dir_path_T + r'results-kcbk-lightq-parent-0.00' + id_string + '_0.dat', reg_scheme_rel, "T",       NLO_scheme=NLO_scheme )
-    cs_tbk_balsd_lightq_000_T_Q0_rel = plotting_functions.get_distribution( dir_path_T + r'results-tbk-lightq-bal+sd-0.00' + id_string + '_0.dat', reg_scheme_rel, "T",          NLO_scheme=NLO_scheme )
+    cs_tbk_balsd_lightq_000_T_Q0_rel = plotting_functions.get_distribution( dir_path_T + r'results-tbk-lightq-bal+sd-0.00' + id_string + '_0.01_high-W.dat', reg_scheme_rel, "T",          NLO_scheme=NLO_scheme )
     cs_resumbk_parent_lightq_000_T_Q0_rel = plotting_functions.get_distribution( dir_path_T + r'results-resumbk-lightq-parent-0.00' + id_string + '_0.dat', reg_scheme_rel, "T", NLO_scheme=NLO_scheme )
 
 if particle == 'upsilon':

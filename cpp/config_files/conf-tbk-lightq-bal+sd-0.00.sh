@@ -8,7 +8,7 @@ C2=822
 lambda_QCD=0.241
 c_small=0.2
 mu_0=0.6025
-dipole_file=../../nlodisfit/data/dipole-tbk-hera-bal+sd-0.00.dip
+dipole_file=../../nlodisfit/data/dipole-tbk-lightq-bal+sd-0.00.dip
 
 alpha_s_scheme=bal+sd
 
