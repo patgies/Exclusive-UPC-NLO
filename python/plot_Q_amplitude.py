@@ -15,28 +15,33 @@ import plotting_functions
 
 
 # Order:LO(x_min) 	 LO(x_pom) 	 LO(x_max) 	 qq NLO 1 dim 	 qq NLO J_1 	 qq NLO J_2 	 qq NLO K_0 	 qqg dim 4 no BK 	 qqg dim 4 sub2 BK 	 qqg dim 4 unsub BK 	 qqg dim 6
-dir_path = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes/'
+dir_path = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
 
 
 alphas_const = False
 if alphas_const:
     amplitude_file = dir_path + r'production_amplitude_Q_as_02.dat'
 else:
-    amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-4.61-jpsi-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-4.61-jpsi-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-upsilon-T-W_90.dat'
+    amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-upsilon-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-W_90.dat'
     # amplitude_file = dir_path + r'results-A197-kcbk-hera-bal+sd-4.61-Q.dat'
     # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-0.00-Q.dat'
     # amplitude_file = dir_path + r'results-IP_SAT_m1.4-Q.dat'
     # amplitude_file = dir_path + r'results-LOBK-MVe-Q.dat'
     # amplitude_file = dir_path + r'production_amplitude_W_m1.2.dat'
-with open(amplitude_file, "r") as f:
-    lines = [line for line in f.readlines() if not line.startswith('#')]
-    Qv = np.array([float(x) for x in lines[2].split(' ')[:-1]])
-    amplitudes_table = []
-    for l in lines[3:]:
-        values = l.split(' ')
-        amplitudes_vector = [float(x) for x in values[:-1]]
-        amplitudes_table += [amplitudes_vector]
+# with open(amplitude_file, "r") as f:
+#     lines = [line for line in f.readlines() if not line.startswith('#')]
+#     Qv = np.array([float(x) for x in lines[2].split(' ')[:-1]])
+#     amplitudes_table = []
+#     for l in lines[3:]:
+#         values = l.split(' ')
+#         amplitudes_vector = [float(x) for x in values[:-1]]
+#         amplitudes_table += [amplitudes_vector]
+Wv, Q2, amplitudes_table = plotting_functions.read_file(amplitude_file)
 
+Qv = np.sqrt(Q2)
 
 Nc = 3
 ef = 2/3
@@ -84,17 +89,22 @@ rel_factor = e*ef*m*Nc/(np.pi)*2/ np.sqrt(2*Nc) * wf_rel
 # factor = e*ef*Nc/(2*np.pi)*2*wf_LO*Qv / np.sqrt(2*Nc)
 
 
-lambda_v = np.array(amplitudes_table)[:,12]
-amplitudes = np.transpose(nonrel_factor*np.transpose(np.array(amplitudes_table)[:,:12]))
-rel_amplitudes = np.transpose(rel_factor*np.transpose(np.array(amplitudes_table)[:,13:]))
+# lambda_v = np.array(amplitudes_table)[:,12]
+# amplitudes = np.transpose(nonrel_factor*np.transpose(np.array(amplitudes_table)[:,:12]))
+# rel_amplitudes = np.transpose(rel_factor*np.transpose(np.array(amplitudes_table)[:,13:]))
 
+
+
+lambda_v = np.array(amplitudes_table)[:,11]
+amplitudes = nonrel_factor*np.array(amplitudes_table)[:,:11]
+rel_amplitudes = rel_factor*np.array(amplitudes_table)[:,12:]
 
 
 linewidth = 2.5
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
-plots = [5]
+plots = [2]
 
 if 1 in plots:
     plt.figure(1)
@@ -122,6 +132,24 @@ if 1 in plots:
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)
 
+# LO_prime = amplitudes[:,0]
+# LO_pom = amplitudes[:,1]
+# LO_0 = amplitudes[:,2]
+# LO_BK = amplitudes[:,2] + amplitudes[:,9]
+# if reg_scheme == 'decay width':
+#     NLO_dip = amplitudes[:,3]+amplitudes[:,5]+amplitudes[:,6]+amplitudes[:,7]
+# else:
+#     NLO_dip = amplitudes[:,4]+amplitudes[:,5]+amplitudes[:,6]+amplitudes[:,7]
+# NLO_qqg = amplitudes[:,8]+amplitudes[:,11]
+# NLO_BK = amplitudes[:,10]
+# NLO = LO_0 + NLO_BK + NLO_dip + NLO_qqg
+# NLO2 = LO_prime + NLO_dip + NLO_qqg
+# NLO3 = LO_pom + amplitudes[:,9] + NLO_dip + NLO_qqg
+
+# rel = rel_amplitudes[:,0] + rel_amplitudes[:,1] + 1/2*rel_amplitudes[:,2]
+
+
+
 LO_prime = amplitudes[:,0]
 LO_pom = amplitudes[:,1]
 LO_0 = amplitudes[:,2]
@@ -130,13 +158,12 @@ if reg_scheme == 'decay width':
     NLO_dip = amplitudes[:,3]+amplitudes[:,5]+amplitudes[:,6]+amplitudes[:,7]
 else:
     NLO_dip = amplitudes[:,4]+amplitudes[:,5]+amplitudes[:,6]+amplitudes[:,7]
-NLO_qqg = amplitudes[:,8]+amplitudes[:,11]
-NLO_BK = amplitudes[:,10]
-NLO = LO_0 + NLO_BK + NLO_dip + NLO_qqg
+NLO_qqg = amplitudes[:,8]+amplitudes[:,10]
+NLO_BK = amplitudes[:,9]
+NLO = (LO_0 + NLO_BK) + NLO_dip + NLO_qqg
 NLO2 = LO_prime + NLO_dip + NLO_qqg
-NLO3 = LO_pom + amplitudes[:,9] + NLO_dip + NLO_qqg
+# NLO3 = (LO_pom + amplitudes[:,9]) + NLO_dip + NLO_qqg
 
-rel = rel_amplitudes[:,0] + rel_amplitudes[:,1] + 1/2*rel_amplitudes[:,2]
 
 if 2 in plots:
     plt.figure(2)
@@ -179,14 +206,14 @@ gev_to_nb = 0.389379e6
 # cs_rel_pom = 1/(16*np.pi)*(LO_pom + rel )**2                                            * gev_to_nb * pheno_factor
 # cs_NLO_rel = 1/(16*np.pi)*((LO_prime+rel)**2+2*(LO_prime+rel)*(NLO+rel-(LO_prime+rel))) * gev_to_nb * pheno_factor 
 
-dict_cs = plotting_functions.calculate_cross_section(Qv, amplitudes_table, reg_scheme)
+# dict_cs = plotting_functions.calculate_cross_section(Qv, amplitudes_table, reg_scheme)
 
-cs_LO_prime = dict_cs["LO"]
-cs_LO_pom = dict_cs["LO_pom"]
-cs_NLO = dict_cs["NLO"]
-cs_rel = dict_cs["LO_rel"]
-cs_rel_pom = dict_cs["LO_rel_pom"]
-cs_NLO_rel = dict_cs["NLO_rel"]
+# cs_LO_prime = dict_cs["LO"]
+# cs_LO_pom = dict_cs["LO_pom"]
+# cs_NLO = dict_cs["NLO"]
+# cs_rel = dict_cs["LO_rel"]
+# cs_rel_pom = dict_cs["LO_rel_pom"]
+# cs_NLO_rel = dict_cs["NLO_rel"]
 
 
 if 3 in plots:

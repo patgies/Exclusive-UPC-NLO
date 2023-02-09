@@ -10,8 +10,8 @@ import experimental_data
     
 plotting_functions.pheno_correction = False
 
-particle = 'jpsi'
-# particle = 'upsilon'
+# particle = 'jpsi'
+particle = 'upsilon'
 plotting_functions.particle = particle
 plotting_functions.initialize()
 
@@ -41,16 +41,26 @@ else:
 Mv2 = Mv**2
 
 Cf = 4/3
-NRQCD_factor = (1-2*Cf*alpha_s0/np.pi)**2
+# NRQCD_factor = (1-2*Cf*alpha_s0/np.pi)**2
 
+if particle == 'jpsi':
+    cs_kcbk_parent_lightq_000_p =    plotting_functions.get_total_cross_section( dir_path_L + r'results-kcbk-lightq-parent-0.00-jpsi-L-W_90.dat', dir_path_T + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+    cs_tbk_balsd_lightq_000_p =      plotting_functions.get_total_cross_section( dir_path_L + r'results-tbk-lightq-bal+sd-0.00-jpsi-L-W_90.dat', dir_path_T + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+    cs_resumbk_parent_lightq_000_p = plotting_functions.get_total_cross_section( dir_path_L + r'results-resumbk-lightq-parent-0.00-jpsi-L-W_90.dat', dir_path_T + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
 
-cs_kcbk_parent_lightq_000_p =    plotting_functions.get_total_cross_section( dir_path_L + r'results-kcbk-lightq-parent-0.00-jpsi-L-W_90.dat', dir_path_T + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
-cs_tbk_balsd_lightq_000_p =      plotting_functions.get_total_cross_section( dir_path_L + r'results-tbk-lightq-bal+sd-0.00-jpsi-L-W_90.dat', dir_path_T + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
-cs_resumbk_parent_lightq_000_p = plotting_functions.get_total_cross_section( dir_path_L + r'results-resumbk-lightq-parent-0.00-jpsi-L-W_90.dat', dir_path_T + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+    cs_kcbk_parent_lightq_000_A =    plotting_functions.get_total_cross_section( dir_path_L + r'results-A197-kcbk-lightq-parent-0.00-jpsi-L-W_90.dat',    dir_path_T + r'results-A197-kcbk-lightq-parent-0.00-jpsi-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+    cs_tbk_balsd_lightq_000_A =      plotting_functions.get_total_cross_section( dir_path_L + r'results-A197-tbk-lightq-bal+sd-0.00-jpsi-L-W_90.dat',     dir_path_T + r'results-A197-tbk-lightq-bal+sd-0.00-jpsi-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+    cs_resumbk_parent_lightq_000_A = plotting_functions.get_total_cross_section( dir_path_L + r'results-A197-resumbk-lightq-parent-0.00-jpsi-L-W_90.dat', dir_path_T + r'results-A197-resumbk-lightq-parent-0.00-jpsi-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
 
-cs_kcbk_parent_lightq_000_A =    plotting_functions.get_total_cross_section( dir_path_L + r'results-A197-kcbk-lightq-parent-0.00-jpsi-L-W_90.dat',    dir_path_T + r'results-A197-kcbk-lightq-parent-0.00-jpsi-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
-cs_tbk_balsd_lightq_000_A =      plotting_functions.get_total_cross_section( dir_path_L + r'results-A197-tbk-lightq-bal+sd-0.00-jpsi-L-W_90.dat',     dir_path_T + r'results-A197-tbk-lightq-bal+sd-0.00-jpsi-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
-cs_resumbk_parent_lightq_000_A = plotting_functions.get_total_cross_section( dir_path_L + r'results-A197-resumbk-lightq-parent-0.00-jpsi-L-W_90.dat', dir_path_T + r'results-A197-resumbk-lightq-parent-0.00-jpsi-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+if particle == 'upsilon':
+    cs_kcbk_parent_lightq_000_p =    plotting_functions.get_total_cross_section( dir_path_L + r'results-kcbk-lightq-parent-0.00-upsilon-L-W_90.dat',           dir_path_T + r'results-kcbk-lightq-parent-0.00-upsilon-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+    cs_tbk_balsd_lightq_000_p =      plotting_functions.get_total_cross_section( dir_path_L + r'results-tbk-lightq-bal+sd-0.00-upsilon-L-W_90.dat',            dir_path_T + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+    cs_resumbk_parent_lightq_000_p = plotting_functions.get_total_cross_section( dir_path_L + r'results-resumbk-lightq-parent-0.00-upsilon-L-W_90.dat',        dir_path_T + r'results-resumbk-lightq-parent-0.00-upsilon-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+    
+    cs_kcbk_parent_lightq_000_A =    plotting_functions.get_total_cross_section( dir_path_L + r'results-A197-kcbk-lightq-parent-0.00-upsilon-L-W_90.dat',    dir_path_T + r'results-A197-kcbk-lightq-parent-0.00-upsilon-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+    cs_tbk_balsd_lightq_000_A =      plotting_functions.get_total_cross_section( dir_path_L + r'results-A197-tbk-lightq-bal+sd-0.00-upsilon-L-W_90.dat',     dir_path_T + r'results-A197-tbk-lightq-bal+sd-0.00-upsilon-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+    cs_resumbk_parent_lightq_000_A = plotting_functions.get_total_cross_section( dir_path_L + r'results-A197-resumbk-lightq-parent-0.00-upsilon-L-W_90.dat', dir_path_T + r'results-A197-resumbk-lightq-parent-0.00-upsilon-T-W_90.dat', reg_scheme_NLO, NLO_scheme=NLO_scheme)
+
 
 
 

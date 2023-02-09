@@ -26,11 +26,13 @@ if alphas_const:
     # amplitude_file = dir_path + r'KCBK_Ybk_4.6_as_0.3_W.dat'
     amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_high-W.dat'
 else:
-    # amplitude_file = dir_path + r'results-kcbk-lightq-bal+sd-4.61.dat'
+    # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-Q2.dat'
     # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-4.61-jpsi-T-Q2.dat'
-    # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-Q2.dat'
+    amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-Q2.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-Q2_0.01_high-W.dat'
-    amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-Q2_0.01_high-W.dat'
+    # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-Q2_0.01_high-W.dat'
+    # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-upsilon-T-Q2_0.01_high-W.dat'
+    # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-upsilon-T-Q2_0.01_high-W.dat'
     # amplitude_file = dir_path + r'results-LOBK-MVe-rcBK.dat'
     # amplitude_file = dir_path + r'results-tbk-hera-bal+sd-4.61.dat'
     # amplitude_file = dir_path + r'results-tbk-hera-bal+sd-4.61_Q2_0.05.dat'
@@ -113,7 +115,7 @@ if 1 in plots:
     plt.title(r'Amplitude [GeV$^{-2}$]', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=15)
     plt.xlim([50, 1e3])
-    plt.ylim([-0.2, 0.4])
+    plt.ylim([-1.0, 1.0])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
     plt.xscale('log')
@@ -160,7 +162,7 @@ if 2 in plots:
     # plt.ylabel(r'$\sigma_L+\sigma_T$ [nb]', fontsize=15)
     # plt.xlim([50, 2e2])
     plt.xlim([50, 1e3])
-    plt.ylim([-0.02e1, 0.4e0])
+    plt.ylim([-0.1e1, 1e0])
     plt.xticks(fontsize=12)
     plt.yticks(fontsize=12)
     plt.xscale('log')
