@@ -24,7 +24,9 @@ if alphas_const:
 else:
     # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-4.61-jpsi-T-W_90.dat'
     # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-upsilon-T-W_90.dat'
-    amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-upsilon-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-upsilon-T-W_90.dat'
+    amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff.dat'
+    # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-W_90.dat'
     # amplitude_file = dir_path + r'results-A197-kcbk-hera-bal+sd-4.61-Q.dat'
     # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-0.00-Q.dat'
@@ -104,7 +106,7 @@ linewidth = 2.5
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
-plots = [2]
+plots = [2,21]
 
 if 1 in plots:
     plt.figure(1)
@@ -184,6 +186,32 @@ if 2 in plots:
     plt.yticks(fontsize=15)
     # plt.xscale('log')
     # plt.yscale('log')
+    plt.tight_layout()
+    plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
+    plt.tick_params(axis='x', pad=5)
+
+
+
+
+if 21 in plots:
+    plt.figure(21)
+    plt.plot(Qv**2, np.abs(NLO), 'k-',label=r'$\textrm{NLO} (=\textrm{LO}(x_0)+ \textrm{NLO}_\textrm{BK} + \textrm{NLO}_\textrm{dip} + \textrm{NLO}_{qqg})$', linewidth=linewidth)
+    plt.plot(Qv**2, np.abs(LO_prime), 'b--',label=r'$\textrm{LO}(x^\prime$)', linewidth=linewidth)
+    plt.plot(Qv**2, np.abs(LO_pom), 'g--',label=r'$\textrm{LO}(x_\textrm{P})$', linewidth=linewidth)
+    plt.plot(Qv**2, np.abs(LO_0), 'r--',label=r'$\textrm{LO}(x_0)$', linewidth=linewidth)
+    # plt.plot(Qv**2+Mv**2Wv, LO_BK, 'r--',label=r'$\textrm{LO}(x_0)+ L_\textrm{BK}$', linewidth=linewidth)
+    plt.plot(Qv**2, np.abs(NLO_dip), 'b:',label=r'$\textrm{NLO}_\textrm{dip}$', linewidth=linewidth)
+    plt.plot(Qv**2, np.abs(NLO_qqg), 'r:',label=r'$\textrm{NLO}_{qqg}$', linewidth=linewidth)
+    plt.plot(Qv**2, np.abs(NLO_BK), 'k:',label=r'$\textrm{NLO}_\textrm{BK}$', linewidth=linewidth)
+    plt.legend(prop={'size': 12}, frameon=False)
+    plt.title(r'Amplitude at $W =90 \textrm{GeV}$ [GeV$^{-2}$]', fontsize=17)
+    plt.xlabel(r'$Q^2$ [GeV$^2$]', fontsize=15)
+    plt.xlim([0.01, 1e2])
+    plt.ylim([0.001, 0.2])
+    plt.xticks(fontsize=15)
+    plt.yticks(fontsize=15)
+    # plt.xscale('log')
+    plt.yscale('log')
     plt.tight_layout()
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)

@@ -74,6 +74,10 @@ bool x_pom_bool = false;
 bool dipole_file_bool = true;
 bool dim6_bool = false;
 
+bool minus_cutoff_bool = false;
+double minus_cutoff_value = 1.0;
+
+
 double x_pom_fun(double W, double Q, double Delta) {
     return (Q*Q+Mv*Mv+Delta*Delta)/(W*W+Q*Q-m_N*m_N);
 }
@@ -83,6 +87,9 @@ double x_min_fun(double W, double Q, double Delta) {
     double x_pom = x_pom_fun(W, Q, Delta);
     return x_pom * 2.0*Q0*Q0/(Q*Q+Mv*Mv+Delta*Delta);
 }
+
+
+
 
 double Y_0_fun(double W, double Q) {
     return log( (W*W+Q*Q-m_N*m_N) / (Q0*Q0) );
@@ -113,6 +120,7 @@ double target_rapidity(double Y, double r) {
 
 // Gives the minimum for the z_2 integral in the unsub scheme.
 double z2_min_fun(double W, double Q) {
+    if( minus_cutoff_bool == true ) return 0.0;
     return fmin(exp(Y0_if- Y_0_fun(W, Q) ), z2_max);
 }
 
@@ -120,6 +128,22 @@ double z2_min_fun(double W, double Q) {
 double z2_min_pom_fun(double W, double Q, double Delta) {
     return z2_min_fun(W, Q) * x_max/x_pom_fun(W, Q, Delta);
 }
+
+// Gives the minimum for the z_2 integral when using a cutoff for the minus momentum. 
+// This is in addition to the cutoff z2 > 2*Q0*Q0/W*W;
+// double z2_min_minus_cutoff(double W, double Q, double x01, double x20, double x21) {
+    // double r = min( x20, x21 );
+    // return exp(Y0_if) / (W*W+Q*Q-m_N*m_N) / (r*r) * minus_cutoff_value ;
+// }
+
+// Gives the minimum for the z_2 integral when using a cutoff for the minus momentum. 
+//TODO: minus_cutoff not properly implemented!!! Need to figure out the correct cutoff for z2 and the correct Ydip
+double z2_min_minus_cutoff(double W, double Q, double r) {
+
+    // return exp(Y0_if) / (W*W+Q*Q-m_N*m_N) / (fmin(1, Q0*Q0 * r*r )) * minus_cutoff_value ;
+    return exp(Y0_if) / (W*W+Q*Q-m_N*m_N) / (r*r ) * minus_cutoff_value ;
+}
+
 
 
 // Constants needed for the nuclear dipole amplitude

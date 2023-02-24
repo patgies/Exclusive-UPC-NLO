@@ -20,15 +20,17 @@ plots = [1,2,5]
 dir_path = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
 
 
-alphas_const = False
+alphas_const = True
 if alphas_const:
     # amplitude_file = dir_path + r'production_amplitude_W_as_02_fixed_ver_2.0.dat'
     # amplitude_file = dir_path + r'KCBK_Ybk_4.6_as_0.3_W.dat'
-    amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_high-W.dat'
+    # amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_high-W.dat'
+    # amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_minus_cutoff.dat'
+    amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_minus_cutoff_10.dat'
 else:
-    # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-Q2.dat'
+    amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-Q2.dat'
     # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-4.61-jpsi-T-Q2.dat'
-    amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-Q2.dat'
+    # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-Q2.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-Q2_0.01_high-W.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-Q2_0.01_high-W.dat'
     # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-upsilon-T-Q2_0.01_high-W.dat'
@@ -162,7 +164,8 @@ if 2 in plots:
     # plt.ylabel(r'$\sigma_L+\sigma_T$ [nb]', fontsize=15)
     # plt.xlim([50, 2e2])
     plt.xlim([50, 1e3])
-    plt.ylim([-0.1e1, 1e0])
+    # plt.ylim([-0.1e1, 1e0])
+    plt.ylim([-3e0, 3e0])
     plt.xticks(fontsize=12)
     plt.yticks(fontsize=12)
     plt.xscale('log')

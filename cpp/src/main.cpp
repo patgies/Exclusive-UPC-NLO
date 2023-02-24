@@ -72,6 +72,7 @@ int main(int argc, char* argv[])
         cout << "-int_points_dim_low:\tNumber of integration points for the low-dimensional (<4) parts of the calculate" << endl;
         cout << "-int_points_dim_4:\tNumber of integration points for the 4-dimensional part of the calculate" << endl;
         cout << "-int_points_dim_6:\tNumber of integration points for the 6-dimensional part of the calculate" << endl;
+        cout << "-minus_cutoff:\tInstead of a cutoff in z2, set a cutoff that correponds to minus momentum. Specifically, the cutoff is of the form z2 > beta/(W^2*xt_01^2) where beta is a cutoff value to be set." << endl;
         cout << "One can also set the integration limits if needed. However, this isn't necessary and default values may be used instead." << endl;
         cout << "If running alpha_s is used (as is by default), the following variables must be set:" << endl;
         cout << "-alpha_s_scheme:\tSet the scheme for running alpha_s: bal+sd or parent_dipole." << endl;
@@ -236,6 +237,10 @@ int main(int argc, char* argv[])
         else if(string(argv[i])=="-alphas_const") {
             alpha_s_const = StrToReal(argv[i+1]);
             alpha_s_run_bool = false;
+        }
+        else if(string(argv[i])=="-minus_cutoff") {
+            minus_cutoff_value = StrToReal(argv[i+1]);
+            minus_cutoff_bool = true;
         }
         else if(string(argv[i])== "-b_dependent") {
             b_dependence_bool = true;

@@ -74,6 +74,9 @@ extern bool x_pom_bool ;
 extern bool dipole_file_bool;
 extern bool dim6_bool;
 
+extern bool minus_cutoff_bool;
+extern double minus_cutoff_value;
+
 double x_pom_fun(double W, double Q, double Delta);
 double x_min_fun(double W, double Q, double Delta);
 
@@ -83,6 +86,7 @@ double rapidity(double W, double Q, double z2);
 double target_rapidity(double Y, double r);
 double z2_min_fun(double W, double Q);
 double z2_min_pom_fun(double W, double Q, double Delta);
+double z2_min_minus_cutoff(double W, double Q, double r);
 
 
 // Constants needed for the nuclear dipole amplitude
