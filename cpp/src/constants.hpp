@@ -86,8 +86,8 @@ double rapidity(double W, double Q, double z2);
 double target_rapidity(double Y, double r);
 double z2_min_fun(double W, double Q);
 double z2_min_pom_fun(double W, double Q, double Delta);
-double z2_min_minus_cutoff(double W, double Q, double r);
-
+// double z2_min_minus_cutoff(double W, double Q, double r);
+double z2_min_minus_cutoff(double W, double Q, double x01, double x20, double x21);
 
 // Constants needed for the nuclear dipole amplitude
 extern bool b_dependence_bool;

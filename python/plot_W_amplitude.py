@@ -26,7 +26,7 @@ if alphas_const:
     # amplitude_file = dir_path + r'KCBK_Ybk_4.6_as_0.3_W.dat'
     # amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_high-W.dat'
     # amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_minus_cutoff.dat'
-    amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_minus_cutoff_10.dat'
+    amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_minus_cutoff_1-x20x21.dat'
 else:
     amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-Q2.dat'
     # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-4.61-jpsi-T-Q2.dat'

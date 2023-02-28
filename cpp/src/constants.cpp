@@ -131,18 +131,19 @@ double z2_min_pom_fun(double W, double Q, double Delta) {
 
 // Gives the minimum for the z_2 integral when using a cutoff for the minus momentum. 
 // This is in addition to the cutoff z2 > 2*Q0*Q0/W*W;
-// double z2_min_minus_cutoff(double W, double Q, double x01, double x20, double x21) {
+double z2_min_minus_cutoff(double W, double Q, double x01, double x20, double x21) {
     // double r = min( x20, x21 );
-    // return exp(Y0_if) / (W*W+Q*Q-m_N*m_N) / (r*r) * minus_cutoff_value ;
-// }
-
-// Gives the minimum for the z_2 integral when using a cutoff for the minus momentum. 
-//TODO: minus_cutoff not properly implemented!!! Need to figure out the correct cutoff for z2 and the correct Ydip
-double z2_min_minus_cutoff(double W, double Q, double r) {
-
-    // return exp(Y0_if) / (W*W+Q*Q-m_N*m_N) / (fmin(1, Q0*Q0 * r*r )) * minus_cutoff_value ;
-    return exp(Y0_if) / (W*W+Q*Q-m_N*m_N) / (r*r ) * minus_cutoff_value ;
+    double r2 = min( 0.5*x20*x20, 0.5*x21*x21 ); // This emulates having the constraint for z0*z2*x20^2 and z1*z2*z21^2
+    return exp(Y0_if) / (W*W+Q*Q-m_N*m_N) / (r2) * minus_cutoff_value ;
 }
+
+// // Gives the minimum for the z_2 integral when using a cutoff for the minus momentum. 
+// //TODO: minus_cutoff not properly implemented!!! Need to figure out the correct cutoff for z2 and the correct Ydip
+// double z2_min_minus_cutoff(double W, double Q, double r) {
+
+//     // return exp(Y0_if) / (W*W+Q*Q-m_N*m_N) / (fmin(1, Q0*Q0 * r*r )) * minus_cutoff_value ;
+//     return exp(Y0_if) / (W*W+Q*Q-m_N*m_N) / (r*r ) * minus_cutoff_value ;
+// }
 
 
 

@@ -135,7 +135,7 @@ double Longitudinal::M_1(double x[], double delta, double m, double Q, double W)
     double Y = rapidity(W, Q, z2);
 
 
-    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10*x10 ) > z2 ) return 0.0;
+    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10, x20, x21 ) > z2 ) return 0.0;
 
     double omega_f = (1.0/2.0-z2) * z2 * 8.0;
     double lambda_f = 1.0/2.0*z2/(1.0/2.0-z2);
@@ -169,7 +169,7 @@ double Longitudinal::M_2(double x[], double delta, double m, double Q, double W)
     double x10 = x10_value(x20, x21, ph);
     double Y = rapidity(W, Q, z2);
 
-    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10*x10 ) > z2 ) return 0.0;
+    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10, x20, x21) > z2 ) return 0.0;
 
 
     double omega_f = (1.0/2.0-z2) * z2 * 8.0;
@@ -216,7 +216,7 @@ double Longitudinal::M_1_fast(double x[], double delta, double m, double Q, doub
     double x10 = x10_value(x20, x21, ph);
     double Y = rapidity(W, Q, z2);
 
-    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10*x10 ) > z2 ) return 0.0;
+    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10, x20, x21 ) > z2 ) return 0.0;
 
     
     double omega_f = (1.0/2.0-z2) * z2 * 8.0;
@@ -254,7 +254,7 @@ double Longitudinal::M_2_fast(double x[], double delta, double m, double Q, doub
     double x10 = x10_value(x20, x21, ph);
     double Y = rapidity(W, Q, z2);
 
-    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10*x10 ) > z2 ) return 0.0;
+    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10, x20, x21 ) > z2 ) return 0.0;
 
     
     double omega_f = (1.0/2.0-z2) * z2 * 8.0;
@@ -290,7 +290,7 @@ double Longitudinal::L_5(double x[], double delta, double m, double Q, double W)
     double x10 = x10_value(x20, x21, ph);
     double Y = rapidity(W, Q, z2);
 
-    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10*x10 ) > z2 ) return 0.0;
+    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10, x20, x21) > z2 ) return 0.0;
 
     
     double omega_f = (1.0/2.0-z2) * z2 * 8.0;
@@ -320,7 +320,7 @@ double Longitudinal::L_3(double x[], double delta, double m, double Q, double W)
     double x10 = x10_value(x20, x21, ph);
     double Y = rapidity(W, Q, z2);
 
-    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10*x10 ) > z2 ) return 0.0;
+    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q,x10, x20, x21 ) > z2 ) return 0.0;
 
     
     return 8.0*m/(M_PI*x20)* gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( gsl_pow_2(1.0-z2) + gsl_pow_2(z2) -1.0 ) * 
@@ -339,7 +339,7 @@ double Longitudinal::L_4(double x[], double delta, double m, double Q, double W)
     double Y = rapidity(W, Q, z2);
 
 
-    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10*x10 ) > z2 ) return 0.0;
+    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10, x20, x21 ) > z2 ) return 0.0;
 
 
     return 8.0*m/(M_PI*x20) * N_xyz(x10, x20, x21, delta, Y) * gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( 1.0- x20/x21 * cos(ph) ) * ( gsl_sf_bessel_K1(2.0*m*z2*x20) - 1.0/(2.0*m*z2*x20) )  * x20 *x21 * 2.0 *M_PI*alpha_s3(x10,x20,x21)*2.0/3.0/M_PI * delta_factor_qqg(z2, delta, x20, x21, ph);
@@ -355,7 +355,7 @@ double Longitudinal::L_BK(double x[], double delta, double m, double Q, double W
     double Y = rapidity(W, Q, z2);
 
 
-    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10*x10 ) > z2 ) return 0.0;
+    if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10, x20, x21 ) > z2 ) return 0.0;
 
 
     return 2.0 / (M_PI*z2) * ( N_xyz(x10, x20, x21, delta, Y) - N_xy(x10, delta, Y) ) * gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * gsl_pow_2(x10) / gsl_pow_2( x20 * x21 )  * x20 *x21 * 2.0 *M_PI*alpha_s3(x10,x20,x21)*2.0/3.0/M_PI * delta_factor_qqg(z2, delta, x20, x21, ph);

@@ -22,14 +22,15 @@ alphas_const = False
 if alphas_const:
     amplitude_file = dir_path + r'production_amplitude_Q_as_02.dat'
 else:
-    # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-4.61-jpsi-T-W_90.dat'
-    # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-upsilon-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff-x20x21.dat'
     # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-upsilon-T-W_90.dat'
-    amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff.dat'
-    # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff.dat'
-    # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-W_90.dat'
+    amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-upsilon-T-W_90_minus_cutoff-x20x21.dat'
+    # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-W_90_minus_cutoff-x20x21.dat'
     # amplitude_file = dir_path + r'results-A197-kcbk-hera-bal+sd-4.61-Q.dat'
     # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-0.00-Q.dat'
+    # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-4.61-jpsi-T-W_90.dat'
     # amplitude_file = dir_path + r'results-IP_SAT_m1.4-Q.dat'
     # amplitude_file = dir_path + r'results-LOBK-MVe-Q.dat'
     # amplitude_file = dir_path + r'production_amplitude_W_m1.2.dat'
@@ -207,7 +208,7 @@ if 21 in plots:
     plt.title(r'Amplitude at $W =90 \textrm{GeV}$ [GeV$^{-2}$]', fontsize=17)
     plt.xlabel(r'$Q^2$ [GeV$^2$]', fontsize=15)
     plt.xlim([0.01, 1e2])
-    plt.ylim([0.001, 0.2])
+    plt.ylim([1e-4, 1e0])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
     # plt.xscale('log')

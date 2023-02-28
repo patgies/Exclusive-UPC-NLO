@@ -19,7 +19,7 @@ calculate_amplitude () {
     PARAMETERS=${11}           # Additional parameters in the call
 
 
-    NTHREAD=20              # Number of threads used in the calculation
+    NTHREAD=8              # Number of threads used in the calculation
     
     evaluation_points $FIXED_PARAMETER $FIXED_VALUE $PARAMETER_MIN $PARAMETER_MAX
     source ${INPUT_FOLDER}/conf-${CONF}.sh
@@ -199,8 +199,14 @@ date +"%d-%m-%y %T"
 
 # CONF FIXED_PARAM FIXED_VALUE PARAM_MIN PARAM_MAX CALC_LONG CALC_TRANS PARTICLE ACCURACY INFO ADDITIONAL_OPTIONS
 
-# calculate_amplitude "LOBK-as-const" "Q2" 0.01 100 3000 false true "jpsi" 2 "_high-W"
+calculate_amplitude "LOBK-as-const" "Q2" 0.01 30 1000 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+calculate_amplitude "LOBK-as-const" "Q2" 0.01 30 1000 false true "jpsi" 2 "_minus_cutoff_10-x20x21" "-minus_cutoff 10"
 
+calculate_amplitude "LOBK-as-const" "W" 90 0.01 100 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+calculate_amplitude "LOBK-as-const" "W" 90 0.01 100 false true "jpsi" 2 "_minus_cutoff_10-x20x21" "-minus_cutoff 10"
+
+
+# calculate_amplitude "LOBK-as-const" "Q2" 0.01 100 3000 false true "jpsi" 2 "_high-W"
 
 # calculate_amplitude "kcbk-lightq-parent-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_high-W"
 # calculate_amplitude "resumbk-lightq-parent-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_high-W"
@@ -215,13 +221,20 @@ date +"%d-%m-%y %T"
 # calculate_amplitude "A197-resumbk-lightq-parent-0.00" "Q2" 0.01 100 3000 false true "jpsi" 2 "_high-W"
 # calculate_amplitude "A197-tbk-lightq-bal+sd-0.00" "Q2" 0.01 100 3000 false true "jpsi" 2 "_high-W"
 
-calculate_amplitude "kcbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff" "-minus_cutoff 1"
-calculate_amplitude "resumbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff" "-minus_cutoff 1"
-calculate_amplitude "tbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff" "-minus_cutoff 1"
+# calculate_amplitude "kcbk-lightq-parent-0.00" "W" 90 0.01 100 false true "jpsi" 2 "_minus_cutoff-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "resumbk-lightq-parent-0.00" "W" 90 0.01 100 false true "jpsi" 2 "_minus_cutoff-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "tbk-lightq-bal+sd-0.00" "W" 90 0.01 100 false true "jpsi" 2 "_minus_cutoff-x20x21" "-minus_cutoff 1"
 
-calculate_amplitude "kcbk-lightq-parent-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_minus_cutoff" "-minus_cutoff 1"
-calculate_amplitude "resumbk-lightq-parent-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_minus_cutoff" "-minus_cutoff 1"
-calculate_amplitude "tbk-lightq-bal+sd-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_minus_cutoff" "-minus_cutoff 1"
+# calculate_amplitude "kcbk-lightq-parent-0.00" "W" 90 0.01 100 false true "upsilon" 2 "_minus_cutoff-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "resumbk-lightq-parent-0.00" "W" 90 0.01 100 false true "upsilon" 2 "_minus_cutoff-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "tbk-lightq-bal+sd-0.00" "W" 90 0.01 100 false true "upsilon" 2 "_minus_cutoff-x20x21" "-minus_cutoff 1"
+
+
+
+# calculate_amplitude "kcbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "resumbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "tbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff-x20x21" "-minus_cutoff 1"
+
 
 
 # calculate_amplitude "kcbk-lightq-parent-4.61" "Q2" true true "jpsi" 2
