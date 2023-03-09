@@ -20,7 +20,7 @@ plots = [1,2,5]
 dir_path = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
 
 
-alphas_const = True
+alphas_const = False
 if alphas_const:
     # amplitude_file = dir_path + r'production_amplitude_W_as_02_fixed_ver_2.0.dat'
     # amplitude_file = dir_path + r'KCBK_Ybk_4.6_as_0.3_W.dat'
@@ -156,9 +156,9 @@ if 2 in plots:
     plt.plot(Wv, NLO_BK, 'k:',label=r'$\textrm{NLO}_\textrm{BK}$', linewidth=linewidth)
     plt.legend(prop={'size': 10}, frameon=False)
     if alphas_const:
-        plt.title(r'Amplitude at $Q^2 =10 \textrm{GeV}^2$ [GeV$^{-2}$] $(\alpha_s = 0.3)$', fontsize=14)
+        plt.title(r'Amplitude at $Q^2 =0 \textrm{GeV}^2$ [GeV$^{-2}$] $(\alpha_s = 0.3)$', fontsize=14)
     else:
-        plt.title(r'Amplitude at $Q^2 =10 \textrm{GeV}^2$ [GeV$^{-2}$]', fontsize=14)
+        plt.title(r'Amplitude at $Q^2 =0 \textrm{GeV}^2$ [GeV$^{-2}$]', fontsize=14)
     # plt.title(r'Amplitude at $Q^2 =10 \textrm{GeV}^2$ [GeV$^{-2}$] $(m_c = 1.2\textrm{GeV})$', fontsize=17)
     plt.xlabel(r'$W$ [GeV]', fontsize=12)
     # plt.ylabel(r'$\sigma_L+\sigma_T$ [nb]', fontsize=15)
