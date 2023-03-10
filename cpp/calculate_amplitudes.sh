@@ -219,14 +219,29 @@ date +"%d-%m-%y %T"
 # calculate_amplitude "resumbk-lightq-parent-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_high-W"
 # calculate_amplitude "tbk-lightq-bal+sd-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_high-W"
 
-calculate_amplitude "tbk-lightq-parent-0.00" "W" 90 0.01 100 false true "jpsi" 2
-calculate_amplitude "tbk-lightq-parent-0.00" "W" 90 0.01 100 false true "upsilon" 2
-calculate_amplitude "tbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_high-W"
-calculate_amplitude "tbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2 "_high-W"
+# calculate_amplitude "tbk-lightq-parent-0.00" "W" 90 0.01 100 false true "jpsi" 2
+# calculate_amplitude "tbk-lightq-parent-0.00" "W" 90 0.01 100 false true "upsilon" 2
+# calculate_amplitude "tbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_high-W"
+# calculate_amplitude "tbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2 "_high-W"
 
-# calculate_amplitude "A197-kcbk-lightq-parent-0.00" "Q2" 90 0.01 100 true true "jpsi" 2 "_high-W"
-# calculate_amplitude "A197-resumbk-lightq-parent-0.00" "Q2" 90 0.01 100 true true "jpsi" 2 "_high-W"
-# calculate_amplitude "A197-tbk-lightq-bal+sd-0.00" "Q2" 90 0.01 100 true true "jpsi" 2 "_high-W"
+# calculate_amplitude "A197-kcbk-lightq-parent-0.00" "W" 90 0.01 100 true true "jpsi" 2
+# calculate_amplitude "A197-resumbk-lightq-parent-0.00" "W" 90 0.01 100 true true "jpsi" 2
+# calculate_amplitude "A197-tbk-lightq-bal+sd-0.00" "W" 90 0.01 100 true true "jpsi" 2
+
+# TODO:calculate these four!
+# calculate_amplitude "A197-tbk-lightq-bal+sd-0.00" "W" 90 0.01 100 falsee true "jpsi" 2
+# calculate_amplitude "A197-kcbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 
+# calculate_amplitude "A197-resumbk-lightq-parent-0.00" "Q2"  30 3000 false true "jpsi" 2 
+# calculate_amplitude "A197-tbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 
+
+calculate_amplitude "kcbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_Y0-4.61" "-Y0_if 4.61"
+calculate_amplitude "resumbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_Y0-4.61" "-Y0_if 4.61"
+calculate_amplitude "tbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_Y0-4.61" "-Y0_if 4.61"
+
+
+calculate_amplitude "kcbk-lightq-parent-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_Y0-4.61" "-Y0_if 4.61"
+calculate_amplitude "resumbk-lightq-parent-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_Y0-4.61" "-Y0_if 4.61"
+calculate_amplitude "tbk-lightq-bal+sd-0.00" "W" 90 0.01 100 true true "jpsi" 2 "_Y0-4.61" "-Y0_if 4.61"
 
 
 # calculate_amplitude "A197-kcbk-lightq-parent-0.00" "Q2" 0.01 100 3000 false true "jpsi" 2 "_high-W"

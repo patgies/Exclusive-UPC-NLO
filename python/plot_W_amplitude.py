@@ -28,18 +28,22 @@ if alphas_const:
     # amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_minus_cutoff.dat'
     amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_minus_cutoff_1-x20x21.dat'
 else:
-    amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-Q2.dat'
+    # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-Q2.dat'
     # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-4.61-jpsi-T-Q2.dat'
     # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-Q2.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-Q2_0.01_high-W.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-Q2_0.01_high-W.dat'
     # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-upsilon-T-Q2_0.01_high-W.dat'
+    amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-Q2_0.01_Y0-4.61.dat'
     # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-upsilon-T-Q2_0.01_high-W.dat'
     # amplitude_file = dir_path + r'results-LOBK-MVe-rcBK.dat'
     # amplitude_file = dir_path + r'results-tbk-hera-bal+sd-4.61.dat'
     # amplitude_file = dir_path + r'results-tbk-hera-bal+sd-4.61_Q2_0.05.dat'
     # amplitude_file = dir_path + r'results-IP_SAT_m1.4-lambda-pom.dat'
     # amplitude_file = dir_path + r'production_amplitude_W_m1.2.dat'
+    # amplitude_file = dir_path + r'results-A197-kcbk-lightq-parent-0.00-upsilon-T-Q2_0.01.dat'
+    # amplitude_file = dir_path + r'results-A197-resumbk-lightq-parent-0.00-upsilon-T-Q2_0.01.dat'
+    # amplitude_file = dir_path + r'results-A197-tbk-lightq-bal+sd-0.00-upsilon-T-Q2_0.01.dat'
 
 
 

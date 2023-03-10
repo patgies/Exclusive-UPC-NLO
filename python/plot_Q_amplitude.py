@@ -25,7 +25,7 @@ else:
     # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90.dat'
     # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff-x20x21.dat'
     # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90.dat'
-    # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-upsilon-T-W_90_minus_cutoff-x20x21.dat'
+    # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff-x20x21.dat'
     amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-W_90.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-parent-0.00-upsilon-T-W_90.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-W_90_minus_cutoff-x20x21.dat'
@@ -38,6 +38,12 @@ else:
     # amplitude_file = dir_path + r'results-IP_SAT_m1.4-Q.dat'
     # amplitude_file = dir_path + r'results-LOBK-MVe-Q.dat'
     # amplitude_file = dir_path + r'production_amplitude_W_m1.2.dat'
+    # amplitude_file = dir_path + r'results-A197-tbk-lightq-bal+sd-0.00-upsilon-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-A197-resumbk-lightq-parent-0.00-jpsi-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-A197-kcbk-lightq-parent-0.00-jpsi-T-W_90.dat'
+
+
+
 # with open(amplitude_file, "r") as f:
 #     lines = [line for line in f.readlines() if not line.startswith('#')]
 #     Qv = np.array([float(x) for x in lines[2].split(' ')[:-1]])
@@ -212,7 +218,7 @@ if 21 in plots:
     plt.title(r'Amplitude at $W =90 \textrm{GeV}$ [GeV$^{-2}$]', fontsize=17)
     plt.xlabel(r'$Q^2$ [GeV$^2$]', fontsize=15)
     plt.xlim([0.01, 1e2])
-    plt.ylim([1e-4, 1e0])
+    plt.ylim([1e-4, 1e2])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
     # plt.xscale('log')
