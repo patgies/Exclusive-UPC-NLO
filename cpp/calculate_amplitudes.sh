@@ -234,12 +234,17 @@ date +"%d-%m-%y %T"
 # calculate_amplitude "A197-tbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 
 
 
-calculate_amplitude "kcbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 
-calculate_amplitude "resumbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 
-calculate_amplitude "tbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 
-calculate_amplitude "kcbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2
-calculate_amplitude "resumbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2
-calculate_amplitude "tbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2
+# calculate_amplitude "kcbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 
+# calculate_amplitude "resumbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 
+# calculate_amplitude "tbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 
+# calculate_amplitude "kcbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2
+# calculate_amplitude "resumbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2
+# calculate_amplitude "tbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2
+
+
+calculate_amplitude "kcbk-hera-parent-4.61" "Q2" 0.01 30 3000 false true "jpsi" 2 
+calculate_amplitude "kcbk-hera-parent-4.61" "W" 90 0.01 100 true true "jpsi" 2
+
 
 # calculate_amplitude "kcbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_Y0-4.61" "-Y0_if 4.61"
 # calculate_amplitude "resumbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_Y0-4.61" "-Y0_if 4.61"

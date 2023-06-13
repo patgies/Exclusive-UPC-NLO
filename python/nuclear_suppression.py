@@ -15,7 +15,7 @@ particle = 'jpsi'
 plotting_functions.particle = particle
 plotting_functions.initialize()
 
-function_of = 'W'
+function_of = 'Q2'
 
 reg_scheme_LO = 'decay width'
 reg_scheme_NLO = 'NR wave function'
