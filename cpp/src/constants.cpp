@@ -133,8 +133,8 @@ double z2_min_pom_fun(double W, double Q, double Delta) {
 // This is in addition to the cutoff z2 > 2*Q0*Q0/W*W;
 double z2_min_minus_cutoff(double W, double Q, double x01, double x20, double x21) {
     // double r = min( x20, x21 );
-    // double r2 = min( 0.5*x20*x20, 0.5*x21*x21 ); // This emulates having the constraint for z0*z2*x20^2 and z1*z2*z21^2
-    double r2 = min( min( 1.0/(Q0*Q0), x01*x01 ), min( x20*x20, x21*x21 ) ); // This should be close to what is in the evolution
+    double r2 = min( 0.5*x20*x20, 0.5*x21*x21 ); // This emulates having the constraint for z0*z2*x20^2 and z1*z2*z21^2. Works only in the nonrelativistic limit.
+    // double r2 = min( min( 1.0/(Q0*Q0), x01*x01 ), min( x20*x20, x21*x21 ) ); // This should be close to what is in the evolution
     return exp(Y0_if) / (W*W+Q*Q-m_N*m_N) / (r2) * minus_cutoff_value ;
 }
 

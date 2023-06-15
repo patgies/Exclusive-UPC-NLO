@@ -17,17 +17,24 @@ import plotting_functions
 # Order:LO(x_min) 	 LO(x_pom) 	 LO(x_max) 	 qq NLO 1 dim 	 qq NLO J_1 	 qq NLO J_2 	 qq NLO K_0 	 qqg dim 4 no BK 	 qqg dim 4 sub2 BK 	 qqg dim 4 unsub BK 	 qqg dim 6
 dir_path = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
 
+particle = 'jpsi'
+# particle = 'upsilon' 
 
-alphas_const = False
-if alphas_const:
-    amplitude_file = dir_path + r'production_amplitude_Q_as_02.dat'
-else:
+if particle == 'jpsi':
+    Mv = 3.0969
+
     # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90.dat'
-    # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff-x20x21.dat'
+    # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff_1-x20x21.dat'
     # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90.dat'
+    amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff_1-x20x21.dat'
+    # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-W_90_minus_cutoff_1-x20x21.dat'
+
+
     # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff-x20x21.dat'
-    amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-W_90.dat'
-    # amplitude_file = dir_path + r'results-tbk-lightq-parent-0.00-upsilon-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff-x20x21.dat'
+    # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-tbk-lightq-parent-0.00-jpsi-T-W_90.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-W_90_minus_cutoff-x20x21.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff_1-x20x21.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff_1-x20x21-tbkscheme.dat'
@@ -41,6 +48,45 @@ else:
     # amplitude_file = dir_path + r'results-A197-tbk-lightq-bal+sd-0.00-upsilon-T-W_90.dat'
     # amplitude_file = dir_path + r'results-A197-resumbk-lightq-parent-0.00-jpsi-T-W_90.dat'
     # amplitude_file = dir_path + r'results-A197-kcbk-lightq-parent-0.00-jpsi-T-W_90.dat'
+elif particle == 'upsilon':
+    Mv = 9.46
+
+    # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-upsilon-T-W_90.dat'
+    amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-upsilon-T-W_90_minus_cutoff_1-x20x21.dat'
+    # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-upsilon-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-upsilon-T-W_90_minus_cutoff_1-x20x21.dat'
+    # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-W_90.dat'
+    # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-W_90_minus_cutoff_1-x20x21.dat'
+else:
+    print('Invalid particle')
+
+
+# alphas_const = False
+# if alphas_const:
+#     amplitude_file = dir_path + r'production_amplitude_Q_as_02.dat'
+# else:
+#     # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90.dat'
+#     # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff-x20x21.dat'
+#     # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff_1-x20x21.dat'
+#     amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-upsilon-T-W_90.dat'
+#     # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-upsilon-T-W_90_minus_cutoff_1-x20x21.dat'
+#     # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90.dat'
+#     # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff-x20x21.dat'
+#     # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-upsilon-T-W_90.dat'
+#     # amplitude_file = dir_path + r'results-tbk-lightq-parent-0.00-upsilon-T-W_90.dat'
+#     # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-W_90_minus_cutoff-x20x21.dat'
+#     # amplitude_file = dir_path + r'results-tbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff_1-x20x21.dat'
+#     # amplitude_file = dir_path + r'results-tbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff_1-x20x21-tbkscheme.dat'
+#     # amplitude_file = dir_path + r'results-tbk-lightq-parent-0.00-proj-rapidity-jpsi-T-W_90_minus_cutoff_1-x20x21.dat'
+#     # amplitude_file = dir_path + r'results-A197-kcbk-hera-bal+sd-4.61-Q.dat'
+#     # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-0.00-Q.dat'
+#     # amplitude_file = dir_path + r'results-kcbk-hera-bal+sd-4.61-jpsi-T-W_90.dat'
+#     # amplitude_file = dir_path + r'results-IP_SAT_m1.4-Q.dat'
+#     # amplitude_file = dir_path + r'results-LOBK-MVe-Q.dat'
+#     # amplitude_file = dir_path + r'production_amplitude_W_m1.2.dat'
+#     # amplitude_file = dir_path + r'results-A197-tbk-lightq-bal+sd-0.00-upsilon-T-W_90.dat'
+#     # amplitude_file = dir_path + r'results-A197-resumbk-lightq-parent-0.00-jpsi-T-W_90.dat'
+#     # amplitude_file = dir_path + r'results-A197-kcbk-lightq-parent-0.00-jpsi-T-W_90.dat'
 
 
 
@@ -61,7 +107,6 @@ ef = 2/3
 Cf = 4/3
 e = np.sqrt(4*np.pi/137)
 Gamma_ee = 5.53e-6
-Mv = 3.0969
 m = Mv/2
 alpha_s = 0.25
 O_LDME = 0.440
@@ -206,22 +251,22 @@ if 2 in plots:
 
 if 21 in plots:
     plt.figure(21)
-    plt.plot(Qv**2, np.abs(NLO), 'k-',label=r'$\textrm{NLO} (=\textrm{LO}(x_0)+ \textrm{NLO}_\textrm{BK} + \textrm{NLO}_\textrm{dip} + \textrm{NLO}_{qqg})$', linewidth=linewidth)
-    plt.plot(Qv**2, np.abs(LO_prime), 'b--',label=r'$\textrm{LO}(x^\prime$)', linewidth=linewidth)
-    plt.plot(Qv**2, np.abs(LO_pom), 'g--',label=r'$\textrm{LO}(x_\textrm{P})$', linewidth=linewidth)
-    plt.plot(Qv**2, np.abs(LO_0), 'r--',label=r'$\textrm{LO}(x_0)$', linewidth=linewidth)
-    # plt.plot(Qv**2+Mv**2Wv, LO_BK, 'r--',label=r'$\textrm{LO}(x_0)+ L_\textrm{BK}$', linewidth=linewidth)
-    plt.plot(Qv**2, np.abs(NLO_dip), 'b:',label=r'$\textrm{NLO}_\textrm{dip}$', linewidth=linewidth)
-    plt.plot(Qv**2, np.abs(NLO_qqg), 'r:',label=r'$\textrm{NLO}_{qqg}$', linewidth=linewidth)
-    plt.plot(Qv**2, np.abs(NLO_BK), 'k:',label=r'$\textrm{NLO}_\textrm{BK}$', linewidth=linewidth)
+    plt.plot(Mv**2 + Qv**2, np.abs(NLO), 'k-',label=r'$\textrm{NLO} (=\textrm{LO}(x_0)+ \textrm{NLO}_\textrm{BK} + \textrm{NLO}_\textrm{dip} + \textrm{NLO}_{qqg})$', linewidth=linewidth)
+    plt.plot(Mv**2 + Qv**2, np.abs(LO_prime), 'b--',label=r'$\textrm{LO}(x^\prime$)', linewidth=linewidth)
+    plt.plot(Mv**2 + Qv**2, np.abs(LO_pom), 'g--',label=r'$\textrm{LO}(x_\textrm{P})$', linewidth=linewidth)
+    plt.plot(Mv**2 + Qv**2, np.abs(LO_0), 'r--',label=r'$\textrm{LO}(x_0)$', linewidth=linewidth)
+    # plt.plot(Mv**2 + Qv**2, LO_BK, 'r--',label=r'$\textrm{LO}(x_0)+ L_\textrm{BK}$', linewidth=linewidth)
+    plt.plot(Mv**2 + Qv**2, np.abs(NLO_dip), 'b:',label=r'$\textrm{NLO}_\textrm{dip}$', linewidth=linewidth)
+    plt.plot(Mv**2 + Qv**2, np.abs(NLO_qqg), 'r:',label=r'$\textrm{NLO}_{qqg}$', linewidth=linewidth)
+    plt.plot(Mv**2 + Qv**2, np.abs(NLO_BK), 'k:',label=r'$\textrm{NLO}_\textrm{BK}$', linewidth=linewidth)
     plt.legend(prop={'size': 12}, frameon=False)
     plt.title(r'Amplitude at $W =90 \textrm{GeV}$ [GeV$^{-2}$]', fontsize=17)
-    plt.xlabel(r'$Q^2$ [GeV$^2$]', fontsize=15)
-    plt.xlim([0.01, 1e2])
+    plt.xlabel(r'$M_V^2+ Q^2$ [GeV$^2$]', fontsize=15)
+    plt.xlim([Mv**2, Mv**2 + 1e2])
     plt.ylim([1e-4, 1e2])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
-    # plt.xscale('log')
+    plt.xscale('log')
     plt.yscale('log')
     plt.tight_layout()
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
