@@ -23,10 +23,13 @@ particle = 'jpsi'
 if particle == 'jpsi':
     Mv = 3.0969
 
+    amplitude_file = dir_path + r'results-LOBK-as-const_invariant_mass_rapidity-jpsi-T-W_90_minus_cutoff_1-x20x21.dat'
+
+
     # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90.dat'
     # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff_1-x20x21.dat'
     # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90.dat'
-    amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff_1-x20x21.dat'
+    # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-W_90_minus_cutoff_1-x20x21.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-W_90.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-W_90_minus_cutoff_1-x20x21.dat'
 

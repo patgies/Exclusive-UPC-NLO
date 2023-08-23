@@ -228,20 +228,23 @@ date +"%d-%m-%y %T"
 # calculate_amplitude "tbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
 # calculate_amplitude "tbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
 
-calculate_amplitude "kcbk-lightq-bal+sd-0.00" "W" 90 0.01 100 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
-calculate_amplitude "kcbk-lightq-bal+sd-0.00" "W" 90 0.01 100 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
-calculate_amplitude "kcbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
-calculate_amplitude "kcbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "kcbk-lightq-bal+sd-0.00" "W" 90 0.01 100 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "kcbk-lightq-bal+sd-0.00" "W" 90 0.01 100 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "kcbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "kcbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
 
-calculate_amplitude "resumbk-lightq-bal+sd-0.00" "W" 90 0.01 100 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
-calculate_amplitude "resumbk-lightq-bal+sd-0.00" "W" 90 0.01 100 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
-calculate_amplitude "resumbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
-calculate_amplitude "resumbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "resumbk-lightq-bal+sd-0.00" "W" 90 0.01 100 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "resumbk-lightq-bal+sd-0.00" "W" 90 0.01 100 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "resumbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "resumbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
 
-calculate_amplitude "tbk-lightq-parent-0.00" "W" 90 0.01 100 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
-calculate_amplitude "tbk-lightq-parent-0.00" "W" 90 0.01 100 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
-calculate_amplitude "tbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
-calculate_amplitude "tbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "tbk-lightq-parent-0.00" "W" 90 0.01 100 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "tbk-lightq-parent-0.00" "W" 90 0.01 100 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "tbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "tbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+
+# calculate_amplitude "LOBK-as-const_invariant_mass_rapidity" "W" 90 0.01 100 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+calculate_amplitude "LOBK-as-const_invariant_mass_rapidity" "Q2" 0.01 30 1000 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
 
 
 

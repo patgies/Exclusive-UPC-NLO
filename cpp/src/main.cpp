@@ -66,6 +66,7 @@ int main(int argc, char* argv[])
         cout << "-thread:\tAmount of CPU threads used for calculations. Default is "<< n_thread << endl;
         cout << "-xpom:\tCalculations are done at rapidity Y=ln(1/x_pom) instead of Y_dip. Meant for LO calculations."<<endl;
         cout << "-use_target_rapidity:\tUse target rapidity instead of projectile rapidity. For TBK dipole amplitude."<<endl;
+        cout << "-use_invariant_mass_rapidity:\tUse invariant mass rapidity instead of projectile rapidity. Might be theoretically better motivated? Should be used only with LOBK."<<endl;
         cout << "-m_N:\tMass of the nucleon (~1GeV, doesn't affect the results too much)" << endl;
         cout << "-alphas_const:\tUse constant alpha_s and set its value." << endl;
         cout << "-dipole_file:\tPath to the dipole file" << endl;
@@ -213,6 +214,18 @@ int main(int argc, char* argv[])
         else if(string(argv[i])=="-u_max") {
             u_max = StrToReal(argv[i+1]);
         }
+        else if(string(argv[i])=="-y_min") {
+            y_min = StrToReal(argv[i+1]);
+        }
+        else if(string(argv[i])=="-y_max") {
+            y_max = StrToReal(argv[i+1]);
+        }
+        else if(string(argv[i])=="-Y_min") {
+            Y_min = StrToReal(argv[i+1]);
+        }
+        else if(string(argv[i])=="-Y_max") {
+            Y_max = StrToReal(argv[i+1]);
+        }
         else if(string(argv[i])=="-int_points_dim_low") {
             calls_dim_low = StrToInt(argv[i+1]);
         }
@@ -233,6 +246,9 @@ int main(int argc, char* argv[])
         }
         else if(string(argv[i])=="-use_target_rapidity") {
             eta_bool = true;
+        }
+        else if(string(argv[i])=="-use_invariant_mass_rapidity") {
+            inv_mass_rapidity_bool = true;
         }
         else if(string(argv[i])=="-alphas_const") {
             alpha_s_const = StrToReal(argv[i+1]);

@@ -55,6 +55,9 @@ extern double u_max ;
 extern double y_min ;
 extern double y_max ;
 
+extern double Y_min ;
+extern double Y_max;
+
 
 //Number of evaluation points:
 extern int W_length;
@@ -77,6 +80,9 @@ extern bool dim6_bool;
 extern bool minus_cutoff_bool;
 extern double minus_cutoff_value;
 
+extern bool inv_mass_rapidity_bool;
+
+
 double x_pom_fun(double W, double Q, double Delta);
 double x_min_fun(double W, double Q, double Delta);
 
@@ -84,6 +90,8 @@ double Y_0_fun(double W, double Q);
 double eta_corr(double r);
 double rapidity(double W, double Q, double z2);
 double target_rapidity(double Y, double r);
+double invariant_mass_rapidity_qq(double r, double z0, double z1, double W);
+double invariant_mass_rapidity_qqg(double x10, double x20, double x21, double z0, double z1, double z2, double W);
 double z2_min_fun(double W, double Q);
 double z2_min_pom_fun(double W, double Q, double Delta);
 // double z2_min_minus_cutoff(double W, double Q, double r);

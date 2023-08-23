@@ -4,6 +4,7 @@
 #define _DIPOLE_AMPLITUDES_H
 
 void initialize_amplitude(std::string file);
+double check_Y(double Y);
 double N_xy(double r, double delta, double Y);
 double N_xyz(double r10, double r20, double r21, double delta, double Y);
 double S_xy(double r, double Y);

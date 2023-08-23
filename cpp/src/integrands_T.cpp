@@ -132,7 +132,14 @@ double Transverse::M(double x[], double delta, double m, double Q, double W) {
     double u = x[5];
 
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2);
+    double Y;
+    if (inv_mass_rapidity_bool) {
+        Y = invariant_mass_rapidity_qqg( x10, x20, x21, 0.5 - z2, 0.5, z2, W );
+    }
+    else {
+        Y = rapidity(W, Q, z2); 
+    }
+
 
 
     if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10, x20, x21) > z2 ) return 0.0;
@@ -174,7 +181,13 @@ double Transverse::M_fast(double x[], double delta, double m, double Q, double W
     double y = x[4];
 
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2);
+    double Y;
+    if (inv_mass_rapidity_bool) {
+        Y = invariant_mass_rapidity_qqg( x10, x20, x21, 0.5 - z2, 0.5, z2, W );
+    }
+    else {
+        Y = rapidity(W, Q, z2); 
+    }
 
 
     if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10, x20, x21 ) > z2 ) return 0.0;
@@ -224,7 +237,13 @@ double Transverse::L_1(double x[], double delta, double m, double Q, double W){
     double z2 = x[3];
 
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2);
+    double Y;
+    if (inv_mass_rapidity_bool) {
+        Y = invariant_mass_rapidity_qqg( x10, x20, x21, 0.5 - z2, 0.5, z2, W );
+    }
+    else {
+        Y = rapidity(W, Q, z2); 
+    }
 
 
     if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10, x20, x21 ) > z2 ) return 0.0;
@@ -274,7 +293,13 @@ double Transverse::L_BK(double x[], double delta, double m, double Q, double W){
     double z2 = x[3];
     
     double x10 = x10_value(x20, x21, ph);
-    double Y = rapidity(W, Q, z2);
+    double Y;
+    if (inv_mass_rapidity_bool) {
+        Y = invariant_mass_rapidity_qqg( x10, x20, x21, 0.5 - z2, 0.5, z2, W );
+    }
+    else {
+        Y = rapidity(W, Q, z2); 
+    }
 
 
     if( minus_cutoff_bool == true && z2_min_minus_cutoff( W, Q, x10, x20, x21 ) > z2 ) return 0.0;
@@ -288,12 +313,31 @@ double Transverse::L_BK(double x[], double delta, double m, double Q, double W){
 double Transverse::qq_LO(double x[], size_t dim, void *params) {
     dimension_error(dim, 1);
     struct integ_params *p = (struct integ_params *)params;
-    double x_rap = p->x;
+    string *Y_string = p->Y;
+    // double x_rap = p->x;
     double delta = p->delta;
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap);
+
+
+    double W = p->W;
+    double Y;
+    
+    if (*Y_string == "Y_IM" ) {
+        Y = invariant_mass_rapidity_qq( x10, 0.5, 0.5, W );
+    }
+    else if (*Y_string == "Y_pom") {
+        double x_pom = x_pom_fun(W, Q, delta);
+        Y = log(1.0/x_pom); 
+    }
+    else if (*Y_string == "Y_0") {
+        Y = Y0_if; 
+    }
+    else if (*Y_string == "Y_dip") {
+        double x_min = x_min_fun(W, Q, delta);
+        Y = log(1.0/x_min); 
+    }
 
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * 2*M_PI * x10 * delta_factor_qq(0.5, delta, x10);
@@ -303,12 +347,30 @@ double Transverse::qq_LO(double x[], size_t dim, void *params) {
 double Transverse::qq_NLO_1_dim_decay_width(double x[], size_t dim, void *params) {
     dimension_error(dim, 1);
     struct integ_params *p = (struct integ_params *)params;
-    double x_rap = p->x;
+    string *Y_string = p->Y;
+    // double x_rap = p->x;
     double delta = p->delta;
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap);
+
+    double W = p->W;
+    double Y;
+    
+    if (*Y_string == "Y_IM" ) {
+        Y = invariant_mass_rapidity_qq( x10, 0.5, 0.5, W );
+    }
+    else if (*Y_string == "Y_pom") {
+        double x_pom = x_pom_fun(W, Q, delta);
+        Y = log(1.0/x_pom); 
+    }
+    else if (*Y_string == "Y_0") {
+        Y = Y0_if; 
+    }
+    else if (*Y_string == "Y_dip") {
+        double x_min = x_min_fun(W, Q, delta);
+        Y = log(1.0/x_min); 
+    }
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( -Omega_V(m,Q)+L(m,Q) -M_PI*M_PI/3.0+13.0/2.0-3.0*log( m*x10/2.0 ) -3.0*M_EULER )
             *2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
@@ -318,12 +380,31 @@ double Transverse::qq_NLO_1_dim_decay_width(double x[], size_t dim, void *params
 double Transverse::qq_NLO_1_dim_wave_function(double x[], size_t dim, void *params) {
     dimension_error(dim, 1);
     struct integ_params *p = (struct integ_params *)params;
-    double x_rap = p->x;
+    string *Y_string = p->Y;
+    // double x_rap = p->x;
     double delta = p->delta;
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap);
+
+
+    double W = p->W;
+    double Y;
+    
+    if (*Y_string == "Y_IM" ) {
+        Y = invariant_mass_rapidity_qq( x10, 0.5, 0.5, W );
+    }
+    else if (*Y_string == "Y_pom") {
+        double x_pom = x_pom_fun(W, Q, delta);
+        Y = log(1.0/x_pom); 
+    }
+    else if (*Y_string == "Y_0") {
+        Y = Y0_if; 
+    }
+    else if (*Y_string == "Y_dip") {
+        double x_min = x_min_fun(W, Q, delta);
+        Y = log(1.0/x_min); 
+    }
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( -Omega_V(m,Q)+L(m,Q) -M_PI*M_PI/3.0+5.0/2.0-3.0*log( m*x10/2.0 ) -3.0*M_EULER )
             *2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
@@ -333,13 +414,32 @@ double Transverse::qq_NLO_1_dim_wave_function(double x[], size_t dim, void *para
 double Transverse::qq_NLO_K(double x[], size_t dim, void *params) {
     dimension_error(dim, 2);
     struct integ_params *p = (struct integ_params *)params;
-    double x_rap = p->x;
+    string *Y_string = p->Y;
+    // double x_rap = p->x;
     double delta = p->delta;
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
     double z = x[1];
-    double Y = log(1.0/x_rap);
+
+
+    double W = p->W;
+    double Y;
+    
+    if (*Y_string == "Y_IM" ) {
+        Y = invariant_mass_rapidity_qq( x10, 0.5, 0.5, W );
+    }
+    else if (*Y_string == "Y_pom") {
+        double x_pom = x_pom_fun(W, Q, delta);
+        Y = log(1.0/x_pom); 
+    }
+    else if (*Y_string == "Y_0") {
+        Y = Y0_if; 
+    }
+    else if (*Y_string == "Y_dip") {
+        double x_min = x_min_fun(W, Q, delta);
+        Y = log(1.0/x_min); 
+    }
 
 
     return N_xy(x10, delta, Y)*K_0_integrand(z, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(z, delta, x10);
@@ -349,13 +449,32 @@ double Transverse::qq_NLO_K(double x[], size_t dim, void *params) {
 double Transverse::qq_NLO_J_1(double x[], size_t dim, void *params) {
     dimension_error(dim, 2);
     struct integ_params *p = (struct integ_params *)params;
-    double x_rap = p->x;
+    string *Y_string = p->Y;
+    // double x_rap = p->x;
     double delta = p->delta;
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
     double xi = x[1];
-    double Y = log(1.0/x_rap);
+
+
+    double W = p->W;
+    double Y;
+    
+    if (*Y_string == "Y_IM" ) {
+        Y = invariant_mass_rapidity_qq( x10, 0.5, 0.5, W );
+    }
+    else if (*Y_string == "Y_pom") {
+        double x_pom = x_pom_fun(W, Q, delta);
+        Y = log(1.0/x_pom); 
+    }
+    else if (*Y_string == "Y_0") {
+        Y = Y0_if; 
+    }
+    else if (*Y_string == "Y_dip") {
+        double x_min = x_min_fun(W, Q, delta);
+        Y = log(1.0/x_min); 
+    }
 
     return N_xy(x10, delta, Y)*J_1_integrand(xi, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
 }
@@ -364,14 +483,33 @@ double Transverse::qq_NLO_J_1(double x[], size_t dim, void *params) {
 double Transverse::qq_NLO_J_2(double x[], size_t dim, void *params) {
     dimension_error(dim, 3);
     struct integ_params *p = (struct integ_params *)params;
-    double x_rap = p->x;
+    string *Y_string = p->Y;
+    // double x_rap = p->x;
     double delta = p->delta;
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
     double xi = x[1];
     double x_var = x[2];
-    double Y = log(1.0/x_rap);
+
+
+    double W = p->W;
+    double Y;
+    
+    if (*Y_string == "Y_IM" ) {
+        Y = invariant_mass_rapidity_qq( x10, 0.5, 0.5, W );
+    }
+    else if (*Y_string == "Y_pom") {
+        double x_pom = x_pom_fun(W, Q, delta);
+        Y = log(1.0/x_pom); 
+    }
+    else if (*Y_string == "Y_0") {
+        Y = Y0_if; 
+    }
+    else if (*Y_string == "Y_dip") {
+        double x_min = x_min_fun(W, Q, delta);
+        Y = log(1.0/x_min); 
+    }
     
     return N_xy(x10, delta, Y)*J_2_integrand(xi, x_var, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
 }
@@ -439,13 +577,31 @@ double Transverse::qqg_dim6(double x[], size_t dim, void *params) {
 double Transverse::qq_rel_002_pp(double x[], size_t dim, void *params) {
     dimension_error(dim, 1);
     struct integ_params *p = (struct integ_params *)params;
-    double x_rap = p->x;
+    string *Y_string = p->Y;
+    // double x_rap = p->x;
     double delta = p->delta;
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap);
 
+
+    double W = p->W;
+    double Y;
+
+    if (*Y_string == "Y_IM" ) {
+        Y = invariant_mass_rapidity_qq( x10, 0.5, 0.5, W );
+    }
+    else if (*Y_string == "Y_pom") {
+        double x_pom = x_pom_fun(W, Q, delta);
+        Y = log(1.0/x_pom); 
+    }
+    else if (*Y_string == "Y_0") {
+        Y = Y0_if; 
+    }
+    else if (*Y_string == "Y_dip") {
+        double x_min = x_min_fun(W, Q, delta);
+        Y = log(1.0/x_min); 
+    }
     double zeta = x10 * sqrt(0.25*Q*Q+m*m);
 
 
@@ -457,12 +613,32 @@ double Transverse::qq_rel_002_pp(double x[], size_t dim, void *params) {
 double Transverse::qq_rel_200_pp(double x[], size_t dim, void *params) {
     dimension_error(dim, 1);
     struct integ_params *p = (struct integ_params *)params;
-    double x_rap = p->x;
+    string *Y_string = p->Y;
+    // double x_rap = p->x;
     double delta = p->delta;
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap);
+
+
+    double W = p->W;
+    double Y;
+    
+    if (*Y_string == "Y_IM" ) {
+        Y = invariant_mass_rapidity_qq( x10, 0.5, 0.5, W );
+    }
+    else if (*Y_string == "Y_pom") {
+        double x_pom = x_pom_fun(W, Q, delta);
+        Y = log(1.0/x_pom); 
+    }
+    else if (*Y_string == "Y_0") {
+        Y = Y0_if; 
+    }
+    else if (*Y_string == "Y_dip") {
+        double x_min = x_min_fun(W, Q, delta);
+        Y = log(1.0/x_min); 
+    }
+
 
     double zeta = x10 * sqrt(0.25*Q*Q+m*m);
 
@@ -474,12 +650,31 @@ double Transverse::qq_rel_200_pp(double x[], size_t dim, void *params) {
 double Transverse::qq_rel_100_pm(double x[], size_t dim, void *params) {
     dimension_error(dim, 1);
     struct integ_params *p = (struct integ_params *)params;
-    double x_rap = p->x;
+    string *Y_string = p->Y;
+    // double x_rap = p->x;
     double delta = p->delta;
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap);
+
+
+    double W = p->W;
+    double Y;
+
+    if (*Y_string == "Y_IM" ) {
+        Y = invariant_mass_rapidity_qq( x10, 0.5, 0.5, W );
+    }
+    else if (*Y_string == "Y_pom") {
+        double x_pom = x_pom_fun(W, Q, delta);
+        Y = log(1.0/x_pom); 
+    }
+    else if (*Y_string == "Y_0") {
+        Y = Y0_if; 
+    }
+    else if (*Y_string == "Y_dip") {
+        double x_min = x_min_fun(W, Q, delta);
+        Y = log(1.0/x_min); 
+    }
 
     double zeta = x10 * sqrt(0.25*Q*Q+m*m);
 
@@ -494,12 +689,31 @@ double Transverse::qq_rel_100_pm(double x[], size_t dim, void *params) {
 double Transverse::lambda_integrand(double x[], size_t dim, void *params) {
     dimension_error(dim, 1);
     struct integ_params *p = (struct integ_params *)params;
-    double x_rap = p->x;
+    string *Y_string = p->Y;
+    // double x_rap = p->x;
     double delta = p->delta;
     double Q = p->Q;
     double m = p->m;
     double x10 = x[0];
-    double Y = log(1.0/x_rap);
+
+
+    double W = p->W;
+    double Y;
+    
+    if (*Y_string == "Y_IM" ) {
+        Y = invariant_mass_rapidity_qq( x10, 0.5, 0.5, W );
+    }
+    else if (*Y_string == "Y_pom") {
+        double x_pom = x_pom_fun(W, Q, delta);
+        Y = log(1.0/x_pom); 
+    }
+    else if (*Y_string == "Y_0") {
+        Y = Y0_if; 
+    }
+    else if (*Y_string == "Y_dip") {
+        double x_min = x_min_fun(W, Q, delta);
+        Y = log(1.0/x_min); 
+    }
 
     return dNdY(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * 2*M_PI * x10 * delta_factor_qq(0.5, delta, x10);
 }

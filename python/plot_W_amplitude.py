@@ -7,7 +7,7 @@ import os
 import plotting_functions
 
 # plots = [52]
-plots = [1,2,5]
+plots = [1,2,5, 21]
 
 # def phenomenological_correction(lambda_v):
 #     real_part_correction = lambda x: 1+np.tan( np.pi/2 * x )**2
@@ -28,8 +28,10 @@ if alphas_const:
     # amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_minus_cutoff.dat'
     amplitude_file = dir_path + r'results-LOBK-as-const-jpsi-T-Q2_0.01_minus_cutoff_1-x20x21.dat'
 else:
+    amplitude_file = dir_path + r'results-LOBK-as-const_invariant_mass_rapidity-jpsi-T-Q2_0.01_minus_cutoff_1-x20x21.dat'
+    
     # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-Q2.dat'
-    amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-Q2_0.01_minus_cutoff_1-x20x21.dat'
+    # amplitude_file = dir_path + r'results-kcbk-lightq-parent-0.00-jpsi-T-Q2_0.01_minus_cutoff_1-x20x21.dat'
     # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-Q2.dat'
     # amplitude_file = dir_path + r'results-resumbk-lightq-parent-0.00-jpsi-T-Q2_0.01_minus_cutoff_1-x20x21.dat'
     # amplitude_file = dir_path + r'results-tbk-lightq-bal+sd-0.00-jpsi-T-Q2_0.01_high-W.dat'
@@ -129,7 +131,8 @@ if 1 in plots:
     plt.plot(Wv, amplitudes[:,0], 'k-',label='LO($x\'$)', linewidth=linewidth)
     plt.plot(Wv, amplitudes[:,1], 'b-',label='LO($x_p$)', linewidth=linewidth)
     plt.plot(Wv, amplitudes[:,2], 'r-',label='LO($x_0$)', linewidth=linewidth)
-    plt.plot(Wv, amplitudes[:,3], 'k--',label='NLO 1 dim', linewidth=linewidth)
+    plt.plot(Wv, amplitudes[:,3], 'k--',label='NLO 1 dim dw', linewidth=linewidth)
+    plt.plot(Wv, amplitudes[:,4], 'm--',label='NLO 1 dim wf', linewidth=linewidth)
     plt.plot(Wv, amplitudes[:,5], 'b--',label='NLO $J_1$', linewidth=linewidth)
     plt.plot(Wv, amplitudes[:,6], 'r--',label='NLO $J_2$', linewidth=linewidth)
     plt.plot(Wv, amplitudes[:,7], 'c--',label='NLO $K_0$', linewidth=linewidth)
@@ -196,6 +199,40 @@ if 2 in plots:
     plt.tight_layout()
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)
+
+
+if 21 in plots:
+    plt.figure(21)
+    plt.plot(Wv, np.abs(NLO), 'k-',label=r'$\textrm{NLO (unsub scheme)}$', linewidth=linewidth)
+    # plt.plot(Wv, NLO, 'r-',label=r'$\textrm{NLO} (=\textrm{LO}(x^\prime)+ \textrm{NLO}_\textrm{dip} + \textrm{NLO}_{qqg})$', linewidth=linewidth)
+    # plt.plot(Wv, NLO, 'b-',label=r'$\textrm{NLO} (=\textrm{LO}(x_\textrm{P})+ \textrm{NLO}_\textrm{BK,2} + \textrm{NLO}_\textrm{dip} + \textrm{NLO}_{qqg})$', linewidth=linewidth)
+    plt.plot(Wv, np.abs(LO_prime), 'b--',label=r'$\textrm{LO}(x^\prime$)', linewidth=linewidth)
+    plt.plot(Wv, np.abs(LO_pom), 'g--',label=r'$\textrm{LO}(x_\textrm{P})$', linewidth=linewidth)
+    plt.plot(Wv, np.abs(LO_0), 'r--',label=r'$\textrm{LO}(x_0)$', linewidth=linewidth)
+    # plt.plot(Wv, LO_BK, 'r--',label=r'$\textrm{LO}(x_0)+ L_\textrm{BK}$', linewidth=linewidth)
+    plt.plot(Wv, np.abs(NLO_dip), 'b:',label=r'$\textrm{NLO}_\textrm{dip}$', linewidth=linewidth)
+    plt.plot(Wv, np.abs(NLO_qqg), 'r:',label=r'$\textrm{NLO}_{q \bar q g-BK}$', linewidth=linewidth)
+    plt.plot(Wv, np.abs(NLO_BK), 'k:',label=r'$\textrm{NLO}_\textrm{BK}$', linewidth=linewidth)
+    plt.legend(prop={'size': 10}, frameon=False)
+    if alphas_const:
+        plt.title(r'Amplitude at $Q^2 =0 \textrm{GeV}^2$ [GeV$^{-2}$] $(\alpha_s = 0.3)$', fontsize=14)
+    else:
+        plt.title(r'Amplitude at $Q^2 =0 \textrm{GeV}^2$ [GeV$^{-2}$]', fontsize=14)
+    # plt.title(r'Amplitude at $Q^2 =10 \textrm{GeV}^2$ [GeV$^{-2}$] $(m_c = 1.2\textrm{GeV})$', fontsize=17)
+    plt.xlabel(r'$W$ [GeV]', fontsize=12)
+    # plt.ylabel(r'$\sigma_L+\sigma_T$ [nb]', fontsize=15)
+    # plt.xlim([50, 2e2])
+    plt.xlim([50, 1e3])
+    # plt.ylim([-0.1e1, 1e0])
+    plt.ylim([1e-3, 3e0])
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.tight_layout()
+    plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
+    plt.tick_params(axis='x', pad=5)
+
 
 # gev_to_nb = 0.389379e6
 

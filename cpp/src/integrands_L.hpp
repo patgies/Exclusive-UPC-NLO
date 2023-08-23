@@ -2,6 +2,9 @@
 #ifndef _INTEGRANDS_L_H
 #define _INTEGRANDS_L_H
 
+#include <string>
+using namespace std;
+
 #include <gsl/gsl_math.h>
 
 namespace Longitudinal {
@@ -54,7 +57,8 @@ namespace Longitudinal {
     double delta_factor_qqg(double z2, double Delta, double x20, double x21, double ph);
 
     double theta(double x);
-    struct integ_params { double delta; double m; double Q; double x; double W;};
+    // struct integ_params { double delta; double m; double Q; double x; double W;};
+    struct integ_params { double delta; double m; double Q; string *Y; double W;};
 
 }
 

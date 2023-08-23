@@ -19,6 +19,16 @@ void initialize_amplitude(string file) {
     amp_init_bool = true;
 }
 
+double check_Y(double Y) {
+    if ( Y < Y_min ) {
+        return Y_min;
+    }
+    else if ( Y > Y_max ) {
+        return Y_max;
+    }
+    return Y;
+}
+
 
 // Qs^2 for GBW model.
 double Qs2_GBW( double x ) {
@@ -34,6 +44,7 @@ double Qs2_GBW( double x ) {
 // Gives the Fourier transform dipole amplitude N_xy = 1-S_xy. Here r is the distance between the quark and antiquark.
 // TODO: delta dependence not implemented!
 double N_xy(double r, double delta, double Y) {
+    Y = check_Y(Y);
     if(b_dependence_bool) {
         if( r < 1.0001 * 1.0e-5 ) {
             return 0.0;
@@ -84,6 +95,8 @@ rij = |xi-xj|; x0 = quark, x1 = antiquark, x2 = gluon transverse coordinates
 TODO: delta dependence not implemented
 */
 double N_xyz(double r10, double r20, double r21, double delta, double Y) {
+    Y = check_Y(Y);
+
     if( b_dependence_bool ) {
         // Handle r<r_min and r>r_max.
         double r_min = 1.0e-5;
@@ -102,7 +115,8 @@ double N_xyz(double r10, double r20, double r21, double delta, double Y) {
 // Derivative of the dipole amplitude. Needed for calculating phenomenological corrections.
 double dNdY(double r, double delta, double Y) {
     double epsilon = 5.0e-2;
-    return ( N_xy(r, delta, Y+epsilon ) - N_xy(r, delta, Y-epsilon) ) / (2.0*epsilon);
+    return ( N_xy(r, delta, Y+2.0*epsilon ) - N_xy(r, delta, Y) ) / (2.0*epsilon);
+    // return ( N_xy(r, delta, Y+epsilon ) - N_xy(r, delta, Y-epsilon) ) / (2.0*epsilon);
     // return ( -1.0/12.0 * N_xy(r, delta, Y+2.0*epsilon ) +2.0/3.0 * N_xy(r, delta, Y+epsilon) +1.0/12.0 * N_xy(r, delta, Y-2.0*epsilon ) -2.0/3.0 * N_xy(r, delta, Y-epsilon) ) / (epsilon);
         
 }

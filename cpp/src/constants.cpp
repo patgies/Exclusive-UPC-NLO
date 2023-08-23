@@ -55,6 +55,10 @@ double u_max = 1000.0;
 double y_min = 1.0e-5;
 double y_max = 1.0-1.0e-5;
 
+// Limits for the rapidity, given by the dipole amplitude file. These default values should not affect results.
+double Y_min = -100.0;
+double Y_max = 100.0;
+
 
 //Number of evaluation points:
 int W_length=0;
@@ -76,6 +80,8 @@ bool dim6_bool = false;
 
 bool minus_cutoff_bool = false;
 double minus_cutoff_value = 1.0;
+
+bool inv_mass_rapidity_bool = false;
 
 
 double x_pom_fun(double W, double Q, double Delta) {
@@ -117,6 +123,19 @@ double target_rapidity(double Y, double r) {
     return Y + eta_corr(r);
 } 
 
+// Invariant mass for a qqbar state in mixed space. TODO: in principle should add Q^2 dependence
+double invariant_mass_rapidity_qq(double r, double z0, double z1, double W) {
+    return log( W*W * z0*z1*r*r ) - Y0_if;
+}
+
+// Invariant mass for a qqbarg state in mixed space. (an approximation) TODO: in principle should add Q^2 dependence
+double invariant_mass_rapidity_qqg(double x10, double x20, double x21, double z0, double z1, double z2, double W) {
+    double r = min( x20, x21 );
+    double invariant_mass = 1.0/(z0*z1*x10*x10) + 1.0/( z2*r*r );
+    return log( W*W / invariant_mass ) - Y0_if;
+}
+
+
 
 // Gives the minimum for the z_2 integral in the unsub scheme.
 double z2_min_fun(double W, double Q) {
@@ -133,7 +152,7 @@ double z2_min_pom_fun(double W, double Q, double Delta) {
 // This is in addition to the cutoff z2 > 2*Q0*Q0/W*W;
 double z2_min_minus_cutoff(double W, double Q, double x01, double x20, double x21) {
     // double r = min( x20, x21 );
-    double r2 = min( 0.5*x20*x20, 0.5*x21*x21 ); // This emulates having the constraint for z0*z2*x20^2 and z1*z2*z21^2. Works only in the nonrelativistic limit.
+    double r2 = min( x20*x20, x21*x21 ); // This emulates having the constraint for z0*z2*x20^2 and z1*z2*z21^2. Works only in the nonrelativistic limit.
     // double r2 = min( min( 1.0/(Q0*Q0), x01*x01 ), min( x20*x20, x21*x21 ) ); // This should be close to what is in the evolution
     return exp(Y0_if) / (W*W+Q*Q-m_N*m_N) / (r2) * minus_cutoff_value ;
 }

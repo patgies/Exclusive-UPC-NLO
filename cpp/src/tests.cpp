@@ -35,6 +35,7 @@ double ytdef = 0.12;
 
 double tol = 0.0001;
 
+
 // Transverse
 
 
@@ -68,7 +69,9 @@ BOOST_AUTO_TEST_CASE( test_GBW_dipole )
 
 BOOST_AUTO_TEST_CASE( test_int_lo_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
     BOOST_TEST( Transverse::qq_LO( x, 1,  &params) == 0.0427634, tt::tolerance(tol) );
 }
@@ -86,14 +89,18 @@ BOOST_AUTO_TEST_CASE( test_L_T )
 
 BOOST_AUTO_TEST_CASE( test_int_1dim_dw_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
     BOOST_TEST( Transverse::qq_NLO_1_dim_decay_width( x, 1,  &params) == 0.0157832, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_1dim_wf_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
     BOOST_TEST( Transverse::qq_NLO_1_dim_wave_function( x, 1,  &params) == 0.00140157, tt::tolerance(tol) );
 }
@@ -101,14 +108,18 @@ BOOST_AUTO_TEST_CASE( test_int_1dim_wf_T )
 
 BOOST_AUTO_TEST_CASE( test_int_J1_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef, xidef};
     BOOST_TEST( Transverse::qq_NLO_J_1( x, 2,  &params) == -0.00139493, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_J2_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef, xidef, xdef};
     BOOST_TEST( Transverse::qq_NLO_J_2( x, 3,  &params) == -0.00299998, tt::tolerance(tol) );
 }
@@ -117,35 +128,46 @@ BOOST_AUTO_TEST_CASE( test_int_J2_T )
 
 BOOST_AUTO_TEST_CASE( test_int_K_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef, zdef};
     BOOST_TEST( Transverse::qq_NLO_K( x, 2,  &params) == 0.0327568, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_lambda_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
-    BOOST_TEST( Transverse::lambda_integrand( x, 1,  &params) == 0.0122184, tt::tolerance(tol) );
+    // BOOST_TEST( Transverse::lambda_integrand( x, 1,  &params) == 0.0122184, tt::tolerance(tol) );
+    BOOST_TEST( Transverse::lambda_integrand( x, 1,  &params) == 0.0123918, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_rel_002_pp_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
     BOOST_TEST( Transverse::qq_rel_002_pp( x, 1,  &params) == -0.0891563, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_rel_200_pp_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
     BOOST_TEST( Transverse::qq_rel_200_pp( x, 1,  &params) == 0.0328108, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_rel_100_pm_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
     BOOST_TEST( Transverse::qq_rel_100_pm( x, 1,  &params) == -0.196119, tt::tolerance(tol) );
 }
@@ -154,7 +176,9 @@ BOOST_AUTO_TEST_CASE( test_int_rel_100_pm_T )
 
 BOOST_AUTO_TEST_CASE( test_int_BK_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {x20def, x21def, phidef, z2def};
     BOOST_TEST( Transverse::qqg_BK( x, 4,  &params) == 0.0754996, tt::tolerance(tol) );
 }
@@ -162,21 +186,27 @@ BOOST_AUTO_TEST_CASE( test_int_BK_T )
 
 BOOST_AUTO_TEST_CASE( test_int_dim4_unsub_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {x20def, x21def, phidef, z2def};
     BOOST_TEST( Transverse::qqg_dim4_unsub( x, 4,  &params) == -0.309625, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_dim4_sub_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {x20def, x21def, phidef, z2def};
     BOOST_TEST( Transverse::qqg_dim4_sub( x, 4,  &params) == -0.385125, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_dim6_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {x20def, x21def, phidef, z2def, tdef, udef};
     BOOST_TEST( Transverse::qqg_dim6( x, 6,  &params) == -0.040435, tt::tolerance(tol) );
 }
@@ -184,7 +214,9 @@ BOOST_AUTO_TEST_CASE( test_int_dim6_T )
 
 BOOST_AUTO_TEST_CASE( test_int_dim5_T )
 {
-    struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Transverse::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Transverse::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {x20def, x21def, phidef, z2def, ytdef};
     BOOST_TEST( Transverse::qqg_dim5( x, 5,  &params) == -0.0000773066, tt::tolerance(tol) );
 }
@@ -218,7 +250,9 @@ BOOST_AUTO_TEST_CASE( test_x10_L )
 
 BOOST_AUTO_TEST_CASE( test_int_lo_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
     BOOST_TEST( Longitudinal::qq_LO( x, 1,  &params) == 0.0427634, tt::tolerance(tol) );
 }
@@ -235,28 +269,36 @@ BOOST_AUTO_TEST_CASE( test_L_L )
 
 BOOST_AUTO_TEST_CASE( test_int_1dim_dw_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
     BOOST_TEST( Longitudinal::qq_NLO_1_dim_decay_width( x, 1,  &params) == 0.0143608, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_1dim_wf_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
     BOOST_TEST( Longitudinal::qq_NLO_1_dim_wave_function( x, 1,  &params) == -0.00002082, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_J1_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef, xidef};
     BOOST_TEST( Longitudinal::qq_NLO_J_1( x, 2,  &params) == 0.00425542, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_J2_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef, xidef, xdef};
     BOOST_TEST( Longitudinal::qq_NLO_J_2( x, 3,  &params) == 0.000338758, tt::tolerance(tol) );
 }
@@ -264,29 +306,38 @@ BOOST_AUTO_TEST_CASE( test_int_J2_L )
 
 BOOST_AUTO_TEST_CASE( test_int_K_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef, zdef};
     BOOST_TEST( Longitudinal::qq_NLO_K0( x, 2,  &params) == -0.018036, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_lambda_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
-    BOOST_TEST( Longitudinal::lambda_integrand( x, 1,  &params) == 0.0122184, tt::tolerance(tol) );
+    // BOOST_TEST( Longitudinal::lambda_integrand( x, 1,  &params) == 0.0122184, tt::tolerance(tol) );
+    BOOST_TEST( Longitudinal::lambda_integrand( x, 1,  &params) == 0.0123918, tt::tolerance(tol) );
 }
 
 
 BOOST_AUTO_TEST_CASE( test_int_rel_200_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
     BOOST_TEST( Longitudinal::qq_rel_200( x, 1,  &params) == 0.0164054, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_rel_002_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {rdef};
     BOOST_TEST( Longitudinal::qq_rel_002( x, 1,  &params) == -0.0463929, tt::tolerance(tol) );
 }
@@ -295,28 +346,36 @@ BOOST_AUTO_TEST_CASE( test_int_rel_002_L )
 
 BOOST_AUTO_TEST_CASE( test_int_BK_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {x20def, x21def, phidef, z2def};
     BOOST_TEST( Longitudinal::qqg_BK( x, 4,  &params) == 0.0754996, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_dim4_unsub_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {x20def, x21def, phidef, z2def};
     BOOST_TEST( Longitudinal::qqg_dim4_unsub( x, 4,  &params) == -0.308027, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_dim4_sub_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {x20def, x21def, phidef, z2def};
     BOOST_TEST( Longitudinal::qqg_dim4_sub( x, 4,  &params) == -0.383526, tt::tolerance(tol) );
 }
 
 BOOST_AUTO_TEST_CASE( test_int_dim6_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {x20def, x21def, phidef, z2def, tdef, udef};
     BOOST_TEST( Longitudinal::qqg_dim6( x, 6,  &params) == -0.0235301, tt::tolerance(tol) );
 }
@@ -325,7 +384,9 @@ BOOST_AUTO_TEST_CASE( test_int_dim6_L )
 
 BOOST_AUTO_TEST_CASE( test_int_dim5_L )
 {
-    struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
+    Y0_if = Ydef;
+    struct Longitudinal::integ_params params = {0.0, m, Qdef, new string("Y_0"), Wdef};
+    // struct Longitudinal::integ_params params = {0.0, m, Qdef, exp(-Ydef), Wdef};
     double x[] = {x20def, x21def, phidef, z2def, ytdef};
     BOOST_TEST( Longitudinal::qqg_dim5( x, 5,  &params) == -0.0000543107, tt::tolerance(tol) );
 }
