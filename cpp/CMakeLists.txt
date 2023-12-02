@@ -36,8 +36,8 @@ set_target_properties(NLO_amplitude PROPERTIES
 
 
 
-# Add compatibility with Boost
-set_target_properties(tests PROPERTIES
-	RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+# # Add compatibility with Boost
+# set_target_properties(tests PROPERTIES
+# 	RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 	
 

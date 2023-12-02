@@ -19,7 +19,7 @@ calculate_amplitude () {
     PARAMETERS=${11}           # Additional parameters in the call
 
 
-    NTHREAD=8              # Number of threads used in the calculation
+    NTHREAD=20              # Number of threads used in the calculation
     
     evaluation_points $FIXED_PARAMETER $FIXED_VALUE $PARAMETER_MIN $PARAMETER_MAX
     source ${INPUT_FOLDER}/conf-${CONF}.sh
@@ -244,7 +244,7 @@ date +"%d-%m-%y %T"
 # calculate_amplitude "tbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
 
 # calculate_amplitude "LOBK-as-const_invariant_mass_rapidity" "W" 90 0.01 100 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
-calculate_amplitude "LOBK-as-const_invariant_mass_rapidity" "Q2" 0.01 30 1000 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
+# calculate_amplitude "LOBK-as-const_invariant_mass_rapidity" "Q2" 0.01 30 1000 false true "jpsi" 2 "_minus_cutoff_1-x20x21" "-minus_cutoff 1"
 
 
 
@@ -276,6 +276,22 @@ calculate_amplitude "LOBK-as-const_invariant_mass_rapidity" "Q2" 0.01 30 1000 fa
 # calculate_amplitude "resumbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2
 # calculate_amplitude "tbk-lightq-bal+sd-0.00" "Q2" 0.01 30 3000 false true "upsilon" 2
 
+calculate_amplitude "kcbk-lightq-parent-0.00" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
+calculate_amplitude "resumbk-lightq-parent-0.00" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
+calculate_amplitude "tbk-lightq-bal+sd-0.00" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
+calculate_amplitude "kcbk-lightq-parent-4.61" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
+calculate_amplitude "resumbk-lightq-parent-4.61" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
+calculate_amplitude "tbk-lightq-bal+sd-4.61" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
+
+calculate_amplitude "kcbk-hera-bal+sd-0.00" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
+calculate_amplitude "resumbk-hera-bal+sd-0.00" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
+calculate_amplitude "tbk-hera-bal+sd-0.00" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
+calculate_amplitude "kcbk-hera-bal+sd-4.61" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
+calculate_amplitude "resumbk-hera-bal+sd-4.61" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
+calculate_amplitude "tbk-hera-bal+sd-4.61" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
+
+# calculate_amplitude "LOBK-MVe" "Q2" 0.01 30 30000 false true "jpsi" 0 "_ultrahigh-W" "-xpom"
+
 
 # calculate_amplitude "kcbk-hera-parent-4.61" "Q2" 0.01 30 3000 false true "jpsi" 2 
 # calculate_amplitude "kcbk-hera-parent-4.61" "W" 90 0.01 100 true true "jpsi" 2
@@ -302,7 +318,6 @@ calculate_amplitude "LOBK-as-const_invariant_mass_rapidity" "Q2" 0.01 30 1000 fa
 # calculate_amplitude "kcbk-lightq-parent-0.00" "W" 90 0.01 100 false true "upsilon" 2 "_minus_cutoff-x20x21" "-minus_cutoff 1"
 # calculate_amplitude "resumbk-lightq-parent-0.00" "W" 90 0.01 100 false true "upsilon" 2 "_minus_cutoff-x20x21" "-minus_cutoff 1"
 # calculate_amplitude "tbk-lightq-bal+sd-0.00" "W" 90 0.01 100 false true "upsilon" 2 "_minus_cutoff-x20x21" "-minus_cutoff 1"
-
 
 
 # calculate_amplitude "kcbk-lightq-parent-0.00" "Q2" 0.01 30 3000 false true "jpsi" 2 "_minus_cutoff-x20x21" "-minus_cutoff 1"

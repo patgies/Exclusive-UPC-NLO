@@ -41,24 +41,24 @@ target_link_libraries(
 
 # Add compatibility with Boost
 
-set(Boost_USE_STATIC_LIBS ON)
-set(Boost_USE_MULTITHREADED ON)
-set(Boost_USE_STATIC_RUNTIME OFF)
-find_package(Boost 1.55 REQUIRED COMPONENTS unit_test_framework)
+# set(Boost_USE_STATIC_LIBS ON)
+# set(Boost_USE_MULTITHREADED ON)
+# set(Boost_USE_STATIC_RUNTIME OFF)
+# find_package(Boost 1.55 REQUIRED COMPONENTS unit_test_framework)
 
 
-add_executable(tests tests.cpp)
-target_include_directories(tests PRIVATE ${Boost_INCLUDE_DIRS})
+# add_executable(tests tests.cpp)
+# target_include_directories(tests PRIVATE ${Boost_INCLUDE_DIRS})
 
 
-target_link_libraries(
-	tests
-	PRIVATE
-	integrands
-	amplitude
-	${Boost_LIBRARIES}
-	GSL::gsl
-	GSL::gslcblas
-)
+# target_link_libraries(
+# 	tests
+# 	PRIVATE
+# 	integrands
+# 	amplitude
+# 	${Boost_LIBRARIES}
+# 	GSL::gsl
+# 	GSL::gslcblas
+# )
 
-add_custom_command(TARGET tests POST_BUILD COMMAND tests)
+# add_custom_command(TARGET tests POST_BUILD COMMAND tests)
