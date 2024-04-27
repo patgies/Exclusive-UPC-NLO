@@ -316,7 +316,7 @@ if 3 in plots:
     plt.plot(cs_tbk_461_T[0],     C_int * cs_tbk_461_T[3], 'g-',label=r'NLO TBK 4.61', linewidth=linewidth2)
     plt.plot(cs_resumbk_000_T[0], C_int * cs_resumbk_000_T[3], 'b--',label=r'NLO ResumBK 0.00', linewidth=linewidth3)
     plt.plot(cs_resumbk_461_T[0], C_int * cs_resumbk_461_T[3], 'b-',label=r'NLO ResumBK 4.61', linewidth=linewidth3)
-    plt.plot(cs_kcbk_parent_461_T_Q0[0], C_int * cs_kcbk_parent_461_T_Q0[3], 'm-',label=r'NLO KCBK parent 4.61', linewidth=linewidth3)
+    # plt.plot(cs_kcbk_parent_461_T_Q0[0], C_int * cs_kcbk_parent_461_T_Q0[3], 'm-',label=r'NLO KCBK parent 4.61', linewidth=linewidth3)
     plt.plot(cs_lobk_mve_T[0],    C_int * cs_lobk_mve_T[6], 'k:',label=r'LO LOBK', linewidth=linewidth2)
     plt.errorbar(sigma_tot_ZEUS_W[0], sigma_tot_ZEUS_data[0],         yerr=[np.sqrt(sigma_tot_ZEUS_data[1]**2+sigma_tot_ZEUS_data[2]**2),np.sqrt(sigma_tot_ZEUS_data[3]**2+sigma_tot_ZEUS_data[4]**2)],label='ZEUS', fmt='or', capsize=3)
     plt.errorbar(sigma_tot_H1_v1_W[0], sigma_tot_H1_v1_data[0],       yerr=[np.sqrt(sigma_tot_H1_v1_data[1]**2+sigma_tot_H1_v1_data[2]**2),np.sqrt(sigma_tot_H1_v1_data[3]**2+sigma_tot_H1_v1_data[4]**2)],label='H1', fmt='vb', capsize=3)
