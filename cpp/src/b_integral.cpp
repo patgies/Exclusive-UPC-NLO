@@ -3,6 +3,7 @@
 #include "b_integral.hpp"
 #include "dipole_amplitudes.hpp"
 #include "constants.hpp"
+#include <cmath>
 #include <cstring>
 #include <gsl/gsl_integration.h>
 

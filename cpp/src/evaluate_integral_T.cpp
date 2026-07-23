@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <sstream>
 #include <future>
 
 #include "integrands_T.hpp"
