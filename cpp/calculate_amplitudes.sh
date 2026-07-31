@@ -289,7 +289,7 @@ date +"%d-%m-%y %T"
 # Y_{0,BK}=4.61 data for the nuclear-suppression comparison (W=90 fixed, Q2 swept 0.01-100, L only).
 # kcbk-hera-parent-4.61 proton data already exists (results-kcbk-hera-parent-4.61-jpsi-L-W_90.dat), only the
 # nuclear (A197) side needs computing for that one. TBK needs both proton and nuclear sides.
-calculate_amplitude "tbk-lightq-parent-4.61" "W" 90 0.01 100 true false "jpsi" 3
+#calculate_amplitude "tbk-lightq-parent-4.61" "W" 90 0.01 100 true false "jpsi" 3
 calculate_amplitude "A197-tbk-lightq-parent-4.61" "W" 90 0.01 100 true false "jpsi" 3
 calculate_amplitude "A197-kcbk-hera-parent-4.61" "W" 90 0.01 100 true false "jpsi" 3
 #calculate_amplitude "tbk-hera-bal+sd-0.00" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
