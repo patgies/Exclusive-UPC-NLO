@@ -19,7 +19,7 @@ calculate_amplitude () {
     PARAMETERS=${11}           # Additional parameters in the call
 
 
-    NTHREAD=20              # Number of threads used in the calculation
+    NTHREAD=10              # Number of threads used in the calculation
     
     evaluation_points $FIXED_PARAMETER $FIXED_VALUE $PARAMETER_MIN $PARAMETER_MAX
     source ${INPUT_FOLDER}/conf-${CONF}.sh
@@ -290,8 +290,8 @@ date +"%d-%m-%y %T"
 # kcbk-hera-parent-4.61 proton data already exists (results-kcbk-hera-parent-4.61-jpsi-L-W_90.dat), only the
 # nuclear (A197) side needs computing for that one. TBK needs both proton and nuclear sides.
 #calculate_amplitude "tbk-lightq-parent-4.61" "W" 90 0.01 100 true false "jpsi" 3
-calculate_amplitude "A197-tbk-lightq-parent-4.61" "W" 90 0.01 100 true false "jpsi" 3
-calculate_amplitude "A197-kcbk-hera-parent-4.61" "W" 90 0.01 100 true false "jpsi" 3
+#calculate_amplitude "A197-tbk-lightq-parent-4.61" "W" 90 0.01 100 true false "jpsi" 1 "_acc1"
+calculate_amplitude "kcbk-hera-bal+sd-4.61" "W" 90 0.01 100 true false "jpsi" 3 "_acc3"
 #calculate_amplitude "tbk-hera-bal+sd-0.00" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
 #calculate_amplitude "kcbk-hera-bal+sd-4.61" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
 #calculate_amplitude "resumbk-hera-bal+sd-4.61" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
