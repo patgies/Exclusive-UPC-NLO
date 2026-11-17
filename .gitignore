@@ -13,5 +13,5 @@ cpp/dipole_amplitude/*
 CMakeCache.txt
 *.png
 *.out
-*old*
+*_old*
 *Makefile

@@ -8,7 +8,18 @@
 using namespace std;
 
 
-extern AmplitudeLib *amplitudes [16];
+// Impact-parameter grid of the nuclear dipole files (b in GeV^-1).
+// File i holds the dipole at b = B_STEP*i, for i = 0, ..., N_B_FILES-1 (b = 0, 2, ..., 30).
+// The b-integral uses the files explicitly up to index B_LAST (b = 26) with the trapezoid rule,
+// and for b > B_MIN_TAIL = 26.5 the linearised tail A*T_A(b)*sigma0/2*N_proton(r).
+const int    N_B_FILES  = 16;
+const double B_STEP     = 2.0;
+const int    B_LAST     = 13;
+const double B_TAIL_GAP = 0.5;                            // distance from the last file to the tail start
+const double B_MIN_TAIL = B_STEP*B_LAST + B_TAIL_GAP;     // = 26.5
+const double W_LAST     = B_STEP*B_LAST * (B_STEP/2.0 + B_TAIL_GAP);  // trapezoid weight b*db of the last point (= 1.5*26)
+
+extern AmplitudeLib *amplitudes [N_B_FILES];
 extern AmplitudeLib *amp_default;
 
 void initialize_amplitudes(string folder, string default_file);

@@ -13,6 +13,14 @@
 #include "integrands_T.hpp"
 #include "constants.hpp"
 #include "dipole_amplitudes.hpp"
+#include <cstdlib>
+#include <string>
+
+// Called when the rapidity choice string is not one of Y_IM, Y_pom, Y_0, Y_dip (a programming error).
+[[noreturn]] static void unknown_Y_string(const std::string &s) {
+    std::cerr << "Unknown rapidity choice: " << s << std::endl;
+    std::abort();
+}
 using namespace std;
 
 // Heaviside theta
@@ -339,6 +347,9 @@ double Transverse::qq_LO(double x[], size_t dim, void *params) {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
     }
+    else {
+        unknown_Y_string(*Y_string);
+    }
 
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * 2*M_PI * x10 * delta_factor_qq(0.5, delta, x10);
@@ -371,6 +382,9 @@ double Transverse::qq_NLO_1_dim_decay_width(double x[], size_t dim, void *params
     else if (*Y_string == "Y_dip") {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
+    }
+    else {
+        unknown_Y_string(*Y_string);
     }
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( -Omega_V(m,Q)+L(m,Q) -M_PI*M_PI/3.0+13.0/2.0-3.0*log( m*x10/2.0 ) -3.0*M_EULER )
@@ -405,6 +419,9 @@ double Transverse::qq_NLO_1_dim_wave_function(double x[], size_t dim, void *para
     else if (*Y_string == "Y_dip") {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
+    }
+    else {
+        unknown_Y_string(*Y_string);
     }
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( -Omega_V(m,Q)+L(m,Q) -M_PI*M_PI/3.0+5.0/2.0-3.0*log( m*x10/2.0 ) -3.0*M_EULER )
@@ -441,6 +458,9 @@ double Transverse::qq_NLO_K(double x[], size_t dim, void *params) {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
     }
+    else {
+        unknown_Y_string(*Y_string);
+    }
 
 
     return N_xy(x10, delta, Y)*K_0_integrand(z, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(z, delta, x10);
@@ -476,6 +496,9 @@ double Transverse::qq_NLO_J_1(double x[], size_t dim, void *params) {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
     }
+    else {
+        unknown_Y_string(*Y_string);
+    }
 
     return N_xy(x10, delta, Y)*J_1_integrand(xi, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
 }
@@ -510,6 +533,9 @@ double Transverse::qq_NLO_J_2(double x[], size_t dim, void *params) {
     else if (*Y_string == "Y_dip") {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
+    }
+    else {
+        unknown_Y_string(*Y_string);
     }
     
     return N_xy(x10, delta, Y)*J_2_integrand(xi, x_var, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
@@ -603,6 +629,9 @@ double Transverse::qq_rel_002_pp(double x[], size_t dim, void *params) {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
     }
+    else {
+        unknown_Y_string(*Y_string);
+    }
     double zeta = x10 * sqrt(0.25*Q*Q+m*m);
 
 
@@ -638,6 +667,9 @@ double Transverse::qq_rel_200_pp(double x[], size_t dim, void *params) {
     else if (*Y_string == "Y_dip") {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
+    }
+    else {
+        unknown_Y_string(*Y_string);
     }
 
 
@@ -675,6 +707,9 @@ double Transverse::qq_rel_100_pm(double x[], size_t dim, void *params) {
     else if (*Y_string == "Y_dip") {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
+    }
+    else {
+        unknown_Y_string(*Y_string);
     }
 
     double zeta = x10 * sqrt(0.25*Q*Q+m*m);
@@ -714,6 +749,9 @@ double Transverse::lambda_integrand(double x[], size_t dim, void *params) {
     else if (*Y_string == "Y_dip") {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
+    }
+    else {
+        unknown_Y_string(*Y_string);
     }
 
     return dNdY(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * 2*M_PI * x10 * delta_factor_qq(0.5, delta, x10);

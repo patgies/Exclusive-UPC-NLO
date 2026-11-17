@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 
     if (string(argv[1])=="--help" || string(argv[1])=="-h")
     {
-        cout << "Program for calculating exclusive vector meson production in DIS at NLO accuracy. Made by J. Penttala <jani.j.penttala@student.jyu.fi>, 2021.\n" << endl;
+        cout << "Program for calculating exclusive vector meson production in DIS at NLO accuracy.\n" << endl;
         cout << "Required parameters:" << endl;
         cout << "-ofileL:\tOutput file for longitudinal production amplitude" << endl;
         cout << "-ofileT:\tOutput file for transverse production amplitude" << endl;
@@ -380,8 +380,8 @@ int main(int argc, char* argv[])
 
         ofstream ofile;
         ofile.open(output_file_L);
-        ofile << "# Longitudinal exclusive vector meson production in DIS at NLO by J. Penttala <jani.j.penttala@student.jyu.fi>, 2021. These are the values for the production amplitude at t=0, up to a prefactor -e*ef*Q/(2*pi)*sqrt(Nc/2)*2*(wavefunction factor)." << endl;
-        ofile << "# Git version " << g_GIT_SHA1 << " main build " << __DATE__  << " " << __TIME__ << endl;
+        ofile << "# Longitudinal exclusive vector meson production in DIS at NLO. These are the values for the production amplitude at t=0, up to a prefactor -e*ef*Q/(2*pi)*sqrt(Nc/2)*2*(wavefunction factor)." << endl;
+        ofile << "# Git version " << g_GIT_SHA1 << " (" << g_GIT_LOCAL_CHANGES << ")" << " main build " << __DATE__  << " " << __TIME__ << endl;
         ofile << "# Command: ";
         for (int i=1; i<argc; i++)
             ofile << argv[i] << " ";
@@ -401,8 +401,8 @@ int main(int argc, char* argv[])
 
         ofstream ofile;
         ofile.open(output_file_T);
-        ofile << "# Transverse exclusive vector meson production in DIS at NLO by J. Penttala <jani.j.penttala@student.jyu.fi>, 2021. These are the values for the production amplitude at t=0, up to a prefactor e*ef*m/(pi)*sqrt(Nc/2)*2*(wavefunction factor)." << endl;
-        ofile << "# Git version " << g_GIT_SHA1 << " main build " << __DATE__  << " " << __TIME__ << endl;
+        ofile << "# Transverse exclusive vector meson production in DIS at NLO. These are the values for the production amplitude at t=0, up to a prefactor e*ef*m/(pi)*sqrt(Nc/2)*2*(wavefunction factor)." << endl;
+        ofile << "# Git version " << g_GIT_SHA1 << " (" << g_GIT_LOCAL_CHANGES << ")" << " main build " << __DATE__  << " " << __TIME__ << endl;
         ofile << "# Command: ";
         for (int i=1; i<argc; i++)
             ofile << argv[i] << " ";

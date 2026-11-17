@@ -32,7 +32,6 @@ namespace Longitudinal {
         r = gsl_rng_alloc (T);
 
 
-        clock_t begin = clock();
 
         {
             gsl_monte_vegas_state *s = gsl_monte_vegas_alloc (dimension);
@@ -58,7 +57,6 @@ namespace Longitudinal {
         gsl_rng_free (r);
 
 
-        clock_t end = clock();
 
         return res;
 
@@ -72,7 +70,6 @@ namespace Longitudinal {
         // double x_pom = x_pom_fun(W, Q, Delta);
         // double x_min = x_min_fun(W, Q, Delta);
         double z2_min = z2_min_fun(W, Q);
-        double z2_min_pom = z2_min_pom_fun(W, Q, Delta);
 
         struct Longitudinal::integ_params params_sub = {Delta, m, Q, new string("Y_dip"), W}; 
         struct Longitudinal::integ_params params_pom = {Delta, m, Q, new string("Y_pom"), W}; 
@@ -111,15 +108,15 @@ namespace Longitudinal {
         }
 
         if(inv_mass_rapidity_bool) {
-            gsl_monte_function mf_qq_LO_unsub =     { &Longitudinal::qq_LO, 1, &params_inv_mass };
-            gsl_monte_function mf_qq_NLO_1_dim_dw = { &Longitudinal::qq_NLO_1_dim_decay_width, 1, &params_inv_mass };
-            gsl_monte_function mf_qq_NLO_1_dim_wf = { &Longitudinal::qq_NLO_1_dim_wave_function, 1, &params_inv_mass };
-            gsl_monte_function mf_qq_NLO_J_1 =      { &Longitudinal::qq_NLO_J_1, 2, &params_inv_mass };
-            gsl_monte_function mf_qq_NLO_J_2 =      { &Longitudinal::qq_NLO_J_2, 3, &params_inv_mass };
-            gsl_monte_function mf_qq_NLO_K0 =       { &Longitudinal::qq_NLO_K0, 2, &params_inv_mass };
-        gsl_monte_function mf_lambda =    { &Longitudinal::lambda_integrand, 1, &params_inv_mass };
-        gsl_monte_function mf_qq_rel_002 = { &Longitudinal::qq_rel_002, 1, &params_inv_mass };
-        gsl_monte_function mf_qq_rel_200 = { &Longitudinal::qq_rel_200, 1, &params_inv_mass };
+            mf_qq_LO_unsub =     { &Longitudinal::qq_LO, 1, &params_inv_mass };
+            mf_qq_NLO_1_dim_dw = { &Longitudinal::qq_NLO_1_dim_decay_width, 1, &params_inv_mass };
+            mf_qq_NLO_1_dim_wf = { &Longitudinal::qq_NLO_1_dim_wave_function, 1, &params_inv_mass };
+            mf_qq_NLO_J_1 =      { &Longitudinal::qq_NLO_J_1, 2, &params_inv_mass };
+            mf_qq_NLO_J_2 =      { &Longitudinal::qq_NLO_J_2, 3, &params_inv_mass };
+            mf_qq_NLO_K0 =       { &Longitudinal::qq_NLO_K0, 2, &params_inv_mass };
+            mf_lambda =    { &Longitudinal::lambda_integrand, 1, &params_inv_mass };
+            mf_qq_rel_002 = { &Longitudinal::qq_rel_002, 1, &params_inv_mass };
+            mf_qq_rel_200 = { &Longitudinal::qq_rel_200, 1, &params_inv_mass };
         }
 
         double xl_qq_LO[] = {x10_min};
@@ -201,7 +198,7 @@ namespace Longitudinal {
                     double Q2 = Q2_list[i_W];
                     double Q = sqrt(Q2);
             
-                    futures[i_thread] = async(amplitudes_string, W, Q, Delta);
+                    futures[i_thread] = async(std::launch::async, amplitudes_string, W, Q, Delta); // force real threads (default policy may run deferred/serially on old GCC)
                 }
 
             }

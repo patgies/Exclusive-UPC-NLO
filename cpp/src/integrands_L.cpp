@@ -13,6 +13,14 @@ See the article for the definitions of the functions.
 #include "dipole_amplitudes.hpp"
 #include "integrands_L.hpp"
 #include "constants.hpp"
+#include <cstdlib>
+#include <string>
+
+// Called when the rapidity choice string is not one of Y_IM, Y_pom, Y_0, Y_dip (a programming error).
+[[noreturn]] static void unknown_Y_string(const std::string &s) {
+    std::cerr << "Unknown rapidity choice: " << s << std::endl;
+    std::abort();
+}
 using namespace std;
 using namespace Longitudinal;
 
@@ -441,6 +449,9 @@ double Longitudinal::qq_LO(double x[], size_t dim, void *params) {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
     }
+    else {
+        unknown_Y_string(*Y_string);
+    }
 
  
 
@@ -476,6 +487,9 @@ double Longitudinal::qq_NLO_1_dim_decay_width(double x[], size_t dim, void *para
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
     }
+    else {
+        unknown_Y_string(*Y_string);
+    }
 
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( 6.0-gsl_pow_2(M_PI)/3.0 + Gamma_Lm(m, Q) + L(m, Q) - 3.0*log(x10*m/2.0)-3.0*M_EULER )*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
@@ -510,6 +524,9 @@ double Longitudinal::qq_NLO_1_dim_wave_function(double x[], size_t dim, void *pa
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
     }
+    else {
+        unknown_Y_string(*Y_string);
+    }
 
     return N_xy(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * ( 2.0-gsl_pow_2(M_PI)/3.0 + Gamma_Lm(m, Q) + L(m, Q) - 3.0*log(x10*m/2.0)-3.0*M_EULER )*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
 }
@@ -543,6 +560,9 @@ double Longitudinal::qq_NLO_K0(double x[], size_t dim, void *params) {
     else if (*Y_string == "Y_dip") {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
+    }
+    else {
+        unknown_Y_string(*Y_string);
     }
 
 
@@ -579,6 +599,9 @@ double Longitudinal::qq_NLO_J_1(double x[], size_t dim, void *params) {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
     }
+    else {
+        unknown_Y_string(*Y_string);
+    }
 
     return N_xy(x10, delta, Y)*J_1_integrand(xi, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
 }
@@ -613,6 +636,9 @@ double Longitudinal::qq_NLO_J_2(double x[], size_t dim, void *params) {
     else if (*Y_string == "Y_dip") {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
+    }
+    else {
+        unknown_Y_string(*Y_string);
     }
     
     return N_xy(x10, delta, Y)*J_2_integrand(xi, x_var, x10, m, Q)*2*M_PI*x10*alpha_s(x10)*2.0/3.0/M_PI * delta_factor_qq(0.5, delta, x10);
@@ -709,6 +735,9 @@ double Longitudinal::qq_rel_002(double x[], size_t dim, void *params) {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
     }
+    else {
+        unknown_Y_string(*Y_string);
+    }
 
 
     return N_xy(x10, delta, Y)* ( gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*Q*Q + m*m )) - Q*Q*x10/(8.0 * sqrt( 1.0/4.0*Q*Q + m*m ) ) * gsl_sf_bessel_K1(x10 * sqrt( 1.0/4.0*Q*Q + m*m ) ) ) * 2*M_PI * x10 * delta_factor_qq(0.5, delta, x10);
@@ -743,6 +772,9 @@ double Longitudinal::qq_rel_200(double x[], size_t dim, void *params) {
     else if (*Y_string == "Y_dip") {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
+    }
+    else {
+        unknown_Y_string(*Y_string);
     }
 
 
@@ -779,6 +811,9 @@ double Longitudinal::lambda_integrand(double x[], size_t dim, void *params) {
     else if (*Y_string == "Y_dip") {
         double x_min = x_min_fun(W, Q, delta);
         Y = log(1.0/x_min); 
+    }
+    else {
+        unknown_Y_string(*Y_string);
     }
 
     return dNdY(x10, delta, Y)*gsl_sf_bessel_K0(x10 * sqrt(1.0/4.0*gsl_pow_2(Q)+gsl_pow_2(m)) ) * 2*M_PI * x10 * delta_factor_qq(0.5, delta, x10);

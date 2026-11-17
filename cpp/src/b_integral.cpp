@@ -7,8 +7,15 @@
 #include <cstring>
 #include <gsl/gsl_integration.h>
 
+// Rapidity at which the dipole of size r is evaluated, matching S_xy() in dipole_amplitudes.cpp:
+// target-rapidity shift (non-zero only with -use_target_rapidity, i.e. TBK) and the Y0_if lower bound.
+static double Yt(double r, double Y) {
+    double y = target_rapidity(Y, r);
+    return y < Y0_if ? Y0_if : y;
+}
 
-AmplitudeLib *amplitudes [16];
+
+AmplitudeLib *amplitudes [N_B_FILES];
 AmplitudeLib *amp_default;
 
 void initialize_amplitudes(string folder,  string default_file) {
@@ -28,10 +35,10 @@ void initialize_amplitudes(string folder,  string default_file) {
 
 
 
-    for(int i=0; i<16; i++) {
+    for(int i=0; i<N_B_FILES; i++) {
 
         char file_0 [256];
-        sprintf( file_0, folder.c_str(), 2*i );
+        sprintf( file_0, folder.c_str(), (int)(B_STEP*i) );
         amplitudes[i] = new AmplitudeLib(file_0);
     }
 
@@ -52,7 +59,7 @@ double rho_A(double x3, void *params)
 }
 
 // Wood-Saxon density times r^2*4*pi. For calculating \int d^3r T_A(r).
-double rho_A_r2(double r, void *params)
+double rho_A_r2(double r, void * /*params*/)
 {   
     return 1.0 / ( std::exp( (r-R_A())/d_thickness ) + 1 )*r*r*M_PI*4;
 }
@@ -85,7 +92,7 @@ void initialize_T_A() {
     int n_eval = 200;
     gsl_integration_workspace *w = gsl_integration_workspace_alloc(n_eval);
 
-    double b_min = 26.5;
+    double b_min = B_MIN_TAIL;
 
     // params.b = 0;
     gsl_function F;
@@ -106,7 +113,7 @@ void initialize_T_A_squared() {
     gsl_integration_workspace *w = gsl_integration_workspace_alloc(n_eval);
 
 
-    double b_min = 26.5;
+    double b_min = B_MIN_TAIL;
     // params.b = 0;
     gsl_function F;
     F.function = &T_A_squared_integrand;
@@ -116,11 +123,11 @@ void initialize_T_A_squared() {
     T_A_squared_b_min_integral = integ;
 }
 
-double T_A_integrand(double b, void *params) {
+double T_A_integrand(double b, void * /*params*/) {
     return 2.0*M_PI*b*T_A(b);
 }
 
-double T_A_squared_integrand(double b, void *params) {
+double T_A_squared_integrand(double b, void * /*params*/) {
     return 2.0*M_PI*b*T_A(b)*T_A(b);
 }
 
@@ -151,10 +158,10 @@ double qq_dipole_integrated(double r, double Y) {
     double value = 0.0;
 
     // Calculate the integral using trapezoid method. Sum 2*pi*N*(delta b)*b
-    value += 2.0*M_PI*amplitudes[0]->DipoleAmplitude(r, Y)*0.0;
-    value += 2.0*M_PI*amplitudes[13]->DipoleAmplitude(r, Y)*1.5*26.0;
-    for(int i=1; i<13; i++) {
-        value += 2.0*M_PI*amplitudes[i]->DipoleAmplitude(r, Y)*2.0*(2.0*i);
+    value += 2.0*M_PI*amplitudes[0]->DipoleAmplitude(r, Yt(r, Y))*0.0;
+    value += 2.0*M_PI*amplitudes[B_LAST]->DipoleAmplitude(r, Yt(r, Y))*W_LAST;
+    for(int i=1; i<B_LAST; i++) {
+        value += 2.0*M_PI*amplitudes[i]->DipoleAmplitude(r, Yt(r, Y))*B_STEP*(B_STEP*i);
     }
 
     value += T_A_b_min_integral * qq_dipole_value_b_independent(r, Y);
@@ -204,10 +211,10 @@ double qqg_dipole_integrated(double x10, double x20, double x21, double Y) {
     double value = 0.0;
 
     // Calculate the integral using trapezoid method. Sum 2*pi*N*(delta b)*b
-    value += 2.0*M_PI*0.0*qqg_dipole_value(amplitudes[0]->DipoleAmplitude(x10, Y), amplitudes[0]->DipoleAmplitude(x20, Y), amplitudes[0]->DipoleAmplitude(x21, Y));
-    value += 2.0*M_PI*1.5*26.0*qqg_dipole_value(amplitudes[13]->DipoleAmplitude(x10, Y), amplitudes[13]->DipoleAmplitude(x20, Y), amplitudes[13]->DipoleAmplitude(x21, Y));
-    for(int i=1; i<13; i++) {
-        value += 2.0*M_PI*(2.0*i)*2.0*qqg_dipole_value(amplitudes[i]->DipoleAmplitude(x10, Y), amplitudes[i]->DipoleAmplitude(x20, Y), amplitudes[i]->DipoleAmplitude(x21, Y));
+    value += 2.0*M_PI*0.0*qqg_dipole_value(amplitudes[0]->DipoleAmplitude(x10, Yt(x10, Y)), amplitudes[0]->DipoleAmplitude(x20, Yt(x20, Y)), amplitudes[0]->DipoleAmplitude(x21, Yt(x21, Y)));
+    value += 2.0*M_PI*W_LAST*qqg_dipole_value(amplitudes[B_LAST]->DipoleAmplitude(x10, Yt(x10, Y)), amplitudes[B_LAST]->DipoleAmplitude(x20, Yt(x20, Y)), amplitudes[B_LAST]->DipoleAmplitude(x21, Yt(x21, Y)));
+    for(int i=1; i<B_LAST; i++) {
+        value += 2.0*M_PI*(B_STEP*i)*B_STEP*qqg_dipole_value(amplitudes[i]->DipoleAmplitude(x10, Yt(x10, Y)), amplitudes[i]->DipoleAmplitude(x20, Yt(x20, Y)), amplitudes[i]->DipoleAmplitude(x21, Yt(x21, Y)));
     }
 
     value += qqg_dipole_value_b_independent(qq_dipole_value_b_independent(x10, Y), qq_dipole_value_b_independent(x20, Y), qq_dipole_value_b_independent(x21, Y));
@@ -262,12 +269,12 @@ double qqg_dipole_value_b_independent( double N_10, double N_20, double N_21) {
 
 
 double qq_dipole_value_high_b(double r, double Y, double b) {
-    return T_A(b) * sigma0/2.0 * A * amp_default->DipoleAmplitude(r, Y);
+    return T_A(b) * sigma0/2.0 * A * amp_default->DipoleAmplitude(r, Yt(r, Y));
 }
 
 // The value of the dipole amplitude divided by T(b) (should work at high b, doesn't at low b)
 double qq_dipole_value_b_independent(double r, double Y) {
-    return sigma0/2.0 * A * amp_default->DipoleAmplitude(r, Y);
+    return sigma0/2.0 * A * amp_default->DipoleAmplitude(r, Yt(r, Y));
 }
 
 

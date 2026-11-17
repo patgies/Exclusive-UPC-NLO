@@ -43,7 +43,7 @@ double Qs2_GBW( double x ) {
 
 // Gives the Fourier transform dipole amplitude N_xy = 1-S_xy. Here r is the distance between the quark and antiquark.
 // TODO: delta dependence not implemented!
-double N_xy(double r, double delta, double Y) {
+double N_xy(double r, double /*delta*/, double Y) {
     Y = check_Y(Y);
     if(b_dependence_bool) {
         if( r < 1.0001 * 1.0e-5 ) {
@@ -94,7 +94,7 @@ Gives the Fourier transform of the qqg dipole amplitude N_xyz = 1-S_xyz.
 rij = |xi-xj|; x0 = quark, x1 = antiquark, x2 = gluon transverse coordinates
 TODO: delta dependence not implemented
 */
-double N_xyz(double r10, double r20, double r21, double delta, double Y) {
+double N_xyz(double r10, double r20, double r21, double /*delta*/, double Y) {
     Y = check_Y(Y);
 
     if( b_dependence_bool ) {

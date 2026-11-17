@@ -31,7 +31,6 @@ namespace Transverse {
         r = gsl_rng_alloc (T);
 
 
-        clock_t begin = clock();
 
         {
             gsl_monte_vegas_state *s = gsl_monte_vegas_alloc (dimension);
@@ -56,7 +55,6 @@ namespace Transverse {
         gsl_rng_free (r);
 
 
-        clock_t end = clock();
 
         return res;
 
@@ -69,7 +67,6 @@ namespace Transverse {
         // double x_pom = x_pom_fun(W, Q, Delta);
         // double x_min = x_min_fun(W, Q, Delta);
         double z2_min = z2_min_fun(W, Q);
-        double z2_min_pom = z2_min_pom_fun(W, Q, Delta);
 
         struct Transverse::integ_params params_sub = {Delta, m, Q, new string("Y_dip"), W}; 
         struct Transverse::integ_params params_pom = {Delta, m, Q, new string("Y_pom"), W}; 
@@ -111,16 +108,16 @@ namespace Transverse {
 
 
         if(inv_mass_rapidity_bool) {
-            gsl_monte_function mf_qq_LO_unsub =     { &Transverse::qq_LO, 1, &params_inv_mass };
-            gsl_monte_function mf_qq_NLO_1_dim_dw = { &Transverse::qq_NLO_1_dim_decay_width, 1, &params_inv_mass };
-            gsl_monte_function mf_qq_NLO_1_dim_wf = { &Transverse::qq_NLO_1_dim_wave_function, 1, &params_inv_mass };
-            gsl_monte_function mf_qq_NLO_J_1 = { &Transverse::qq_NLO_J_1, 2, &params_inv_mass };
-            gsl_monte_function mf_qq_NLO_J_2 = { &Transverse::qq_NLO_J_2, 3, &params_inv_mass };
-            gsl_monte_function mf_qq_NLO_K = { &Transverse::qq_NLO_K, 2, &params_inv_mass };
-        gsl_monte_function mf_lambda = { &Transverse::lambda_integrand, 1, &params_inv_mass };
-        gsl_monte_function mf_qq_rel_002_pp = { &Transverse::qq_rel_002_pp, 1, &params_inv_mass };
-        gsl_monte_function mf_qq_rel_200_pp = { &Transverse::qq_rel_200_pp, 1, &params_inv_mass };
-        gsl_monte_function mf_qq_rel_100_pm = { &Transverse::qq_rel_100_pm, 1, &params_inv_mass };
+            mf_qq_LO_unsub =     { &Transverse::qq_LO, 1, &params_inv_mass };
+            mf_qq_NLO_1_dim_dw = { &Transverse::qq_NLO_1_dim_decay_width, 1, &params_inv_mass };
+            mf_qq_NLO_1_dim_wf = { &Transverse::qq_NLO_1_dim_wave_function, 1, &params_inv_mass };
+            mf_qq_NLO_J_1 = { &Transverse::qq_NLO_J_1, 2, &params_inv_mass };
+            mf_qq_NLO_J_2 = { &Transverse::qq_NLO_J_2, 3, &params_inv_mass };
+            mf_qq_NLO_K = { &Transverse::qq_NLO_K, 2, &params_inv_mass };
+            mf_lambda = { &Transverse::lambda_integrand, 1, &params_inv_mass };
+            mf_qq_rel_002_pp = { &Transverse::qq_rel_002_pp, 1, &params_inv_mass };
+            mf_qq_rel_200_pp = { &Transverse::qq_rel_200_pp, 1, &params_inv_mass };
+            mf_qq_rel_100_pm = { &Transverse::qq_rel_100_pm, 1, &params_inv_mass };
         }
 
         double xl_qq_LO[] = {x10_min};
@@ -203,7 +200,7 @@ namespace Transverse {
                     double Q2 = Q2_list[i_W];
                     double Q = sqrt(Q2);
             
-                    futures[i_thread] = async(amplitudes_string, W, Q, Delta);
+                    futures[i_thread] = async(std::launch::async, amplitudes_string, W, Q, Delta); // force real threads (default policy may run deferred/serially on old GCC)
                 }
 
             }
