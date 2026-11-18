@@ -8,6 +8,7 @@ See the article for the definitions of the functions.
 #include <gsl/gsl_sf_bessel.h>
 #include <gsl/gsl_sf_dilog.h>
 #include <gsl/gsl_errno.h>
+#include <cmath>
 #include <iostream>
 
 #include "dipole_amplitudes.hpp"
