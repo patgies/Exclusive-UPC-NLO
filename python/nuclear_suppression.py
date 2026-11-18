@@ -66,10 +66,10 @@ if particle == 'jpsi' and function_of == 'Q2':
     # The paper used KCBK hera bal+sd, Y_{0,BK}=4.61 (2021 config conf-A197-kcbk-hera-bal+sd-4.61.txt, commit f53016e),
     # gold dipoles dipole_kcbk_balsdrc_x0bk0.010000_... and b-grid b<=26 GeV^-1. Reproduces the paper LO (0.72 -> 0.83).
     # TBK gold lines are commented out: the b-dependent code path lacks the target-rapidity shift (b_integral.cpp).
-    cs_L_kcbk_hera_balsd_461_p = plotting_functions.get_cross_section_values( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-jpsi-L-W.dat', reg_scheme_NLO, "L", NLO_scheme=NLO_scheme)
-    cs_L_kcbk_hera_balsd_461_A = plotting_functions.get_cross_section_values( dir_path_L + r'results-A197-kcbk-hera-bal+sd-4.61-jpsi-L-W_90_acc0.dat', reg_scheme_NLO, "L", NLO_scheme=NLO_scheme)
-    cs_L_rel_kcbk_hera_balsd_461_p = plotting_functions.get_cross_section_values( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-jpsi-L-W.dat', reg_scheme_rel, "L", NLO_scheme=NLO_scheme)
-    cs_L_rel_kcbk_hera_balsd_461_A = plotting_functions.get_cross_section_values( dir_path_L + r'results-A197-kcbk-hera-bal+sd-4.61-jpsi-L-W_90_acc0.dat', reg_scheme_rel, "L", NLO_scheme=NLO_scheme)
+    cs_L_kcbk_hera_balsd_461_p = plotting_functions.get_cross_section_values( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-jpsi-L-W_90_acc3.dat', reg_scheme_NLO, "L", NLO_scheme=NLO_scheme)
+    cs_L_kcbk_hera_balsd_461_A = plotting_functions.get_cross_section_values( dir_path_L + r'results-A197-kcbk-hera-bal+sd-4.61-jpsi-L-W_90_acc3.dat', reg_scheme_NLO, "L", NLO_scheme=NLO_scheme)
+    cs_L_rel_kcbk_hera_balsd_461_p = plotting_functions.get_cross_section_values( dir_path_L + r'results-kcbk-hera-bal+sd-4.61-jpsi-L-W_90_acc3.dat', reg_scheme_rel, "L", NLO_scheme=NLO_scheme)
+    cs_L_rel_kcbk_hera_balsd_461_A = plotting_functions.get_cross_section_values( dir_path_L + r'results-A197-kcbk-hera-bal+sd-4.61-jpsi-L-W_90_acc3.dat', reg_scheme_rel, "L", NLO_scheme=NLO_scheme)
 
     # cs_L_tbk_parent_lightq_461_p = plotting_functions.get_cross_section_values( dir_path_L + r'results-tbk-lightq-parent-4.61-jpsi-L-W_90.dat', reg_scheme_NLO, "L", NLO_scheme=NLO_scheme)
     # cs_L_tbk_parent_lightq_461_A = plotting_functions.get_cross_section_values( dir_path_L + r'results-A197-tbk-lightq-parent-4.61-jpsi-L-W_90_acc1.dat', reg_scheme_NLO, "L", NLO_scheme=NLO_scheme)
@@ -131,7 +131,7 @@ plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
 if function_of == 'Q2' and particle == 'jpsi':
-    plots = [15] #plots = [1, 11, 15, 16]
+    plots = [15, 18] #plots = [1, 11, 15, 16, 18]
 elif function_of == 'Q2' and particle == 'upsilon':
     plots = [1]
 elif function_of == 'W':
@@ -259,27 +259,38 @@ if 15 in plots:
         R_LO_rel  = 1/A**2 * cs_rel_A[4]/cs_rel_p[4]
         R_NLO     = 1/A**2 * cs_A[3]/cs_p[3]
         R_NLO_rel = 1/A**2 * cs_rel_A[5]/cs_rel_p[5]
-        plt.plot(Q2v, R_LO,      color=color, linestyle=':',  label=label+' LO',      linewidth=linewidth2)
-        plt.plot(Q2v, R_LO_rel,  color=color, linestyle='-.', label=label+' LO+rel',  linewidth=linewidth2)
-        plt.plot(Q2v, R_NLO,     color=color, linestyle='-',  label=label+' NLO',     linewidth=linewidth2)
-        plt.plot(Q2v, R_NLO_rel, color=color, linestyle='--', label=label+' NLO+rel', linewidth=linewidth2)
-    plt.legend(prop={'size': 10}, frameon=False, ncol=3, loc='upper center', bbox_to_anchor=(0.5, -0.13))
+        plt.plot(Q2v, R_LO,      color='b', linestyle='-',  label=r'LO',      linewidth=linewidth2)
+        plt.plot(Q2v, R_LO_rel,  color='b', linestyle='--', label=r'LO+rel',  linewidth=linewidth2)
+        plt.plot(Q2v, R_NLO,     color='r', linestyle='-',  label=r'NLO',     linewidth=linewidth1)
+        plt.plot(Q2v, R_NLO_rel, color='r', linestyle='--', label=r'NLO+rel', linewidth=linewidth1)
+    plt.legend(prop={'size': 15}, frameon=False, ncol=4, loc='upper center', bbox_to_anchor=(0.5, -0.11))
     if particle == 'jpsi':
         plt.title(r'Nuclear suppression $\frac{\textrm{d}}{\textrm{d}t} \sigma^{\gamma^* + A \rightarrow J/\psi+A} / (A^2 \frac{\textrm{d}}{\textrm{d}t} \sigma^{\gamma^* + p \rightarrow J/\psi+p})$, $Y_0=4.61$', fontsize=13)
     elif particle == 'upsilon':
         plt.title(r'Nuclear suppression $\frac{\textrm{d}}{\textrm{d}t} \sigma^{\gamma^* + A \rightarrow \Upsilon+A} / (A^2 \frac{\textrm{d}}{\textrm{d}t} \sigma^{\gamma^* + p \rightarrow \Upsilon+p})$, $Y_0=4.61$', fontsize=13)
     plt.xlabel(r'$Q^2$ [GeV$^2$]', fontsize=15)
     plt.xlim([0.1, 100])
-    plt.ylim([0.71, 0.84])
+    plt.ylim([0.71, 1])
     plt.xticks(fontsize=15)
     plt.yticks(fontsize=15)
-    plt.text(0.65, 0.85, r'$W = 90\textrm{ GeV}$', transform=fig15.transFigure, fontsize=20)
-    plt.text(0.65, 0.78, r'$t = 0$', transform=fig15.transFigure, fontsize=20)
+    plt.text(0.97, 0.03, r'$W = 90\textrm{ GeV}$, $t = 0$', transform=plt.gca().transAxes, fontsize=17, ha='right', va='bottom')
+    scheme_names = {'decay width': 'decay width', 'NR wave function': 'NR wave function', 'rel wave function': 'rel.~wave function'}
+    NLO_scheme_names = {'LO(Ydip)': r'linearized, $\sigma \propto \mathcal{A}_\textrm{LO}^2 + 2\mathcal{A}_\textrm{LO}(\mathcal{A}_\textrm{NLO}-\mathcal{A}_\textrm{LO})$',
+                        'squared': r'squared, $\sigma \propto \mathcal{A}_\textrm{NLO}^2$',
+                        'LO(Y0)+BK': r'linearized around LO$(Y_0)$+BK'}
+    plt.text(0.03, 0.97,
+             r'KCBK hera bal+sd, $Y_{0,\textrm{BK}}=4.61$, Au ($A=197$)' '\n'
+             r'one-loop $q\bar q$ term: ' + scheme_names[reg_scheme_NLO] + r' (NLO), ' + scheme_names[reg_scheme_rel] + r' (+rel)' '\n'
+             r'NLO cross section: ' + NLO_scheme_names[NLO_scheme],
+             transform=plt.gca().transAxes, fontsize=11, ha='left', va='top', color='k', linespacing=1.6)
     plt.xscale('log')
     plt.tight_layout()
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)
-    fig15.savefig(os.path.dirname(os.path.realpath(__file__)) + r'/figures/nuclear_suppression_Q2_fit_comparison_Y461.pdf', bbox_inches='tight')
+    scheme_tags = {'decay width': 'dw', 'NR wave function': 'NRwf', 'rel wave function': 'relwf'}
+    NLO_scheme_tags = {'LO(Ydip)': 'linearized', 'squared': 'squared', 'LO(Y0)+BK': 'linearized-LOY0BK'}
+    fig15.savefig(os.path.dirname(os.path.realpath(__file__)) + r'/figures/nuclear_suppression_L_Q2_W90_kcbk-hera-balsd-4.61_'
+                  + scheme_tags[reg_scheme_NLO] + '-' + NLO_scheme_tags[NLO_scheme] + '.pdf', bbox_inches='tight')
 
 
 if 16 in plots:
@@ -368,6 +379,49 @@ if 21 in plots:
     plt.tight_layout()
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)
+
+
+if 18 in plots:
+    # Reproduction of arXiv:2106.12825 Fig. 2 right with the 2021 plotting scheme (python/plotting_functions.py at commit f53016e,
+    # bool_decay_width=True): decay-width one-loop qq column, LO+rel = (LO+rel)^2, NLO = LO^2 + 2 LO (NLO-LO),
+    # NLO+rel = (LO+rel)^2 + 2 (LO+rel)(NLO-LO). The last one is not a scheme in calculate_cross_section_L, so it is
+    # built here from the LO, linearized NLO and squared LO+rel cross sections (overall factors cancel in the ratio).
+    f_p = dir_path_L + r'results-kcbk-hera-bal+sd-4.61-jpsi-L-W_90_acc3.dat'
+    f_A = dir_path_L + r'results-A197-kcbk-hera-bal+sd-4.61-jpsi-L-W_90_acc3.dat'
+    def paper_cs(f):
+        lin = plotting_functions.get_cross_section_values(f, 'decay width', "L", NLO_scheme='LO(Ydip)')
+        sq  = plotting_functions.get_cross_section_values(f, 'decay width', "L", NLO_scheme='squared')
+        LO, NLO, LO_rel = lin[2], lin[3], sq[4]
+        NLO_rel = LO_rel + (NLO - LO) * np.sqrt(LO_rel / LO)
+        return lin[1], LO, LO_rel, NLO, NLO_rel
+    Q2v, *cs_p = paper_cs(f_p)
+    _,   *cs_A = paper_cs(f_A)
+    R = [1/A**2 * a/p for a, p in zip(cs_A, cs_p)]
+
+    fig18 = plt.figure(18, figsize=(8, 7.5))
+    plt.plot(Q2v, R[0], 'b-',  label=r'LO',      linewidth=linewidth2)
+    plt.plot(Q2v, R[1], 'b--', label=r'LO+rel',  linewidth=linewidth2)
+    plt.plot(Q2v, R[2], 'r-',  label=r'NLO',     linewidth=linewidth1)
+    plt.plot(Q2v, R[3], 'r--', label=r'NLO+rel', linewidth=linewidth1)
+    plt.legend(prop={'size': 15}, frameon=False, ncol=4, loc='upper center', bbox_to_anchor=(0.5, -0.11))
+    plt.title(r'Nuclear suppression $\frac{\textrm{d}}{\textrm{d}t} \sigma_L^{\gamma^* + A \rightarrow J/\psi+A} / (A^2 \frac{\textrm{d}}{\textrm{d}t} \sigma_L^{\gamma^* + p \rightarrow J/\psi+p})$', fontsize=15)
+    plt.xlabel(r'$Q^2$ [GeV$^2$]', fontsize=15)
+    plt.xlim([0.1, 100])
+    plt.ylim([0.712, 0.842])  # same range as Fig. 2 (right) of arXiv:2106.12825
+    plt.xticks(fontsize=15)
+    plt.yticks(fontsize=15)
+    plt.text(0.97, 0.03, r'$W = 90\textrm{ GeV}$, $t = 0$', transform=plt.gca().transAxes, fontsize=17, ha='right', va='bottom')
+    plt.text(0.03, 0.97,
+             r'Reproduction of arXiv:2106.12825, Fig.~2 (right)' '\n'
+             r'KCBK hera bal+sd, $Y_{0,\textrm{BK}}=4.61$, Au ($A=197$)' '\n'
+             r'Scheme: decay-width one-loop $q\bar q$ term,' '\n'
+             r'linearized NLO $\sigma \propto \mathcal{A}_\textrm{LO}^2 + 2\mathcal{A}_\textrm{LO}(\mathcal{A}_\textrm{NLO}-\mathcal{A}_\textrm{LO})$',
+             transform=plt.gca().transAxes, fontsize=11, ha='left', va='top', color='k', linespacing=1.6)
+    plt.xscale('log')
+    plt.tight_layout()
+    plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
+    plt.tick_params(axis='x', pad=5)
+    fig18.savefig(os.path.dirname(os.path.realpath(__file__)) + r'/figures/nuclear_suppression_L_Q2_W90_kcbk-hera-balsd-4.61_dw-linearized_arXiv2106.12825.pdf', bbox_inches='tight')
 
 
 
