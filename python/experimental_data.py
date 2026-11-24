@@ -3,7 +3,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
-dir_path = os.path.dirname(os.path.realpath(__file__)) + r'/experimental_data/'
+dir_path = os.path.dirname(os.path.realpath(__file__)) + r'/../experimental_data/'
 
 
 

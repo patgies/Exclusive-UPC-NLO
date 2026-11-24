@@ -289,7 +289,7 @@ if 15 in plots:
     plt.tick_params(axis='x', pad=5)
     scheme_tags = {'decay width': 'dw', 'NR wave function': 'NRwf', 'rel wave function': 'relwf'}
     NLO_scheme_tags = {'LO(Ydip)': 'linearized', 'squared': 'squared', 'LO(Y0)+BK': 'linearized-LOY0BK'}
-    fig15.savefig(os.path.dirname(os.path.realpath(__file__)) + r'/figures/nuclear_suppression_L_Q2_W90_kcbk-hera-balsd-4.61_'
+    fig15.savefig(os.path.dirname(os.path.realpath(__file__)) + r'/../figures/nuclear_suppression_L_Q2_W90_kcbk-hera-balsd-4.61_'
                   + scheme_tags[reg_scheme_NLO] + '-' + NLO_scheme_tags[NLO_scheme] + '.pdf', bbox_inches='tight')
 
 
@@ -326,7 +326,7 @@ if 16 in plots:
     plt.tight_layout()
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)
-    fig16.savefig(os.path.dirname(os.path.realpath(__file__)) + r'/figures/nuclear_suppression_Q2_fit_comparison_Y0.pdf', bbox_inches='tight')
+    fig16.savefig(os.path.dirname(os.path.realpath(__file__)) + r'/../figures/nuclear_suppression_Q2_fit_comparison_Y0.pdf', bbox_inches='tight')
 
 
 if 2 in plots:
@@ -421,7 +421,7 @@ if 18 in plots:
     plt.tight_layout()
     plt.tick_params(direction='in', which='both', left=True, right=True, axis='y')
     plt.tick_params(axis='x', pad=5)
-    fig18.savefig(os.path.dirname(os.path.realpath(__file__)) + r'/figures/nuclear_suppression_L_Q2_W90_kcbk-hera-balsd-4.61_dw-linearized_arXiv2106.12825.pdf', bbox_inches='tight')
+    fig18.savefig(os.path.dirname(os.path.realpath(__file__)) + r'/../figures/nuclear_suppression_L_Q2_W90_kcbk-hera-balsd-4.61_dw-linearized_arXiv2106.12825.pdf', bbox_inches='tight')
 
 
 
