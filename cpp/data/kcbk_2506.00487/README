@@ -1,0 +1,3 @@
+KCBK dipoles, MAP parameters of arXiv:2506.00487, from github.com/hejajama/nlobk_dipole_nucleus.
+Copied with the 4th ### header line changed from x0=1.00 to Y0=0 (AmplitudeLib reads it as Y0).
+Pb files: b = 0,2,...,32 GeV^-1 (only b = 0..30 are read by b_integral.cpp).
