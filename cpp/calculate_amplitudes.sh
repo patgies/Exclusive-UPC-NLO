@@ -4,6 +4,7 @@ CODE_FOLDER=build/bin                   # Where is the actual program?
 INPUT_FOLDER=config_files               # Where are the config files located?
 OUTPUT_FOLDER_L=output/longitudinal     # Where to output the longitudinal production files?
 OUTPUT_FOLDER_T=output/transverse       # Where to output the transverse productin files?
+mkdir -p ${OUTPUT_FOLDER_L} ${OUTPUT_FOLDER_T}   # NLO_amplitude does not create them and silently writes nothing if missing
 
 calculate_amplitude () {
     CONF=$1                 # configuration file used (e.g. -conf-kcbk-hera-bal+sd-0.00.sh)
