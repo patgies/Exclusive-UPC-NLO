@@ -15,8 +15,8 @@ plotting_functions.initialize()
 reg_scheme_LO = 'decay width'
 reg_scheme_NLO = 'NR wave function'
 reg_scheme_rel = 'rel wave function' 
-dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_L/'
-dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
+dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/../cpp/output/longitudinal/'
+dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/../cpp/output/transverse/'
 
 
 R_kcbk_000 =    plotting_functions.get_cross_section_ratio( dir_path_L + r'results-kcbk-hera-bal+sd-0.00-jpsi-L-W.dat', dir_path_T + r'results-kcbk-hera-bal+sd-0.00-jpsi-T-W.dat', reg_scheme_NLO)

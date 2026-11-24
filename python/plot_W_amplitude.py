@@ -17,7 +17,7 @@ plots = [1,2,5, 21]
 
 
 # Order:LO(x_min) 	 LO(x_pom) 	 LO(x_max) 	 qq NLO 1 dim 	 qq NLO J_1 	 qq NLO J_2 	 qq NLO K_0 	 qqg dim 4 no BK 	 qqg dim 4 sub2 BK 	 qqg dim 4 unsub BK 	 qqg dim 6
-dir_path = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
+dir_path = os.path.dirname(os.path.realpath(__file__)) + r'/../cpp/output/transverse/'
 
 
 alphas_const = False

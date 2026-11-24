@@ -19,7 +19,7 @@ plotting_functions.initialize()
 BKeq = 'kcbk'
 Y0 = '4.61'
 
-dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
+dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/../cpp/output/transverse/'
 
 cs_nlo_LOYdip    = plotting_functions.get_cross_section_values(    dir_path_T + r'results-' + BKeq + r'-hera-bal+sd-' + Y0 + r'-jpsi-T-W.dat', 'decay width', 'T', NLO_scheme='LO(Ydip)')
 cs_nlo_sq        = plotting_functions.get_cross_section_values(    dir_path_T + r'results-' + BKeq + r'-hera-bal+sd-' + Y0 + r'-jpsi-T-W.dat', 'decay width', 'T', NLO_scheme='squared')

@@ -32,7 +32,7 @@ elif pol=='T' and const=='Q':
     id_string = '-jpsi-T-Q2'
 
 
-dir_path = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_' + pol + r'/'
+dir_path = os.path.dirname(os.path.realpath(__file__)) + r'/../cpp/output/' + {'L': 'longitudinal', 'T': 'transverse'}[pol] + r'/'
 
 cs_kcbk_000_dw = plotting_functions.get_cross_section_values( dir_path + r'results-kcbk-hera-bal+sd-0.00' + id_string + '.dat', reg_scheme_dw, pol )
 cs_kcbk_461_dw = plotting_functions.get_cross_section_values( dir_path + r'results-kcbk-hera-bal+sd-4.61' + id_string + '.dat', reg_scheme_dw, pol )

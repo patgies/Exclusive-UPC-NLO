@@ -23,8 +23,8 @@ reg_scheme_rel = 'rel wave function'
 # NLO_scheme = 'LO(Ydip)'
 NLO_scheme = 'squared'
 
-dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_L/'
-dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
+dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/../cpp/output/longitudinal/'
+dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/../cpp/output/transverse/'
 
 
 if particle == 'jpsi':

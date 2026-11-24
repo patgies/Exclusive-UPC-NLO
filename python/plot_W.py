@@ -44,8 +44,8 @@ elif particle == 'upsilon':
     id_string = '-upsilon-T-Q2'
     # id_string = '-upsilon-T-Q2_0.01_high-W'
 
-dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_L/'
-dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/amplitudes_T/'
+dir_path_L = os.path.dirname(os.path.realpath(__file__)) + r'/../cpp/output/longitudinal/'
+dir_path_T = os.path.dirname(os.path.realpath(__file__)) + r'/../cpp/output/transverse/'
 
 # cs_kcbk_000_L = plotting_functions.get_cross_section_values_W( dir_path_L + r'results-kcbk-hera-bal+sd-0.00.dat', reg_scheme, "L" )
 # cs_kcbk_461_L = plotting_functions.get_cross_section_values_W( dir_path_L + r'results-kcbk-hera-bal+sd-4.61.dat', reg_scheme, "L" )
