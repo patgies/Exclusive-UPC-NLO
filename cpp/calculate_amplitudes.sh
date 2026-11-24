@@ -291,7 +291,11 @@ date +"%d-%m-%y %T"
 # nuclear (A197) side needs computing for that one. TBK needs both proton and nuclear sides.
 #calculate_amplitude "tbk-lightq-parent-4.61" "W" 90 0.01 100 true false "jpsi" 3
 #calculate_amplitude "A197-tbk-lightq-parent-4.61" "W" 90 0.01 100 true false "jpsi" 1 "_acc1"
-calculate_amplitude "kcbk-hera-bal+sd-4.61" "W" 90 0.01 100 true false "jpsi" 3 "_acc3"
+#calculate_amplitude "kcbk-hera-bal+sd-4.61" "W" 90 0.01 100 true false "jpsi" 3 "_acc3"
+#calculate_amplitude "kcbk-map-parent-0.00"      "Q2" 0.01 50 1000 false true "upsilon" 2
+#calculate_amplitude "A208-kcbk-map-parent-0.00" "Q2" 0.01 50 1000 false true "upsilon" 2
+#calculate_amplitude "kcbk-map-bal+sd-0.00"      "Q2" 0.01 50 1000 false true "upsilon" 2
+calculate_amplitude "A208-kcbk-map-bal+sd-0.00" "Q2" 0.01 50 1000 false true "upsilon" 2
 #calculate_amplitude "tbk-hera-bal+sd-0.00" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
 #calculate_amplitude "kcbk-hera-bal+sd-4.61" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
 #calculate_amplitude "resumbk-hera-bal+sd-4.61" "Q2" 0.01 30 30000 false true "jpsi" 2 "_ultrahigh-W"
