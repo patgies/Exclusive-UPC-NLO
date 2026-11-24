@@ -1,7 +1,7 @@
 *.aux
 *.log
 *synctex*
-*.pdf
+#*.pdf
 *settings.json
 *__pycache__*
 *.o
